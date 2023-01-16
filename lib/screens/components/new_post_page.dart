@@ -1,6 +1,11 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:iut_ads/screens/components/image_view_page.dart';
 import 'package:iut_ads/screens/home_page.dart';
 import 'package:iut_ads/utils/utils.dart';
@@ -61,6 +66,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
     return items;
   }
 
+  File? imageFile;
   @override
   Widget build(BuildContext context) {
     String category = widget.adsObjets.tradeCategory;
@@ -75,6 +81,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
         text: widget.adsObjets.traderPhoneNumber.toString());
     final whatsapp = TextEditingController(
         text: widget.adsObjets.traderWhatsappNumber.toString());
+
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
@@ -98,7 +105,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              // await getImageFromDevice();
+              // print(imageFile!.path);
+            },
             icon: SvgPicture.asset(
               'assets/icons/category.2.svg',
             ),
@@ -175,7 +185,9 @@ class _NewPostScreenState extends State<NewPostScreen> {
                   child: TextFormField(
                     controller: price,
                     cursorColor: primaryColor,
-                    keyboardType: TextInputType.numberWithOptions(),
+                    keyboardType: TextInputType.numberWithOptions(
+                      decimal: true,
+                    ),
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
@@ -237,16 +249,20 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 ),
                 Text('Image'),
                 Container(
-                  height: widget.adsObjets.imageLink == '' ? 250 : 310,
+                  height: 310,
                   width: widget.deviceSize.width,
                   margin: EdgeInsets.all(5.0),
                   decoration: BoxDecoration(
                     color: primaryColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: widget.adsObjets.imageLink == ''
+                  // child: Text(imageFile.path),
+                  child: imageFile!.path != ''
                       ? InkWell(
-                          onTap: () {},
+                          onTap: () async {
+                            final imageSource = await showDialog(context);
+                            await getImageFromDevice(imageSource);
+                          },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -269,7 +285,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => ImageViewScreen(
-                                      imageLink: widget.adsObjets.imageLink,
+                                      imageLink: imageFile!.path,
                                       deviceSize: widget.deviceSize,
                                     ),
                                   ),
@@ -283,8 +299,8 @@ class _NewPostScreenState extends State<NewPostScreen> {
                                     topRight: Radius.circular(10),
                                     bottomLeft: Radius.circular(10),
                                   ),
-                                  child: Image.asset(
-                                    widget.adsObjets.imageLink,
+                                  child: Image.file(
+                                    imageFile!,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -294,7 +310,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
                               height: 10,
                             ),
                             InkWell(
-                              onTap: () {},
+                              onTap: () async {
+                                final imageSource = await showDialog(context);
+                                await getImageFromDevice(imageSource);
+                              },
                               child: Container(
                                 height: 50,
                                 width: 150,
@@ -559,5 +578,38 @@ class _NewPostScreenState extends State<NewPostScreen> {
         ),
       ),
     );
+  }
+
+  Future showDialog(BuildContext context) {
+    return showCupertinoModalPopup(
+      context: context,
+      builder: (context) => CupertinoActionSheet(
+        actions: [
+          CupertinoActionSheetAction(
+            onPressed: () => Navigator.of(context).pop(ImageSource.camera),
+            child: Text('Camera'),
+          ),
+          CupertinoActionSheetAction(
+            onPressed: () => Navigator.of(context).pop(ImageSource.gallery),
+            child: Text('Gallery'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Get from Camera
+  Future getImageFromDevice(ImageSource imageSource) async {
+    try {
+      PickedFile? pickedFile = await ImagePicker.platform.pickImage(
+        source: imageSource,
+      );
+      if (pickedFile == null) return;
+      setState(() {
+        imageFile = File(pickedFile.path);
+      });
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:iut_ads/utils/utils.dart';
 import 'package:iut_ads/welcome_pages/start_page.dart';
 
 void main() async {
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       title: 'Ndere Ads',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primaryColor: primaryColor,
         fontFamily: 'Comfortaa_bold',
       ),
       home: MyHomePage(),

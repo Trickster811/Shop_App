@@ -179,7 +179,7 @@ class MyDocumentsScreen extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              Text('Quantité'),
+                              Text('N. Copies'),
                               SizedBox(
                                 width: 10,
                               ),

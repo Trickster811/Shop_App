@@ -22,12 +22,9 @@ class UtilFunctions {
           directory = await getApplicationDocumentsDirectory();
         }
       }
-      final bytes = await File(filePath).readAsBytes();
       final fileSaved = File(directory!.path + "/$name");
 
-      await fileSaved.writeAsBytes(bytes);
-      print('ffff');
-      return fileSaved;
+      return File(filePath).copy(fileSaved.path);
     } catch (e) {}
   }
 
