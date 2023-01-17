@@ -49,7 +49,9 @@ class MyDocumentsScreen extends StatelessWidget {
                 documentTitle: 'Analyse et conception des Algorithmes',
                 documentLink: 'assets/ineif/faief',
                 documentCopies: 05,
-                documentType: false,
+                documentColorType: false,
+                documentReliureType: true,
+                documentdispositionType: true,
                 ownerName: 'Alhafiz',
                 ownerPhone: 656541584,
                 documentStatus: true,
@@ -61,7 +63,9 @@ class MyDocumentsScreen extends StatelessWidget {
                 documentTitle: 'Telecommunication',
                 documentLink: 'assets/ineif/faief',
                 documentCopies: 05,
-                documentType: false,
+                documentColorType: false,
+                documentReliureType: false,
+                documentdispositionType: true,
                 ownerName: 'Alhafiz',
                 ownerPhone: 656541584,
                 documentStatus: false,
@@ -119,137 +123,7 @@ class MyDocumentsScreen extends StatelessWidget {
             ),
             child: IconButton(
               onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: Container(
-                        padding: EdgeInsets.only(bottom: 5.0),
-                        child: Text('Details')),
-                    contentPadding: EdgeInsets.all(0),
-                    content: Container(
-                      height: 200,
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Text('Client'),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                height: 40,
-                                padding: EdgeInsets.all(5.0),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: primaryColor.withOpacity(.1),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Text(
-                                  documentBuilder.ownerName,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          Row(
-                            children: [
-                              Text('Phone'),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                height: 40,
-                                padding: EdgeInsets.all(5.0),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: primaryColor.withOpacity(.1),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Text(
-                                  documentBuilder.ownerPhone.toString(),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          Row(
-                            children: [
-                              Text('N. Copies'),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                height: 40,
-                                padding: EdgeInsets.all(5.0),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: primaryColor.withOpacity(.1),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Text(
-                                  documentBuilder.documentCopies.toString(),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          Row(
-                            children: [
-                              Text('Couleur'),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                height: 40,
-                                padding: EdgeInsets.all(5.0),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: primaryColor.withOpacity(.1),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Text(
-                                  documentBuilder.documentType ? 'Oui' : 'Non',
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                    actions: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                          height: 40,
-                          width: 60,
-                          padding: EdgeInsets.all(5.0),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: documentBuilder.documentStatus
-                                ? Colors.green
-                                : Colors.orange,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Text(
-                            'Ok',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                );
+                showDocumentDetailsDialog(context, documentBuilder);
               },
               icon: SvgPicture.asset(
                 'assets/icons/show.5.svg',
@@ -259,6 +133,107 @@ class MyDocumentsScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Future<dynamic> showDocumentDetailsDialog(
+      BuildContext context, DocumentBuilder documentBuilder) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Container(
+            padding: EdgeInsets.only(bottom: 5.0), child: Text('Details')),
+        contentPadding: EdgeInsets.all(0),
+        content: Container(
+          height: 300,
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            children: [
+              detailsItemBuilder(
+                'Client',
+                documentBuilder.ownerName,
+              ),
+              detailsItemBuilder(
+                'Phone',
+                documentBuilder.ownerPhone.toString(),
+              ),
+              detailsItemBuilder(
+                'N. Copies',
+                documentBuilder.documentCopies.toString(),
+              ),
+              detailsItemBuilder(
+                'Couleur',
+                documentBuilder.documentColorType ? 'Oui' : 'Non',
+              ),
+              detailsItemBuilder(
+                'Reliure',
+                documentBuilder.documentReliureType ? 'Oui' : 'Non',
+              ),
+              detailsItemBuilder(
+                'Disposition',
+                documentBuilder.documentdispositionType
+                    ? 'Recto'
+                    : 'Recto/Verso',
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Container(
+              height: 40,
+              width: 60,
+              padding: EdgeInsets.all(5.0),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: documentBuilder.documentStatus
+                    ? Colors.green
+                    : Colors.orange,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                'Ok',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget detailsItemBuilder(String title, String description) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Text(title),
+            SizedBox(
+              width: 10,
+            ),
+            Container(
+              height: 40,
+              padding: EdgeInsets.all(5.0),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: primaryColor.withOpacity(.1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                description,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10.0,
+        ),
+      ],
     );
   }
 }

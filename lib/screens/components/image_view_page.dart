@@ -34,11 +34,11 @@ class ImageViewScreen extends StatelessWidget {
             onPressed: () async {
               final imageName = UtilFunctions.baseNameProvider(imageLink);
               try {
-                final File? image = await UtilFunctions.saveDocument(
+                await UtilFunctions.saveDocument(
                   name: imageName,
                   filePath: imageLink,
                 );
-                print(image!.path);
+                // print(image!.path);
                 final snackBar = SnackBar(
                   behavior: SnackBarBehavior.floating,
                   content: Container(
@@ -62,7 +62,9 @@ class ImageViewScreen extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              } catch (e) {}
+              } catch (e) {
+                print(e);
+              }
             },
             icon: SvgPicture.asset(
               'assets/icons/download.3.svg',

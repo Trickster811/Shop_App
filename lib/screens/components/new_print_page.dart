@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -20,6 +20,7 @@ class NewPrintSCreen extends StatefulWidget {
 class _NewPrintSCreenState extends State<NewPrintSCreen> {
   bool couleurIndex = true;
   bool dispositionIndex = true;
+  bool reliureIndex = true;
   bool paymentIndex = true;
 
   File? documentFile;
@@ -94,6 +95,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     cursorColor: primaryColor,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
+                      hintText: 'titre du document',
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -116,18 +118,22 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                 ),
                 Text('Fichier'),
                 Container(
-                  height: 150,
+                  height: 160,
                   width: widget.deviceSize.width,
                   margin: EdgeInsets.all(5.0),
+                  alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: primaryColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  // child: Text(imageFile.path),
                   child: documentFile == null
                       ? InkWell(
                           onTap: () async {
-                            await selectFile();
+                            final temporalyFile =
+                                await UtilFunctions.selectFile([]);
+                            setState(() {
+                              documentFile = temporalyFile;
+                            });
                           },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -143,27 +149,23 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                           ),
                         )
                       : Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              height: 100,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                  bottomLeft: Radius.circular(10),
-                                ),
-                                child: Text(
-                                  UtilFunctions.baseNameProvider(
-                                      documentFile!.path),
-                                ),
-                              ),
+                            Text(
+                              UtilFunctions.baseNameProvider(
+                                  documentFile!.path),
                             ),
                             SizedBox(
                               height: 10,
                             ),
                             InkWell(
-                              onTap: () async {},
+                              onTap: () async {
+                                final temporalyFile =
+                                    await UtilFunctions.selectFile([]);
+                                setState(() {
+                                  documentFile = temporalyFile;
+                                });
+                              },
                               child: Container(
                                 height: 50,
                                 width: 150,
@@ -172,17 +174,13 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                                 ),
                                 decoration: BoxDecoration(
                                   color: primaryColor,
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    bottomRight: Radius.circular(10),
-                                    bottomLeft: Radius.circular(10),
-                                  ),
+                                  borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     SvgPicture.asset(
-                                      'assets/icons/image-2.svg',
+                                      'assets/icons/document.2.svg',
                                       color: Colors.white,
                                     ),
                                     SizedBox(
@@ -382,6 +380,94 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                 SizedBox(
                   height: 20.0,
                 ),
+                Text('Reliure'),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      children: [
+                        Text('Oui'),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              reliureIndex = reliureIndex ? false : true;
+                            });
+                          },
+                          child: Container(
+                            height: 30,
+                            width: 55,
+                            padding: EdgeInsets.all(2.0),
+                            margin: EdgeInsets.symmetric(vertical: 5.0),
+                            alignment: reliureIndex
+                                ? Alignment.centerRight
+                                : Alignment.centerLeft,
+                            decoration: BoxDecoration(
+                              color: reliureIndex
+                                  ? Colors.green
+                                  : Colors.green.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(10000),
+                              border: Border.all(
+                                color: Colors.green.withOpacity(0.2),
+                              ),
+                            ),
+                            child: Container(
+                              height: 30,
+                              width: 25,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(1000),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Text('Non'),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              reliureIndex = reliureIndex ? false : true;
+                            });
+                          },
+                          child: Container(
+                            height: 30,
+                            width: 55,
+                            padding: EdgeInsets.all(2.0),
+                            margin: EdgeInsets.symmetric(vertical: 5.0),
+                            alignment: !reliureIndex
+                                ? Alignment.centerRight
+                                : Alignment.centerLeft,
+                            decoration: BoxDecoration(
+                              color: !reliureIndex
+                                  ? Colors.orange
+                                  : Colors.orange.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(10000),
+                              border: Border.all(
+                                color: Colors.orange.withOpacity(0.2),
+                              ),
+                            ),
+                            child: Container(
+                              height: 30,
+                              width: 25,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(1000),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -406,13 +492,17 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                           child: TextFormField(
                             onChanged: (value) {
                               if (int.tryParse(value) == null)
-                                return showFlashMessage(
+                                return UtilFunctions.showFlashMessage(
+                                  context,
                                   'Veuillez entre des chiffres !!!',
                                   Colors.red,
+                                  widget.deviceSize,
                                 );
                               setState(() {
                                 totalPrice = int.parse(value) *
-                                    int.parse(documentPrice.text);
+                                    int.parse(documentPrice.text
+                                        .toString()
+                                        .substring(0, 2));
                                 print(documentCopies.text);
                               });
                             },
@@ -506,6 +596,46 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                   ),
                 ),
                 SizedBox(
+                  height: 10,
+                ),
+                Text('Commentaire'),
+                Container(
+                  height: 150,
+                  width: widget.deviceSize.width,
+                  margin: EdgeInsets.symmetric(vertical: 5.0),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.0,
+                    vertical: 8.0,
+                  ),
+                  decoration: BoxDecoration(
+                    color: primaryColor.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: TextFormField(
+                    controller: documentName,
+                    cursorColor: primaryColor,
+                    keyboardType: TextInputType.text,
+                    maxLines: 05,
+                    decoration: InputDecoration(
+                      hintText: 'Commentaire ou Instructions',
+                      contentPadding: EdgeInsets.only(bottom: 10.0),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                        ),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                        ),
+                      ),
+                    ),
+                    validator: RequiredValidator(
+                      errorText: 'Veuillez renseigner cet élément',
+                    ),
+                  ),
+                ),
+                SizedBox(
                   height: 20,
                 ),
                 Center(
@@ -532,6 +662,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     cursorColor: primaryColor,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
+                      hintText: 'votre nom',
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -569,15 +700,18 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     controller: ownerPhone,
                     onChanged: (value) {
                       if (int.tryParse(value) == null) {
-                        showFlashMessage(
+                        UtilFunctions.showFlashMessage(
+                          context,
                           'Veuillez entre des chiffres !!!',
                           Colors.red,
+                          widget.deviceSize,
                         );
                       }
                     },
                     cursorColor: primaryColor,
                     keyboardType: TextInputType.numberWithOptions(),
                     decoration: InputDecoration(
+                      hintText: 'numéro téléphone',
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -615,15 +749,18 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     controller: ownerWhatsapp,
                     onChanged: (value) {
                       if (int.tryParse(value) == null) {
-                        showFlashMessage(
+                        UtilFunctions.showFlashMessage(
+                          context,
                           'Veuillez entre des chiffres !!!',
                           Colors.red,
+                          widget.deviceSize,
                         );
                       }
                     },
                     cursorColor: primaryColor,
                     keyboardType: TextInputType.numberWithOptions(),
                     decoration: InputDecoration(
+                      hintText: 'numéro whatsapp',
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -653,7 +790,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                   children: [
                     Column(
                       children: [
-                        Text('Orange'),
+                        Text('Orange Money'),
                         InkWell(
                           onTap: () {
                             setState(() {
@@ -740,14 +877,18 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
       bottomNavigationBar: InkWell(
         onTap: () {
           if (_formKey.currentState!.validate()) {
-            showFlashMessage(
+            UtilFunctions.showFlashMessage(
+              context,
               'Merci pour votre confiance !!',
               Colors.green,
+              widget.deviceSize,
             );
           } else {
-            showFlashMessage(
+            UtilFunctions.showFlashMessage(
+              context,
               'Veuillez remplir tous les champs !!',
               Colors.red,
+              widget.deviceSize,
             );
           }
         },
@@ -790,38 +931,5 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
         ),
       ),
     );
-  }
-
-  showFlashMessage(String message, Color color) {
-    final snackBar = SnackBar(
-      behavior: SnackBarBehavior.floating,
-      content: Container(
-        height: 40,
-        width: widget.deviceSize.width,
-        margin: EdgeInsets.all(10),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: color.withOpacity(.5),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Text(
-          message,
-          style: TextStyle(
-            fontSize: 14,
-            fontFamily: 'Comfortaa_bold',
-          ),
-        ),
-      ),
-      elevation: 0,
-      backgroundColor: Colors.transparent,
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
-
-  Future selectFile() async {
-    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
-    if (result == null) return;
-    final path = result.files.single.path!;
-    setState(() => documentFile = File(path));
   }
 }

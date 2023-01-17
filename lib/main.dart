@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:iut_ads/utils/utils.dart';
+import 'package:iut_ads/welcome_pages/loading_page.dart';
 import 'package:iut_ads/welcome_pages/start_page.dart';
 
 void main() async {
@@ -9,11 +10,25 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  await UtilFunctions.init();
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  List<String>? userInfo;
+
+  @override
+  void initState() {
+    super.initState();
+    userInfo = UtilFunctions.getUserInfo();
+  }
 
   // This widget is the root of your application.
   @override
@@ -25,7 +40,9 @@ class MyApp extends StatelessWidget {
         primaryColor: primaryColor,
         fontFamily: 'Comfortaa_bold',
       ),
-      home: MyHomePage(),
+      home: LoadingScreen(
+        userInfo: userInfo,
+      ),
     );
   }
 }

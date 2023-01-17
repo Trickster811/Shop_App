@@ -20,7 +20,9 @@ class ServiceScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            'Services impression de documents',
+            'Services impression de documents par le secrétariat LMD',
+            textAlign: TextAlign.center,
+            textScaleFactor: 1.1,
             style: TextStyle(
               fontSize: 16,
             ),
@@ -99,7 +101,9 @@ class DocumentBuilder {
   final String documentTitle;
   final String documentLink;
   final int documentCopies;
-  final bool documentType;
+  final bool documentColorType;
+  final bool documentdispositionType;
+  final bool documentReliureType;
   final String ownerName;
   final int ownerPhone;
   final bool documentStatus;
@@ -108,7 +112,9 @@ class DocumentBuilder {
     required this.documentTitle,
     required this.documentLink,
     required this.documentCopies,
-    required this.documentType,
+    required this.documentColorType,
+    required this.documentdispositionType,
+    required this.documentReliureType,
     required this.ownerName,
     required this.ownerPhone,
     required this.documentStatus,

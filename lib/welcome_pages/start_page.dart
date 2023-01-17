@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/parser.dart';
+import 'package:iut_ads/screens/about_page.dart';
 import 'package:iut_ads/screens/components/new_post_page.dart';
 import 'package:iut_ads/screens/home_page.dart';
 import 'package:iut_ads/screens/my_post_page.dart';
 import 'package:iut_ads/screens/research_page.dart';
 import 'package:iut_ads/screens/service_page.dart';
 import 'package:iut_ads/utils/utils.dart';
+import 'package:iut_ads/welcome_pages/auth/sign_in_page.dart';
+import 'package:iut_ads/welcome_pages/disconnection.dart';
 
 class MyHomePage extends StatefulWidget {
+  final List<String>? userInfo;
+
+  const MyHomePage({
+    Key? key,
+    required this.userInfo,
+  }) : super(key: key);
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   int currentState = 0;
+  bool? firstTimeIndex;
 
   final listOfScreensTitle = [
     'Acceuil',
@@ -22,9 +32,50 @@ class _MyHomePageState extends State<MyHomePage> {
     'Recherche',
     'Service',
   ];
+
+  double appBarHeightSize = 0;
+  @override
+  void initState() {
+    super.initState();
+    checkUser();
+  }
+
+  checkUser() async {
+    final bool? firstTime = UtilFunctions.getFirstTime();
+    final List<String>? userInfo = UtilFunctions.getUserInfo();
+    if (firstTime != null && !firstTime) {
+      setState(() {
+        firstTimeIndex = true;
+      });
+    } else {
+      setState(() {
+        firstTimeIndex = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final deviceSize = MediaQuery.of(context).size;
+    List<List> menuItemList = [
+      [
+        !firstTimeIndex!
+            ? 'assets/icons/login.1.svg'
+            : 'assets/icons/logout.4.svg',
+        !firstTimeIndex! ? 'Se Connecter' : 'Deconnexion',
+        !firstTimeIndex!
+            ? SignInScreen(
+                userInfo: [],
+              )
+            : DeconnexionScreen(),
+      ],
+      [
+        'assets/icons/info-square.4.svg',
+        'A propos',
+        AboutScreen(),
+      ],
+    ];
+
     final listOfIcons = [
       Icons.home,
       Icons.favorite,
@@ -33,21 +84,23 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
     final listOfScreens = [
       HomeScreen(
-        deviceSize: size,
+        deviceSize: deviceSize,
       ),
       MyPostScreen(
-        deviceSize: size,
+        deviceSize: deviceSize,
+        firstTimeIndex: firstTimeIndex,
       ),
       ResearchScreen(
-        deviceSize: size,
+        deviceSize: deviceSize,
       ),
       ServiceScreen(
-        deviceSize: size,
+        deviceSize: deviceSize,
       ),
     ];
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
@@ -58,66 +111,48 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         actions: [
-          currentState != 1
-              ? IconButton(
-                  onPressed: () {
-                    setState(() {});
-                  },
-                  icon: SvgPicture.asset(
-                    'assets/icons/category.2.svg',
-                  ),
-                )
-              : InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NewPostScreen(
-                          deviceSize: size,
-                          adsObjets: AdsObjets(
-                            imageLink: '',
-                            productName: '',
-                            productPrice: 0,
-                            location: '',
-                            traderName: '',
-                            traderIdNumber: 0,
-                            traderPhoneNumber: 0,
-                            traderWhatsappNumber: 0,
-                            tradeCategory: 'Commerce',
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    // width: 80,
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.symmetric(
-                      vertical: 10.0,
-                      horizontal: 10.0,
-                    ),
-                    margin: EdgeInsets.symmetric(
-                      vertical: 10.0,
-                      horizontal: 10.0,
-                    ),
-                    decoration: BoxDecoration(
-                      color: primaryColor,
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    child: Text(
-                      'Publier',
-                      style: TextStyle(
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                ),
+          IconButton(
+            onPressed: () {
+              UtilFunctions.openDialog(context, menuItemList, appBarHeightSize);
+            },
+            icon: SvgPicture.asset(
+              'assets/icons/category.2.svg',
+            ),
+          ),
         ],
       ),
       body: listOfScreens[currentState],
+      floatingActionButton: firstTimeIndex! && currentState == 1
+          ? FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NewPostScreen(
+                      deviceSize: deviceSize,
+                      adsObjets: AdsObjets(
+                        imageLink: '',
+                        productName: '',
+                        productPrice: 0,
+                        location: '',
+                        traderName: '',
+                        traderIdNumber: 0,
+                        traderPhoneNumber: 0,
+                        traderWhatsappNumber: 0,
+                        tradeCategory: 'Commerce',
+                      ),
+                    ),
+                  ),
+                );
+              },
+              backgroundColor: primaryColor,
+              foregroundColor: Colors.white,
+              child: Icon(Icons.add),
+            )
+          : Container(),
       bottomNavigationBar: Container(
         height: 50,
-        width: size.width,
+        width: deviceSize.width,
         margin: EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: primaryColor,

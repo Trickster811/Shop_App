@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iut_ads/screens/components/details_page.dart';
 import 'package:iut_ads/screens/components/image_view_page.dart';
@@ -150,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Container(
                 height: 125,
-                width: (widget.deviceSize.width - 20) * .65,
+                width: (widget.deviceSize.width - 20) * .55,
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -226,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Container(
                 height: 125,
-                width: (widget.deviceSize.width - 20) * .35,
+                width: (widget.deviceSize.width - 20) * .45,
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(.05),
                   borderRadius: BorderRadius.only(
@@ -236,72 +237,30 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              starRate0 = starRate0 == 0 ? 1 : 0;
-                            });
-                          },
-                          child: starRate0 == 0
-                              ? SvgPicture.asset(
-                                  'assets/icons/star.5.svg',
-                                )
-                              : SvgPicture.asset(
-                                  'assets/icons/star.4.svg',
-                                ),
+                    RatingBar(
+                      initialRating: 3,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemSize: 30.0,
+                      ratingWidget: RatingWidget(
+                        full: SvgPicture.asset(
+                          'assets/icons/heart.5.svg',
+                          color: Colors.red,
                         ),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              starRate1 = starRate1 == 0 ? 1 : 0;
-                              starRate0 = starRate1 == 1 ? 1 : 0;
-                            });
-                          },
-                          child: starRate1 == 0
-                              ? SvgPicture.asset(
-                                  'assets/icons/star.5.svg',
-                                )
-                              : SvgPicture.asset(
-                                  'assets/icons/star.4.svg',
-                                ),
+                        half: SvgPicture.asset(
+                          'assets/icons/heart.1.svg',
+                          color: Colors.red,
                         ),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              starRate2 = starRate2 == 0 ? 1 : 0;
-                              starRate1 = starRate2 == 1 ? 1 : 0;
-                              starRate0 = starRate2 == 1 ? 1 : 0;
-                            });
-                          },
-                          child: starRate1 == 0
-                              ? SvgPicture.asset(
-                                  'assets/icons/star.5.svg',
-                                )
-                              : SvgPicture.asset(
-                                  'assets/icons/star.4.svg',
-                                ),
+                        empty: SvgPicture.asset(
+                          'assets/icons/heart.3.svg',
+                          color: Colors.red,
                         ),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              starRate3 = starRate3 == 0 ? 1 : 0;
-                              starRate2 = starRate3 == 1 ? 1 : 0;
-                              starRate1 = starRate3 == 1 ? 1 : 0;
-                              starRate0 = starRate3 == 1 ? 1 : 0;
-                            });
-                          },
-                          child: starRate1 == 0
-                              ? SvgPicture.asset(
-                                  'assets/icons/star.5.svg',
-                                )
-                              : SvgPicture.asset(
-                                  'assets/icons/star.4.svg',
-                                ),
-                        ),
-                      ],
+                      ),
+                      // itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                      onRatingUpdate: (rating) {
+                        print(rating);
+                      },
                     ),
                     InkWell(
                       onTap: () {
@@ -314,128 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         //     ),
                         //   ),
                         // );
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            contentPadding: EdgeInsets.all(0),
-                            content: Container(
-                              height: 100,
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.15),
-                                    blurRadius: 10,
-                                    offset: Offset(0, 10),
-                                  ),
-                                ],
-                              ),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        adsObjets.traderName,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 05,
-                                      ),
-                                      Text(
-                                        "(Vendeur)",
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        '${adsObjets.traderIdNumber}',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 05,
-                                      ),
-                                      Text(
-                                        "(CNI)",
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        '${adsObjets.traderPhoneNumber}',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 05,
-                                      ),
-                                      Text(
-                                        "(Phone)",
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            actions: [
-                              InkWell(
-                                onTap: () {},
-                                child: Container(
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                      color: primaryColor,
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      IconButton(
-                                        onPressed: () {},
-                                        icon: SvgPicture.asset(
-                                          'assets/icons/calling.4.svg',
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      IconButton(
-                                        onPressed: () {},
-                                        icon: SvgPicture.asset(
-                                          'assets/icons/whatsapp.svg',
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
+                        showDetails(context, adsObjets);
                       },
                       child: Container(
                         padding: EdgeInsets.all(10),
@@ -458,6 +296,81 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           )
+        ],
+      ),
+    );
+  }
+
+  showDetails(BuildContext context, AdsObjets adsObjets) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        contentPadding: EdgeInsets.all(0),
+        content: Container(
+          height: 300,
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.15),
+                blurRadius: 10,
+                offset: Offset(0, 10),
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              detailsItemBuilder(
+                'Vendeur',
+                adsObjets.traderName,
+              ),
+              detailsItemBuilder(
+                'N. CNI',
+                adsObjets.traderIdNumber.toString(),
+              ),
+              detailsItemBuilder(
+                'Phone',
+                adsObjets.traderPhoneNumber.toString(),
+              ),
+              detailsItemBuilder(
+                'Whatsapp',
+                adsObjets.traderWhatsappNumber.toString(),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          InkWell(
+            onTap: () {},
+            child: Container(
+              width: 150,
+              decoration: BoxDecoration(
+                  color: primaryColor, borderRadius: BorderRadius.circular(10)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: SvgPicture.asset(
+                      'assets/icons/calling.4.svg',
+                      color: Colors.white,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: SvgPicture.asset(
+                      'assets/icons/whatsapp.svg',
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -487,6 +400,36 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         SizedBox(
           width: 05,
+        ),
+      ],
+    );
+  }
+
+  Widget detailsItemBuilder(String title, String description) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Text(title),
+            SizedBox(
+              width: 10,
+            ),
+            Container(
+              height: 40,
+              padding: EdgeInsets.all(5.0),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: primaryColor.withOpacity(.1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                description,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10.0,
         ),
       ],
     );

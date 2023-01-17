@@ -15,15 +15,19 @@ class NewPostScreen extends StatefulWidget {
     Key? key,
     required this.deviceSize,
     required this.adsObjets,
+    this.firstTimeIndex,
   }) : super(key: key);
   final Size deviceSize;
   final AdsObjets adsObjets;
+  final bool? firstTimeIndex;
 
   @override
   State<NewPostScreen> createState() => _NewPostScreenState();
 }
 
 class _NewPostScreenState extends State<NewPostScreen> {
+  File? imageFile;
+
   // Form key
   final _formKey = GlobalKey<FormState>();
 
@@ -66,7 +70,12 @@ class _NewPostScreenState extends State<NewPostScreen> {
     return items;
   }
 
-  File? imageFile;
+  @override
+  void initState() {
+    if (widget.adsObjets.imageLink != '')
+      imageFile = File(widget.adsObjets.imageLink);
+  }
+
   @override
   Widget build(BuildContext context) {
     String category = widget.adsObjets.tradeCategory;
@@ -249,7 +258,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 ),
                 Text('Image'),
                 Container(
-                  height: 310,
+                  height: imageFile == null ? 250 : 310,
                   width: widget.deviceSize.width,
                   margin: EdgeInsets.all(5.0),
                   decoration: BoxDecoration(
@@ -257,7 +266,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   // child: Text(imageFile.path),
-                  child: imageFile!.path != ''
+                  child: imageFile == null
                       ? InkWell(
                           onTap: () async {
                             final imageSource = await showDialog(context);
@@ -293,6 +302,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                               },
                               child: Container(
                                 height: 250,
+                                alignment: Alignment.center,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(10),

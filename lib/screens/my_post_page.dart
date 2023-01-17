@@ -6,13 +6,16 @@ import 'package:iut_ads/screens/components/image_view_page.dart';
 import 'package:iut_ads/screens/components/new_post_page.dart';
 import 'package:iut_ads/screens/home_page.dart';
 import 'package:iut_ads/utils/utils.dart';
+import 'package:iut_ads/welcome_pages/auth/sign_in_page.dart';
 
 class MyPostScreen extends StatefulWidget {
   const MyPostScreen({
     Key? key,
     required this.deviceSize,
+    required this.firstTimeIndex,
   }) : super(key: key);
   final Size deviceSize;
+  final bool? firstTimeIndex;
 
   @override
   State<MyPostScreen> createState() => _MyPostScreenState();
@@ -21,25 +24,85 @@ class MyPostScreen extends StatefulWidget {
 class _MyPostScreenState extends State<MyPostScreen> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          adsItemBuilder(
-            context,
-            AdsObjets(
-              imageLink: 'assets/images/2.png',
-              productName: 'Chocolat',
-              productPrice: 0.25,
-              location: 'Bini - Dang',
-              traderName: 'Julie Queen',
-              traderIdNumber: 101115020,
-              traderPhoneNumber: 690786195,
-              traderWhatsappNumber: 690786195,
-              tradeCategory: 'Formation',
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8.0),
+      child: widget.firstTimeIndex!
+          ? SingleChildScrollView(
+              child: Column(
+                children: [
+                  adsItemBuilder(
+                    context,
+                    AdsObjets(
+                      imageLink: 'assets/images/2.png',
+                      productName: 'Chocolat',
+                      productPrice: 0.25,
+                      location: 'Bini - Dang',
+                      traderName: 'Julie Queen',
+                      traderIdNumber: 101115020,
+                      traderPhoneNumber: 690786195,
+                      traderWhatsappNumber: 690786195,
+                      tradeCategory: 'Formation',
+                    ),
+                  ),
+                ],
+              ),
+            )
+          : Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Connecter pour pouvoir poster des annonces ou publicités",
+                    textScaleFactor: 1.2,
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignInScreen(
+                            userInfo: [],
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: 200,
+                      padding: EdgeInsets.symmetric(
+                        vertical: 10.0,
+                        horizontal: 30.0,
+                      ),
+                      decoration: BoxDecoration(
+                        color: primaryColor,
+                        borderRadius: BorderRadius.circular(1000.0),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/icons/login.1.svg',
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 15.0,
+                          ),
+                          Text(
+                            "Se Connecter",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
     );
   }
 
