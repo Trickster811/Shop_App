@@ -43,15 +43,11 @@ class _MyHomePageState extends State<MyHomePage> {
   checkUser() async {
     final bool? firstTime = UtilFunctions.getFirstTime();
     final List<String>? userInfo = UtilFunctions.getUserInfo();
-    if (firstTime != null && !firstTime) {
-      setState(() {
-        firstTimeIndex = true;
-      });
-    } else {
-      setState(() {
-        firstTimeIndex = false;
-      });
-    }
+    print(firstTime);
+    setState(() {
+      firstTimeIndex = firstTime;
+      // widget.userInfo = userInfo;
+    });
   }
 
   @override
@@ -59,11 +55,13 @@ class _MyHomePageState extends State<MyHomePage> {
     final deviceSize = MediaQuery.of(context).size;
     List<List> menuItemList = [
       [
-        !firstTimeIndex!
+        firstTimeIndex! != null && firstTimeIndex!
             ? 'assets/icons/login.1.svg'
             : 'assets/icons/logout.4.svg',
-        !firstTimeIndex! ? 'Se Connecter' : 'Deconnexion',
-        !firstTimeIndex!
+        firstTimeIndex! != null && firstTimeIndex!
+            ? 'Se Connecter'
+            : 'Deconnexion',
+        firstTimeIndex! != null && firstTimeIndex!
             ? SignInScreen(
                 userInfo: [],
               )

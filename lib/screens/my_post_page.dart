@@ -24,8 +24,7 @@ class MyPostScreen extends StatefulWidget {
 class _MyPostScreenState extends State<MyPostScreen> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8.0),
+    return SizedBox(
       child: widget.firstTimeIndex!
           ? SingleChildScrollView(
               child: Column(

@@ -334,15 +334,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 password.text,
               ];
               try {
-                final j = await UtilFunctions.setUserInfo(userLoginInfo);
-                print(j[0]);
-                final f = await UtilFunctions.setFirstTime(true);
-                print(f);
+                await UtilFunctions.setUserInfo(userLoginInfo);
+                await UtilFunctions.setFirstTime(true);
+
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     builder: (context) => MyHomePage(
-                      userInfo: userLoginInfo,
+                      userInfo: UtilFunctions.getUserInfo(),
                     ),
                   ),
                 );
