@@ -104,9 +104,11 @@ class DocumentBuilder {
   final bool documentColorType;
   final bool documentdispositionType;
   final bool documentReliureType;
+  final DateTime documentSendingDate;
   final String ownerName;
   final int ownerPhone;
   final bool documentStatus;
+
   const DocumentBuilder({
     Key? key,
     required this.documentTitle,
@@ -115,6 +117,7 @@ class DocumentBuilder {
     required this.documentColorType,
     required this.documentdispositionType,
     required this.documentReliureType,
+    required this.documentSendingDate,
     required this.ownerName,
     required this.ownerPhone,
     required this.documentStatus,

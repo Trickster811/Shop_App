@@ -3,13 +3,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/parser.dart';
 import 'package:iut_ads/screens/about_page.dart';
 import 'package:iut_ads/screens/components/new_post_page.dart';
+import 'package:iut_ads/screens/history_page.dart';
 import 'package:iut_ads/screens/home_page.dart';
+import 'package:iut_ads/screens/my_pending_taks_page.dart';
 import 'package:iut_ads/screens/my_post_page.dart';
 import 'package:iut_ads/screens/research_page.dart';
 import 'package:iut_ads/screens/service_page.dart';
 import 'package:iut_ads/utils/utils.dart';
 import 'package:iut_ads/welcome_pages/auth/sign_in_page.dart';
-import 'package:iut_ads/welcome_pages/disconnection.dart';
+import 'package:iut_ads/welcome_pages/auth/disconnection.dart';
 
 class MyHomePage extends StatefulWidget {
   final List<String>? userInfo;
@@ -24,14 +26,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int currentState = 0;
-  bool? firstTimeIndex;
-
-  final listOfScreensTitle = [
-    'Acceuil',
-    'Poster',
-    'Recherche',
-    'Service',
-  ];
+  bool firstTimeIndex = false;
+  List<String> userLoginInfo = [];
 
   double appBarHeightSize = 0;
   @override
@@ -45,7 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
     final List<String>? userInfo = UtilFunctions.getUserInfo();
     print(firstTime);
     setState(() {
-      firstTimeIndex = firstTime;
+      firstTimeIndex = firstTime!;
+      userLoginInfo = userInfo!;
       // widget.userInfo = userInfo;
     });
   }
@@ -53,19 +50,29 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
+    final listOfScreensTitle = [
+      'Acceuil',
+      userLoginInfo.isNotEmpty && userLoginInfo[0] == 'Secretariat'
+          ? 'Gérer'
+          : 'Poster',
+      'Recherche',
+      userLoginInfo.isNotEmpty && userLoginInfo[0] == 'Secretariat'
+          ? 'Historique'
+          : 'Service',
+    ];
     List<List> menuItemList = [
       [
-        firstTimeIndex! != null && firstTimeIndex!
-            ? 'assets/icons/login.1.svg'
-            : 'assets/icons/logout.4.svg',
-        firstTimeIndex! != null && firstTimeIndex!
-            ? 'Se Connecter'
-            : 'Deconnexion',
-        firstTimeIndex! != null && firstTimeIndex!
-            ? SignInScreen(
+        firstTimeIndex != null && firstTimeIndex
+            ? 'assets/icons/logout.4.svg'
+            : 'assets/icons/login.1.svg',
+        firstTimeIndex != null && firstTimeIndex
+            ? 'Deconnexion'
+            : 'Se Connecter',
+        firstTimeIndex != null && firstTimeIndex
+            ? DeconnexionScreen()
+            : SignInScreen(
                 userInfo: [],
-              )
-            : DeconnexionScreen(),
+              ),
       ],
       [
         'assets/icons/info-square.4.svg',
@@ -74,26 +81,28 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
     ];
 
-    final listOfIcons = [
-      Icons.home,
-      Icons.favorite,
-      Icons.settings,
-      Icons.search,
-    ];
     final listOfScreens = [
       HomeScreen(
         deviceSize: deviceSize,
       ),
-      MyPostScreen(
-        deviceSize: deviceSize,
-        firstTimeIndex: firstTimeIndex,
-      ),
+      userLoginInfo.isNotEmpty && userLoginInfo[0] == 'Secretariat'
+          ? MyPendingTasksScreen(
+              deviceSize: deviceSize,
+            )
+          : MyPostScreen(
+              deviceSize: deviceSize,
+              firstTimeIndex: firstTimeIndex,
+            ),
       ResearchScreen(
         deviceSize: deviceSize,
       ),
-      ServiceScreen(
-        deviceSize: deviceSize,
-      ),
+      userLoginInfo.isNotEmpty && userLoginInfo[0] == 'Secretariat'
+          ? HistoryScreen(
+              deviceSize: deviceSize,
+            )
+          : ServiceScreen(
+              deviceSize: deviceSize,
+            ),
     ];
     return Scaffold(
       extendBody: true,
@@ -120,7 +129,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: listOfScreens[currentState],
-      floatingActionButton: firstTimeIndex! && currentState == 1
+      floatingActionButton: firstTimeIndex &&
+              currentState == 1 &&
+              userLoginInfo[0] != 'Secretariat'
           ? FloatingActionButton(
               onPressed: () {
                 Navigator.push(
@@ -205,7 +216,10 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               icon: currentState != 1
                   ? SvgPicture.asset(
-                      'assets/icons/plus.svg',
+                      userLoginInfo.isNotEmpty &&
+                              userLoginInfo[0] == 'Secretariat'
+                          ? 'assets/icons/activity.6.svg'
+                          : 'assets/icons/plus.svg',
                       color: Colors.white,
                     )
                   : Column(
@@ -220,7 +234,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                         SvgPicture.asset(
-                          'assets/icons/plus.3.svg',
+                          userLoginInfo.isNotEmpty &&
+                                  userLoginInfo[0] == 'Secretariat'
+                              ? 'assets/icons/activity.2.svg'
+                              : 'assets/icons/plus.3.svg',
                           color: Colors.white,
                         ),
                       ],
@@ -263,7 +280,10 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               icon: currentState != 3
                   ? SvgPicture.asset(
-                      'assets/icons/buy.1.svg',
+                      userLoginInfo.isNotEmpty &&
+                              userLoginInfo[0] == 'Secretariat'
+                          ? 'assets/icons/calendar.svg'
+                          : 'assets/icons/buy.1.svg',
                       color: Colors.white,
                     )
                   : Column(
@@ -278,7 +298,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                         SvgPicture.asset(
-                          'assets/icons/buy.svg',
+                          userLoginInfo.isNotEmpty &&
+                                  userLoginInfo[0] == 'Secretariat'
+                              ? 'assets/icons/calendar.1.svg'
+                              : 'assets/icons/buy.svg',
                           color: Colors.white,
                         ),
                       ],

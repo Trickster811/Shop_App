@@ -25,12 +25,57 @@ class _HomeScreenState extends State<HomeScreen> {
   int starRate4 = 0;
   @override
   Widget build(BuildContext context) {
+    final List test = [
+      adsItemBuilder(
+        context,
+        AdsObjets(
+          imageLink: 'assets/images/2.png',
+          productName: 'Chocolat',
+          productPrice: 0.25,
+          location: 'Bini - Dang',
+          traderName: 'Julie Queen',
+          traderIdNumber: 101115020,
+          traderPhoneNumber: 690786195,
+          traderWhatsappNumber: 690786195,
+          tradeCategory: 'Commerce',
+        ),
+      ),
+      adsItemBuilder(
+        context,
+        AdsObjets(
+          imageLink: 'assets/images/2.png',
+          productName: 'Chocolat',
+          productPrice: 0.25,
+          location: 'Bini - Dang',
+          traderName: 'Julie Queen',
+          traderIdNumber: 101115020,
+          traderPhoneNumber: 690786195,
+          traderWhatsappNumber: 690786195,
+          tradeCategory: 'Offre Service',
+        ),
+      ),
+      adsItemBuilder(
+        context,
+        AdsObjets(
+          imageLink: 'assets/images/2.png',
+          productName: 'Chocolat',
+          productPrice: 0.25,
+          location: 'Bini - Dang',
+          traderName: 'Julie Queen',
+          traderIdNumber: 101115020,
+          traderPhoneNumber: 690786195,
+          traderWhatsappNumber: 690786195,
+          tradeCategory: 'Formation',
+        ),
+      ),
+    ];
     return Column(
       children: [
-        Container(
-          padding: EdgeInsets.symmetric(vertical: 8.0),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
+        SingleChildScrollView(
+          // controller: scrollController,
+          scrollDirection: Axis.horizontal,
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.0),
             child: Row(
               children: [
                 toolBarElementBuilder('All'),
@@ -42,55 +87,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                adsItemBuilder(
-                  context,
-                  AdsObjets(
-                    imageLink: 'assets/images/2.png',
-                    productName: 'Chocolat',
-                    productPrice: 0.25,
-                    location: 'Bini - Dang',
-                    traderName: 'Julie Queen',
-                    traderIdNumber: 101115020,
-                    traderPhoneNumber: 690786195,
-                    traderWhatsappNumber: 690786195,
-                    tradeCategory: 'Commerce',
-                  ),
-                ),
-                adsItemBuilder(
-                  context,
-                  AdsObjets(
-                    imageLink: 'assets/images/2.png',
-                    productName: 'Chocolat',
-                    productPrice: 0.25,
-                    location: 'Bini - Dang',
-                    traderName: 'Julie Queen',
-                    traderIdNumber: 101115020,
-                    traderPhoneNumber: 690786195,
-                    traderWhatsappNumber: 690786195,
-                    tradeCategory: 'Offre Service',
-                  ),
-                ),
-                adsItemBuilder(
-                  context,
-                  AdsObjets(
-                    imageLink: 'assets/images/2.png',
-                    productName: 'Chocolat',
-                    productPrice: 0.25,
-                    location: 'Bini - Dang',
-                    traderName: 'Julie Queen',
-                    traderIdNumber: 101115020,
-                    traderPhoneNumber: 690786195,
-                    traderWhatsappNumber: 690786195,
-                    tradeCategory: 'Formation',
-                  ),
-                ),
-                SizedBox(
-                  height: 70,
-                ),
-              ],
+          child: DraggableScrollableSheet(
+            expand: false,
+            builder: (context, scrollController) => ListView.builder(
+              controller: scrollController,
+              itemCount: test.length,
+              itemBuilder: (context, index) => test[index],
             ),
           ),
         ),
