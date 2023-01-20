@@ -87,13 +87,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         Expanded(
-          child: DraggableScrollableSheet(
-            expand: false,
-            builder: (context, scrollController) => ListView.builder(
-              controller: scrollController,
-              itemCount: test.length,
-              itemBuilder: (context, index) => test[index],
-            ),
+          child: ListView.builder(
+            itemCount: test.length,
+            itemBuilder: (context, index) => test[index],
           ),
         ),
       ],

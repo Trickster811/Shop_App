@@ -15,64 +15,121 @@ class MyPendingTasksScreen extends StatefulWidget {
   const MyPendingTasksScreen({
     Key? key,
     required this.deviceSize,
+    required this.dateTimeRange,
   }) : super(key: key);
   final Size deviceSize;
+  final DateTimeRange dateTimeRange;
 
   @override
   State<MyPendingTasksScreen> createState() => _MyPendingTasksScreenState();
 }
 
 class _MyPendingTasksScreenState extends State<MyPendingTasksScreen> {
-  List pendingTasksList = [];
+  List<DocumentBuilder> pendingTasksList = [
+    DocumentBuilder(
+      documentTitle: 'Analyse et conception des Algorithmes',
+      documentLink: 'assets/ineif/faief',
+      documentCopies: 05,
+      documentColorType: false,
+      documentReliureType: true,
+      documentdispositionType: true,
+      documentSendingDate: DateTime.now().subtract(Duration(days: 10)),
+      ownerName: 'Alhafiz',
+      ownerPhone: 656541584,
+      documentStatus: true,
+    ),
+  ];
+  List<DocumentBuilder> filteredPendingTasksList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    performingFiltering();
+  }
+
+  performingFiltering() {
+    try {
+      print(pendingTasksList[0].documentSendingDate);
+      print(widget.dateTimeRange.start);
+      setState(() {
+        for (var element in pendingTasksList) {
+          if (element.documentSendingDate
+              .isBefore(widget.dateTimeRange.start)) {
+            filteredPendingTasksList.add(element);
+          }
+        }
+
+        print('yo');
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 8.0,
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: Text(
-                  DateFormat.yMMMMEEEEd().format(DateTime.now()),
-                  style: TextStyle(
-                    fontSize: 12,
-                  ),
+    return Stack(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.0),
+          child: GroupedListView<DocumentBuilder, DateTime>(
+            elements: filteredPendingTasksList,
+            groupBy: (pendingTask) => DateTime(
+              pendingTask.documentSendingDate.year,
+              pendingTask.documentSendingDate.month,
+              pendingTask.documentSendingDate.day,
+            ),
+            // groupSeparatorBuilder: (String groupByValue) =>
+            //     Text(groupByValue),
+            groupHeaderBuilder: (DocumentBuilder pendingTask) => Container(
+              height: 30.0,
+              padding: EdgeInsets.symmetric(
+                vertical: 8.0,
+              ),
+              color: Theme.of(context).scaffoldBackgroundColor,
+              alignment: Alignment.center,
+              child: Text(
+                DateFormat.yMMMMEEEEd().format(pendingTask.documentSendingDate),
+                style: TextStyle(
+                  fontSize: 12,
                 ),
               ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Container(
-                height: 100,
-                width: widget.deviceSize.width,
-                alignment: Alignment.center,
+            ),
+            itemBuilder: (context, DocumentBuilder pendingTask) => Container(
+                height: 50.0,
                 padding: EdgeInsets.all(10.0),
+                margin: EdgeInsets.symmetric(vertical: 10.0),
                 decoration: BoxDecoration(
                   color: primaryColor.withOpacity(.5),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-              ),
-              GroupedListView<dynamic, String>(
-                elements: pendingTasksList,
-                groupBy: (element) => element['group'],
-                groupSeparatorBuilder: (String groupByValue) =>
-                    Text(groupByValue),
-                itemBuilder: (context, dynamic element) =>
-                    Text(element['name']),
-                itemComparator: (item1, item2) =>
-                    item1['name'].compareTo(item2['name']), // optional
-                useStickyGroupSeparators: true, // optional
-                floatingHeader: true, // optional
-                order: GroupedListOrder.ASC, // optional),
-              )
-            ],
+                child: Text(pendingTask.documentTitle)),
+            // itemComparator: (item1, item2) =>
+            //     item1['name'].compareTo(item2['name']), // optional
+            useStickyGroupSeparators: true, // optional
+            floatingHeader: true, // optional
+            order: GroupedListOrder.DESC, // optional),
           ),
         ),
-      ),
+        Positioned(
+          bottom: 90,
+          right: 20,
+          child: ClipOval(
+            child: Container(
+              height: 50,
+              width: 50,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: primaryColor,
+              ),
+              child: SvgPicture.asset(
+                'assets/icons/calendar.svg',
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 

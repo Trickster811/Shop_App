@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/parser.dart';
+import 'package:intl/intl.dart';
 import 'package:iut_ads/screens/about_page.dart';
 import 'package:iut_ads/screens/components/new_post_page.dart';
 import 'package:iut_ads/screens/history_page.dart';
@@ -28,6 +29,14 @@ class _MyHomePageState extends State<MyHomePage> {
   int currentState = 0;
   bool firstTimeIndex = false;
   List<String> userLoginInfo = [];
+  DateTimeRange dateTimeRange = DateTimeRange(
+    start: DateTime.now().subtract(
+      Duration(
+        days: 5,
+      ),
+    ),
+    end: DateTime.now(),
+  );
 
   double appBarHeightSize = 0;
   @override
@@ -88,6 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
       userLoginInfo.isNotEmpty && userLoginInfo[0] == 'Secretariat'
           ? MyPendingTasksScreen(
               deviceSize: deviceSize,
+              dateTimeRange: dateTimeRange,
             )
           : MyPostScreen(
               deviceSize: deviceSize,
@@ -118,6 +128,27 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         actions: [
+          currentState == 1 &&
+                  userLoginInfo.isNotEmpty &&
+                  userLoginInfo[0] == 'Secretariat'
+              ? IconButton(
+                  onPressed: () async {
+                    final DateTimeRange? date = await showDateRangePicker(
+                      context: context,
+                      firstDate: DateTime(2022),
+                      lastDate: DateTime.now(),
+                      initialEntryMode: DatePickerEntryMode.input,
+                      initialDateRange: dateTimeRange,
+                    );
+                    setState(() {
+                      dateTimeRange = date!;
+                    });
+                  },
+                  icon: SvgPicture.asset(
+                    'assets/icons/calendar.svg',
+                  ),
+                )
+              : Container(),
           IconButton(
             onPressed: () {
               UtilFunctions.openDialog(context, menuItemList, appBarHeightSize);
@@ -129,36 +160,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: listOfScreens[currentState],
-      floatingActionButton: firstTimeIndex &&
-              currentState == 1 &&
-              userLoginInfo[0] != 'Secretariat'
-          ? FloatingActionButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => NewPostScreen(
-                      deviceSize: deviceSize,
-                      adsObjets: AdsObjets(
-                        imageLink: '',
-                        productName: '',
-                        productPrice: 0,
-                        location: '',
-                        traderName: '',
-                        traderIdNumber: 0,
-                        traderPhoneNumber: 0,
-                        traderWhatsappNumber: 0,
-                        tradeCategory: 'Commerce',
-                      ),
-                    ),
-                  ),
-                );
-              },
-              backgroundColor: primaryColor,
-              foregroundColor: Colors.white,
-              child: Icon(Icons.add),
-            )
-          : Container(),
       bottomNavigationBar: Container(
         height: 50,
         width: deviceSize.width,

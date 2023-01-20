@@ -24,84 +24,106 @@ class MyPostScreen extends StatefulWidget {
 class _MyPostScreenState extends State<MyPostScreen> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: widget.firstTimeIndex!
-          ? SingleChildScrollView(
-              child: Column(
-                children: [
-                  adsItemBuilder(
-                    context,
-                    AdsObjets(
-                      imageLink: 'assets/images/2.png',
-                      productName: 'Chocolat',
-                      productPrice: 0.25,
-                      location: 'Bini - Dang',
-                      traderName: 'Julie Queen',
-                      traderIdNumber: 101115020,
-                      traderPhoneNumber: 690786195,
-                      traderWhatsappNumber: 690786195,
-                      tradeCategory: 'Formation',
-                    ),
-                  ),
-                ],
-              ),
-            )
-          : Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Connecter pour pouvoir poster des annonces ou publicités",
-                    textScaleFactor: 1.2,
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
+    return Stack(
+      children: [
+        SizedBox(
+          child: widget.firstTimeIndex!
+              ? SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      adsItemBuilder(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => SignInScreen(
-                            userInfo: [],
+                        AdsObjets(
+                          imageLink: 'assets/images/2.png',
+                          productName: 'Chocolat',
+                          productPrice: 0.25,
+                          location: 'Bini - Dang',
+                          traderName: 'Julie Queen',
+                          traderIdNumber: 101115020,
+                          traderPhoneNumber: 690786195,
+                          traderWhatsappNumber: 690786195,
+                          tradeCategory: 'Formation',
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              : Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Connecter pour pouvoir poster des annonces ou publicités",
+                        textScaleFactor: 1.2,
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SignInScreen(
+                                userInfo: [],
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: 200,
+                          padding: EdgeInsets.symmetric(
+                            vertical: 10.0,
+                            horizontal: 30.0,
+                          ),
+                          decoration: BoxDecoration(
+                            color: primaryColor,
+                            borderRadius: BorderRadius.circular(1000.0),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/icons/login.1.svg',
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: 15.0,
+                              ),
+                              Text(
+                                "Se Connecter",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      );
-                    },
-                    child: Container(
-                      width: 200,
-                      padding: EdgeInsets.symmetric(
-                        vertical: 10.0,
-                        horizontal: 30.0,
                       ),
-                      decoration: BoxDecoration(
-                        color: primaryColor,
-                        borderRadius: BorderRadius.circular(1000.0),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            'assets/icons/login.1.svg',
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 15.0,
-                          ),
-                          Text(
-                            "Se Connecter",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
+        ),
+        Positioned(
+          bottom: 90,
+          right: 20,
+          child: ClipOval(
+            child: Container(
+              height: 50,
+              width: 50,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: primaryColor,
+              ),
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
               ),
             ),
+          ),
+        ),
+      ],
     );
   }
 
