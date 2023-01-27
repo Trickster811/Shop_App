@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_svg/parser.dart';
-import 'package:intl/intl.dart';
 import 'package:iut_ads/screens/about_page.dart';
-import 'package:iut_ads/screens/components/new_post_page.dart';
-import 'package:iut_ads/screens/history_page.dart';
+import 'package:iut_ads/screens/entreprise_history_page.dart';
 import 'package:iut_ads/screens/home_page.dart';
 import 'package:iut_ads/screens/my_pending_taks_page.dart';
 import 'package:iut_ads/screens/my_post_page.dart';
 import 'package:iut_ads/screens/research_page.dart';
+import 'package:iut_ads/screens/secretariat_history_page%20copy.dart';
 import 'package:iut_ads/screens/service_page.dart';
 import 'package:iut_ads/utils/utils.dart';
-import 'package:iut_ads/welcome_pages/auth/sign_in_page.dart';
 import 'package:iut_ads/welcome_pages/auth/disconnection.dart';
+import 'package:iut_ads/welcome_pages/auth/sign_in_page.dart';
 
 class MyHomePage extends StatefulWidget {
   final List<String>? userInfo;
@@ -29,14 +27,6 @@ class _MyHomePageState extends State<MyHomePage> {
   int currentState = 0;
   bool firstTimeIndex = false;
   List<String> userLoginInfo = [];
-  DateTimeRange dateTimeRange = DateTimeRange(
-    start: DateTime.now().subtract(
-      Duration(
-        days: 5,
-      ),
-    ),
-    end: DateTime.now(),
-  );
 
   double appBarHeightSize = 0;
   @override
@@ -63,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
       'Acceuil',
       userLoginInfo.isNotEmpty && userLoginInfo[0] == 'Secretariat'
           ? 'Gérer'
-          : 'Poster',
+          : 'Publications',
       'Recherche',
       userLoginInfo.isNotEmpty && userLoginInfo[0] == 'Secretariat'
           ? 'Historique'
@@ -97,7 +87,6 @@ class _MyHomePageState extends State<MyHomePage> {
       userLoginInfo.isNotEmpty && userLoginInfo[0] == 'Secretariat'
           ? MyPendingTasksScreen(
               deviceSize: deviceSize,
-              dateTimeRange: dateTimeRange,
             )
           : MyPostScreen(
               deviceSize: deviceSize,
@@ -107,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
         deviceSize: deviceSize,
       ),
       userLoginInfo.isNotEmpty && userLoginInfo[0] == 'Secretariat'
-          ? HistoryScreen(
+          ? SecretariatHistoryScreen(
               deviceSize: deviceSize,
             )
           : ServiceScreen(
@@ -128,24 +117,31 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         actions: [
-          currentState == 1 &&
-                  userLoginInfo.isNotEmpty &&
-                  userLoginInfo[0] == 'Secretariat'
+          userLoginInfo.isNotEmpty &&
+                  userLoginInfo[0] == 'Internaute' &&
+                  currentState == 3
               ? IconButton(
-                  onPressed: () async {
-                    final DateTimeRange? date = await showDateRangePicker(
-                      context: context,
-                      firstDate: DateTime(2022),
-                      lastDate: DateTime.now(),
-                      initialEntryMode: DatePickerEntryMode.input,
-                      initialDateRange: dateTimeRange,
+                  onPressed: () {},
+                  icon: SvgPicture.asset(
+                    'assets/icons/call.5.svg',
+                  ),
+                )
+              : Container(),
+          userLoginInfo.isNotEmpty &&
+                  userLoginInfo[0] == 'Internaute' &&
+                  currentState == 3
+              ? IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            EntrepriseHistoryScreen(deviceSize: deviceSize),
+                      ),
                     );
-                    setState(() {
-                      dateTimeRange = date!;
-                    });
                   },
                   icon: SvgPicture.asset(
-                    'assets/icons/calendar.svg',
+                    'assets/icons/time-circle.4.svg',
                   ),
                 )
               : Container(),
@@ -167,7 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
         decoration: BoxDecoration(
           color: primaryColor,
           borderRadius: BorderRadius.all(
-            Radius.circular(100000),
+            Radius.circular(10.0),
           ),
           boxShadow: [
             BoxShadow(
@@ -283,7 +279,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ? SvgPicture.asset(
                       userLoginInfo.isNotEmpty &&
                               userLoginInfo[0] == 'Secretariat'
-                          ? 'assets/icons/calendar.svg'
+                          ? 'assets/icons/time-circle.4.svg'
                           : 'assets/icons/buy.1.svg',
                       color: Colors.white,
                     )
@@ -301,7 +297,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         SvgPicture.asset(
                           userLoginInfo.isNotEmpty &&
                                   userLoginInfo[0] == 'Secretariat'
-                              ? 'assets/icons/calendar.1.svg'
+                              ? 'assets/icons/time-circle.5.svg'
                               : 'assets/icons/buy.svg',
                           color: Colors.white,
                         ),

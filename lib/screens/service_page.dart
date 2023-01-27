@@ -105,6 +105,7 @@ class DocumentBuilder {
   final bool documentdispositionType;
   final bool documentReliureType;
   final DateTime documentSendingDate;
+  final String documentComment;
   final String ownerName;
   final int ownerPhone;
   final bool documentStatus;
@@ -118,6 +119,7 @@ class DocumentBuilder {
     required this.documentdispositionType,
     required this.documentReliureType,
     required this.documentSendingDate,
+    required this.documentComment,
     required this.ownerName,
     required this.ownerPhone,
     required this.documentStatus,

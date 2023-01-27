@@ -84,8 +84,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
         TextEditingController(text: widget.adsObjets.productPrice.toString());
     final location = TextEditingController(text: widget.adsObjets.location);
     final name = TextEditingController(text: widget.adsObjets.traderName);
-    final numberCNI =
-        TextEditingController(text: widget.adsObjets.traderIdNumber.toString());
+
     final phone = TextEditingController(
         text: widget.adsObjets.traderPhoneNumber.toString());
     final whatsapp = TextEditingController(
@@ -132,7 +131,15 @@ class _NewPostScreenState extends State<NewPostScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Catégorie'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Catégorie'),
+                    SvgPicture.asset(
+                      'assets/icons/category.4.svg',
+                    ),
+                  ],
+                ),
                 Container(
                   height: 50,
                   width: widget.deviceSize.width,
@@ -178,7 +185,15 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 SizedBox(
                   height: 10,
                 ),
-                Text('Prix Unitaire'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Prix Unitaire'),
+                    SvgPicture.asset(
+                      'assets/icons/wallet.5.svg',
+                    ),
+                  ],
+                ),
                 Container(
                   height: 50,
                   width: widget.deviceSize.width,
@@ -218,7 +233,15 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 SizedBox(
                   height: 10,
                 ),
-                Text('Localisation'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Localisation'),
+                    SvgPicture.asset(
+                      'assets/icons/arrow-down-square.svg',
+                    ),
+                  ],
+                ),
                 Container(
                   height: 50,
                   width: widget.deviceSize.width,
@@ -256,7 +279,15 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 SizedBox(
                   height: 10,
                 ),
-                Text('Image'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Image'),
+                    SvgPicture.asset(
+                      'assets/icons/image-2.svg',
+                    ),
+                  ],
+                ),
                 Container(
                   height: imageFile == null ? 250 : 310,
                   width: widget.deviceSize.width,
@@ -364,7 +395,15 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 SizedBox(
                   height: 10,
                 ),
-                Text('Nom'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Nom'),
+                    SvgPicture.asset(
+                      'assets/icons/profile.1.svg',
+                    ),
+                  ],
+                ),
                 Container(
                   height: 50,
                   width: widget.deviceSize.width,
@@ -402,45 +441,15 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 SizedBox(
                   height: 10,
                 ),
-                Text('Numéro CNI'),
-                Container(
-                  height: 50,
-                  width: widget.deviceSize.width,
-                  margin: EdgeInsets.all(5.0),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10.0,
-                    vertical: 8.0,
-                  ),
-                  decoration: BoxDecoration(
-                    color: primaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: TextFormField(
-                    controller: numberCNI,
-                    cursorColor: primaryColor,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(bottom: 10.0),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Téléphone'),
+                    SvgPicture.asset(
+                      'assets/icons/calling.4.svg',
                     ),
-                    validator: RequiredValidator(
-                      errorText: 'Veuillez renseigner cet élément',
-                    ),
-                  ),
+                  ],
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text('Téléphone'),
                 Container(
                   height: 50,
                   width: widget.deviceSize.width,
@@ -478,7 +487,16 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 SizedBox(
                   height: 10,
                 ),
-                Text('Whatsapp'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Whatsapp'),
+                    SvgPicture.asset(
+                      'assets/icons/whatsapp.svg',
+                      height: 20,
+                    ),
+                  ],
+                ),
                 Container(
                   height: 50,
                   width: widget.deviceSize.width,
@@ -523,31 +541,52 @@ class _NewPostScreenState extends State<NewPostScreen> {
       ),
       bottomNavigationBar: InkWell(
         onTap: () {
-          if (!_formKey.currentState!.validate()) {
-            final snackBar = SnackBar(
-              behavior: SnackBarBehavior.floating,
-              content: Container(
-                height: 40,
-                width: widget.deviceSize.width,
-                margin: EdgeInsets.all(10),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.red.withOpacity(.5),
-                  borderRadius: BorderRadius.circular(10),
+          if (!_formKey.currentState!.validate())
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                behavior: SnackBarBehavior.floating,
+                content: Container(
+                  height: 40,
+                  width: widget.deviceSize.width,
+                  margin: EdgeInsets.all(10),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.red.withOpacity(.5),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text(
+                    'Veuiller renseigner tous les champs!!',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontFamily: 'Comfortaa_bold',
+                    ),
+                  ),
                 ),
-                child: Text(
-                  'Veuiller renseigner tous les champs!!',
+                elevation: 0,
+                backgroundColor: Colors.transparent,
+              ),
+            );
+          else
+            showCupertinoModalPopup(
+              context: context,
+              builder: (context) => CupertinoActionSheet(
+                message: Text(
+                  'Votre demande de publication a été envoyé avec succès',
                   style: TextStyle(
                     fontSize: 14,
                     fontFamily: 'Comfortaa_bold',
                   ),
                 ),
+                actions: [
+                  CupertinoActionSheetAction(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('OK'),
+                  ),
+                ],
               ),
-              elevation: 0,
-              backgroundColor: Colors.transparent,
             );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          } else {}
         },
         child: Container(
           height: 40,

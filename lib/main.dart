@@ -1,3 +1,10 @@
+// ************************************************************
+// ************************************************************
+// ***     Copyright 2023 One Chat. All rights reserved.    ***
+// ***          by Jo@chim Ned@ouk@ (MacNight_nj).          ***
+// ************************************************************
+// ************************************************************
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:iut_ads/utils/utils.dart';

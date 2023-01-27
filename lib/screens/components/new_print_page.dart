@@ -88,7 +88,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                   ),
                   decoration: BoxDecoration(
                     color: primaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: TextFormField(
                     controller: documentName,
@@ -487,7 +487,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                           ),
                           decoration: BoxDecoration(
                             color: primaryColor.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(50),
+                            borderRadius: BorderRadius.circular(10.0),
                           ),
                           child: TextFormField(
                             onChanged: (value) {
@@ -548,7 +548,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                           ),
                           decoration: BoxDecoration(
                             color: primaryColor.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(50),
+                            borderRadius: BorderRadius.circular(10.0),
                           ),
                           child: TextFormField(
                             controller: documentPrice,
@@ -589,7 +589,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                   alignment: Alignment.centerLeft,
                   decoration: BoxDecoration(
                     color: primaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Text(
                     totalPrice.toString() + ' FCFA',
@@ -655,7 +655,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                   ),
                   decoration: BoxDecoration(
                     color: primaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: TextFormField(
                     controller: ownerName,
@@ -694,7 +694,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                   ),
                   decoration: BoxDecoration(
                     color: primaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: TextFormField(
                     controller: ownerPhone,
@@ -743,7 +743,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                   ),
                   decoration: BoxDecoration(
                     color: primaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: TextFormField(
                     controller: ownerWhatsapp,
@@ -899,7 +899,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
           decoration: BoxDecoration(
             color: primaryColor,
             borderRadius: BorderRadius.all(
-              Radius.circular(1000),
+              Radius.circular(10.0),
             ),
             boxShadow: [
               BoxShadow(

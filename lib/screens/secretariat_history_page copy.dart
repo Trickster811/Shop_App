@@ -8,25 +8,24 @@ import 'package:iut_ads/screens/home_page.dart';
 import 'package:iut_ads/utils/utils.dart';
 import 'package:iut_ads/welcome_pages/auth/sign_in_page.dart';
 
-class HistoryScreen extends StatefulWidget {
-  const HistoryScreen({
+class SecretariatHistoryScreen extends StatefulWidget {
+  const SecretariatHistoryScreen({
     Key? key,
     required this.deviceSize,
   }) : super(key: key);
   final Size deviceSize;
 
   @override
-  State<HistoryScreen> createState() => _HistoryScreenState();
+  State<SecretariatHistoryScreen> createState() =>
+      _SecretariatHistoryScreenState();
 }
 
-class _HistoryScreenState extends State<HistoryScreen> {
+class _SecretariatHistoryScreenState extends State<SecretariatHistoryScreen> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [],
-        ),
+    return SingleChildScrollView(
+      child: Column(
+        children: [],
       ),
     );
   }

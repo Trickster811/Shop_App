@@ -47,14 +47,14 @@ class _SignInScreenState extends State<SignInScreen> {
       ),
       DropdownMenuItem(
         child: Text(
-          "Internaute",
+          "Entreprise",
           style: TextStyle(
             color: primaryColor,
             fontSize: 16,
             fontFamily: 'Comfortaa_bold',
           ),
         ),
-        value: "Internaute",
+        value: "Entreprise",
       ),
     ];
     return items;
@@ -135,7 +135,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   decoration: BoxDecoration(
                     color: primaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: DropdownButtonFormField(
                     style: TextStyle(
@@ -181,7 +181,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   decoration: BoxDecoration(
                     color: primaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: TextFormField(
                     controller: email,
@@ -220,7 +220,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   decoration: BoxDecoration(
                     color: primaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: TextFormField(
                     controller: password,
@@ -273,7 +273,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       decoration: BoxDecoration(
                         color: primaryColor,
-                        borderRadius: BorderRadius.circular(1000.0),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: Text(
                         "S'inscire",
@@ -306,7 +306,7 @@ class _SignInScreenState extends State<SignInScreen> {
               margin: EdgeInsets.symmetric(vertical: 10.0),
               decoration: BoxDecoration(
                 color: primaryColor.withOpacity(.5),
-                borderRadius: BorderRadius.circular(1000),
+                borderRadius: BorderRadius.circular(10.0),
               ),
               child: Text(
                 'Annuler',
@@ -379,7 +379,7 @@ class _SignInScreenState extends State<SignInScreen> {
               margin: EdgeInsets.symmetric(vertical: 10.0),
               decoration: BoxDecoration(
                 color: primaryColor,
-                borderRadius: BorderRadius.circular(1000),
+                borderRadius: BorderRadius.circular(10.0),
               ),
               child: Text(
                 'Se Connecter',

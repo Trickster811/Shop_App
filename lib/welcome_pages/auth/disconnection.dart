@@ -104,7 +104,7 @@ class _DeconnexionScreenState extends State<DeconnexionScreen> {
                       margin: EdgeInsets.symmetric(vertical: 10.0),
                       decoration: BoxDecoration(
                         color: primaryColor,
-                        borderRadius: BorderRadius.circular(1000),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: Text(
                         'Autre compte',
@@ -142,7 +142,7 @@ class _DeconnexionScreenState extends State<DeconnexionScreen> {
                       margin: EdgeInsets.symmetric(vertical: 10.0),
                       decoration: BoxDecoration(
                         color: primaryColor,
-                        borderRadius: BorderRadius.circular(1000),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: Text(
                         'Deconnexion',
@@ -170,7 +170,7 @@ class _DeconnexionScreenState extends State<DeconnexionScreen> {
           margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
           decoration: BoxDecoration(
             color: primaryColor.withOpacity(.5),
-            borderRadius: BorderRadius.circular(1000),
+            borderRadius: BorderRadius.circular(10.0),
           ),
           child: Text(
             'Annuler',

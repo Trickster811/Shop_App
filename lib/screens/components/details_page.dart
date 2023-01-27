@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iut_ads/screens/components/image_view_page.dart';
 import 'package:iut_ads/screens/home_page.dart';
+import 'package:iut_ads/screens/service_page.dart';
 import 'package:iut_ads/utils/utils.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({
     Key? key,
     required this.deviceSize,
-    required this.adsObjets,
+    required this.documentBuilder,
   }) : super(key: key);
   final Size deviceSize;
-  final AdsObjets adsObjets;
+  final DocumentBuilder documentBuilder;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,186 +33,316 @@ class DetailsScreen extends StatelessWidget {
           IconButton(
             onPressed: () {},
             icon: SvgPicture.asset(
-              'assets/icons/star.svg',
+              'assets/icons/chat.2.svg',
               // color: Colors.white,
             ),
           ),
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.all(10),
-              alignment: Alignment.centerLeft,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    adsObjets.productName,
-                    style: TextStyle(
-                      fontSize: 25,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 05,
-                  ),
-                  Text(
-                    "(Produit)",
-                    style: TextStyle(
-                      fontSize: 10,
-                    ),
-                  ),
+                  Text('Informations sur le Document'),
                 ],
               ),
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              alignment: Alignment.centerLeft,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '€ ${adsObjets.productPrice}',
-                    style: TextStyle(
-                      fontSize: 25,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 05,
-                  ),
-                  Text(
-                    "(Prix U)",
-                    style: TextStyle(
-                      fontSize: 10,
-                    ),
-                  ),
-                ],
+              SizedBox(
+                height: 25.0,
               ),
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              alignment: Alignment.centerLeft,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    adsObjets.location,
-                    style: TextStyle(
-                      fontSize: 25,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 05,
-                  ),
-                  Text(
-                    "(Position)",
-                    style: TextStyle(
-                      fontSize: 10,
-                    ),
-                  ),
-                ],
+              Text('Document'),
+              SizedBox(
+                height: 10.0,
               ),
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ImageViewScreen(
-                      imageLink: 'assets/images/2.png',
-                      deviceSize: deviceSize,
-                    ),
-                  ),
-                );
-              },
-              child: Container(
-                height: deviceSize.width * .75,
-                width: deviceSize.width,
+              Container(
+                height: 150,
+                alignment: Alignment.center,
+                padding: EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
+                  color: primaryColor.withOpacity(.1),
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  child: Image.asset(
-                    'assets/images/2.png',
-                    fit: BoxFit.cover,
-                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      documentBuilder.documentTitle,
+                      textScaleFactor: 1.2,
+                      textAlign: TextAlign.center,
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        height: 40,
+                        width: 150,
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          color: primaryColor,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/icons/download.3.svg',
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 05.0,
+                            ),
+                            Text(
+                              'Télecharger',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              alignment: Alignment.centerLeft,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              SizedBox(
+                height: 20.0,
+              ),
+              Text('Spécifications'),
+              SizedBox(
+                height: 20.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
-                    adsObjets.traderName,
-                    style: TextStyle(
-                      fontSize: 25,
-                    ),
+                  Column(
+                    children: [
+                      Text('Couleur'),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Container(
+                        height: 50,
+                        width: 60,
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          color: documentBuilder.documentColorType
+                              ? Colors.green.withOpacity(.1)
+                              : Colors.red.withOpacity(.1),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Text(
+                          documentBuilder.documentColorType ? 'OUI' : 'NON',
+                          style: TextStyle(
+                            color: documentBuilder.documentColorType
+                                ? Colors.green
+                                : Colors.red,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    width: 05,
+                  Column(
+                    children: [
+                      Text('Reliure'),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Container(
+                        height: 50,
+                        width: 60,
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          color: documentBuilder.documentReliureType
+                              ? Colors.green.withOpacity(.1)
+                              : Colors.red.withOpacity(.1),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Text(
+                          documentBuilder.documentReliureType ? 'OUI' : 'NON',
+                          style: TextStyle(
+                            color: documentBuilder.documentReliureType
+                                ? Colors.green
+                                : Colors.red,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    "(Produit)",
-                    style: TextStyle(
-                      fontSize: 10,
-                    ),
+                  Column(
+                    children: [
+                      Text('Recto/Verso'),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Container(
+                        height: 50,
+                        width: 60,
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          color: documentBuilder.documentdispositionType
+                              ? Colors.green.withOpacity(.1)
+                              : Colors.red.withOpacity(.1),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Text(
+                          documentBuilder.documentdispositionType
+                              ? 'OUI'
+                              : 'NON',
+                          style: TextStyle(
+                            color: documentBuilder.documentdispositionType
+                                ? Colors.green
+                                : Colors.red,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text('N. Copies'),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Container(
+                        height: 50,
+                        width: 60,
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          color: primaryColor.withOpacity(.1),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Text(
+                          '0' + documentBuilder.documentCopies.toString(),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              'Contacts',
-              style: TextStyle(
-                fontSize: 18,
+              SizedBox(
+                height: 20.0,
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            SvgPicture.asset(
-              'assets/icons/arrow-down.6.svg',
-            ),
-          ],
+              Text('Commentaire'),
+              SizedBox(
+                height: 10.0,
+              ),
+              Container(
+                height: 100.0,
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: primaryColor.withOpacity(.1),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Text(
+                  documentBuilder.documentComment,
+                  textAlign: TextAlign.justify,
+                ),
+              ),
+              SizedBox(
+                height: 50.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Informations sur le Client'),
+                ],
+              ),
+              SizedBox(
+                height: 25.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      Text('Nom'),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Container(
+                        height: 50.0,
+                        width: deviceSize.width * .4,
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          color: primaryColor.withOpacity(.1),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Text(documentBuilder.ownerName),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 10.0,
+                  ),
+                  Column(
+                    children: [
+                      Text('Contacts'),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Container(
+                        height: 50.0,
+                        width: deviceSize.width * .4,
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          color: primaryColor.withOpacity(.1),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Text(
+                          documentBuilder.ownerPhone.toString(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 75.0,
+              ),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: Container(
         height: 40,
         // width: 60,
-        margin: EdgeInsets.only(left: 70, right: 70, bottom: 10),
+        margin: EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: primaryColor,
-          borderRadius: BorderRadius.circular(1000),
+          color: Colors.green,
+          borderRadius: BorderRadius.circular(10.0),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IconButton(
-              onPressed: () {},
-              icon: SvgPicture.asset(
-                'assets/icons/calling.4.svg',
+        child: InkWell(
+          onTap: () {},
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgPicture.asset(
+                'assets/icons/tick-square.1.svg',
                 color: Colors.white,
               ),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: SvgPicture.asset(
-                'assets/icons/whatsapp.svg',
-                color: Colors.white,
+              SizedBox(
+                width: 05.0,
               ),
-            ),
-          ],
+              Text(
+                'Terminer',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

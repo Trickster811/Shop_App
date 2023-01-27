@@ -34,7 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
           productPrice: 0.25,
           location: 'Bini - Dang',
           traderName: 'Julie Queen',
-          traderIdNumber: 101115020,
           traderPhoneNumber: 690786195,
           traderWhatsappNumber: 690786195,
           tradeCategory: 'Commerce',
@@ -48,7 +47,6 @@ class _HomeScreenState extends State<HomeScreen> {
           productPrice: 0.25,
           location: 'Bini - Dang',
           traderName: 'Julie Queen',
-          traderIdNumber: 101115020,
           traderPhoneNumber: 690786195,
           traderWhatsappNumber: 690786195,
           tradeCategory: 'Offre Service',
@@ -62,7 +60,6 @@ class _HomeScreenState extends State<HomeScreen> {
           productPrice: 0.25,
           location: 'Bini - Dang',
           traderName: 'Julie Queen',
-          traderIdNumber: 101115020,
           traderPhoneNumber: 690786195,
           traderWhatsappNumber: 690786195,
           tradeCategory: 'Formation',
@@ -226,8 +223,9 @@ class _HomeScreenState extends State<HomeScreen> {
               Container(
                 height: 125,
                 width: (widget.deviceSize.width - 20) * .45,
+                alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(.05),
+                  color: Colors.black.withOpacity(.03),
                   borderRadius: BorderRadius.only(
                     bottomRight: Radius.circular(10),
                   ),
@@ -235,51 +233,76 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    RatingBar(
-                      initialRating: 3,
-                      direction: Axis.horizontal,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      itemSize: 30.0,
-                      ratingWidget: RatingWidget(
-                        full: SvgPicture.asset(
-                          'assets/icons/heart.5.svg',
-                          color: Colors.red,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          onTap: () {},
+                          child: SvgPicture.asset(
+                            'assets/icons/heart.5.svg',
+                            color: Colors.red,
+                          ),
                         ),
-                        half: SvgPicture.asset(
-                          'assets/icons/heart.1.svg',
-                          color: Colors.red,
+                        SizedBox(
+                          width: 10.0,
                         ),
-                        empty: SvgPicture.asset(
-                          'assets/icons/heart.3.svg',
-                          color: Colors.red,
+                        Text('15.5k'),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            RatingBar(
+                              initialRating: 3,
+                              direction: Axis.horizontal,
+                              allowHalfRating: true,
+                              itemCount: 5,
+                              itemSize: 30.0,
+                              ratingWidget: RatingWidget(
+                                full: SvgPicture.asset(
+                                  'assets/icons/heart.5.svg',
+                                  color: Colors.red,
+                                ),
+                                half: SvgPicture.asset(
+                                  'assets/icons/heart.1.svg',
+                                  color: Colors.red,
+                                ),
+                                empty: SvgPicture.asset(
+                                  'assets/icons/heart.3.svg',
+                                  color: Colors.red,
+                                ),
+                              ),
+                              // itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                              onRatingUpdate: (rating) {
+                                print(rating);
+                              },
+                            );
+                          },
+                          child: SvgPicture.asset(
+                            'assets/icons/star.4.svg',
+                            color: Colors.yellow,
+                          ),
                         ),
-                      ),
-                      // itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                      onRatingUpdate: (rating) {
-                        print(rating);
-                      },
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Text('15.5k'),
+                      ],
                     ),
                     InkWell(
                       onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => DetailsScreen(
-                        //       deviceSize: widget.deviceSize,
-                        //       adsObjets: adsObjets,
-                        //     ),
-                        //   ),
-                        // );
                         showDetails(context, adsObjets);
                       },
                       child: Container(
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                            color: primaryColor,
-                            borderRadius: BorderRadius.circular(
-                              10,
-                            )),
+                          color: primaryColor,
+                          borderRadius: BorderRadius.circular(
+                            10,
+                          ),
+                        ),
                         child: Text(
                           'Details',
                           style: TextStyle(
@@ -325,10 +348,6 @@ class _HomeScreenState extends State<HomeScreen> {
               detailsItemBuilder(
                 'Vendeur',
                 adsObjets.traderName,
-              ),
-              detailsItemBuilder(
-                'N. CNI',
-                adsObjets.traderIdNumber.toString(),
               ),
               detailsItemBuilder(
                 'Phone',
@@ -440,7 +459,6 @@ class AdsObjets {
   final double productPrice;
   final String location;
   final String traderName;
-  final double traderIdNumber;
   final int traderPhoneNumber;
   final int traderWhatsappNumber;
   final String tradeCategory;
@@ -451,7 +469,6 @@ class AdsObjets {
     required this.productPrice,
     required this.location,
     required this.traderName,
-    required this.traderIdNumber,
     required this.traderPhoneNumber,
     required this.traderWhatsappNumber,
     required this.tradeCategory,

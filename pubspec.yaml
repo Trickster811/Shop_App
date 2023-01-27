@@ -37,6 +37,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   datetime_picker_formfield:
+  lottie:
   file_picker:
   flutter_rating_bar:
   flutter_svg:

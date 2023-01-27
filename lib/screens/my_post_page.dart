@@ -24,11 +24,13 @@ class MyPostScreen extends StatefulWidget {
 class _MyPostScreenState extends State<MyPostScreen> {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        SizedBox(
-          child: widget.firstTimeIndex!
-              ? SingleChildScrollView(
+    return widget.firstTimeIndex!
+        ? Stack(
+            children: [
+              Container(
+                height: widget.deviceSize.height,
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: SingleChildScrollView(
                   child: Column(
                     children: [
                       adsItemBuilder(
@@ -39,7 +41,6 @@ class _MyPostScreenState extends State<MyPostScreen> {
                           productPrice: 0.25,
                           location: 'Bini - Dang',
                           traderName: 'Julie Queen',
-                          traderIdNumber: 101115020,
                           traderPhoneNumber: 690786195,
                           traderWhatsappNumber: 690786195,
                           tradeCategory: 'Formation',
@@ -47,91 +48,112 @@ class _MyPostScreenState extends State<MyPostScreen> {
                       ),
                     ],
                   ),
-                )
-              : Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Connecter pour pouvoir poster des annonces ou publicités",
-                        textScaleFactor: 1.2,
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SignInScreen(
-                                userInfo: [],
-                              ),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          width: 200,
-                          padding: EdgeInsets.symmetric(
-                            vertical: 10.0,
-                            horizontal: 30.0,
-                          ),
-                          decoration: BoxDecoration(
-                            color: primaryColor,
-                            borderRadius: BorderRadius.circular(1000.0),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                'assets/icons/login.1.svg',
-                                color: Colors.white,
-                              ),
-                              SizedBox(
-                                width: 15.0,
-                              ),
-                              Text(
-                                "Se Connecter",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
+                ),
+              ),
+              Positioned(
+                bottom: 90,
+                right: 20,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NewPostScreen(
+                          deviceSize: widget.deviceSize,
+                          adsObjets: AdsObjets(
+                            imageLink: '',
+                            productName: '',
+                            productPrice: 0.00,
+                            location: '',
+                            traderName: '',
+                            traderPhoneNumber: 0,
+                            traderWhatsappNumber: 0000,
+                            tradeCategory: 'Commerce',
                           ),
                         ),
                       ),
-                    ],
+                    );
+                  },
+                  child: Container(
+                    height: 50,
+                    width: 50,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: primaryColor,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-        ),
-        Positioned(
-          bottom: 90,
-          right: 20,
-          child: ClipOval(
-            child: Container(
-              height: 50,
-              width: 50,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: primaryColor,
               ),
-              child: Icon(
-                Icons.add,
-                color: Colors.white,
-              ),
+            ],
+          )
+        : Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Connecter pour pouvoir poster des annonces ou publicités",
+                  textScaleFactor: 1.2,
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SignInScreen(
+                          userInfo: [],
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: 200,
+                    padding: EdgeInsets.symmetric(
+                      vertical: 10.0,
+                      horizontal: 30.0,
+                    ),
+                    decoration: BoxDecoration(
+                      color: primaryColor,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/icons/login.1.svg',
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 15.0,
+                        ),
+                        Text(
+                          "Se Connecter",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ),
-      ],
-    );
+          );
   }
 
   Widget adsItemBuilder(BuildContext context, AdsObjets adsObjets) {
     return Container(
       height: 300,
       width: widget.deviceSize.width,
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -178,80 +200,82 @@ class _MyPostScreenState extends State<MyPostScreen> {
           ),
           Row(
             children: [
-              Container(
-                height: 125,
-                width: (widget.deviceSize.width - 20) * .65,
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
+              Expanded(
+                child: Container(
+                  height: 125,
+                  // width: (widget.deviceSize.width - 20) * .65,
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(10),
+                    ),
                   ),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          adsObjets.productName,
-                          style: TextStyle(
-                            fontSize: 18,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            adsObjets.productName,
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 05,
-                        ),
-                        Text(
-                          "(Produit)",
-                          style: TextStyle(
-                            fontSize: 10,
+                          SizedBox(
+                            width: 05,
                           ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '€ ${adsObjets.productPrice}',
-                          style: TextStyle(
-                            fontSize: 18,
+                          Text(
+                            "(Produit)",
+                            style: TextStyle(
+                              fontSize: 10,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 05,
-                        ),
-                        Text(
-                          "(Prix U)",
-                          style: TextStyle(
-                            fontSize: 10,
+                        ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '€ ${adsObjets.productPrice}',
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          adsObjets.location,
-                          style: TextStyle(
-                            fontSize: 18,
+                          SizedBox(
+                            width: 05,
                           ),
-                        ),
-                        SizedBox(
-                          width: 05,
-                        ),
-                        Text(
-                          "(Position)",
-                          style: TextStyle(
-                            fontSize: 10,
+                          Text(
+                            "(Prix U)",
+                            style: TextStyle(
+                              fontSize: 10,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            adsObjets.location,
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 05,
+                          ),
+                          Text(
+                            "(Position)",
+                            style: TextStyle(
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Container(

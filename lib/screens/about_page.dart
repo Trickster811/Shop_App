@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:iut_ads/utils/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -22,6 +23,8 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
+  double appBarHeightSize = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +40,14 @@ class AboutScreen extends StatelessWidget {
             fontFamily: 'Comfortaa_bold',
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: SvgPicture.asset(
+              'assets/icons/call.5.svg',
+            ),
+          ),
+        ],
       ),
       body: Stack(
         children: [
@@ -70,18 +81,15 @@ class AboutScreen extends StatelessWidget {
                     'Ndere Ads',
                     style: TextStyle(
                       fontSize: 15,
-                      fontFamily: 'Comfortaa_bold',
                     ),
                   ),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
-                    'Application publicitaire',
+                    'Application Publicitaire',
                     style: TextStyle(
                       fontSize: 10,
-                      fontFamily: 'Comfortaa_bold',
-                      // color: Colors.black45,
                     ),
                   ),
                   SizedBox(
@@ -91,8 +99,6 @@ class AboutScreen extends StatelessWidget {
                     '1.0.0+1',
                     style: TextStyle(
                       fontSize: 10,
-                      fontFamily: 'Comfortaa_bold',
-                      // color: Colors.black45,
                     ),
                   ),
                   Spacer(),
@@ -112,7 +118,7 @@ class AboutScreen extends StatelessWidget {
                     margin: EdgeInsets.only(bottom: 10.0),
                     decoration: BoxDecoration(
                       color: Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.circular(100000),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
