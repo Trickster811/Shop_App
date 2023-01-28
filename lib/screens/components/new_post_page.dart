@@ -26,7 +26,7 @@ class NewPostScreen extends StatefulWidget {
 }
 
 class _NewPostScreenState extends State<NewPostScreen> {
-  File? imageFile;
+  List<File?> imageFile = [];
 
   // Form key
   final _formKey = GlobalKey<FormState>();
@@ -72,8 +72,8 @@ class _NewPostScreenState extends State<NewPostScreen> {
 
   @override
   void initState() {
-    if (widget.adsObjets.imageLink != '')
-      imageFile = File(widget.adsObjets.imageLink);
+    if (widget.adsObjets.imageLink.isNotEmpty)
+      for (var item in widget.adsObjets.imageLink) imageFile.add(File(item));
   }
 
   @override
@@ -282,7 +282,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Image'),
+                    Text('Images'),
                     SvgPicture.asset(
                       'assets/icons/image-2.svg',
                     ),
@@ -297,16 +297,16 @@ class _NewPostScreenState extends State<NewPostScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   // child: Text(imageFile.path),
-                  child: imageFile == null
+                  child: imageFile.isEmpty
                       ? InkWell(
                           onTap: () async {
-                            final imageSource = await showDialog(context);
-                            await getImageFromDevice(imageSource);
+                            // final imageSource = await showDialog(context);
+                            await getImageFromDevice();
                           },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('Importer une image'),
+                              Text('Importer vos images'),
                               SizedBox(
                                 height: 10,
                               ),
@@ -319,32 +319,46 @@ class _NewPostScreenState extends State<NewPostScreen> {
                       : Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ImageViewScreen(
-                                      imageLink: imageFile!.path,
-                                      deviceSize: widget.deviceSize,
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  for (var image in imageFile)
+                                    InkWell(
+                                      onTap: () {
+                                        // Navigator.push(
+                                        //   context,
+                                        //   MaterialPageRoute(
+                                        //     builder: (context) =>
+                                        //         ImageViewScreen(
+                                        //       imageLink: imageFile,
+                                        //       deviceSize: widget.deviceSize,
+                                        //     ),
+                                        //   ),
+                                        // );
+                                      },
+                                      child: Container(
+                                        height: 250,
+                                        // width: 250,
+                                        margin: EdgeInsets.symmetric(
+                                          horizontal: 10.0,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          child: Image.file(
+                                            image!,
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                height: 250,
-                                alignment: Alignment.center,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    topRight: Radius.circular(10),
-                                    bottomLeft: Radius.circular(10),
-                                  ),
-                                  child: Image.file(
-                                    imageFile!,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
+                                ],
                               ),
                             ),
                             SizedBox(
@@ -352,8 +366,8 @@ class _NewPostScreenState extends State<NewPostScreen> {
                             ),
                             InkWell(
                               onTap: () async {
-                                final imageSource = await showDialog(context);
-                                await getImageFromDevice(imageSource);
+                                // final imageSource = await showDialog(context);
+                                await getImageFromDevice();
                               },
                               child: Container(
                                 height: 50,
@@ -363,11 +377,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                                 ),
                                 decoration: BoxDecoration(
                                   color: primaryColor,
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    bottomRight: Radius.circular(10),
-                                    bottomLeft: Radius.circular(10),
-                                  ),
+                                  borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -648,14 +658,17 @@ class _NewPostScreenState extends State<NewPostScreen> {
   }
 
   /// Get from Camera
-  Future getImageFromDevice(ImageSource imageSource) async {
+  Future getImageFromDevice() async {
     try {
-      PickedFile? pickedFile = await ImagePicker.platform.pickImage(
-        source: imageSource,
-      );
+      List<PickedFile>? pickedFile =
+          await ImagePicker.platform.pickMultiImage();
       if (pickedFile == null) return;
+      List<File?> imageList = [];
+      for (var element in pickedFile) {
+        imageList.add(File(element.path));
+      }
       setState(() {
-        imageFile = File(pickedFile.path);
+        imageFile = imageList;
       });
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');

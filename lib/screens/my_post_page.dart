@@ -36,7 +36,14 @@ class _MyPostScreenState extends State<MyPostScreen> {
                       adsItemBuilder(
                         context,
                         AdsObjets(
-                          imageLink: 'assets/images/2.png',
+                          imageLink: [
+                            'https://rukminim1.flixcart.com/image/612/612/l51d30w0/shoe/z/w/c/10-mrj1914-10-aadi-white-black-red-original-imagft9k9hydnfjp.jpeg?q=70',
+                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH0YZh6ggzT4m0wdOK84OuihNDPGSHEuVUtwLhge3pmEPeA8k7GjZCsSSoAOgDXqzFcBI&usqp=CAU',
+                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZtaCc3GrWTcxkOL1lvXXMEDo5rVEg5DGf2LyEmxd2cYWkPTPw6gzVVdKc_3Md5Mbfz0I&usqp=CAU',
+                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzv-wsjN5e6td-LHSyqak5TG4pdW4CcqQuTPUUpGwvDwWRVhbeBpFkpwRgZ89z_mtfOE8&usqp=CAU',
+                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGFEzJimi75YHQQ6ClrDVpKG2ldTukwK_PIST1lklXhTmHQQI_OwGenvurqqnj3U_00c4&usqp=CAU',
+                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9uELZlGwIYcmHNK8h4mpTLiwh-BTNv3I9f4hPNgKSLuH3v_KTJh3Ciu6K4qE3olXNvgM&usqp=CAU',
+                          ],
                           productName: 'Chocolat',
                           productPrice: 0.25,
                           location: 'Bini - Dang',
@@ -61,7 +68,7 @@ class _MyPostScreenState extends State<MyPostScreen> {
                         builder: (context) => NewPostScreen(
                           deviceSize: widget.deviceSize,
                           adsObjets: AdsObjets(
-                            imageLink: '',
+                            imageLink: [],
                             productName: '',
                             productPrice: 0.00,
                             location: '',
@@ -191,8 +198,9 @@ class _MyPostScreenState extends State<MyPostScreen> {
                 borderRadius: BorderRadius.vertical(
                   top: Radius.circular(10),
                 ),
-                child: Image.asset(
-                  adsObjets.imageLink,
+                child: FadeInImage.assetNetwork(
+                  placeholder: 'assets/images/2.png',
+                  image: adsObjets.imageLink[0],
                   fit: BoxFit.cover,
                 ),
               ),

@@ -5,14 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iut_ads/utils/utils.dart';
 
-class ImageViewScreen extends StatelessWidget {
+class ImageViewScreen extends StatefulWidget {
   const ImageViewScreen({
     Key? key,
     required this.imageLink,
     required this.deviceSize,
   }) : super(key: key);
-  final String imageLink;
+  final List<String> imageLink;
   final Size deviceSize;
+
+  @override
+  State<ImageViewScreen> createState() => _ImageViewScreenState();
+}
+
+class _ImageViewScreenState extends State<ImageViewScreen> {
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,18 +39,19 @@ class ImageViewScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () async {
-              final imageName = UtilFunctions.baseNameProvider(imageLink);
+              final imageName =
+                  UtilFunctions.baseNameProvider(widget.imageLink);
               try {
                 await UtilFunctions.saveDocument(
                   name: imageName,
-                  filePath: imageLink,
+                  filePath: widget.imageLink[index],
                 );
                 // print(image!.path);
                 final snackBar = SnackBar(
                   behavior: SnackBarBehavior.floating,
                   content: Container(
                     height: 40,
-                    width: deviceSize.width,
+                    width: widget.deviceSize.width,
                     margin: EdgeInsets.all(10),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
@@ -73,16 +81,60 @@ class ImageViewScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: Container(
-          height: deviceSize.width,
-          width: deviceSize.width,
-          alignment: Alignment.center,
-          child: Image.asset(
-            imageLink,
-            fit: BoxFit.contain,
+      body: Column(
+        children: [
+          Expanded(
+            child: Container(
+              height: widget.deviceSize.width,
+              width: widget.deviceSize.width,
+              alignment: Alignment.center,
+              child: FadeInImage.assetNetwork(
+                placeholder: 'assets/images/2.png',
+                image: widget.imageLink[index],
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
-        ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                for (var item in widget.imageLink)
+                  Container(
+                    height: 75,
+                    width: 75,
+                    margin: EdgeInsets.symmetric(horizontal: 5.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(
+                        color: Colors.white.withOpacity(.2),
+                      ),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          index = widget.imageLink.indexOf(item);
+                        });
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: InteractiveViewer(
+                          maxScale: 5,
+                          child: Image.network(
+                            item,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10.0,
+          ),
+        ],
       ),
     );
   }

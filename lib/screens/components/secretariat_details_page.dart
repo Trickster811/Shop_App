@@ -5,8 +5,8 @@ import 'package:iut_ads/screens/home_page.dart';
 import 'package:iut_ads/screens/service_page.dart';
 import 'package:iut_ads/utils/utils.dart';
 
-class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({
+class SecretariatDetailsScreen extends StatelessWidget {
+  const SecretariatDetailsScreen({
     Key? key,
     required this.deviceSize,
     required this.documentBuilder,

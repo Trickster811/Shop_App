@@ -6,7 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
-import 'package:iut_ads/screens/components/details_page.dart';
+import 'package:iut_ads/screens/components/secretariat_details_page.dart';
 import 'package:iut_ads/screens/components/image_view_page.dart';
 import 'package:iut_ads/screens/components/new_post_page.dart';
 import 'package:iut_ads/screens/home_page.dart';
@@ -181,7 +181,7 @@ class _MyPendingTasksScreenState extends State<MyPendingTasksScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => DetailsScreen(
+                                builder: (context) => SecretariatDetailsScreen(
                                   deviceSize: widget.deviceSize,
                                   documentBuilder: pendingTask,
                                 ),
