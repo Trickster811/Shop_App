@@ -118,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         actions: [
           userLoginInfo.isNotEmpty &&
-                  userLoginInfo[0] == 'Internaute' &&
+                  userLoginInfo[0] == 'Entreprise' &&
                   currentState == 3
               ? IconButton(
                   onPressed: () {},
@@ -128,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 )
               : Container(),
           userLoginInfo.isNotEmpty &&
-                  userLoginInfo[0] == 'Internaute' &&
+                  userLoginInfo[0] == 'Entreprise' &&
                   currentState == 3
               ? IconButton(
                   onPressed: () {

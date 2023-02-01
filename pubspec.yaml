@@ -35,10 +35,12 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  stack_appodeal_flutter:
+  cupertino_icons:
   datetime_picker_formfield:
   lottie:
   file_picker:
+  flutter_launcher_icons:
   flutter_rating_bar:
   flutter_svg:
   form_field_validator:
@@ -49,6 +51,7 @@ dependencies:
   permission_handler:
   shared_preferences:
   url_launcher:  
+  rename:
   # rive:
 
 dev_dependencies:

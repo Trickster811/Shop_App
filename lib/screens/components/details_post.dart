@@ -65,7 +65,7 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: Text(
-                      '€ 225',
+                      'XAF 225',
                       textAlign: TextAlign.center,
                       textScaleFactor: 1.5,
                       style: TextStyle(

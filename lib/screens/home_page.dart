@@ -201,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '€ ${adsObjets.productPrice}',
+                            'XAF ${adsObjets.productPrice}',
                             style: TextStyle(
                               fontSize: 18,
                             ),

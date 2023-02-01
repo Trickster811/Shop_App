@@ -82,6 +82,7 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
         ],
       ),
       body: Column(
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: Container(
@@ -94,6 +95,19 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                 fit: BoxFit.cover,
               ),
             ),
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  'Images:',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
           ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
