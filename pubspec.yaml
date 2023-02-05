@@ -35,7 +35,7 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  stack_appodeal_flutter:
+  
   cupertino_icons:
   datetime_picker_formfield:
   lottie:
@@ -53,6 +53,8 @@ dependencies:
   url_launcher:  
   rename:
   # rive:
+  stack_appodeal_flutter:
+  
 
 dev_dependencies:
   flutter_test:

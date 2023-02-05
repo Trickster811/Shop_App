@@ -11,6 +11,7 @@ import 'package:iut_ads/screens/service_page.dart';
 import 'package:iut_ads/utils/utils.dart';
 import 'package:iut_ads/welcome_pages/auth/disconnection.dart';
 import 'package:iut_ads/welcome_pages/auth/sign_in_page.dart';
+import 'package:stack_appodeal_flutter/stack_appodeal_flutter.dart';
 
 class MyHomePage extends StatefulWidget {
   final List<String>? userInfo;
@@ -29,21 +30,12 @@ class _MyHomePageState extends State<MyHomePage> {
   List<String> userLoginInfo = [];
 
   double appBarHeightSize = 0;
+
   @override
   void initState() {
     super.initState();
     checkUser();
-  }
-
-  checkUser() async {
-    final bool? firstTime = UtilFunctions.getFirstTime();
-    final List<String>? userInfo = UtilFunctions.getUserInfo();
-    print(firstTime);
-    setState(() {
-      firstTimeIndex = firstTime!;
-      userLoginInfo = userInfo!;
-      // widget.userInfo = userInfo;
-    });
+    appodealInitialization();
   }
 
   @override
@@ -307,6 +299,71 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+    );
+  }
+
+  checkUser() async {
+    final bool? firstTime = UtilFunctions.getFirstTime();
+    final List<String>? userInfo = UtilFunctions.getUserInfo();
+    print(firstTime);
+    setState(() {
+      firstTimeIndex = firstTime!;
+      userLoginInfo = userInfo!;
+      // widget.userInfo = userInfo;
+    });
+  }
+
+  Future<void> appodealInitialization() async {
+    Appodeal.setLogLevel(Appodeal.LogLevelVerbose);
+
+    Appodeal.setAutoCache(AppodealAdType.Interstitial, false);
+    Appodeal.setAutoCache(AppodealAdType.RewardedVideo, false);
+    Appodeal.setUseSafeArea(true);
+
+    // Set ad auto caching enabled or disabled
+    // By default autocache is enabled for all ad types
+    Appodeal.setAutoCache(AppodealAdType.Interstitial, false); //default - true
+
+    // Set testing mode
+    Appodeal.setTesting(false); //default - false
+
+    // Set Appodeal SDK logging level
+    Appodeal.setLogLevel(
+        Appodeal.LogLevelVerbose); //default - Appodeal.LogLevelNone
+
+    // Enable or disable child direct threatment
+    Appodeal.setChildDirectedTreatment(false); //default - false
+
+    // Disable network for specific ad type
+    Appodeal.disableNetwork("admob");
+    Appodeal.disableNetwork("admob", AppodealAdType.Interstitial);
+
+    Appodeal.setBannerCallbacks(
+      onBannerLoaded: (isPrecache) => {},
+      onBannerFailedToLoad: () => {},
+      onBannerShown: () => {},
+      onBannerShowFailed: () => {},
+      onBannerClicked: () => {},
+      onBannerExpired: () => {},
+    );
+
+    Appodeal.setInterstitialCallbacks(
+      onInterstitialLoaded: (isPrecache) => {},
+      onInterstitialFailedToLoad: () => {},
+      onInterstitialShown: () => {},
+      onInterstitialShowFailed: () => {},
+      onInterstitialClicked: () => {},
+      onInterstitialClosed: () => {},
+      onInterstitialExpired: () => {},
+    );
+    Appodeal.setRewardedVideoCallbacks(
+      onRewardedVideoLoaded: (isPrecache) => {},
+      onRewardedVideoFailedToLoad: () => {},
+      onRewardedVideoShown: () => {},
+      onRewardedVideoShowFailed: () => {},
+      onRewardedVideoClicked: () => {},
+      onRewardedVideoClosed: (isFinished) {},
+      onRewardedVideoExpired: () => {},
     );
   }
 }

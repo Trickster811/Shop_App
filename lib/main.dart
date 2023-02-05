@@ -1,6 +1,6 @@
 // ************************************************************
 // ************************************************************
-// ***     Copyright 2023 One Chat. All rights reserved.    ***
+// ***     Copyright 2023 Ndere Ads. All rights reserved.   ***
 // ***          by Jo@chim Ned@ouk@ (MacNight_nj).          ***
 // ************************************************************
 // ************************************************************
@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:iut_ads/utils/utils.dart';
 import 'package:iut_ads/welcome_pages/loading_page.dart';
-import 'package:iut_ads/welcome_pages/start_page.dart';
 import 'package:stack_appodeal_flutter/stack_appodeal_flutter.dart';
 
 void main() async {
@@ -19,6 +18,21 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
   await UtilFunctions.init();
+
+  Appodeal.initialize(
+    appKey: '0c478ff9f0c261eea3db303ad66c482313460e9cf1681cb4',
+    adTypes: [
+      AppodealAdType.RewardedVideo,
+      AppodealAdType.Interstitial,
+      AppodealAdType.Banner,
+      AppodealAdType.MREC
+    ],
+    onInitializationFinished: (errors) {
+      errors?.forEach((error) => print(error.desctiption));
+      print("onInitializationFinished: errors - ${errors?.length ?? 0}");
+    },
+  );
+
   runApp(const MyApp());
 }
 
@@ -36,7 +50,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     userInfo = UtilFunctions.getUserInfo();
-    appodealInitialization();
+    // appodealInitialization();
   }
 
   Future<void> appodealInitialization() async {
@@ -46,18 +60,23 @@ class _MyAppState extends State<MyApp> {
     Appodeal.setAutoCache(AppodealAdType.RewardedVideo, false);
     Appodeal.setUseSafeArea(true);
 
-    Appodeal.initialize(
-        appKey: '0c478ff9f0c261eea3db303ad66c482313460e9cf1681cb4',
-        adTypes: [
-          AppodealAdType.RewardedVideo,
-          AppodealAdType.Interstitial,
-          AppodealAdType.Banner,
-          AppodealAdType.MREC
-        ],
-        onInitializationFinished: (errors) {
-          errors?.forEach((error) => print(error.desctiption));
-          print("onInitializationFinished: errors - ${errors?.length ?? 0}");
-        });
+    // Set ad auto caching enabled or disabled
+    // By default autocache is enabled for all ad types
+    Appodeal.setAutoCache(AppodealAdType.Interstitial, false); //default - true
+
+    // Set testing mode
+    Appodeal.setTesting(false); //default - false
+
+    // Set Appodeal SDK logging level
+    Appodeal.setLogLevel(
+        Appodeal.LogLevelVerbose); //default - Appodeal.LogLevelNone
+
+    // Enable or disable child direct threatment
+    Appodeal.setChildDirectedTreatment(false); //default - false
+
+    // Disable network for specific ad type
+    Appodeal.disableNetwork("admob");
+    Appodeal.disableNetwork("admob", AppodealAdType.Interstitial);
 
     Appodeal.setBannerCallbacks(
       onBannerLoaded: (isPrecache) => {},
@@ -76,6 +95,15 @@ class _MyAppState extends State<MyApp> {
       onInterstitialClicked: () => {},
       onInterstitialClosed: () => {},
       onInterstitialExpired: () => {},
+    );
+    Appodeal.setRewardedVideoCallbacks(
+      onRewardedVideoLoaded: (isPrecache) => {},
+      onRewardedVideoFailedToLoad: () => {},
+      onRewardedVideoShown: () => {},
+      onRewardedVideoShowFailed: () => {},
+      onRewardedVideoClicked: () => {},
+      onRewardedVideoClosed: (isFinished) {},
+      onRewardedVideoExpired: () => {},
     );
   }
 

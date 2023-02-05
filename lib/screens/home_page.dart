@@ -6,6 +6,7 @@ import 'package:iut_ads/screens/components/details_post.dart';
 import 'package:iut_ads/screens/components/secretariat_details_page.dart';
 import 'package:iut_ads/screens/components/image_view_page.dart';
 import 'package:iut_ads/utils/utils.dart';
+import 'package:stack_appodeal_flutter/stack_appodeal_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -424,31 +425,56 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget toolBarElementBuilder(String title) {
-    return Row(
-      children: [
-        SizedBox(
-          width: 05,
-        ),
-        Container(
-          height: 40,
-          padding: EdgeInsets.all(8.0),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: primaryColor,
-            borderRadius: BorderRadius.circular(1000),
+    return InkWell(
+      onTap: () async {
+        var isready =
+            await Appodeal.isInitialized(AppodealAdType.RewardedVideo);
+        var canShow = await Appodeal.canShow(AppodealAdType.RewardedVideo);
+        if (!isready) {
+          UtilFunctions.showFlashMessage(
+            context,
+            'Appodeal not ready to Show Ads',
+            Colors.white60,
+            widget.deviceSize,
+          );
+        }
+        if (!canShow) {
+          UtilFunctions.showFlashMessage(
+            context,
+            'Failed to Show Ads',
+            Colors.white60,
+            widget.deviceSize,
+          );
+        }
+
+        await Appodeal.show(AppodealAdType.RewardedVideo);
+      },
+      child: Row(
+        children: [
+          SizedBox(
+            width: 05,
           ),
-          child: Text(
-            title,
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.white,
+          Container(
+            height: 40,
+            padding: EdgeInsets.all(8.0),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: primaryColor,
+              borderRadius: BorderRadius.circular(1000),
+            ),
+            child: Text(
+              title,
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.white,
+              ),
             ),
           ),
-        ),
-        SizedBox(
-          width: 05,
-        ),
-      ],
+          SizedBox(
+            width: 05,
+          ),
+        ],
+      ),
     );
   }
 
