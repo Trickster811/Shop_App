@@ -427,27 +427,21 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget toolBarElementBuilder(String title) {
     return InkWell(
       onTap: () async {
-        var isready =
-            await Appodeal.isInitialized(AppodealAdType.RewardedVideo);
-        var canShow = await Appodeal.canShow(AppodealAdType.RewardedVideo);
-        if (!isready) {
+        var ads = await UtilFunctions.showAppodealRewardedVideoAds();
+        if (ads == 1)
           UtilFunctions.showFlashMessage(
             context,
             'Appodeal not ready to Show Ads',
             Colors.white60,
             widget.deviceSize,
           );
-        }
-        if (!canShow) {
+        if (ads == 2)
           UtilFunctions.showFlashMessage(
             context,
             'Failed to Show Ads',
             Colors.white60,
             widget.deviceSize,
           );
-        }
-
-        await Appodeal.show(AppodealAdType.RewardedVideo);
       },
       child: Row(
         children: [

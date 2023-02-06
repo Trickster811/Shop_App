@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     checkUser();
-    appodealInitialization();
+    UtilFunctions.appodealInitialization();
   }
 
   @override
@@ -311,59 +311,5 @@ class _MyHomePageState extends State<MyHomePage> {
       userLoginInfo = userInfo!;
       // widget.userInfo = userInfo;
     });
-  }
-
-  Future<void> appodealInitialization() async {
-    Appodeal.setLogLevel(Appodeal.LogLevelVerbose);
-
-    Appodeal.setAutoCache(AppodealAdType.Interstitial, false);
-    Appodeal.setAutoCache(AppodealAdType.RewardedVideo, false);
-    Appodeal.setUseSafeArea(true);
-
-    // Set ad auto caching enabled or disabled
-    // By default autocache is enabled for all ad types
-    Appodeal.setAutoCache(AppodealAdType.Interstitial, false); //default - true
-
-    // Set testing mode
-    Appodeal.setTesting(false); //default - false
-
-    // Set Appodeal SDK logging level
-    Appodeal.setLogLevel(
-        Appodeal.LogLevelVerbose); //default - Appodeal.LogLevelNone
-
-    // Enable or disable child direct threatment
-    Appodeal.setChildDirectedTreatment(false); //default - false
-
-    // Disable network for specific ad type
-    Appodeal.disableNetwork("admob");
-    Appodeal.disableNetwork("admob", AppodealAdType.Interstitial);
-
-    Appodeal.setBannerCallbacks(
-      onBannerLoaded: (isPrecache) => {},
-      onBannerFailedToLoad: () => {},
-      onBannerShown: () => {},
-      onBannerShowFailed: () => {},
-      onBannerClicked: () => {},
-      onBannerExpired: () => {},
-    );
-
-    Appodeal.setInterstitialCallbacks(
-      onInterstitialLoaded: (isPrecache) => {},
-      onInterstitialFailedToLoad: () => {},
-      onInterstitialShown: () => {},
-      onInterstitialShowFailed: () => {},
-      onInterstitialClicked: () => {},
-      onInterstitialClosed: () => {},
-      onInterstitialExpired: () => {},
-    );
-    Appodeal.setRewardedVideoCallbacks(
-      onRewardedVideoLoaded: (isPrecache) => {},
-      onRewardedVideoFailedToLoad: () => {},
-      onRewardedVideoShown: () => {},
-      onRewardedVideoShowFailed: () => {},
-      onRewardedVideoClicked: () => {},
-      onRewardedVideoClosed: (isFinished) {},
-      onRewardedVideoExpired: () => {},
-    );
   }
 }

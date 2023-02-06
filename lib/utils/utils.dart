@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stack_appodeal_flutter/stack_appodeal_flutter.dart';
 
 final primaryColor = Color.fromARGB(255, 35, 25, 37);
 
@@ -16,6 +17,20 @@ class UtilFunctions {
 
   static Future init() async {
     _preferences = await SharedPreferences.getInstance();
+
+    Appodeal.initialize(
+      appKey: '0c478ff9f0c261eea3db303ad66c482313460e9cf1681cb4',
+      adTypes: [
+        AppodealAdType.RewardedVideo,
+        AppodealAdType.Interstitial,
+        AppodealAdType.Banner,
+        AppodealAdType.MREC
+      ],
+      onInitializationFinished: (errors) {
+        errors?.forEach((error) => print(error.desctiption));
+        print("onInitializationFinished: errors - ${errors?.length ?? 0}");
+      },
+    );
   }
 
   static Future setFirstTime(bool firstTime) async {
@@ -176,5 +191,69 @@ class UtilFunctions {
       backgroundColor: Colors.transparent,
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  static Future<void> appodealInitialization() async {
+    Appodeal.setLogLevel(Appodeal.LogLevelVerbose);
+
+    Appodeal.setAutoCache(AppodealAdType.Interstitial, false);
+    Appodeal.setAutoCache(AppodealAdType.RewardedVideo, false);
+    Appodeal.setUseSafeArea(true);
+
+    // Set ad auto caching enabled or disabled
+    // By default autocache is enabled for all ad types
+    Appodeal.setAutoCache(AppodealAdType.Interstitial, false); //default - true
+
+    // Set testing mode
+    Appodeal.setTesting(false); //default - false
+
+    // Set Appodeal SDK logging level
+    Appodeal.setLogLevel(
+        Appodeal.LogLevelVerbose); //default - Appodeal.LogLevelNone
+
+    // Enable or disable child direct threatment
+    Appodeal.setChildDirectedTreatment(false); //default - false
+
+    // Disable network for specific ad type
+    Appodeal.disableNetwork("admob");
+    Appodeal.disableNetwork("admob", AppodealAdType.Interstitial);
+
+    Appodeal.setBannerCallbacks(
+      onBannerLoaded: (isPrecache) => {},
+      onBannerFailedToLoad: () => {},
+      onBannerShown: () => {},
+      onBannerShowFailed: () => {},
+      onBannerClicked: () => {},
+      onBannerExpired: () => {},
+    );
+
+    Appodeal.setInterstitialCallbacks(
+      onInterstitialLoaded: (isPrecache) => {},
+      onInterstitialFailedToLoad: () => {},
+      onInterstitialShown: () => {},
+      onInterstitialShowFailed: () => {},
+      onInterstitialClicked: () => {},
+      onInterstitialClosed: () => {},
+      onInterstitialExpired: () => {},
+    );
+    Appodeal.setRewardedVideoCallbacks(
+      onRewardedVideoLoaded: (isPrecache) => {},
+      onRewardedVideoFailedToLoad: () => {},
+      onRewardedVideoShown: () => {},
+      onRewardedVideoShowFailed: () => {},
+      onRewardedVideoClicked: () => {},
+      onRewardedVideoClosed: (isFinished) {},
+      onRewardedVideoExpired: () => {},
+    );
+  }
+
+  static showAppodealRewardedVideoAds() async {
+    var isready = await Appodeal.isInitialized(AppodealAdType.RewardedVideo);
+    var canShow = await Appodeal.canShow(AppodealAdType.RewardedVideo);
+
+    if (!isready) return 1;
+    if (!canShow) return 2;
+
+    return await Appodeal.show(AppodealAdType.RewardedVideo);
   }
 }
