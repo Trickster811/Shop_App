@@ -11,7 +11,7 @@ import 'package:iut_ads/screens/service_page.dart';
 import 'package:iut_ads/utils/utils.dart';
 import 'package:iut_ads/welcome_pages/auth/disconnection.dart';
 import 'package:iut_ads/welcome_pages/auth/sign_in_page.dart';
-import 'package:stack_appodeal_flutter/stack_appodeal_flutter.dart';
+// import 'package:stack_appodeal_flutter/stack_appodeal_flutter.dart';
 
 class MyHomePage extends StatefulWidget {
   final List<String>? userInfo;
@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     checkUser();
-    UtilFunctions.appodealInitialization();
+    // UtilFunctions.appodealInitialization();
   }
 
   @override

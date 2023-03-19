@@ -6,7 +6,7 @@ import 'package:iut_ads/screens/components/details_post.dart';
 import 'package:iut_ads/screens/components/secretariat_details_page.dart';
 import 'package:iut_ads/screens/components/image_view_page.dart';
 import 'package:iut_ads/utils/utils.dart';
-import 'package:stack_appodeal_flutter/stack_appodeal_flutter.dart';
+// import 'package:stack_appodeal_flutter/stack_appodeal_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -436,21 +436,21 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget toolBarElementBuilder(String title) {
     return InkWell(
       onTap: () async {
-        var ads = await UtilFunctions.showAppodealRewardedVideoAds();
-        if (ads == 1)
-          UtilFunctions.showFlashMessage(
-            context,
-            'Appodeal not ready to Show Ads',
-            Colors.white60,
-            widget.deviceSize,
-          );
-        if (ads == 2)
-          UtilFunctions.showFlashMessage(
-            context,
-            'Failed to Show Ads',
-            Colors.white60,
-            widget.deviceSize,
-          );
+        // var ads = await UtilFunctions.showAppodealRewardedVideoAds();
+        // if (ads == 1)
+        //   UtilFunctions.showFlashMessage(
+        //     context,
+        //     'Appodeal not ready to Show Ads',
+        //     Colors.white60,
+        //     widget.deviceSize,
+        //   );
+        // if (ads == 2)
+        //   UtilFunctions.showFlashMessage(
+        //     context,
+        //     'Failed to Show Ads',
+        //     Colors.white60,
+        //     widget.deviceSize,
+        //   );
       },
       child: Row(
         children: [

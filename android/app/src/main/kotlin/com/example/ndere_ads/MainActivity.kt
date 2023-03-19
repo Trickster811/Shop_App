@@ -1,4 +1,4 @@
-package com.dailylearningacademy.ndereads
+package com.example.ndere_ads
 
 import io.flutter.embedding.android.FlutterActivity
 

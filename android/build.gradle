@@ -8,6 +8,8 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:7.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // jcenter()
+        // maven { url "https://artifactory.appodeal.com/appodeal" }
     }
 }
 
@@ -15,8 +17,6 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter()
-        maven { url "https://artifactory.appodeal.com/appodeal" }
     }
 }
 
