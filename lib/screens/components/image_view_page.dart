@@ -44,7 +44,7 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
               try {
                 await UtilFunctions.saveDocument(
                   name: imageName,
-                  filePath: widget.imageLink[index],
+                  document: widget.imageLink[index],
                 );
                 // print(image!.path);
                 final snackBar = SnackBar(

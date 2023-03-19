@@ -875,22 +875,23 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
         ),
       ),
       bottomNavigationBar: InkWell(
-        onTap: () {
-          if (_formKey.currentState!.validate()) {
-            UtilFunctions.showFlashMessage(
-              context,
-              'Merci pour votre confiance !!',
-              Colors.green,
-              widget.deviceSize,
-            );
-          } else {
+        onTap: () async {
+          if (!_formKey.currentState!.validate())
             UtilFunctions.showFlashMessage(
               context,
               'Veuillez remplir tous les champs !!',
               Colors.red,
               widget.deviceSize,
             );
-          }
+
+          final doc = await UtilFunctions.generateTicket();
+
+          UtilFunctions.showFlashMessage(
+            context,
+            'Merci pour votre confiance !!',
+            Colors.green,
+            widget.deviceSize,
+          );
         },
         child: Container(
           height: 40,

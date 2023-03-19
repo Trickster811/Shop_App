@@ -159,6 +159,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   placeholder: 'assets/images/2.png',
                   image: adsObjets.imageLink[0],
                   fit: BoxFit.cover,
+                  placeholderFit: BoxFit.cover,
+                  imageErrorBuilder: (context, error, stackTrace) {
+                    return Image.asset(
+                      'assets/images/2.png',
+                      fit: BoxFit.cover,
+                    );
+                  },
                 ),
               ),
             ),
@@ -397,7 +404,9 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Container(
               width: 150,
               decoration: BoxDecoration(
-                  color: primaryColor, borderRadius: BorderRadius.circular(10)),
+                color: primaryColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

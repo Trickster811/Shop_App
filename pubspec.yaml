@@ -48,12 +48,14 @@ dependencies:
   image_picker:
   intl:
   path_provider:
+  pdf:
   permission_handler:
   shared_preferences:
   url_launcher:  
   rename:
-  # rive:
+  rive:
   stack_appodeal_flutter:
+  syncfusion_flutter_pdfviewer:
   
 
 dev_dependencies:

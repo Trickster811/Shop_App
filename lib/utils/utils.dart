@@ -4,6 +4,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:pdf/pdf.dart' as pdf;
+import 'package:pdf/widgets.dart' as pdfWidget;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,6 +31,7 @@ class UtilFunctions {
       onInitializationFinished: (errors) {
         errors?.forEach((error) => print(error.desctiption));
         print("onInitializationFinished: errors - ${errors?.length ?? 0}");
+        // init();
       },
     );
   }
@@ -45,7 +48,7 @@ class UtilFunctions {
 
   static List<String>? getUserInfo() => _preferences.getStringList('userInfo');
 
-  static saveDocument({required String name, required String filePath}) async {
+  static saveDocument({required String name, required document}) async {
     Directory? directory;
 
     try {
@@ -58,8 +61,17 @@ class UtilFunctions {
           directory = await getApplicationDocumentsDirectory();
         }
       }
+
+      if (document != String) {
+        final bytes = await document.save();
+        final file = File(directory!.path + "/$name");
+
+        await file.writeAsBytes(bytes);
+        return file;
+      }
       final fileSaved = File(directory!.path + "/$name");
-      return File(filePath).copy(fileSaved.path);
+
+      return File(document).copy(fileSaved.path);
     } catch (e) {}
   }
 
@@ -238,9 +250,13 @@ class UtilFunctions {
     );
     Appodeal.setRewardedVideoCallbacks(
       onRewardedVideoLoaded: (isPrecache) => {},
-      onRewardedVideoFailedToLoad: () => {},
+      onRewardedVideoFailedToLoad: () => {
+        showAppodealRewardedVideoAds(),
+      },
       onRewardedVideoShown: () => {},
-      onRewardedVideoShowFailed: () => {},
+      onRewardedVideoShowFailed: () => {
+        showAppodealRewardedVideoAds(),
+      },
       onRewardedVideoClicked: () => {},
       onRewardedVideoClosed: (isFinished) {},
       onRewardedVideoExpired: () => {},
@@ -255,5 +271,23 @@ class UtilFunctions {
     if (!canShow) return 2;
 
     return await Appodeal.show(AppodealAdType.RewardedVideo);
+  }
+
+  static generateTicket() async {
+    final ticket = pdfWidget.Document();
+    ticket.addPage(
+      pdfWidget.Page(
+        pageFormat: pdf.PdfPageFormat(
+          21.0 * pdf.PdfPageFormat.cm,
+          29.7 * pdf.PdfPageFormat.cm,
+          marginAll: 1.5 * pdf.PdfPageFormat.cm,
+        ),
+        build: (context) => pdfWidget.Column(),
+      ),
+    );
+    return await saveDocument(
+      name: '',
+      document: ticket,
+    );
   }
 }
