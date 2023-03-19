@@ -2,11 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:iut_ads/screens/components/image_view_page.dart';
-import 'package:iut_ads/screens/components/new_post_page.dart';
-import 'package:iut_ads/screens/home_page.dart';
-import 'package:iut_ads/utils/utils.dart';
-import 'package:iut_ads/welcome_pages/auth/sign_in_page.dart';
+import 'package:ndere_ads/screens/components/image_view_page.dart';
+import 'package:ndere_ads/screens/components/new_post_page.dart';
+import 'package:ndere_ads/screens/home_page.dart';
+import 'package:ndere_ads/utils/utils.dart';
+import 'package:ndere_ads/welcome_pages/auth/sign_in_page.dart';
 
 class MyPostScreen extends StatefulWidget {
   const MyPostScreen({

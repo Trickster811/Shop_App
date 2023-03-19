@@ -6,13 +6,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
-import 'package:iut_ads/screens/components/secretariat_details_page.dart';
-import 'package:iut_ads/screens/components/image_view_page.dart';
-import 'package:iut_ads/screens/components/new_post_page.dart';
-import 'package:iut_ads/screens/home_page.dart';
-import 'package:iut_ads/screens/service_page.dart';
-import 'package:iut_ads/utils/utils.dart';
-import 'package:iut_ads/welcome_pages/auth/sign_in_page.dart';
+import 'package:ndere_ads/screens/components/secretariat_details_page.dart';
+import 'package:ndere_ads/screens/components/image_view_page.dart';
+import 'package:ndere_ads/screens/components/new_post_page.dart';
+import 'package:ndere_ads/screens/home_page.dart';
+import 'package:ndere_ads/screens/service_page.dart';
+import 'package:ndere_ads/utils/utils.dart';
+import 'package:ndere_ads/welcome_pages/auth/sign_in_page.dart';
 
 class MyPendingTasksScreen extends StatefulWidget {
   const MyPendingTasksScreen({

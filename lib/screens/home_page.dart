@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:iut_ads/screens/components/details_post.dart';
-import 'package:iut_ads/screens/components/secretariat_details_page.dart';
-import 'package:iut_ads/screens/components/image_view_page.dart';
-import 'package:iut_ads/utils/utils.dart';
+import 'package:ndere_ads/screens/components/details_post.dart';
+import 'package:ndere_ads/screens/components/secretariat_details_page.dart';
+import 'package:ndere_ads/screens/components/image_view_page.dart';
+import 'package:ndere_ads/utils/utils.dart';
 // import 'package:stack_appodeal_flutter/stack_appodeal_flutter.dart';
 
 class HomeScreen extends StatefulWidget {

@@ -6,9 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:iut_ads/screens/components/image_view_page.dart';
-import 'package:iut_ads/screens/home_page.dart';
-import 'package:iut_ads/utils/utils.dart';
+import 'package:ndere_ads/screens/components/image_view_page.dart';
+import 'package:ndere_ads/screens/home_page.dart';
+import 'package:ndere_ads/utils/utils.dart';
 
 class NewPostScreen extends StatefulWidget {
   const NewPostScreen({

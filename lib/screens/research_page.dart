@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:iut_ads/utils/utils.dart';
+import 'package:ndere_ads/utils/utils.dart';
 
 class ResearchScreen extends StatelessWidget {
   const ResearchScreen({

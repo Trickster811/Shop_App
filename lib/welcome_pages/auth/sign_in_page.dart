@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:iut_ads/utils/utils.dart';
-import 'package:iut_ads/welcome_pages/auth/sign_up_page.dart';
-import 'package:iut_ads/welcome_pages/start_page.dart';
+import 'package:ndere_ads/utils/utils.dart';
+import 'package:ndere_ads/welcome_pages/auth/sign_up_page.dart';
+import 'package:ndere_ads/welcome_pages/start_page.dart';
 
 class SignInScreen extends StatefulWidget {
   final List<String>? userInfo;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:iut_ads/screens/service_page.dart';
-import 'package:iut_ads/utils/utils.dart';
+import 'package:ndere_ads/screens/service_page.dart';
+import 'package:ndere_ads/utils/utils.dart';
 
 class MyDocumentsScreen extends StatelessWidget {
   const MyDocumentsScreen({

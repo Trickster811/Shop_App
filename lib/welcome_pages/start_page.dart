@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:iut_ads/screens/about_page.dart';
-import 'package:iut_ads/screens/entreprise_history_page.dart';
-import 'package:iut_ads/screens/home_page.dart';
-import 'package:iut_ads/screens/my_pending_taks_page.dart';
-import 'package:iut_ads/screens/my_post_page.dart';
-import 'package:iut_ads/screens/research_page.dart';
-import 'package:iut_ads/screens/secretariat_history_page%20copy.dart';
-import 'package:iut_ads/screens/service_page.dart';
-import 'package:iut_ads/utils/utils.dart';
-import 'package:iut_ads/welcome_pages/auth/disconnection.dart';
-import 'package:iut_ads/welcome_pages/auth/sign_in_page.dart';
+import 'package:ndere_ads/screens/about_page.dart';
+import 'package:ndere_ads/screens/entreprise_history_page.dart';
+import 'package:ndere_ads/screens/home_page.dart';
+import 'package:ndere_ads/screens/my_pending_taks_page.dart';
+import 'package:ndere_ads/screens/my_post_page.dart';
+import 'package:ndere_ads/screens/research_page.dart';
+import 'package:ndere_ads/screens/secretariat_history_page%20copy.dart';
+import 'package:ndere_ads/screens/service_page.dart';
+import 'package:ndere_ads/utils/utils.dart';
+import 'package:ndere_ads/welcome_pages/auth/disconnection.dart';
+import 'package:ndere_ads/welcome_pages/auth/sign_in_page.dart';
 // import 'package:stack_appodeal_flutter/stack_appodeal_flutter.dart';
 
 class MyHomePage extends StatefulWidget {

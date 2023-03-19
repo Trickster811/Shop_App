@@ -7,8 +7,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:iut_ads/utils/utils.dart';
-import 'package:iut_ads/welcome_pages/loading_page.dart';
+import 'package:ndere_ads/utils/utils.dart';
+import 'package:ndere_ads/welcome_pages/loading_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

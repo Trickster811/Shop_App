@@ -4,7 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:iut_ads/utils/utils.dart';
+import 'package:ndere_ads/utils/utils.dart';
 
 class NewPrintSCreen extends StatefulWidget {
   const NewPrintSCreen({
