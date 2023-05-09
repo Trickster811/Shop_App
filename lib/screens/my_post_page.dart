@@ -125,7 +125,7 @@ class _MyPostScreenState extends State<MyPostScreen> {
                     width: 200,
                     padding: EdgeInsets.symmetric(
                       vertical: 10.0,
-                      horizontal: 30.0,
+                      horizontal: 20.0,
                     ),
                     decoration: BoxDecoration(
                       color: primaryColor,

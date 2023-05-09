@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ndere_ads/utils/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -13,11 +12,15 @@ class AboutScreen extends StatelessWidget {
       Uri.parse('https://cm.linkedin.com/in/joachim-nedaouka-0b43b2228');
   final Uri _youtube = Uri.parse('https://www.youtube.com/@macnight_nj');
 
-  Future<void> _launchUrl(Uri _url) async {
+  AboutScreen({
+    Key? key,
+  }) : super(key: key);
+
+  Future<void> _launchUrl(Uri url) async {
     await launchUrl(
-      _url,
+      url,
       mode: LaunchMode.externalApplication,
-      webViewConfiguration: WebViewConfiguration(
+      webViewConfiguration: const WebViewConfiguration(
         headers: <String, String>{'my_header_key': 'my_header_value'},
       ),
     );
@@ -67,8 +70,8 @@ class AboutScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(),
-                  Spacer(),
+                  const SizedBox(),
+                  const Spacer(),
                   Image.asset(
                     'assets/images/hidden_icon_logo.png',
                     height: 65,
