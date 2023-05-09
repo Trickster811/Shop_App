@@ -1,10 +1,4 @@
-import 'dart:io';
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:ndere_ads/utils/utils.dart';
 import 'package:ndere_ads/welcome_pages/auth/sign_up_page.dart';
@@ -34,7 +28,8 @@ class _SignInScreenState extends State<SignInScreen> {
 
   List<DropdownMenuItem<String>> get userTypeList {
     List<DropdownMenuItem<String>> items = [
-      DropdownMenuItem(
+      const DropdownMenuItem(
+        value: "Secretariat",
         child: Text(
           "Secretariat",
           style: TextStyle(
@@ -43,9 +38,9 @@ class _SignInScreenState extends State<SignInScreen> {
             fontFamily: 'Comfortaa_bold',
           ),
         ),
-        value: "Secretariat",
       ),
-      DropdownMenuItem(
+      const DropdownMenuItem(
+        value: "Entreprise",
         child: Text(
           "Entreprise",
           style: TextStyle(
@@ -54,7 +49,6 @@ class _SignInScreenState extends State<SignInScreen> {
             fontFamily: 'Comfortaa_bold',
           ),
         ),
-        value: "Entreprise",
       ),
     ];
     return items;
@@ -67,24 +61,24 @@ class _SignInScreenState extends State<SignInScreen> {
       extendBody: true,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 100,
                 ),
                 Container(
-                  padding: EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(10.0),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: primaryColor,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Column(
-                    children: [
+                    children: const [
                       Text(
                         'NDERE\nADS',
                         textAlign: TextAlign.center,
@@ -108,10 +102,10 @@ class _SignInScreenState extends State<SignInScreen> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
-                Center(
+                const Center(
                   child: Text(
                     'Connexion',
                     textAlign: TextAlign.center,
@@ -121,15 +115,15 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
-                Text('Utilisateur'),
+                const Text('Utilisateur'),
                 Container(
                   height: 50,
                   width: deviceSize.width,
-                  margin: EdgeInsets.symmetric(vertical: 5.0),
-                  padding: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(vertical: 5.0),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,
                     vertical: 8.0,
                   ),
@@ -138,11 +132,11 @@ class _SignInScreenState extends State<SignInScreen> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: DropdownButtonFormField(
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 10,
                       height: 0.5,
                     ),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -167,15 +161,15 @@ class _SignInScreenState extends State<SignInScreen> {
                     },
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text('Email'),
+                const Text('Email'),
                 Container(
                   height: 50,
                   width: deviceSize.width,
-                  margin: EdgeInsets.symmetric(vertical: 5.0),
-                  padding: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(vertical: 5.0),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,
                     vertical: 8.0,
                   ),
@@ -187,7 +181,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     controller: email,
                     cursorColor: primaryColor,
                     keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'votre email',
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
@@ -206,15 +200,15 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text('Mot de passe'),
+                const Text('Mot de passe'),
                 Container(
                   height: 50,
                   width: deviceSize.width,
-                  margin: EdgeInsets.symmetric(vertical: 5.0),
-                  padding: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(vertical: 5.0),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,
                     vertical: 8.0,
                   ),
@@ -227,7 +221,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     cursorColor: primaryColor,
                     obscureText: true,
                     keyboardType: TextInputType.visiblePassword,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'mot de passe',
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
@@ -246,14 +240,14 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Nouveau parmi nous? '),
-                    SizedBox(
+                    const Text('Nouveau parmi nous? '),
+                    const SizedBox(
                       width: 10,
                     ),
                     InkWell(
@@ -262,12 +256,12 @@ class _SignInScreenState extends State<SignInScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => SignUpScreen(
-                                userInfo: [], deviceSize: deviceSize),
+                                userInfo: const [], deviceSize: deviceSize),
                           ),
                         );
                       },
                       child: Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           vertical: 5.0,
                           horizontal: 10.0,
                         ),
@@ -275,7 +269,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           color: primaryColor,
                           borderRadius: BorderRadius.circular(5.0),
                         ),
-                        child: Text(
+                        child: const Text(
                           "S'inscire",
                           style: TextStyle(
                             color: Colors.white,
@@ -286,7 +280,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
               ],
@@ -304,16 +298,16 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Container(
               height: 40,
               alignment: Alignment.center,
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 vertical: 10.0,
                 horizontal: 50.0,
               ),
-              margin: EdgeInsets.symmetric(vertical: 10.0),
+              margin: const EdgeInsets.symmetric(vertical: 10.0),
               decoration: BoxDecoration(
                 color: primaryColor.withOpacity(.5),
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child: Text(
+              child: const Text(
                 'Annuler',
                 style: TextStyle(
                   color: Colors.white,
@@ -323,13 +317,14 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
           InkWell(
             onTap: () async {
-              if (!_formKey.currentState!.validate())
+              if (!_formKey.currentState!.validate()) {
                 return UtilFunctions.showFlashMessage(
                   context,
                   'Veuillez remplir tous les champs !!!',
                   Colors.red,
                   deviceSize,
                 );
+              }
 
               final List<String> userLoginInfo = [
                 userType!,
@@ -339,21 +334,23 @@ class _SignInScreenState extends State<SignInScreen> {
               try {
                 final List<String> userInfo =
                     await UtilFunctions.setUserInfo(userLoginInfo);
-                if (userInfo.length == 0)
+                if (userInfo.isEmpty) {
                   return UtilFunctions.showFlashMessage(
                     context,
                     'Aucun compte existant avec cet email !!',
                     Colors.orange,
                     deviceSize,
                   );
+                }
                 for (var element in userInfo) {
-                  if (element != userLoginInfo[userInfo.indexOf(element)])
+                  if (element != userLoginInfo[userInfo.indexOf(element)]) {
                     return UtilFunctions.showFlashMessage(
                       context,
                       'Email ou Mot de passe incorrect',
                       Colors.red,
                       deviceSize,
                     );
+                  }
                 }
                 await UtilFunctions.setFirstTime(true);
                 //redirecting
@@ -377,16 +374,16 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Container(
               height: 40,
               alignment: Alignment.center,
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 vertical: 10.0,
                 horizontal: 30.0,
               ),
-              margin: EdgeInsets.symmetric(vertical: 10.0),
+              margin: const EdgeInsets.symmetric(vertical: 10.0),
               decoration: BoxDecoration(
                 color: primaryColor,
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child: Text(
+              child: const Text(
                 'Se Connecter',
                 style: TextStyle(
                   color: Colors.white,

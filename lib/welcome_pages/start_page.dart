@@ -6,7 +6,7 @@ import 'package:ndere_ads/screens/home_page.dart';
 import 'package:ndere_ads/screens/my_pending_taks_page.dart';
 import 'package:ndere_ads/screens/my_post_page.dart';
 import 'package:ndere_ads/screens/research_page.dart';
-import 'package:ndere_ads/screens/secretariat_history_page%20copy.dart';
+import 'package:ndere_ads/screens/secretariat_history_page.dart';
 import 'package:ndere_ads/screens/service_page.dart';
 import 'package:ndere_ads/utils/utils.dart';
 import 'package:ndere_ads/welcome_pages/auth/disconnection.dart';
@@ -60,15 +60,15 @@ class _MyHomePageState extends State<MyHomePage> {
             ? 'Deconnexion'
             : 'Se Connecter',
         firstTimeIndex != null && firstTimeIndex
-            ? DeconnexionScreen()
-            : SignInScreen(
+            ? const DeconnexionScreen()
+            : const SignInScreen(
                 userInfo: [],
               ),
       ],
       [
         'assets/icons/info-square.4.svg',
         'A propos',
-        AboutScreen(),
+        const AboutScreen(),
       ],
     ];
 
@@ -103,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
         elevation: 0,
         title: Text(
           listOfScreensTitle[currentState],
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 25,
             color: Colors.black,
           ),
@@ -151,17 +151,17 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: Container(
         height: 50,
         width: deviceSize.width,
-        margin: EdgeInsets.all(20),
+        margin: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: primaryColor,
-          borderRadius: BorderRadius.all(
+          borderRadius: const BorderRadius.all(
             Radius.circular(10.0),
           ),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.15),
               blurRadius: 30,
-              offset: Offset(0, 10),
+              offset: const Offset(0, 10),
             )
           ],
         ),

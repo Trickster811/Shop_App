@@ -1,10 +1,4 @@
-import 'dart:io';
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:ndere_ads/utils/utils.dart';
 import 'package:ndere_ads/welcome_pages/auth/sign_in_page.dart';
@@ -36,7 +30,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   List<DropdownMenuItem<String>> get userTypeList {
     List<DropdownMenuItem<String>> items = [
-      DropdownMenuItem(
+      const DropdownMenuItem(
+        value: "Secretariat",
         child: Text(
           "Secretariat",
           style: TextStyle(
@@ -45,9 +40,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
             fontFamily: 'Comfortaa_bold',
           ),
         ),
-        value: "Secretariat",
       ),
-      DropdownMenuItem(
+      const DropdownMenuItem(
+        value: "Entreprise",
         child: Text(
           "Entreprise",
           style: TextStyle(
@@ -56,7 +51,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
             fontFamily: 'Comfortaa_bold',
           ),
         ),
-        value: "Entreprise",
       ),
     ];
     return items;
@@ -68,24 +62,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
       extendBody: true,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 100,
                 ),
                 Container(
-                  padding: EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(10.0),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: primaryColor,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Column(
-                    children: [
+                    children: const [
                       Text(
                         'NDERE\nADS',
                         textAlign: TextAlign.center,
@@ -109,10 +103,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
-                Center(
+                const Center(
                   child: Text(
                     'Inscription',
                     textAlign: TextAlign.center,
@@ -122,15 +116,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
-                Text('Utilisateur'),
+                const Text('Utilisateur'),
                 Container(
                   height: 50,
                   width: widget.deviceSize.width,
-                  margin: EdgeInsets.symmetric(vertical: 5.0),
-                  padding: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(vertical: 5.0),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,
                     vertical: 8.0,
                   ),
@@ -139,11 +133,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: DropdownButtonFormField(
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 10,
                       height: 0.5,
                     ),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -168,15 +162,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text('Email'),
+                const Text('Email'),
                 Container(
                   height: 50,
                   width: widget.deviceSize.width,
-                  margin: EdgeInsets.symmetric(vertical: 5.0),
-                  padding: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(vertical: 5.0),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,
                     vertical: 8.0,
                   ),
@@ -188,7 +182,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     controller: email,
                     cursorColor: primaryColor,
                     keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'votre email',
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
@@ -207,15 +201,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text('Mot de passe'),
+                const Text('Mot de passe'),
                 Container(
                   height: 50,
                   width: widget.deviceSize.width,
-                  margin: EdgeInsets.symmetric(vertical: 5.0),
-                  padding: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(vertical: 5.0),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,
                     vertical: 8.0,
                   ),
@@ -228,7 +222,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     cursorColor: primaryColor,
                     obscureText: true,
                     keyboardType: TextInputType.visiblePassword,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'mot de passe',
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
@@ -247,14 +241,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Déjà parmi nous ?'),
-                    SizedBox(
+                    const Text('Déjà parmi nous ?'),
+                    const SizedBox(
                       width: 10,
                     ),
                     InkWell(
@@ -262,14 +256,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SignInScreen(
+                            builder: (context) => const SignInScreen(
                               userInfo: [],
                             ),
                           ),
                         );
                       },
                       child: Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           vertical: 5.0,
                           horizontal: 10.0,
                         ),
@@ -277,7 +271,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           color: primaryColor,
                           borderRadius: BorderRadius.circular(5.0),
                         ),
-                        child: Text(
+                        child: const Text(
                           "Se Connecter",
                           style: TextStyle(
                             color: Colors.white,
@@ -288,7 +282,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
               ],
@@ -306,16 +300,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Container(
               height: 40,
               alignment: Alignment.center,
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 vertical: 10.0,
                 horizontal: 50.0,
               ),
-              margin: EdgeInsets.symmetric(vertical: 10.0),
+              margin: const EdgeInsets.symmetric(vertical: 10.0),
               decoration: BoxDecoration(
                 color: primaryColor.withOpacity(.5),
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child: Text(
+              child: const Text(
                 'Annuler',
                 style: TextStyle(
                   color: Colors.white,
@@ -325,13 +319,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
           InkWell(
             onTap: () async {
-              if (!_formKey.currentState!.validate())
+              if (!_formKey.currentState!.validate()) {
                 return UtilFunctions.showFlashMessage(
                   context,
                   'Veuillez remplir tous les champs !!!',
                   Colors.red,
                   widget.deviceSize,
                 );
+              }
 
               final List<String> userLoginInfo = [
                 userType!,
@@ -363,16 +358,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Container(
               height: 40,
               alignment: Alignment.center,
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 vertical: 10.0,
                 horizontal: 50.0,
               ),
-              margin: EdgeInsets.symmetric(vertical: 10.0),
+              margin: const EdgeInsets.symmetric(vertical: 10.0),
               decoration: BoxDecoration(
                 color: primaryColor,
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child: Text(
+              child: const Text(
                 "S'inscrire",
                 style: TextStyle(
                   color: Colors.white,

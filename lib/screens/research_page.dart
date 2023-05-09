@@ -16,8 +16,8 @@ class ResearchScreen extends StatelessWidget {
           Container(
             height: 50,
             width: deviceSize.width,
-            margin: EdgeInsets.all(20),
-            padding: EdgeInsets.all(10),
+            margin: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(1000),
@@ -25,7 +25,7 @@ class ResearchScreen extends StatelessWidget {
                 BoxShadow(
                   color: Colors.black.withOpacity(0.15),
                   blurRadius: 30,
-                  offset: Offset(0, 10),
+                  offset: const Offset(0, 10),
                 ),
               ],
             ),
@@ -35,10 +35,10 @@ class ResearchScreen extends StatelessWidget {
                 SvgPicture.asset(
                   'assets/icons/search.1.svg',
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
-                Expanded(
+                const Expanded(
                   child: TextField(
                     cursorColor: primaryColor,
                     decoration: InputDecoration(

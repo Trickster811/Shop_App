@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:ndere_ads/screens/components/image_view_page.dart';
 import 'package:ndere_ads/screens/home_page.dart';
 import 'package:ndere_ads/utils/utils.dart';
 
@@ -33,7 +32,8 @@ class _NewPostScreenState extends State<NewPostScreen> {
 
   List<DropdownMenuItem<String>> get categoryItems {
     List<DropdownMenuItem<String>> items = [
-      DropdownMenuItem(
+      const DropdownMenuItem(
+        value: "Commerce",
         child: Text(
           "Commerce",
           style: TextStyle(
@@ -42,9 +42,9 @@ class _NewPostScreenState extends State<NewPostScreen> {
             fontFamily: 'Comfortaa_bold',
           ),
         ),
-        value: "Commerce",
       ),
-      DropdownMenuItem(
+      const DropdownMenuItem(
+        value: "Offre Service",
         child: Text(
           "Offre Service",
           style: TextStyle(
@@ -53,9 +53,9 @@ class _NewPostScreenState extends State<NewPostScreen> {
             fontFamily: 'Comfortaa_bold',
           ),
         ),
-        value: "Offre Service",
       ),
-      DropdownMenuItem(
+      const DropdownMenuItem(
+        value: "Formation",
         child: Text(
           "Formation",
           style: TextStyle(
@@ -64,7 +64,6 @@ class _NewPostScreenState extends State<NewPostScreen> {
             fontFamily: 'Comfortaa_bold',
           ),
         ),
-        value: "Formation",
       ),
     ];
     return items;
@@ -72,8 +71,12 @@ class _NewPostScreenState extends State<NewPostScreen> {
 
   @override
   void initState() {
-    if (widget.adsObjets.imageLink.isNotEmpty)
-      for (var item in widget.adsObjets.imageLink) imageFile.add(File(item));
+    super.initState();
+    if (widget.adsObjets.imageLink.isNotEmpty) {
+      for (var item in widget.adsObjets.imageLink) {
+        imageFile.add(File(item));
+      }
+    }
   }
 
   @override
@@ -104,7 +107,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
             // color: Colors.white,
           ),
         ),
-        title: Text(
+        title: const Text(
           'Publier',
           style: TextStyle(
             fontSize: 25,
@@ -127,14 +130,14 @@ class _NewPostScreenState extends State<NewPostScreen> {
         child: Form(
           key: _formKey,
           child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Catégorie'),
+                    const Text('Catégorie'),
                     SvgPicture.asset(
                       'assets/icons/category.4.svg',
                     ),
@@ -143,8 +146,8 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 Container(
                   height: 50,
                   width: widget.deviceSize.width,
-                  margin: EdgeInsets.all(5.0),
-                  padding: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.all(5.0),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,
                     vertical: 8.0,
                   ),
@@ -153,11 +156,11 @@ class _NewPostScreenState extends State<NewPostScreen> {
                     borderRadius: BorderRadius.circular(50),
                   ),
                   child: DropdownButtonFormField(
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 10,
                       height: 0.5,
                     ),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -182,13 +185,13 @@ class _NewPostScreenState extends State<NewPostScreen> {
                     },
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Prix Unitaire'),
+                    const Text('Prix Unitaire'),
                     SvgPicture.asset(
                       'assets/icons/wallet.5.svg',
                     ),
@@ -197,8 +200,8 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 Container(
                   height: 50,
                   width: widget.deviceSize.width,
-                  margin: EdgeInsets.all(5.0),
-                  padding: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.all(5.0),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,
                     vertical: 8.0,
                   ),
@@ -209,10 +212,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
                   child: TextFormField(
                     controller: price,
                     cursorColor: primaryColor,
-                    keyboardType: TextInputType.numberWithOptions(
+                    keyboardType: const TextInputType.numberWithOptions(
                       decimal: true,
                     ),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -230,13 +233,13 @@ class _NewPostScreenState extends State<NewPostScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Localisation'),
+                    const Text('Localisation'),
                     SvgPicture.asset(
                       'assets/icons/arrow-down-square.svg',
                     ),
@@ -245,8 +248,8 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 Container(
                   height: 50,
                   width: widget.deviceSize.width,
-                  margin: EdgeInsets.all(5.0),
-                  padding: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.all(5.0),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,
                     vertical: 8.0,
                   ),
@@ -258,7 +261,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                     controller: location,
                     cursorColor: primaryColor,
                     keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -276,22 +279,22 @@ class _NewPostScreenState extends State<NewPostScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Images'),
+                    const Text('Images'),
                     SvgPicture.asset(
                       'assets/icons/image-2.svg',
                     ),
                   ],
                 ),
                 Container(
-                  height: imageFile == null ? 250 : 310,
+                  height: imageFile.isEmpty ? 250 : 310,
                   width: widget.deviceSize.width,
-                  margin: EdgeInsets.all(5.0),
+                  margin: const EdgeInsets.all(5.0),
                   decoration: BoxDecoration(
                     color: primaryColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(10),
@@ -306,8 +309,8 @@ class _NewPostScreenState extends State<NewPostScreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('Importer vos images'),
-                              SizedBox(
+                              const Text('Importer vos images'),
+                              const SizedBox(
                                 height: 10,
                               ),
                               SvgPicture.asset(
@@ -340,7 +343,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                                       child: Container(
                                         height: 250,
                                         // width: 250,
-                                        margin: EdgeInsets.symmetric(
+                                        margin: const EdgeInsets.symmetric(
                                           horizontal: 10.0,
                                         ),
                                         decoration: BoxDecoration(
@@ -361,7 +364,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             InkWell(
@@ -372,7 +375,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                               child: Container(
                                 height: 50,
                                 width: 150,
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                   horizontal: 10.0,
                                 ),
                                 decoration: BoxDecoration(
@@ -386,10 +389,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
                                       'assets/icons/image-2.svg',
                                       color: Colors.white,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10.0,
                                     ),
-                                    Text(
+                                    const Text(
                                       'Changer',
                                       style: TextStyle(
                                         color: Colors.white,
@@ -402,13 +405,13 @@ class _NewPostScreenState extends State<NewPostScreen> {
                           ],
                         ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Nom'),
+                    const Text('Nom'),
                     SvgPicture.asset(
                       'assets/icons/profile.1.svg',
                     ),
@@ -417,8 +420,8 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 Container(
                   height: 50,
                   width: widget.deviceSize.width,
-                  margin: EdgeInsets.all(5.0),
-                  padding: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.all(5.0),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,
                     vertical: 8.0,
                   ),
@@ -430,7 +433,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                     controller: name,
                     cursorColor: primaryColor,
                     keyboardType: TextInputType.name,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -448,13 +451,13 @@ class _NewPostScreenState extends State<NewPostScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Téléphone'),
+                    const Text('Téléphone'),
                     SvgPicture.asset(
                       'assets/icons/calling.4.svg',
                     ),
@@ -463,8 +466,8 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 Container(
                   height: 50,
                   width: widget.deviceSize.width,
-                  margin: EdgeInsets.all(5.0),
-                  padding: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.all(5.0),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,
                     vertical: 8.0,
                   ),
@@ -476,7 +479,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                     controller: phone,
                     cursorColor: primaryColor,
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -494,13 +497,13 @@ class _NewPostScreenState extends State<NewPostScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Whatsapp'),
+                    const Text('Whatsapp'),
                     SvgPicture.asset(
                       'assets/icons/whatsapp.svg',
                       height: 20,
@@ -510,8 +513,8 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 Container(
                   height: 50,
                   width: widget.deviceSize.width,
-                  margin: EdgeInsets.all(5.0),
-                  padding: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.all(5.0),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,
                     vertical: 8.0,
                   ),
@@ -523,7 +526,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                     controller: whatsapp,
                     cursorColor: primaryColor,
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -541,7 +544,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 70,
                 ),
               ],
@@ -551,20 +554,20 @@ class _NewPostScreenState extends State<NewPostScreen> {
       ),
       bottomNavigationBar: InkWell(
         onTap: () {
-          if (!_formKey.currentState!.validate())
+          if (!_formKey.currentState!.validate()) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 behavior: SnackBarBehavior.floating,
                 content: Container(
                   height: 40,
                   width: widget.deviceSize.width,
-                  margin: EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(10),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: Colors.red.withOpacity(.5),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Veuiller renseigner tous les champs!!',
                     style: TextStyle(
                       fontSize: 14,
@@ -576,11 +579,11 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 backgroundColor: Colors.transparent,
               ),
             );
-          else
+          } else {
             showCupertinoModalPopup(
               context: context,
               builder: (context) => CupertinoActionSheet(
-                message: Text(
+                message: const Text(
                   'Votre demande de publication a été envoyé avec succès',
                   style: TextStyle(
                     fontSize: 14,
@@ -592,26 +595,27 @@ class _NewPostScreenState extends State<NewPostScreen> {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text('OK'),
+                    child: const Text('OK'),
                   ),
                 ],
               ),
             );
+          }
         },
         child: Container(
           height: 40,
-          margin: EdgeInsets.all(20),
+          margin: const EdgeInsets.all(20),
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: primaryColor,
-            borderRadius: BorderRadius.all(
+            borderRadius: const BorderRadius.all(
               Radius.circular(1000),
             ),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.15),
                 blurRadius: 30,
-                offset: Offset(0, 10),
+                offset: const Offset(0, 10),
               ),
             ],
           ),
@@ -622,10 +626,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 'assets/icons/send.3.svg',
                 color: Colors.white,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10.0,
               ),
-              Text(
+              const Text(
                 'Publier',
                 style: TextStyle(
                   color: Colors.white,
@@ -646,11 +650,11 @@ class _NewPostScreenState extends State<NewPostScreen> {
         actions: [
           CupertinoActionSheetAction(
             onPressed: () => Navigator.of(context).pop(ImageSource.camera),
-            child: Text('Camera'),
+            child: const Text('Camera'),
           ),
           CupertinoActionSheetAction(
             onPressed: () => Navigator.of(context).pop(ImageSource.gallery),
-            child: Text('Gallery'),
+            child: const Text('Gallery'),
           ),
         ],
       ),

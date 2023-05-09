@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ndere_ads/screens/components/my_documents_page.dart';
 import 'package:ndere_ads/screens/components/new_print_page.dart';
-import 'package:ndere_ads/screens/my_post_page.dart';
 import 'package:ndere_ads/utils/utils.dart';
 
 class ServiceScreen extends StatelessWidget {
@@ -12,14 +11,14 @@ class ServiceScreen extends StatelessWidget {
   final Size deviceSize;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: deviceSize.height,
       width: deviceSize.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             'Services impression de documents par le secrétariat LMD',
             textAlign: TextAlign.center,
             textScaleFactor: 1.1,
@@ -27,7 +26,7 @@ class ServiceScreen extends StatelessWidget {
               fontSize: 16,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20.0,
           ),
           InkWell(
@@ -44,13 +43,13 @@ class ServiceScreen extends StatelessWidget {
             child: Container(
               height: 50,
               width: 200,
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: primaryColor,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text(
+              child: const Text(
                 'Nouveau',
                 style: TextStyle(
                   color: Colors.white,
@@ -59,7 +58,7 @@ class ServiceScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20.0,
           ),
           InkWell(
@@ -76,13 +75,13 @@ class ServiceScreen extends StatelessWidget {
             child: Container(
               height: 50,
               width: 200,
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: primaryColor,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text(
+              child: const Text(
                 'Mes Documents',
                 style: TextStyle(
                   color: Colors.white,

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ndere_ads/screens/components/details_post.dart';
-import 'package:ndere_ads/screens/components/secretariat_details_page.dart';
 import 'package:ndere_ads/screens/components/image_view_page.dart';
 import 'package:ndere_ads/utils/utils.dart';
 // import 'package:stack_appodeal_flutter/stack_appodeal_flutter.dart';
@@ -30,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final List test = [
       adsItemBuilder(
         context,
-        AdsObjets(
+        const AdsObjets(
           imageLink: [
             'https://rukminim1.flixcart.com/image/612/612/l51d30w0/shoe/z/w/c/10-mrj1914-10-aadi-white-black-red-original-imagft9k9hydnfjp.jpeg?q=70',
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH0YZh6ggzT4m0wdOK84OuihNDPGSHEuVUtwLhge3pmEPeA8k7GjZCsSSoAOgDXqzFcBI&usqp=CAU',
@@ -50,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       adsItemBuilder(
         context,
-        AdsObjets(
+        const AdsObjets(
           imageLink: [
             'https://cdn.shopify.com/s/files/1/0046/9139/4658/files/SS20_HOMEPAGE_MCCLEANPAIR_880x550_crop_center.jpg?v=1614334815',
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqRw1KJxR6to1NRwgUn3qZan9eWtSJXS37yC8JMJvgvqjKNpuzb7YD5ZZd3wXpFMouHHM&usqp=CAU',
@@ -67,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       adsItemBuilder(
         context,
-        AdsObjets(
+        const AdsObjets(
           imageLink: [
             'https://www.shoe-tease.com/wp-content/uploads/2021/10/Shoes-that-go-with-everything-ShoeTease-Blog.jpg',
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZNdz-mIrSJtcSry4OKCjYGUo_zZcWqjDdMkAxHDdmbaRfjagUcB5JVNYRdByps4sABr8&usqp=CAU',
@@ -92,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
           // controller: scrollController,
           scrollDirection: Axis.horizontal,
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.0),
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Row(
               children: [
                 toolBarElementBuilder('All'),
@@ -117,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       height: 300,
       width: widget.deviceSize.width,
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -125,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
           BoxShadow(
             color: Colors.black.withOpacity(0.15),
             blurRadius: 10,
-            offset: Offset(0, 10),
+            offset: const Offset(0, 10),
           ),
         ],
       ),
@@ -146,13 +144,13 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Container(
               height: 175,
               width: double.maxFinite,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.vertical(
                   top: Radius.circular(10),
                 ),
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.vertical(
+                borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(10),
                 ),
                 child: FadeInImage.assetNetwork(
@@ -175,8 +173,8 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: Container(
                   height: 125,
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
+                  padding: const EdgeInsets.all(10),
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(10),
                     ),
@@ -190,14 +188,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Text(
                             adsObjets.productName,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 05,
                           ),
-                          Text(
+                          const Text(
                             "(Produit)",
                             style: TextStyle(
                               fontSize: 10,
@@ -210,14 +208,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Text(
                             'XAF ${adsObjets.productPrice}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 05,
                           ),
-                          Text(
+                          const Text(
                             "(Prix U)",
                             style: TextStyle(
                               fontSize: 10,
@@ -230,14 +228,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Text(
                             adsObjets.location,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 05,
                           ),
-                          Text(
+                          const Text(
                             "(Position)",
                             style: TextStyle(
                               fontSize: 10,
@@ -255,7 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(.03),
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomRight: Radius.circular(10),
                   ),
                 ),
@@ -272,10 +270,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.red,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10.0,
                         ),
-                        Text('15.5k'),
+                        const Text('15.5k'),
                       ],
                     ),
                     Row(
@@ -314,10 +312,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.yellow,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10.0,
                         ),
-                        Text('15.5k'),
+                        const Text('15.5k'),
                       ],
                     ),
                     InkWell(
@@ -334,14 +332,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         );
                       },
                       child: Container(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           color: primaryColor,
                           borderRadius: BorderRadius.circular(
                             10,
                           ),
                         ),
-                        child: Text(
+                        child: const Text(
                           'Details',
                           style: TextStyle(
                             fontSize: 18,
@@ -364,10 +362,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        contentPadding: EdgeInsets.all(0),
+        contentPadding: const EdgeInsets.all(0),
         content: Container(
           height: 300,
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
@@ -375,7 +373,7 @@ class _HomeScreenState extends State<HomeScreen> {
               BoxShadow(
                 color: Colors.black.withOpacity(0.15),
                 blurRadius: 10,
-                offset: Offset(0, 10),
+                offset: const Offset(0, 10),
               ),
             ],
           ),
@@ -454,12 +452,12 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       child: Row(
         children: [
-          SizedBox(
+          const SizedBox(
             width: 05,
           ),
           Container(
             height: 40,
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: primaryColor,
@@ -467,13 +465,13 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             child: Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 color: Colors.white,
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 05,
           ),
         ],
@@ -487,12 +485,12 @@ class _HomeScreenState extends State<HomeScreen> {
         Row(
           children: [
             Text(title),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Container(
               height: 40,
-              padding: EdgeInsets.all(5.0),
+              padding: const EdgeInsets.all(5.0),
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: primaryColor.withOpacity(.1),
@@ -504,7 +502,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 10.0,
         ),
       ],

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ndere_ads/screens/components/image_view_page.dart';
-import 'package:ndere_ads/screens/home_page.dart';
 import 'package:ndere_ads/screens/service_page.dart';
 import 'package:ndere_ads/utils/utils.dart';
 
@@ -41,27 +39,27 @@ class SecretariatDetailsScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                children: const [
                   Text('Informations sur le Document'),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25.0,
               ),
-              Text('Document'),
-              SizedBox(
+              const Text('Document'),
+              const SizedBox(
                 height: 10.0,
               ),
               Container(
                 height: 150,
                 alignment: Alignment.center,
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                   color: primaryColor.withOpacity(.1),
                   borderRadius: BorderRadius.circular(10.0),
@@ -80,7 +78,7 @@ class SecretariatDetailsScreen extends StatelessWidget {
                         height: 40,
                         width: 150,
                         alignment: Alignment.center,
-                        padding: EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(10.0),
                         decoration: BoxDecoration(
                           color: primaryColor,
                           borderRadius: BorderRadius.circular(10.0),
@@ -92,10 +90,10 @@ class SecretariatDetailsScreen extends StatelessWidget {
                               'assets/icons/download.3.svg',
                               color: Colors.white,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 05.0,
                             ),
-                            Text(
+                            const Text(
                               'Télecharger',
                               style: TextStyle(
                                 color: Colors.white,
@@ -108,11 +106,11 @@ class SecretariatDetailsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
-              Text('Spécifications'),
-              SizedBox(
+              const Text('Spécifications'),
+              const SizedBox(
                 height: 20.0,
               ),
               Row(
@@ -120,15 +118,15 @@ class SecretariatDetailsScreen extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      Text('Couleur'),
-                      SizedBox(
+                      const Text('Couleur'),
+                      const SizedBox(
                         height: 10.0,
                       ),
                       Container(
                         height: 50,
                         width: 60,
                         alignment: Alignment.center,
-                        padding: EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(10.0),
                         decoration: BoxDecoration(
                           color: documentBuilder.documentColorType
                               ? Colors.green.withOpacity(.1)
@@ -148,15 +146,15 @@ class SecretariatDetailsScreen extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      Text('Reliure'),
-                      SizedBox(
+                      const Text('Reliure'),
+                      const SizedBox(
                         height: 10.0,
                       ),
                       Container(
                         height: 50,
                         width: 60,
                         alignment: Alignment.center,
-                        padding: EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(10.0),
                         decoration: BoxDecoration(
                           color: documentBuilder.documentReliureType
                               ? Colors.green.withOpacity(.1)
@@ -176,15 +174,15 @@ class SecretariatDetailsScreen extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      Text('Recto/Verso'),
-                      SizedBox(
+                      const Text('Recto/Verso'),
+                      const SizedBox(
                         height: 10.0,
                       ),
                       Container(
                         height: 50,
                         width: 60,
                         alignment: Alignment.center,
-                        padding: EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(10.0),
                         decoration: BoxDecoration(
                           color: documentBuilder.documentdispositionType
                               ? Colors.green.withOpacity(.1)
@@ -206,38 +204,38 @@ class SecretariatDetailsScreen extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      Text('N. Copies'),
-                      SizedBox(
+                      const Text('N. Copies'),
+                      const SizedBox(
                         height: 10.0,
                       ),
                       Container(
                         height: 50,
                         width: 60,
                         alignment: Alignment.center,
-                        padding: EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(10.0),
                         decoration: BoxDecoration(
                           color: primaryColor.withOpacity(.1),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: Text(
-                          '0' + documentBuilder.documentCopies.toString(),
+                          '0${documentBuilder.documentCopies}',
                         ),
                       ),
                     ],
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
-              Text('Commentaire'),
-              SizedBox(
+              const Text('Commentaire'),
+              const SizedBox(
                 height: 10.0,
               ),
               Container(
                 height: 100.0,
                 alignment: Alignment.topLeft,
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                   color: primaryColor.withOpacity(.1),
                   borderRadius: BorderRadius.circular(10.0),
@@ -247,16 +245,16 @@ class SecretariatDetailsScreen extends StatelessWidget {
                   textAlign: TextAlign.justify,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50.0,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                children: const [
                   Text('Informations sur le Client'),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25.0,
               ),
               Row(
@@ -264,15 +262,15 @@ class SecretariatDetailsScreen extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      Text('Nom'),
-                      SizedBox(
+                      const Text('Nom'),
+                      const SizedBox(
                         height: 10.0,
                       ),
                       Container(
                         height: 50.0,
                         width: deviceSize.width * .4,
                         alignment: Alignment.center,
-                        padding: EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(10.0),
                         decoration: BoxDecoration(
                           color: primaryColor.withOpacity(.1),
                           borderRadius: BorderRadius.circular(10.0),
@@ -281,20 +279,20 @@ class SecretariatDetailsScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10.0,
                   ),
                   Column(
                     children: [
-                      Text('Contacts'),
-                      SizedBox(
+                      const Text('Contacts'),
+                      const SizedBox(
                         height: 10.0,
                       ),
                       Container(
                         height: 50.0,
                         width: deviceSize.width * .4,
                         alignment: Alignment.center,
-                        padding: EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(10.0),
                         decoration: BoxDecoration(
                           color: primaryColor.withOpacity(.1),
                           borderRadius: BorderRadius.circular(10.0),
@@ -307,7 +305,7 @@ class SecretariatDetailsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 75.0,
               ),
             ],
@@ -317,7 +315,7 @@ class SecretariatDetailsScreen extends StatelessWidget {
       bottomNavigationBar: Container(
         height: 40,
         // width: 60,
-        margin: EdgeInsets.all(20),
+        margin: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: Colors.green,
           borderRadius: BorderRadius.circular(10.0),
@@ -331,10 +329,10 @@ class SecretariatDetailsScreen extends StatelessWidget {
                 'assets/icons/tick-square.1.svg',
                 color: Colors.white,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 05.0,
               ),
-              Text(
+              const Text(
                 'Terminer',
                 style: TextStyle(
                   color: Colors.white,

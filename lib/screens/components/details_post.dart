@@ -49,14 +49,14 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(20.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
                     height: 50,
                     alignment: Alignment.center,
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 30.0,
                       vertical: 10.0,
                     ),
@@ -64,7 +64,7 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
                       color: primaryColor,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    child: Text(
+                    child: const Text(
                       'XAF 225',
                       textAlign: TextAlign.center,
                       textScaleFactor: 1.5,
@@ -85,8 +85,8 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
           Container(
             height: 40,
             // width: 60,
-            margin: EdgeInsets.all(10),
-            padding: EdgeInsets.all(10.0),
+            margin: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10.0),
             decoration: BoxDecoration(
               color: Colors.green,
               borderRadius: BorderRadius.circular(10.0),
@@ -101,10 +101,10 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
                     height: 20,
                     color: Colors.white,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 05.0,
                   ),
-                  Text(
+                  const Text(
                     'Whatsapp',
                     style: TextStyle(
                       color: Colors.white,
@@ -118,8 +118,8 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
           Container(
             height: 40,
             // width: 60,
-            margin: EdgeInsets.all(10),
-            padding: EdgeInsets.all(10.0),
+            margin: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10.0),
             decoration: BoxDecoration(
               color: Colors.blue,
               borderRadius: BorderRadius.circular(10.0),
@@ -133,10 +133,10 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
                     'assets/icons/call.svg',
                     color: Colors.white,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 05.0,
                   ),
-                  Text(
+                  const Text(
                     'Phone',
                     style: TextStyle(
                       color: Colors.white,
@@ -156,7 +156,9 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
     return Container(
       height: widget.deviceSize.width * .9,
       width: widget.deviceSize.width * .9,
-      margin: EdgeInsets.symmetric(horizontal: 10.0),
+      margin: const EdgeInsets.symmetric(
+        horizontal: 10.0,
+      ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
           10.0,
@@ -165,7 +167,7 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
             blurRadius: 30,
-            offset: Offset(0, 4),
+            offset: const Offset(0, 4),
           ),
         ],
       ),

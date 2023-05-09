@@ -1,18 +1,10 @@
-import 'dart:ui';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 import 'package:ndere_ads/screens/components/secretariat_details_page.dart';
-import 'package:ndere_ads/screens/components/image_view_page.dart';
-import 'package:ndere_ads/screens/components/new_post_page.dart';
-import 'package:ndere_ads/screens/home_page.dart';
 import 'package:ndere_ads/screens/service_page.dart';
 import 'package:ndere_ads/utils/utils.dart';
-import 'package:ndere_ads/welcome_pages/auth/sign_in_page.dart';
 
 class MyPendingTasksScreen extends StatefulWidget {
   const MyPendingTasksScreen({
@@ -28,7 +20,7 @@ class MyPendingTasksScreen extends StatefulWidget {
 class _MyPendingTasksScreenState extends State<MyPendingTasksScreen> {
   DateTimeRange dateTimeRange = DateTimeRange(
     start: DateTime.now().subtract(
-      Duration(
+      const Duration(
         days: 5,
       ),
     ),
@@ -43,7 +35,7 @@ class _MyPendingTasksScreenState extends State<MyPendingTasksScreen> {
       documentColorType: false,
       documentReliureType: true,
       documentdispositionType: true,
-      documentSendingDate: DateTime.now().subtract(Duration(days: 10)),
+      documentSendingDate: DateTime.now().subtract(const Duration(days: 10)),
       documentComment: 'Ne pas imprimer la page 02',
       ownerName: 'Alhafiz',
       ownerPhone: 656541584,
@@ -56,7 +48,7 @@ class _MyPendingTasksScreenState extends State<MyPendingTasksScreen> {
       documentColorType: false,
       documentReliureType: true,
       documentdispositionType: true,
-      documentSendingDate: DateTime.now().subtract(Duration(days: 12)),
+      documentSendingDate: DateTime.now().subtract(const Duration(days: 12)),
       documentComment: 'Ne pas imprimer la page 02',
       ownerName: 'Alhafiz',
       ownerPhone: 656541584,
@@ -70,7 +62,7 @@ class _MyPendingTasksScreenState extends State<MyPendingTasksScreen> {
     return Stack(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: GroupedListView<DocumentBuilder, DateTime>(
             elements: filteredPendingTasksList.isNotEmpty
                 ? filteredPendingTasksList
@@ -84,23 +76,23 @@ class _MyPendingTasksScreenState extends State<MyPendingTasksScreen> {
             //     Text(groupByValue),
             groupHeaderBuilder: (DocumentBuilder pendingTask) => Container(
               height: 30.0,
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 vertical: 8.0,
               ),
-              margin: EdgeInsets.symmetric(vertical: 15.0),
+              margin: const EdgeInsets.symmetric(vertical: 15.0),
               color: Theme.of(context).scaffoldBackgroundColor,
               alignment: Alignment.center,
               child: Text(
                 DateFormat.yMMMMEEEEd().format(pendingTask.documentSendingDate),
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                 ),
               ),
             ),
             itemBuilder: (context, DocumentBuilder pendingTask) => Container(
               height: 150.0,
-              padding: EdgeInsets.all(5.0),
-              margin: EdgeInsets.symmetric(vertical: 10.0),
+              padding: const EdgeInsets.all(5.0),
+              margin: const EdgeInsets.symmetric(vertical: 10.0),
               alignment: Alignment.center,
               decoration: BoxDecoration(
                   color: primaryColor.withOpacity(.1),
@@ -121,7 +113,7 @@ class _MyPendingTasksScreenState extends State<MyPendingTasksScreen> {
                   Container(
                     height: 90,
                     alignment: Alignment.center,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.vertical(
                         top: Radius.circular(10.0),
@@ -130,7 +122,7 @@ class _MyPendingTasksScreenState extends State<MyPendingTasksScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(
+                        const Text(
                           '___Titre du Document___',
                           style: TextStyle(
                             fontSize: 08,
@@ -144,7 +136,7 @@ class _MyPendingTasksScreenState extends State<MyPendingTasksScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5.0,
                   ),
                   Expanded(
@@ -155,7 +147,7 @@ class _MyPendingTasksScreenState extends State<MyPendingTasksScreen> {
                           child: InkWell(
                             onTap: () {},
                             child: Container(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 color: Colors.green,
@@ -163,7 +155,7 @@ class _MyPendingTasksScreenState extends State<MyPendingTasksScreen> {
                                   10,
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 'Travail Terminé',
                                 style: TextStyle(
                                   fontSize: 16,
@@ -173,7 +165,7 @@ class _MyPendingTasksScreenState extends State<MyPendingTasksScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10.0,
                         ),
                         InkWell(
@@ -189,14 +181,14 @@ class _MyPendingTasksScreenState extends State<MyPendingTasksScreen> {
                             );
                           },
                           child: Container(
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               color: Colors.orange,
                               borderRadius: BorderRadius.circular(
                                 10,
                               ),
                             ),
-                            child: Text(
+                            child: const Text(
                               'Details',
                               style: TextStyle(
                                 fontSize: 16,

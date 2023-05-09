@@ -19,23 +19,23 @@ class _DeconnexionScreenState extends State<DeconnexionScreen> {
     return Scaffold(
       // extendBody: true,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 100,
               ),
               Container(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: primaryColor,
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Column(
-                  children: [
+                  children: const [
                     Text(
                       'NDERE\nADS',
                       textAlign: TextAlign.center,
@@ -59,10 +59,10 @@ class _DeconnexionScreenState extends State<DeconnexionScreen> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
-              Center(
+              const Center(
                 child: Text(
                   'Inscription',
                   textAlign: TextAlign.center,
@@ -72,15 +72,15 @@ class _DeconnexionScreenState extends State<DeconnexionScreen> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
-              Spacer(),
-              Text(
+              const Spacer(),
+              const Text(
                 'Voulez-vous vraiment vous déconnecter ?',
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
               Row(
@@ -91,7 +91,7 @@ class _DeconnexionScreenState extends State<DeconnexionScreen> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SignInScreen(
+                          builder: (context) => const SignInScreen(
                             userInfo: [],
                           ),
                         ),
@@ -100,13 +100,13 @@ class _DeconnexionScreenState extends State<DeconnexionScreen> {
                     child: Container(
                       height: 40,
                       alignment: Alignment.center,
-                      padding: EdgeInsets.all(10.0),
-                      margin: EdgeInsets.symmetric(vertical: 10.0),
+                      padding: const EdgeInsets.all(10.0),
+                      margin: const EdgeInsets.symmetric(vertical: 10.0),
                       decoration: BoxDecoration(
                         color: primaryColor,
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Autre compte',
                         style: TextStyle(
                           color: Colors.white,
@@ -136,15 +136,15 @@ class _DeconnexionScreenState extends State<DeconnexionScreen> {
                     child: Container(
                       height: 40,
                       alignment: Alignment.center,
-                      padding: EdgeInsets.all(
+                      padding: const EdgeInsets.all(
                         10.0,
                       ),
-                      margin: EdgeInsets.symmetric(vertical: 10.0),
+                      margin: const EdgeInsets.symmetric(vertical: 10.0),
                       decoration: BoxDecoration(
                         color: primaryColor,
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Deconnexion',
                         style: TextStyle(
                           color: Colors.white,
@@ -154,7 +154,7 @@ class _DeconnexionScreenState extends State<DeconnexionScreen> {
                   ),
                 ],
               ),
-              Spacer(),
+              const Spacer(),
             ],
           ),
         ),
@@ -166,13 +166,13 @@ class _DeconnexionScreenState extends State<DeconnexionScreen> {
         child: Container(
           height: 40,
           alignment: Alignment.center,
-          padding: EdgeInsets.all(10.0),
-          margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+          padding: const EdgeInsets.all(10.0),
+          margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
           decoration: BoxDecoration(
             color: primaryColor.withOpacity(.5),
             borderRadius: BorderRadius.circular(10.0),
           ),
-          child: Text(
+          child: const Text(
             'Annuler',
             style: TextStyle(
               color: Colors.white,

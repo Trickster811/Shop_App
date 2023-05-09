@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ndere_ads/utils/utils.dart';
@@ -59,13 +58,13 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
                   content: Container(
                     height: 40,
                     width: widget.deviceSize.width,
-                    margin: EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(10),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(.5),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Image Downloaded',
                       style: TextStyle(
                         fontSize: 14,

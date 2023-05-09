@@ -1,7 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 import 'package:ndere_ads/screens/components/image_view_page.dart';
 import 'package:ndere_ads/screens/components/new_post_page.dart';
 import 'package:ndere_ads/screens/home_page.dart';
@@ -29,13 +27,13 @@ class _MyPostScreenState extends State<MyPostScreen> {
             children: [
               Container(
                 height: widget.deviceSize.height,
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       adsItemBuilder(
                         context,
-                        AdsObjets(
+                        const AdsObjets(
                           imageLink: [
                             'https://rukminim1.flixcart.com/image/612/612/l51d30w0/shoe/z/w/c/10-mrj1914-10-aadi-white-black-red-original-imagft9k9hydnfjp.jpeg?q=70',
                             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH0YZh6ggzT4m0wdOK84OuihNDPGSHEuVUtwLhge3pmEPeA8k7GjZCsSSoAOgDXqzFcBI&usqp=CAU',
@@ -67,7 +65,7 @@ class _MyPostScreenState extends State<MyPostScreen> {
                       MaterialPageRoute(
                         builder: (context) => NewPostScreen(
                           deviceSize: widget.deviceSize,
-                          adsObjets: AdsObjets(
+                          adsObjets: const AdsObjets(
                             imageLink: [],
                             productName: '',
                             productPrice: 0.00,
@@ -89,7 +87,7 @@ class _MyPostScreenState extends State<MyPostScreen> {
                       color: primaryColor,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.add,
                       color: Colors.white,
                     ),
@@ -102,12 +100,12 @@ class _MyPostScreenState extends State<MyPostScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Connecter pour pouvoir poster des annonces ou publicités",
                   textScaleFactor: 1.2,
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 InkWell(
@@ -115,7 +113,7 @@ class _MyPostScreenState extends State<MyPostScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SignInScreen(
+                        builder: (context) => const SignInScreen(
                           userInfo: [],
                         ),
                       ),
@@ -123,7 +121,7 @@ class _MyPostScreenState extends State<MyPostScreen> {
                   },
                   child: Container(
                     width: 200,
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       vertical: 10.0,
                       horizontal: 20.0,
                     ),
@@ -138,10 +136,10 @@ class _MyPostScreenState extends State<MyPostScreen> {
                           'assets/icons/login.1.svg',
                           color: Colors.white,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 15.0,
                         ),
-                        Text(
+                        const Text(
                           "Se Connecter",
                           style: TextStyle(
                             color: Colors.white,
@@ -160,7 +158,7 @@ class _MyPostScreenState extends State<MyPostScreen> {
     return Container(
       height: 300,
       width: widget.deviceSize.width,
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -168,7 +166,7 @@ class _MyPostScreenState extends State<MyPostScreen> {
           BoxShadow(
             color: Colors.black.withOpacity(0.15),
             blurRadius: 10,
-            offset: Offset(0, 10),
+            offset: const Offset(0, 10),
           ),
         ],
       ),
@@ -189,13 +187,13 @@ class _MyPostScreenState extends State<MyPostScreen> {
             child: Container(
               height: 175,
               width: double.maxFinite,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.vertical(
                   top: Radius.circular(10),
                 ),
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.vertical(
+                borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(10),
                 ),
                 child: FadeInImage.assetNetwork(
@@ -212,8 +210,8 @@ class _MyPostScreenState extends State<MyPostScreen> {
                 child: Container(
                   height: 125,
                   // width: (widget.deviceSize.width - 20) * .65,
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
+                  padding: const EdgeInsets.all(10),
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(10),
                     ),
@@ -227,14 +225,14 @@ class _MyPostScreenState extends State<MyPostScreen> {
                         children: [
                           Text(
                             adsObjets.productName,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 05,
                           ),
-                          Text(
+                          const Text(
                             "(Produit)",
                             style: TextStyle(
                               fontSize: 10,
@@ -247,14 +245,14 @@ class _MyPostScreenState extends State<MyPostScreen> {
                         children: [
                           Text(
                             '€ ${adsObjets.productPrice}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 05,
                           ),
-                          Text(
+                          const Text(
                             "(Prix U)",
                             style: TextStyle(
                               fontSize: 10,
@@ -267,14 +265,14 @@ class _MyPostScreenState extends State<MyPostScreen> {
                         children: [
                           Text(
                             adsObjets.location,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 05,
                           ),
-                          Text(
+                          const Text(
                             "(Position)",
                             style: TextStyle(
                               fontSize: 10,
@@ -291,7 +289,7 @@ class _MyPostScreenState extends State<MyPostScreen> {
                 width: (widget.deviceSize.width - 20) * .35,
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(.05),
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomRight: Radius.circular(10),
                   ),
                 ),
@@ -323,7 +321,7 @@ class _MyPostScreenState extends State<MyPostScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10.0,
                     ),
                     Container(

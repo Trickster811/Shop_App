@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -53,7 +52,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
             // color: Colors.white,
           ),
         ),
-        title: Text(
+        title: const Text(
           'Nouveau',
           style: TextStyle(
             fontSize: 25,
@@ -73,16 +72,16 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
         child: Form(
           key: _formKey,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Titre document'),
+                const Text('Titre document'),
                 Container(
                   height: 50,
                   width: widget.deviceSize.width,
-                  margin: EdgeInsets.symmetric(vertical: 5.0),
-                  padding: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(vertical: 5.0),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,
                     vertical: 8.0,
                   ),
@@ -94,7 +93,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     controller: documentName,
                     cursorColor: primaryColor,
                     keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'titre du document',
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
@@ -113,14 +112,14 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text('Fichier'),
+                const Text('Fichier'),
                 Container(
                   height: 160,
                   width: widget.deviceSize.width,
-                  margin: EdgeInsets.all(5.0),
+                  margin: const EdgeInsets.all(5.0),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: primaryColor.withOpacity(0.1),
@@ -138,8 +137,8 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('Importer votre document'),
-                              SizedBox(
+                              const Text('Importer votre document'),
+                              const SizedBox(
                                 height: 10,
                               ),
                               SvgPicture.asset(
@@ -155,7 +154,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                               UtilFunctions.baseNameProvider(
                                   documentFile!.path),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             InkWell(
@@ -169,7 +168,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                               child: Container(
                                 height: 50,
                                 width: 150,
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                   horizontal: 10.0,
                                 ),
                                 decoration: BoxDecoration(
@@ -183,10 +182,10 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                                       'assets/icons/document.2.svg',
                                       color: Colors.white,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10.0,
                                     ),
-                                    Text(
+                                    const Text(
                                       'Changer',
                                       style: TextStyle(
                                         color: Colors.white,
@@ -199,11 +198,11 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                           ],
                         ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text('Couleur'),
-                SizedBox(
+                const Text('Couleur'),
+                const SizedBox(
                   height: 10.0,
                 ),
                 Row(
@@ -211,7 +210,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                   children: [
                     Column(
                       children: [
-                        Text('Oui'),
+                        const Text('Oui'),
                         InkWell(
                           onTap: () {
                             setState(() {
@@ -221,8 +220,8 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                           child: Container(
                             height: 30,
                             width: 55,
-                            padding: EdgeInsets.all(2.0),
-                            margin: EdgeInsets.symmetric(vertical: 5.0),
+                            padding: const EdgeInsets.all(2.0),
+                            margin: const EdgeInsets.symmetric(vertical: 5.0),
                             alignment: couleurIndex
                                 ? Alignment.centerRight
                                 : Alignment.centerLeft,
@@ -249,7 +248,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     ),
                     Column(
                       children: [
-                        Text('Non'),
+                        const Text('Non'),
                         InkWell(
                           onTap: () {
                             setState(() {
@@ -259,8 +258,8 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                           child: Container(
                             height: 30,
                             width: 55,
-                            padding: EdgeInsets.all(2.0),
-                            margin: EdgeInsets.symmetric(vertical: 5.0),
+                            padding: const EdgeInsets.all(2.0),
+                            margin: const EdgeInsets.symmetric(vertical: 5.0),
                             alignment: !couleurIndex
                                 ? Alignment.centerRight
                                 : Alignment.centerLeft,
@@ -287,11 +286,11 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20.0,
                 ),
-                Text('Disposition'),
-                SizedBox(
+                const Text('Disposition'),
+                const SizedBox(
                   height: 10.0,
                 ),
                 Row(
@@ -299,7 +298,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                   children: [
                     Column(
                       children: [
-                        Text('Recto'),
+                        const Text('Recto'),
                         InkWell(
                           onTap: () {
                             setState(() {
@@ -310,8 +309,8 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                           child: Container(
                             height: 30,
                             width: 55,
-                            padding: EdgeInsets.all(2.0),
-                            margin: EdgeInsets.symmetric(vertical: 5.0),
+                            padding: const EdgeInsets.all(2.0),
+                            margin: const EdgeInsets.symmetric(vertical: 5.0),
                             alignment: dispositionIndex
                                 ? Alignment.centerRight
                                 : Alignment.centerLeft,
@@ -338,7 +337,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     ),
                     Column(
                       children: [
-                        Text('Recto/Verso'),
+                        const Text('Recto/Verso'),
                         InkWell(
                           onTap: () {
                             setState(() {
@@ -349,8 +348,8 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                           child: Container(
                             height: 30,
                             width: 55,
-                            padding: EdgeInsets.all(2.0),
-                            margin: EdgeInsets.symmetric(vertical: 5.0),
+                            padding: const EdgeInsets.all(2.0),
+                            margin: const EdgeInsets.symmetric(vertical: 5.0),
                             alignment: !dispositionIndex
                                 ? Alignment.centerRight
                                 : Alignment.centerLeft,
@@ -377,11 +376,11 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20.0,
                 ),
-                Text('Reliure'),
-                SizedBox(
+                const Text('Reliure'),
+                const SizedBox(
                   height: 10.0,
                 ),
                 Row(
@@ -389,7 +388,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                   children: [
                     Column(
                       children: [
-                        Text('Oui'),
+                        const Text('Oui'),
                         InkWell(
                           onTap: () {
                             setState(() {
@@ -399,8 +398,8 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                           child: Container(
                             height: 30,
                             width: 55,
-                            padding: EdgeInsets.all(2.0),
-                            margin: EdgeInsets.symmetric(vertical: 5.0),
+                            padding: const EdgeInsets.all(2.0),
+                            margin: const EdgeInsets.symmetric(vertical: 5.0),
                             alignment: reliureIndex
                                 ? Alignment.centerRight
                                 : Alignment.centerLeft,
@@ -427,7 +426,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     ),
                     Column(
                       children: [
-                        Text('Non'),
+                        const Text('Non'),
                         InkWell(
                           onTap: () {
                             setState(() {
@@ -437,8 +436,8 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                           child: Container(
                             height: 30,
                             width: 55,
-                            padding: EdgeInsets.all(2.0),
-                            margin: EdgeInsets.symmetric(vertical: 5.0),
+                            padding: const EdgeInsets.all(2.0),
+                            margin: const EdgeInsets.symmetric(vertical: 5.0),
                             alignment: !reliureIndex
                                 ? Alignment.centerRight
                                 : Alignment.centerLeft,
@@ -465,7 +464,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20.0,
                 ),
                 Row(
@@ -474,14 +473,14 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('N. Copies'),
+                        const Text('N. Copies'),
                         Container(
                           height: 50,
                           width: widget.deviceSize.width * .5 - 20,
-                          margin: EdgeInsets.symmetric(
+                          margin: const EdgeInsets.symmetric(
                             vertical: 5.0,
                           ),
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                             horizontal: 10.0,
                             vertical: 8.0,
                           ),
@@ -491,13 +490,15 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                           ),
                           child: TextFormField(
                             onChanged: (value) {
-                              if (int.tryParse(value) == null)
-                                return UtilFunctions.showFlashMessage(
+                              if (int.tryParse(value) == null) {
+                                UtilFunctions.showFlashMessage(
                                   context,
                                   'Veuillez entre des chiffres !!!',
                                   Colors.red,
                                   widget.deviceSize,
                                 );
+                                return;
+                              }
                               setState(() {
                                 totalPrice = int.parse(value) *
                                     int.parse(documentPrice.text
@@ -508,8 +509,9 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                             },
                             controller: documentCopies,
                             cursorColor: primaryColor,
-                            keyboardType: TextInputType.numberWithOptions(),
-                            decoration: InputDecoration(
+                            keyboardType:
+                                const TextInputType.numberWithOptions(),
+                            decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 10.0),
                               enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
@@ -529,20 +531,20 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Prix U'),
+                        const Text('Prix U'),
                         Container(
                           height: 50,
                           width: widget.deviceSize.width * .5 - 20,
-                          margin: EdgeInsets.symmetric(
+                          margin: const EdgeInsets.symmetric(
                             vertical: 5.0,
                           ),
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                             horizontal: 10.0,
                             vertical: 8.0,
                           ),
@@ -553,8 +555,9 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                           child: TextFormField(
                             controller: documentPrice,
                             cursorColor: primaryColor,
-                            keyboardType: TextInputType.numberWithOptions(),
-                            decoration: InputDecoration(
+                            keyboardType:
+                                const TextInputType.numberWithOptions(),
+                            decoration: const InputDecoration(
                               enabled: false,
                               contentPadding: EdgeInsets.only(bottom: 10.0),
                               disabledBorder: UnderlineInputBorder(
@@ -577,33 +580,33 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text('Prix Total'),
+                const Text('Prix Total'),
                 Container(
                   height: 50,
                   width: widget.deviceSize.width,
-                  margin: EdgeInsets.symmetric(vertical: 5.0),
-                  padding: EdgeInsets.all(10.0),
+                  margin: const EdgeInsets.symmetric(vertical: 5.0),
+                  padding: const EdgeInsets.all(10.0),
                   alignment: Alignment.centerLeft,
                   decoration: BoxDecoration(
                     color: primaryColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Text(
-                    totalPrice.toString() + ' FCFA',
+                    '$totalPrice FCFA',
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text('Commentaire'),
+                const Text('Commentaire'),
                 Container(
                   height: 150,
                   width: widget.deviceSize.width,
-                  margin: EdgeInsets.symmetric(vertical: 5.0),
-                  padding: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(vertical: 5.0),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,
                     vertical: 8.0,
                   ),
@@ -616,7 +619,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     cursorColor: primaryColor,
                     keyboardType: TextInputType.text,
                     maxLines: 05,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Commentaire ou Instructions',
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
@@ -635,21 +638,21 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                Center(
+                const Center(
                   child: Text('Informations Personnelles'),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                Text('Nom'),
+                const Text('Nom'),
                 Container(
                   height: 50,
                   width: widget.deviceSize.width,
-                  margin: EdgeInsets.symmetric(vertical: 5.0),
-                  padding: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(vertical: 5.0),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,
                     vertical: 8.0,
                   ),
@@ -661,7 +664,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     controller: ownerName,
                     cursorColor: primaryColor,
                     keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'votre nom',
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
@@ -680,15 +683,15 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text('Téléphone'),
+                const Text('Téléphone'),
                 Container(
                   height: 50,
                   width: widget.deviceSize.width,
-                  margin: EdgeInsets.symmetric(vertical: 5.0),
-                  padding: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(vertical: 5.0),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,
                     vertical: 8.0,
                   ),
@@ -709,8 +712,8 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                       }
                     },
                     cursorColor: primaryColor,
-                    keyboardType: TextInputType.numberWithOptions(),
-                    decoration: InputDecoration(
+                    keyboardType: const TextInputType.numberWithOptions(),
+                    decoration: const InputDecoration(
                       hintText: 'numéro téléphone',
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
@@ -729,15 +732,15 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text('Whatsapp'),
+                const Text('Whatsapp'),
                 Container(
                   height: 50,
                   width: widget.deviceSize.width,
-                  margin: EdgeInsets.symmetric(vertical: 5.0),
-                  padding: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(vertical: 5.0),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,
                     vertical: 8.0,
                   ),
@@ -758,8 +761,8 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                       }
                     },
                     cursorColor: primaryColor,
-                    keyboardType: TextInputType.numberWithOptions(),
-                    decoration: InputDecoration(
+                    keyboardType: const TextInputType.numberWithOptions(),
+                    decoration: const InputDecoration(
                       hintText: 'numéro whatsapp',
                       contentPadding: EdgeInsets.only(bottom: 10.0),
                       enabledBorder: UnderlineInputBorder(
@@ -778,11 +781,11 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                Center(child: Text('Paiement via')),
-                SizedBox(
+                const Center(child: Text('Paiement via')),
+                const SizedBox(
                   height: 20.0,
                 ),
                 Row(
@@ -790,7 +793,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                   children: [
                     Column(
                       children: [
-                        Text('Orange Money'),
+                        const Text('Orange Money'),
                         InkWell(
                           onTap: () {
                             setState(() {
@@ -800,8 +803,8 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                           child: Container(
                             height: 30,
                             width: 55,
-                            padding: EdgeInsets.all(2.0),
-                            margin: EdgeInsets.symmetric(vertical: 5.0),
+                            padding: const EdgeInsets.all(2.0),
+                            margin: const EdgeInsets.symmetric(vertical: 5.0),
                             alignment: paymentIndex
                                 ? Alignment.centerRight
                                 : Alignment.centerLeft,
@@ -828,7 +831,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     ),
                     Column(
                       children: [
-                        Text('Mtn MoMo'),
+                        const Text('Mtn MoMo'),
                         InkWell(
                           onTap: () {
                             setState(() {
@@ -838,8 +841,8 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                           child: Container(
                             height: 30,
                             width: 55,
-                            padding: EdgeInsets.all(2.0),
-                            margin: EdgeInsets.symmetric(vertical: 5.0),
+                            padding: const EdgeInsets.all(2.0),
+                            margin: const EdgeInsets.symmetric(vertical: 5.0),
                             alignment: !paymentIndex
                                 ? Alignment.centerRight
                                 : Alignment.centerLeft,
@@ -866,7 +869,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 70,
                 ),
               ],
@@ -876,15 +879,16 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
       ),
       bottomNavigationBar: InkWell(
         onTap: () async {
-          if (!_formKey.currentState!.validate())
+          if (!_formKey.currentState!.validate()) {
             UtilFunctions.showFlashMessage(
               context,
               'Veuillez remplir tous les champs !!',
               Colors.red,
               widget.deviceSize,
             );
+          }
 
-          final doc = await UtilFunctions.generateTicket();
+          await UtilFunctions.generateTicket();
 
           UtilFunctions.showFlashMessage(
             context,
@@ -895,18 +899,18 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
         },
         child: Container(
           height: 40,
-          margin: EdgeInsets.all(20),
+          margin: const EdgeInsets.all(20),
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: primaryColor,
-            borderRadius: BorderRadius.all(
+            borderRadius: const BorderRadius.all(
               Radius.circular(10.0),
             ),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.15),
                 blurRadius: 30,
-                offset: Offset(0, 10),
+                offset: const Offset(0, 10),
               ),
             ],
           ),
@@ -917,10 +921,10 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                 'assets/icons/work.svg',
                 color: Colors.white,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10.0,
               ),
-              Text(
+              const Text(
                 'Imprimer',
                 style: TextStyle(
                   color: Colors.white,

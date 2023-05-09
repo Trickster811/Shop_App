@@ -22,8 +22,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   startTime() async {
-    var duration = new Duration(seconds: 5);
-    return new Timer(duration, route);
+    var duration = const Duration(seconds: 5);
+    return Timer(duration, route);
   }
 
   route() {
@@ -64,26 +64,26 @@ class _LoadingScreenState extends State<LoadingScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Spacer(),
+                const Spacer(),
                 Image.asset(
                   'assets/images/hidden_icon_logo.png',
                   height: 100,
                   width: 100,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text(
+                const Text(
                   'Ndere Ads',
                   style: TextStyle(
                     fontSize: 15,
                     fontFamily: 'Comfortaa_bold',
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text(
+                const Text(
                   'Application Publicitaire',
                   style: TextStyle(
                     fontSize: 10,
@@ -91,7 +91,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                     // color: Colors.black45,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 100,
                 ),
               ],

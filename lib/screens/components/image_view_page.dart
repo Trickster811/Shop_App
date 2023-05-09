@@ -1,6 +1,3 @@
-import 'dart:io';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ndere_ads/utils/utils.dart';
@@ -52,13 +49,13 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                   content: Container(
                     height: 40,
                     width: widget.deviceSize.width,
-                    margin: EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(10),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(.5),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Image Downloaded',
                       style: TextStyle(
                         fontSize: 14,
@@ -97,7 +94,7 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
             ),
           ),
           Row(
-            children: [
+            children: const [
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
@@ -117,7 +114,7 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                   Container(
                     height: 75,
                     width: 75,
-                    margin: EdgeInsets.symmetric(horizontal: 5.0),
+                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
                       border: Border.all(
@@ -145,7 +142,7 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10.0,
           ),
         ],

@@ -24,7 +24,7 @@ class MyDocumentsScreen extends StatelessWidget {
             // color: Colors.white,
           ),
         ),
-        title: Text(
+        title: const Text(
           'Mes Documents',
           style: TextStyle(
             fontSize: 25,
@@ -85,8 +85,8 @@ class MyDocumentsScreen extends StatelessWidget {
       BuildContext context, DocumentBuilder documentBuilder) {
     return Container(
       width: deviceSize.width,
-      padding: EdgeInsets.all(10.0),
-      margin: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10.0),
+      margin: const EdgeInsets.all(10.0),
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: primaryColor.withOpacity(.1),
@@ -100,7 +100,7 @@ class MyDocumentsScreen extends StatelessWidget {
           Container(
             height: 40,
             width: 80,
-            padding: EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(5.0),
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color:
@@ -109,12 +109,12 @@ class MyDocumentsScreen extends StatelessWidget {
             ),
             child: Text(
               documentBuilder.documentStatus ? 'Terminé' : 'En cours',
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 10.0,
           ),
           Container(
@@ -146,11 +146,17 @@ class MyDocumentsScreen extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         title: Container(
-            padding: EdgeInsets.only(bottom: 5.0), child: Text('Details')),
-        contentPadding: EdgeInsets.all(0),
+          padding: const EdgeInsets.only(
+            bottom: 5.0,
+          ),
+          child: const Text('Details'),
+        ),
+        contentPadding: const EdgeInsets.all(0),
         content: Container(
           height: 300,
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20.0,
+          ),
           child: Column(
             children: [
               detailsItemBuilder(
@@ -190,7 +196,7 @@ class MyDocumentsScreen extends StatelessWidget {
             child: Container(
               height: 40,
               width: 60,
-              padding: EdgeInsets.all(5.0),
+              padding: const EdgeInsets.all(5.0),
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: documentBuilder.documentStatus
@@ -198,7 +204,7 @@ class MyDocumentsScreen extends StatelessWidget {
                     : Colors.orange,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text(
+              child: const Text(
                 'Ok',
                 style: TextStyle(
                   color: Colors.white,
@@ -217,12 +223,12 @@ class MyDocumentsScreen extends StatelessWidget {
         Row(
           children: [
             Text(title),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Container(
               height: 40,
-              padding: EdgeInsets.all(5.0),
+              padding: const EdgeInsets.all(5.0),
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: primaryColor.withOpacity(.1),
@@ -234,7 +240,7 @@ class MyDocumentsScreen extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 10.0,
         ),
       ],

@@ -1,14 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
-import 'package:ndere_ads/screens/components/image_view_page.dart';
-import 'package:ndere_ads/screens/components/new_post_page.dart';
-import 'package:ndere_ads/screens/home_page.dart';
 import 'package:ndere_ads/utils/utils.dart';
-import 'package:ndere_ads/welcome_pages/auth/sign_in_page.dart';
 
 class EntrepriseHistoryScreen extends StatefulWidget {
   const EntrepriseHistoryScreen({
@@ -25,7 +19,7 @@ class EntrepriseHistoryScreen extends StatefulWidget {
 class _EntrepriseHistoryScreenState extends State<EntrepriseHistoryScreen> {
   DateTimeRange dateTimeRange = DateTimeRange(
     start: DateTime.now().subtract(
-      Duration(
+      const Duration(
         days: 5,
       ),
     ),
@@ -38,15 +32,15 @@ class _EntrepriseHistoryScreenState extends State<EntrepriseHistoryScreen> {
       title: 'Analyse et Conception des Algorithmes',
     ),
     HistoryItemBuilder(
-      dateTime: DateTime.now().subtract(Duration(days: 05)),
+      dateTime: DateTime.now().subtract(const Duration(days: 05)),
       title: 'Analyse et Conception des Algorithmes',
     ),
     HistoryItemBuilder(
-      dateTime: DateTime.now().subtract(Duration(days: 05)),
+      dateTime: DateTime.now().subtract(const Duration(days: 05)),
       title: 'Analyse et Conception des Algorithmes',
     ),
     HistoryItemBuilder(
-      dateTime: DateTime.now().subtract(Duration(days: 05)),
+      dateTime: DateTime.now().subtract(const Duration(days: 05)),
       title: 'Analyse et Conception des Algorithmes',
     ),
     HistoryItemBuilder(
@@ -78,7 +72,7 @@ class _EntrepriseHistoryScreenState extends State<EntrepriseHistoryScreen> {
             // color: Colors.white,
           ),
         ),
-        title: Text(
+        title: const Text(
           'Historique',
           style: TextStyle(
             fontSize: 25,
@@ -97,7 +91,7 @@ class _EntrepriseHistoryScreenState extends State<EntrepriseHistoryScreen> {
       body: Stack(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: GroupedListView<HistoryItemBuilder, DateTime>(
               elements: filteredHistoryItem.isNotEmpty
                   ? filteredHistoryItem
@@ -111,15 +105,15 @@ class _EntrepriseHistoryScreenState extends State<EntrepriseHistoryScreen> {
               //     Text(groupByValue),
               groupHeaderBuilder: (HistoryItemBuilder historyItem) => Container(
                 height: 30.0,
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   vertical: 8.0,
                 ),
-                margin: EdgeInsets.symmetric(vertical: 15.0),
+                margin: const EdgeInsets.symmetric(vertical: 15.0),
                 color: Theme.of(context).scaffoldBackgroundColor,
                 alignment: Alignment.center,
                 child: Text(
                   DateFormat.yMMMMEEEEd().format(historyItem.dateTime),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                   ),
                 ),
@@ -127,8 +121,8 @@ class _EntrepriseHistoryScreenState extends State<EntrepriseHistoryScreen> {
               itemBuilder: (context, HistoryItemBuilder historyItem) =>
                   Container(
                 height: 60.0,
-                padding: EdgeInsets.all(5.0),
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                padding: const EdgeInsets.all(5.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: primaryColor.withOpacity(.1),
@@ -140,7 +134,7 @@ class _EntrepriseHistoryScreenState extends State<EntrepriseHistoryScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(
+                    const Text(
                       '___Document Imprimé___',
                       style: TextStyle(
                         fontSize: 08,

@@ -5,14 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatelessWidget {
-  final Uri _github = Uri.parse('https://github.com/Trickster811');
-  final Uri _mail = Uri.parse('https://nedaoukajoachim@gmail.com');
-  final Uri _pinterest = Uri.parse('https://www.pinterest.com/MacNight_nj/');
-  final Uri _linkedIn =
-      Uri.parse('https://cm.linkedin.com/in/joachim-nedaouka-0b43b2228');
-  final Uri _youtube = Uri.parse('https://www.youtube.com/@macnight_nj');
-
-  AboutScreen({
+  const AboutScreen({
     Key? key,
   }) : super(key: key);
 
@@ -26,10 +19,15 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
-  double appBarHeightSize = 0;
-
   @override
   Widget build(BuildContext context) {
+    final Uri github = Uri.parse('https://github.com/Trickster811');
+    final Uri mail = Uri.parse('https://nedaoukajoachim@gmail.com');
+    final Uri pinterest = Uri.parse('https://www.pinterest.com/MacNight_nj/');
+    final Uri linkedIn =
+        Uri.parse('https://cm.linkedin.com/in/joachim-nedaouka-0b43b2228');
+    final Uri youtube = Uri.parse('https://www.youtube.com/@macnight_nj');
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -77,48 +75,48 @@ class AboutScreen extends StatelessWidget {
                     height: 65,
                     width: 65,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  const Text(
                     'Ndere Ads',
                     style: TextStyle(
                       fontSize: 15,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  const Text(
                     'Application Publicitaire',
                     style: TextStyle(
                       fontSize: 10,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  const Text(
                     '1.0.0+1',
                     style: TextStyle(
                       fontSize: 10,
                     ),
                   ),
-                  Spacer(),
-                  Text(
+                  const Spacer(),
+                  const Text(
                     'Liens',
                     style: TextStyle(
                       fontFamily: 'Comfortaa_bold',
                       // color: Colors.black45,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Container(
                     width: 250,
                     // padding: EdgeInsets.all(2.0),
-                    margin: EdgeInsets.only(bottom: 10.0),
+                    margin: const EdgeInsets.only(bottom: 10.0),
                     decoration: BoxDecoration(
                       color: Theme.of(context).primaryColor,
                       borderRadius: BorderRadius.circular(10.0),
@@ -128,7 +126,7 @@ class AboutScreen extends StatelessWidget {
                       children: [
                         IconButton(
                           onPressed: () {
-                            _launchUrl(_github);
+                            _launchUrl(github);
                           },
                           icon: SvgPicture.asset(
                             'assets/icons/github.svg',
@@ -139,7 +137,7 @@ class AboutScreen extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: () {
-                            _launchUrl(_mail);
+                            _launchUrl(mail);
                           },
                           icon: SvgPicture.asset(
                             'assets/icons/mail.svg',
@@ -150,7 +148,7 @@ class AboutScreen extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: () {
-                            _launchUrl(_pinterest);
+                            _launchUrl(pinterest);
                           },
                           icon: SvgPicture.asset(
                             'assets/icons/pinterest.svg',
@@ -161,7 +159,7 @@ class AboutScreen extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: () {
-                            _launchUrl(_linkedIn);
+                            _launchUrl(linkedIn);
                           },
                           icon: SvgPicture.asset(
                             'assets/icons/linked_in.svg',
@@ -172,7 +170,7 @@ class AboutScreen extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: () {
-                            _launchUrl(_youtube);
+                            _launchUrl(youtube);
                           },
                           icon: SvgPicture.asset(
                             'assets/icons/youtube.svg',

@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart' as pdf;
-import 'package:pdf/widgets.dart' as pdfWidget;
+import 'package:pdf/widgets.dart' as pdf_widget;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:stack_appodeal_flutter/stack_appodeal_flutter.dart';
 
-final primaryColor = Color.fromARGB(255, 35, 25, 37);
+const primaryColor = Color.fromARGB(255, 35, 25, 37);
 
 class UtilFunctions {
   static late SharedPreferences _preferences;
@@ -64,15 +64,17 @@ class UtilFunctions {
 
       if (document != String) {
         final bytes = await document.save();
-        final file = File(directory!.path + "/$name");
+        final file = File("${directory!.path}/$name");
 
         await file.writeAsBytes(bytes);
         return file;
       }
-      final fileSaved = File(directory!.path + "/$name");
+      final fileSaved = File("${directory!.path}/$name");
 
       return File(document).copy(fileSaved.path);
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
   }
 
   static Future<bool> _requestPermission(Permission permission) async {
@@ -131,7 +133,7 @@ class UtilFunctions {
     return showMenu(
       context: context,
       position: RelativeRect.fromLTRB(1, appBarHeightSize, 0, 0),
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(10.0),
         ),
@@ -161,12 +163,12 @@ class UtilFunctions {
               item[0],
               color: Theme.of(context).iconTheme.color,
             ),
-            SizedBox(
+            const SizedBox(
               width: 5,
             ),
             Text(
               item[1],
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 15,
                 fontFamily: 'Comfortaa_bold',
                 // color: Colors.white,
@@ -185,7 +187,7 @@ class UtilFunctions {
       content: Container(
         height: 40,
         width: deviceSize.width,
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: color.withOpacity(.5),
@@ -193,7 +195,7 @@ class UtilFunctions {
         ),
         child: Text(
           message,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 14,
             fontFamily: 'Comfortaa_bold',
           ),
@@ -274,15 +276,15 @@ class UtilFunctions {
   // }
 
   static generateTicket() async {
-    final ticket = pdfWidget.Document();
+    final ticket = pdf_widget.Document();
     ticket.addPage(
-      pdfWidget.Page(
-        pageFormat: pdf.PdfPageFormat(
+      pdf_widget.Page(
+        pageFormat: const pdf.PdfPageFormat(
           21.0 * pdf.PdfPageFormat.cm,
           29.7 * pdf.PdfPageFormat.cm,
           marginAll: 1.5 * pdf.PdfPageFormat.cm,
         ),
-        build: (context) => pdfWidget.Column(),
+        build: (context) => pdf_widget.Column(),
       ),
     );
     return await saveDocument(
