@@ -5,6 +5,7 @@ import 'package:ndere_ads/screens/entreprise_history_page.dart';
 import 'package:ndere_ads/screens/home_page.dart';
 import 'package:ndere_ads/screens/my_pending_taks_page.dart';
 import 'package:ndere_ads/screens/my_post_page.dart';
+import 'package:ndere_ads/screens/profile_page.dart';
 import 'package:ndere_ads/screens/research_page.dart';
 import 'package:ndere_ads/screens/secretariat_history_page.dart';
 import 'package:ndere_ads/screens/service_page.dart';
@@ -52,6 +53,20 @@ class _MyHomePageState extends State<MyHomePage> {
           : 'Service',
     ];
     List<List> menuItemList = [
+      if (userLoginInfo.isNotEmpty &&
+          userLoginInfo[0] == 'Entreprise' &&
+          currentState == 3) ...[
+        [
+          'assets/icons/call.5.svg',
+          'Service Client',
+          const AboutScreen(),
+        ],
+        [
+          'assets/icons/time-circle.4.svg',
+          'Historique',
+          EntrepriseHistoryScreen(deviceSize: deviceSize),
+        ]
+      ],
       [
         firstTimeIndex != null && firstTimeIndex
             ? 'assets/icons/logout.4.svg'
@@ -109,34 +124,21 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         actions: [
-          userLoginInfo.isNotEmpty &&
-                  userLoginInfo[0] == 'Entreprise' &&
-                  currentState == 3
-              ? IconButton(
-                  onPressed: () {},
-                  icon: SvgPicture.asset(
-                    'assets/icons/call.5.svg',
-                  ),
-                )
-              : Container(),
-          userLoginInfo.isNotEmpty &&
-                  userLoginInfo[0] == 'Entreprise' &&
-                  currentState == 3
-              ? IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            EntrepriseHistoryScreen(deviceSize: deviceSize),
-                      ),
-                    );
-                  },
-                  icon: SvgPicture.asset(
-                    'assets/icons/time-circle.4.svg',
-                  ),
-                )
-              : Container(),
+          IconButton(
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProfileScreen(
+                  appBarHeightSize: appBarHeightSize,
+                  deviceSize: deviceSize,
+                  firstTimeIndex: firstTimeIndex,
+                ),
+              ),
+            ),
+            icon: SvgPicture.asset(
+              'assets/icons/profile.6.svg',
+            ),
+          ),
           IconButton(
             onPressed: () {
               UtilFunctions.openDialog(context, menuItemList, appBarHeightSize);

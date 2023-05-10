@@ -84,6 +84,7 @@ class UtilFunctions {
     } else {
       final result = await permission.request();
       if (result == PermissionStatus.granted) {
+        await appFolder();
         return true;
       } else {
         return false;
@@ -115,7 +116,8 @@ class UtilFunctions {
 
   static baseNameProvider(path) {
     return basename(
-        path); // This function return the the basename path of a file.
+      path,
+    ); // This function return the the basename path of a file.
   }
 
   static selectFile(List<String>? allowedExtensions) async {

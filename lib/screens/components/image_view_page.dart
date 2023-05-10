@@ -37,7 +37,7 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
           IconButton(
             onPressed: () async {
               final imageName =
-                  UtilFunctions.baseNameProvider(widget.imageLink);
+                  UtilFunctions.baseNameProvider(widget.imageLink[index]);
               try {
                 await UtilFunctions.saveDocument(
                   name: imageName,
