@@ -79,7 +79,7 @@ class AboutScreen extends StatelessWidget {
                     height: 10,
                   ),
                   const Text(
-                    'Ndere Ads',
+                    'ShopApp',
                     style: TextStyle(
                       fontSize: 15,
                     ),

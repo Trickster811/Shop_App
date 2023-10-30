@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ndere_ads/screens/components/image_view_page.dart';
 import 'package:ndere_ads/screens/home_page.dart';
 import 'package:ndere_ads/utils/utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailsPostScreen extends StatefulWidget {
   const DetailsPostScreen({
@@ -44,15 +46,23 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
               child: Row(
                 children: [
                   for (var image in widget.adsObjets.imageLink)
-                    itemBuilder(context, image),
+                    articleItemBuilder(context, image),
                 ],
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Text(
+                    widget.adsObjets.productName,
+                    textAlign: TextAlign.center,
+                    textScaleFactor: 1.5,
+                    style: const TextStyle(
+                      color: primaryColor,
+                    ),
+                  ),
                   Container(
                     height: 50,
                     alignment: Alignment.center,
@@ -64,18 +74,109 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
                       color: primaryColor,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    child: const Text(
-                      'XAF 225',
+                    child: Text(
+                      'XAF ${widget.adsObjets.productPrice}',
                       textAlign: TextAlign.center,
                       textScaleFactor: 1.5,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                     ),
                   ),
                 ],
               ),
-            )
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 10.0,
+              ),
+              child: Text('Notez nous!!!'),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 10.0,
+              ),
+              child: RatingBar.builder(
+                initialRating: 0,
+                minRating: 0,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                glowColor: Colors.red,
+                itemCount: 5,
+                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                itemBuilder: (context, _) => SvgPicture.asset(
+                  'assets/icons/heart.5.svg',
+                  color: Colors.red,
+                ),
+                onRatingUpdate: (rating) {
+                  print(rating);
+                },
+              ),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 10.0,
+              ),
+              child: Row(
+                children: [
+                  const Text("Entreprise : "),
+                  Text(
+                    widget.adsObjets.traderName.toUpperCase(),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 10.0,
+              ),
+              child: Row(
+                children: [
+                  const Text("Siège : "),
+                  Text(
+                    widget.adsObjets.location,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 10.0,
+              ),
+              child: Row(
+                children: [
+                  const Text("Numèro : "),
+                  Text(
+                    widget.adsObjets.traderPhoneNumber.toString(),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 10.0,
+              ),
+              child: Row(
+                children: [
+                  const Text("Whatsapp : "),
+                  Text(
+                    widget.adsObjets.traderWhatsappNumber.toString(),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -92,7 +193,19 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: InkWell(
-              onTap: () {},
+              onTap: () async {
+                final whatsappContact = Uri.https(
+                  'wa.me',
+                  widget.adsObjets.traderPhoneNumber.toString(),
+                  {'text': 'Bonjour'},
+                );
+                if (await canLaunchUrl(whatsappContact)) {
+                  await launchUrl(
+                    whatsappContact,
+                    mode: LaunchMode.externalApplication,
+                  );
+                }
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -125,7 +238,17 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: InkWell(
-              onTap: () {},
+              onTap: () async {
+                final phoneContact = Uri.parse(
+                  'tel:${widget.adsObjets.traderPhoneNumber}',
+                );
+                if (await canLaunchUrl(phoneContact)) {
+                  await launchUrl(
+                    phoneContact,
+                    mode: LaunchMode.externalApplication,
+                  );
+                }
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -152,7 +275,7 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
     );
   }
 
-  Widget itemBuilder(BuildContext context, String image) {
+  Widget articleItemBuilder(BuildContext context, String image) {
     return Container(
       height: widget.deviceSize.width * .9,
       width: widget.deviceSize.width * .9,

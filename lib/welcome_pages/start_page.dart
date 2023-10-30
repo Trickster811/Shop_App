@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ndere_ads/screens/about_page.dart';
-import 'package:ndere_ads/screens/entreprise_history_page.dart';
 import 'package:ndere_ads/screens/home_page.dart';
-import 'package:ndere_ads/screens/my_pending_taks_page.dart';
 import 'package:ndere_ads/screens/my_post_page.dart';
 import 'package:ndere_ads/screens/profile_page.dart';
 import 'package:ndere_ads/screens/research_page.dart';
-import 'package:ndere_ads/screens/secretariat_history_page.dart';
 import 'package:ndere_ads/screens/service_page.dart';
 import 'package:ndere_ads/utils/utils.dart';
 import 'package:ndere_ads/welcome_pages/auth/disconnection.dart';
@@ -27,15 +24,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int currentState = 0;
-  bool firstTimeIndex = false;
-  List<String> userLoginInfo = [];
+  // bool firstTimeIndex = false;
 
   double appBarHeightSize = 0;
 
   @override
   void initState() {
     super.initState();
-    checkUser();
+    // checkUser();
     // UtilFunctions.appodealInitialization();
   }
 
@@ -44,37 +40,36 @@ class _MyHomePageState extends State<MyHomePage> {
     final deviceSize = MediaQuery.of(context).size;
     final listOfScreensTitle = [
       'Acceuil',
-      userLoginInfo.isNotEmpty && userLoginInfo[0] == 'Secretariat'
-          ? 'Gérer'
-          : 'Publications',
+      // widget.userInfo.isNotEmpty && widget.userInfo[0] == 'Client'
+      //     ? 'Gérer'
+      'Publications',
       'Recherche',
-      userLoginInfo.isNotEmpty && userLoginInfo[0] == 'Secretariat'
-          ? 'Historique'
-          : 'Service',
+      'Profil',
+      // widget.userInfo.isNotEmpty && widget.userInfo[0] == 'Client'
+      //     ? 'Historique'
+      //     : 'Service',
     ];
     List<List> menuItemList = [
-      if (userLoginInfo.isNotEmpty &&
-          userLoginInfo[0] == 'Entreprise' &&
-          currentState == 3) ...[
-        [
-          'assets/icons/call.5.svg',
-          'Service Client',
-          const AboutScreen(),
-        ],
-        [
-          'assets/icons/time-circle.4.svg',
-          'Historique',
-          EntrepriseHistoryScreen(deviceSize: deviceSize),
-        ]
-      ],
+      // if (widget.userInfo.isNotEmpty &&
+      //     widget.userInfo[0] == 'Entreprise' &&
+      //     currentState == 3) ...[
+      //   [
+      //     'assets/icons/call.5.svg',
+      //     'Service Client',
+      //     const AboutScreen(),
+      //   ],
+      //   [
+      //     'assets/icons/time-circle.4.svg',
+      //     'Historique',
+      //     EntrepriseHistoryScreen(deviceSize: deviceSize),
+      //   ]
+      // ],
       [
-        firstTimeIndex != null && firstTimeIndex
+        widget.userInfo!.isNotEmpty
             ? 'assets/icons/logout.4.svg'
             : 'assets/icons/login.1.svg',
-        firstTimeIndex != null && firstTimeIndex
-            ? 'Deconnexion'
-            : 'Se Connecter',
-        firstTimeIndex != null && firstTimeIndex
+        widget.userInfo!.isNotEmpty ? 'Deconnexion' : 'Se Connecter',
+        widget.userInfo!.isNotEmpty
             ? const DeconnexionScreen()
             : const SignInScreen(
                 userInfo: [],
@@ -91,24 +86,29 @@ class _MyHomePageState extends State<MyHomePage> {
       HomeScreen(
         deviceSize: deviceSize,
       ),
-      userLoginInfo.isNotEmpty && userLoginInfo[0] == 'Secretariat'
-          ? MyPendingTasksScreen(
-              deviceSize: deviceSize,
-            )
-          : MyPostScreen(
-              deviceSize: deviceSize,
-              firstTimeIndex: firstTimeIndex,
-            ),
+      // widget.userInfo.isNotEmpty && widget.userInfo[0] == 'Client'
+      //     ? MyPendingTasksScreen(
+      //         deviceSize: deviceSize,
+      //       )
+      MyPostScreen(
+        deviceSize: deviceSize,
+        userLoginInfo: widget.userInfo!,
+      ),
       ResearchScreen(
         deviceSize: deviceSize,
       ),
-      userLoginInfo.isNotEmpty && userLoginInfo[0] == 'Secretariat'
-          ? SecretariatHistoryScreen(
-              deviceSize: deviceSize,
-            )
-          : ServiceScreen(
-              deviceSize: deviceSize,
-            ),
+      // widget.userInfo.isNotEmpty && widget.userInfo[0] == 'Client'
+      //     ? SecretariatHistoryScreen(
+      //         deviceSize: deviceSize,
+      //       )
+      // ServiceScreen(
+      //   deviceSize: deviceSize,
+      // ),
+      ProfileScreen(
+        appBarHeightSize: appBarHeightSize,
+        deviceSize: deviceSize,
+        userLoginInfo: widget.userInfo!,
+      )
     ];
     return Scaffold(
       extendBody: true,
@@ -124,21 +124,21 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ProfileScreen(
-                  appBarHeightSize: appBarHeightSize,
-                  deviceSize: deviceSize,
-                  firstTimeIndex: firstTimeIndex,
-                ),
-              ),
-            ),
-            icon: SvgPicture.asset(
-              'assets/icons/profile.6.svg',
-            ),
-          ),
+          // IconButton(
+          //   onPressed: () => Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) => ProfileScreen(
+          //         appBarHeightSize: appBarHeightSize,
+          //         deviceSize: deviceSize,
+          //         widget.userInfo: widget.userInfo,
+          //       ),
+          //     ),
+          //   ),
+          //   icon: SvgPicture.asset(
+          //     'assets/icons/profile.6.svg',
+          //   ),
+          // ),
           IconButton(
             onPressed: () {
               UtilFunctions.openDialog(context, menuItemList, appBarHeightSize);
@@ -207,10 +207,9 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               icon: currentState != 1
                   ? SvgPicture.asset(
-                      userLoginInfo.isNotEmpty &&
-                              userLoginInfo[0] == 'Secretariat'
-                          ? 'assets/icons/activity.6.svg'
-                          : 'assets/icons/plus.svg',
+                      // widget.userInfo.isNotEmpty && widget.userInfo[0] == 'Client'
+                      //     ? 'assets/icons/activity.6.svg'
+                      'assets/icons/plus.svg',
                       color: Colors.white,
                     )
                   : Column(
@@ -225,10 +224,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                         SvgPicture.asset(
-                          userLoginInfo.isNotEmpty &&
-                                  userLoginInfo[0] == 'Secretariat'
-                              ? 'assets/icons/activity.2.svg'
-                              : 'assets/icons/plus.3.svg',
+                          // widget.userInfo.isNotEmpty &&
+                          //         widget.userInfo[0] == 'Client'
+                          //     ? 'assets/icons/activity.2.svg'
+                          'assets/icons/plus.3.svg',
                           color: Colors.white,
                         ),
                       ],
@@ -271,10 +270,9 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               icon: currentState != 3
                   ? SvgPicture.asset(
-                      userLoginInfo.isNotEmpty &&
-                              userLoginInfo[0] == 'Secretariat'
-                          ? 'assets/icons/time-circle.4.svg'
-                          : 'assets/icons/buy.1.svg',
+                      // widget.userInfo.isNotEmpty && widget.userInfo[0] == 'Client'
+                      //     ? 'assets/icons/time-circle.4.svg'
+                      'assets/icons/profile.6.svg',
                       color: Colors.white,
                     )
                   : Column(
@@ -289,10 +287,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                         SvgPicture.asset(
-                          userLoginInfo.isNotEmpty &&
-                                  userLoginInfo[0] == 'Secretariat'
-                              ? 'assets/icons/time-circle.5.svg'
-                              : 'assets/icons/buy.svg',
+                          // widget.userInfo.isNotEmpty &&
+                          //         widget.userInfo[0] == 'Client'
+                          //     ? 'assets/icons/time-circle.5.svg'
+                          'assets/icons/profile.3.svg',
                           color: Colors.white,
                         ),
                       ],
@@ -304,14 +302,14 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  checkUser() async {
-    final bool? firstTime = UtilFunctions.getFirstTime();
-    final List<String>? userInfo = UtilFunctions.getUserInfo();
-    print(firstTime);
-    setState(() {
-      firstTimeIndex = firstTime!;
-      userLoginInfo = userInfo!;
-      // widget.userInfo = userInfo;
-    });
-  }
+  // checkUser() async {
+  //   final bool? firstTime = UtilFunctions.getFirstTime();
+  //   final List<String>? widget.userInfo = UtilFunctions.getwidget.UserInfo();
+  //   print(firstTime);
+  //   setState(() {
+  //     firstTimeIndex = firstTime!;
+  //     widget.userInfo = widget.userInfo!;
+  //     // widget.widget.userInfo = widget.userInfo;
+  //   });
+  // }
 }

@@ -64,7 +64,7 @@ class _DeconnexionScreenState extends State<DeconnexionScreen> {
               ),
               const Center(
                 child: Text(
-                  'Inscription',
+                  'Deconnexion',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 18,

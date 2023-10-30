@@ -35,6 +35,7 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
+  carousel_slider:
   cupertino_icons: ^1.0.2
   datetime_picker_formfield:
   lottie:
@@ -42,10 +43,12 @@ dependencies:
   flutter_launcher_icons:
   flutter_rating_bar:
   flutter_svg:
+  focused_menu:
   form_field_validator:
   grouped_list:
   image_picker:
   intl:
+  liquid_pull_to_refresh:
   path_provider:
   pdf:
   permission_handler:
@@ -96,15 +99,10 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Comfortaa_light
-      fonts:
-        - asset: assets/fonts/Comfortaa-Light.ttf
-    - family: Comfortaa_regular
-      fonts:
-        - asset: assets/fonts/Comfortaa-Regular.ttf
-    - family: Comfortaa_bold
+    - family: Comfortaa
       fonts:
         - asset: assets/fonts/Comfortaa-Bold.ttf
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

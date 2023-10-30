@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:ndere_ads/utils/utils.dart';
 import 'package:ndere_ads/welcome_pages/start_page.dart';
+import 'package:ndere_ads/welcome_pages/welcome_page.dart';
 
 class LoadingScreen extends StatefulWidget {
   final List<String>? userInfo;
@@ -15,10 +17,16 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  final bool? firstTime = UtilFunctions.getFirstTime();
+
   @override
   void initState() {
     super.initState();
-    startTime();
+    if (firstTime != null && firstTime!) {
+      startTime();
+    } else {
+      startTime1();
+    }
   }
 
   startTime() async {
@@ -31,6 +39,22 @@ class _LoadingScreenState extends State<LoadingScreen> {
       context,
       MaterialPageRoute(
         builder: (context) => MyHomePage(
+          userInfo: widget.userInfo,
+        ),
+      ),
+    );
+  }
+
+  startTime1() async {
+    var duration = const Duration(seconds: 5);
+    return Timer(duration, route1);
+  }
+
+  route1() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => WelcomeScreen(
           userInfo: widget.userInfo,
         ),
       ),
@@ -74,10 +98,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
                   height: 10,
                 ),
                 const Text(
-                  'Ndere Ads',
+                  'ShopApp',
                   style: TextStyle(
                     fontSize: 15,
-                    fontFamily: 'Comfortaa_bold',
+                    // fontFamily: 'Comfortaa_bold',
                   ),
                 ),
                 const SizedBox(
@@ -87,7 +111,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                   'Application Publicitaire',
                   style: TextStyle(
                     fontSize: 10,
-                    fontFamily: 'Comfortaa_bold',
+                    // fontFamily: 'Comfortaa_bold',
                     // color: Colors.black45,
                   ),
                 ),

@@ -29,13 +29,13 @@ class _SignInScreenState extends State<SignInScreen> {
   List<DropdownMenuItem<String>> get userTypeList {
     List<DropdownMenuItem<String>> items = [
       const DropdownMenuItem(
-        value: "Secretariat",
+        value: "Client",
         child: Text(
-          "Secretariat",
+          "Client",
           style: TextStyle(
             color: primaryColor,
             fontSize: 16,
-            fontFamily: 'Comfortaa_bold',
+            fontFamily: 'Comfortaa',
           ),
         ),
       ),
@@ -46,7 +46,7 @@ class _SignInScreenState extends State<SignInScreen> {
           style: TextStyle(
             color: primaryColor,
             fontSize: 16,
-            fontFamily: 'Comfortaa_bold',
+            fontFamily: 'Comfortaa',
           ),
         ),
       ),
@@ -70,36 +70,39 @@ class _SignInScreenState extends State<SignInScreen> {
                 const SizedBox(
                   height: 100,
                 ),
-                Container(
-                  padding: const EdgeInsets.all(10.0),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: primaryColor,
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Column(
-                    children: const [
-                      Text(
-                        'NDERE\nADS',
-                        textAlign: TextAlign.center,
-                        textScaleFactor: 1.6,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 25,
-                          letterSpacing: 10,
+                Hero(
+                  tag: 'description_tag',
+                  child: Container(
+                    padding: const EdgeInsets.all(10.0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: primaryColor,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Shop\nApp'.toUpperCase(),
+                          textAlign: TextAlign.center,
+                          textScaleFactor: 1.6,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                            letterSpacing: 10,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      Text(
-                        'by MacNight_nj',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 9,
+                        const SizedBox(
+                          height: 5.0,
                         ),
-                      )
-                    ],
+                        const Text(
+                          'by MacNight_nj',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 9,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -118,126 +121,137 @@ class _SignInScreenState extends State<SignInScreen> {
                 const SizedBox(
                   height: 40,
                 ),
-                const Text('Utilisateur'),
-                Container(
-                  height: 50,
-                  width: deviceSize.width,
-                  margin: const EdgeInsets.symmetric(vertical: 5.0),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10.0,
-                    vertical: 8.0,
+                const Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 5.0,
                   ),
-                  decoration: BoxDecoration(
-                    color: primaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(10.0),
+                  child: Text('Utilisateur'),
+                ),
+                DropdownButtonFormField(
+                  style: const TextStyle(
+                    fontSize: 10,
+                    height: 0.5,
                   ),
-                  child: DropdownButtonFormField(
-                    style: const TextStyle(
-                      fontSize: 10,
-                      height: 0.5,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.only(
+                      left: 10.0,
+                      bottom: 10.0,
                     ),
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.only(bottom: 10.0),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
+                    filled: true,
+                    fillColor: primaryColor.withOpacity(0.1),
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
                       ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
-                      hintText: 'choose',
                     ),
-                    value: userType,
-                    validator: (value) =>
-                        value == null ? 'Veuillez choisir un type' : null,
-                    items: userTypeList,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        userType = newValue!;
-                      });
-                    },
+                    errorBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    focusedErrorBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    hintText: 'choose',
                   ),
+                  value: userType,
+                  validator: (value) =>
+                      value == null ? 'Veuillez choisir un type' : null,
+                  items: userTypeList,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      userType = newValue!;
+                    });
+                  },
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 const Text('Email'),
-                Container(
-                  height: 50,
-                  width: deviceSize.width,
-                  margin: const EdgeInsets.symmetric(vertical: 5.0),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10.0,
-                    vertical: 8.0,
-                  ),
-                  decoration: BoxDecoration(
-                    color: primaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: TextFormField(
-                    controller: email,
-                    cursorColor: primaryColor,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: const InputDecoration(
-                      hintText: 'votre email',
-                      contentPadding: EdgeInsets.only(bottom: 10.0),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
+                TextFormField(
+                  controller: email,
+                  cursorColor: primaryColor,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    hintText: 'votre email',
+                    contentPadding: const EdgeInsets.only(
+                      left: 10.0,
+                      bottom: 10.0,
+                    ),
+                    filled: true,
+                    fillColor: primaryColor.withOpacity(0.1),
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
                       ),
                     ),
-                    validator: RequiredValidator(
-                      errorText: 'Veuillez renseigner cet élément',
+                    errorBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
                     ),
+                    focusedErrorBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                  ),
+                  validator: RequiredValidator(
+                    errorText: 'Veuillez renseigner cet élément',
                   ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 const Text('Mot de passe'),
-                Container(
-                  height: 50,
-                  width: deviceSize.width,
-                  margin: const EdgeInsets.symmetric(vertical: 5.0),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10.0,
-                    vertical: 8.0,
-                  ),
-                  decoration: BoxDecoration(
-                    color: primaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: TextFormField(
-                    controller: password,
-                    cursorColor: primaryColor,
-                    obscureText: true,
-                    keyboardType: TextInputType.visiblePassword,
-                    decoration: const InputDecoration(
-                      hintText: 'mot de passe',
-                      contentPadding: EdgeInsets.only(bottom: 10.0),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
+                TextFormField(
+                  controller: password,
+                  cursorColor: primaryColor,
+                  obscureText: true,
+                  keyboardType: TextInputType.visiblePassword,
+                  decoration: InputDecoration(
+                    hintText: 'mot de passe',
+                    contentPadding: const EdgeInsets.only(
+                      left: 10.0,
+                      bottom: 10.0,
+                    ),
+                    filled: true,
+                    fillColor: primaryColor.withOpacity(0.1),
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
                       ),
                     ),
-                    validator: RequiredValidator(
-                      errorText: 'Veuillez renseigner cet élément',
+                    errorBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
                     ),
+                    focusedErrorBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                  ),
+                  validator: RequiredValidator(
+                    errorText: 'Veuillez renseigner cet élément',
                   ),
                 ),
                 const SizedBox(
@@ -260,21 +274,12 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         );
                       },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 5.0,
-                          horizontal: 10.0,
-                        ),
-                        decoration: BoxDecoration(
+                      child: const Text(
+                        "S'inscire",
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
                           color: primaryColor,
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
-                        child: const Text(
-                          "S'inscire",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                          ),
+                          fontSize: 12,
                         ),
                       ),
                     ),

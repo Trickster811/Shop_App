@@ -1,7 +1,8 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ndere_ads/screens/components/details_post.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:ndere_ads/screens/components/details_post_page.dart';
 import 'package:ndere_ads/screens/components/image_view_page.dart';
 import 'package:ndere_ads/utils/utils.dart';
 // import 'package:stack_appodeal_flutter/stack_appodeal_flutter.dart';
@@ -19,6 +20,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String currentDisplayedCategory = 'All';
+  Future<void> _handleScreenRefreshing() async {
+    return await Future.delayed(
+      const Duration(
+        seconds: 2,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<String> toolBarElement = [
@@ -77,6 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
         tradeCategory: 'Formation',
       ),
     ];
+
     return Column(
       children: [
         SingleChildScrollView(
@@ -92,11 +102,18 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         Expanded(
-          child: ListView.builder(
-            itemCount: test.length,
-            itemBuilder: (context, index) => AdsItemBuilder(
-              adsObjets: test[index],
-              deviceSize: widget.deviceSize,
+          child: LiquidPullToRefresh(
+            onRefresh: _handleScreenRefreshing,
+            color: primaryColor,
+            height: 300,
+            animSpeedFactor: 2.0,
+            showChildOpacityTransition: false,
+            child: ListView.builder(
+              itemCount: test.length,
+              itemBuilder: (context, index) => AdsItemBuilder(
+                adsObjets: test[index],
+                deviceSize: widget.deviceSize,
+              ),
             ),
           ),
         ),
@@ -213,43 +230,59 @@ class AdsItemBuilder extends StatelessWidget {
       ),
       child: Column(
         children: [
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ImageViewScreen(
-                    imageLink: adsObjets.imageLink,
-                    deviceSize: deviceSize,
+          CarouselSlider.builder(
+            itemCount: adsObjets.imageLink.length,
+            options: CarouselOptions(
+              autoPlayInterval: const Duration(
+                seconds: 4,
+              ),
+              viewportFraction: 1,
+              enlargeCenterPage: true,
+              enlargeStrategy: CenterPageEnlargeStrategy.height,
+              height: 175,
+              autoPlay: true,
+            ),
+            itemBuilder: (context, index, realIndex) {
+              final image = adsObjets.imageLink[index];
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ImageViewScreen(
+                        imageLink: adsObjets.imageLink,
+                        deviceSize: deviceSize,
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  height: 175,
+                  width: double.maxFinite,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(10),
+                    ),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(10),
+                    ),
+                    child: FadeInImage.assetNetwork(
+                      placeholder: 'assets/images/2.png',
+                      image: image,
+                      fit: BoxFit.cover,
+                      placeholderFit: BoxFit.cover,
+                      imageErrorBuilder: (context, error, stackTrace) =>
+                          Image.asset(
+                        'assets/images/2.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
               );
             },
-            child: Container(
-              height: 175,
-              width: double.maxFinite,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(10),
-                ),
-              ),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(10),
-                ),
-                child: FadeInImage.assetNetwork(
-                  placeholder: 'assets/images/2.png',
-                  image: adsObjets.imageLink[0],
-                  fit: BoxFit.cover,
-                  placeholderFit: BoxFit.cover,
-                  imageErrorBuilder: (context, error, stackTrace) =>
-                      Image.asset(
-                    'assets/images/2.png',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
           ),
           Row(
             children: [
@@ -343,77 +376,66 @@ class AdsItemBuilder extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        InkWell(
-                          onTap: () {},
-                          child: SvgPicture.asset(
+                    InkWell(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailsPostScreen(
+                            adsObjets: adsObjets,
+                            deviceSize: deviceSize,
+                          ),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text('125.5k'),
+                          const SizedBox(
+                            width: 10.0,
+                          ),
+                          SvgPicture.asset(
                             'assets/icons/heart.5.svg',
                             color: Colors.red,
                           ),
-                        ),
-                        const SizedBox(
-                          width: 10.0,
-                        ),
-                        const Text('15.5k'),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            RatingBar(
-                              initialRating: 3,
-                              direction: Axis.horizontal,
-                              allowHalfRating: true,
-                              itemCount: 5,
-                              itemSize: 30.0,
-                              ratingWidget: RatingWidget(
-                                full: SvgPicture.asset(
-                                  'assets/icons/heart.5.svg',
-                                  color: Colors.red,
-                                ),
-                                half: SvgPicture.asset(
-                                  'assets/icons/heart.1.svg',
-                                  color: Colors.red,
-                                ),
-                                empty: SvgPicture.asset(
-                                  'assets/icons/heart.3.svg',
-                                  color: Colors.red,
-                                ),
-                              ),
-                              // itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                              onRatingUpdate: (rating) {
-                                print(rating);
-                              },
-                            );
-                          },
-                          child: SvgPicture.asset(
-                            'assets/icons/star.4.svg',
-                            color: Colors.yellow,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10.0,
-                        ),
-                        const Text('15.5k'),
-                      ],
+                        ],
+                      ),
                     ),
                     InkWell(
-                      onTap: () {
-                        // showDetails(context, adsObjets);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailsPostScreen(
-                              adsObjets: adsObjets,
-                              deviceSize: deviceSize,
-                            ),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailsPostScreen(
+                            adsObjets: adsObjets,
+                            deviceSize: deviceSize,
                           ),
-                        );
-                      },
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text('15.5k'),
+                          const SizedBox(
+                            width: 10.0,
+                          ),
+                          SvgPicture.asset(
+                            'assets/icons/3-user.1.svg',
+                            color: primaryColor,
+                          ),
+                        ],
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () =>
+                          // showDetails(context, adsObjets);
+                          Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailsPostScreen(
+                            adsObjets: adsObjets,
+                            deviceSize: deviceSize,
+                          ),
+                        ),
+                      ),
                       child: Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(

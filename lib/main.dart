@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: primaryColor,
-        fontFamily: 'Comfortaa_bold',
+        fontFamily: 'Comfortaa',
       ),
       home: LoadingScreen(
         userInfo: userInfo,

@@ -79,12 +79,12 @@ class UtilFunctions {
 
   static Future<bool> _requestPermission(Permission permission) async {
     if (await permission.isGranted) {
-      await appFolder();
+      await appFolder(permission);
       return true;
     } else {
       final result = await permission.request();
       if (result == PermissionStatus.granted) {
-        await appFolder();
+        await appFolder(permission);
         return true;
       } else {
         return false;
@@ -92,14 +92,15 @@ class UtilFunctions {
     }
   }
 
-  static appFolder() async {
+  static appFolder(Permission permission) async {
     final Directory documentDirectory =
         Directory('/sdcard/Ndere Ads/App Documents');
     final Directory imageDirectory = Directory('/sdcard/Ndere Ads/App Images');
 
-    final status = await Permission.storage.request();
+    final status = await permission.request();
 
     if (status == PermissionStatus.granted) {
+      print('yyo');
       if (!await Directory('/sdcard/Ndere Ads').exists()) {
         await Directory('/sdcard/Ndere Ads').create(recursive: true);
       }
@@ -154,7 +155,7 @@ class UtilFunctions {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: ((context) => item[2]),
+              builder: (context) => item[2],
             ),
           );
         },
