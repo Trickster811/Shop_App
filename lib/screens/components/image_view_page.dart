@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ndere_ads/utils/utils.dart';
+import 'package:shop_app/utils/utils.dart';
 
 class ImageViewScreen extends StatefulWidget {
   const ImageViewScreen({

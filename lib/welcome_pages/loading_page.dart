@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:ndere_ads/utils/utils.dart';
-import 'package:ndere_ads/welcome_pages/start_page.dart';
-import 'package:ndere_ads/welcome_pages/welcome_page.dart';
+import 'package:shop_app/utils/utils.dart';
+import 'package:shop_app/welcome_pages/start_page.dart';
+import 'package:shop_app/welcome_pages/welcome_page.dart';
 
 class LoadingScreen extends StatefulWidget {
   final List<String>? userInfo;

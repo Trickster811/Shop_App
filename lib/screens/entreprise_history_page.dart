@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
-import 'package:ndere_ads/utils/utils.dart';
+import 'package:shop_app/utils/utils.dart';
 
 class EntrepriseHistoryScreen extends StatefulWidget {
   const EntrepriseHistoryScreen({

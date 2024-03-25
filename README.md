@@ -1,4 +1,4 @@
-# ndere_ads
+# shop_app
 
 A new Flutter project.
 

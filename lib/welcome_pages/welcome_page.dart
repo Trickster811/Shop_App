@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ndere_ads/utils/utils.dart';
-import 'package:ndere_ads/welcome_pages/auth/sign_in_page.dart';
+import 'package:shop_app/utils/utils.dart';
+import 'package:shop_app/welcome_pages/auth/sign_in_page.dart';
 
 class WelcomeScreen extends StatelessWidget {
   final List<String>? userInfo;

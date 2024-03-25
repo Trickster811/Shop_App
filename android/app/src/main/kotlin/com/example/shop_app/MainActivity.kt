@@ -1,4 +1,4 @@
-package com.example.ndere_ads
+package com.example.shop_app
 
 import io.flutter.embedding.android.FlutterActivity
 

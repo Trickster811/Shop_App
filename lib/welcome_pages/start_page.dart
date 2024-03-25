@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ndere_ads/screens/about_page.dart';
-import 'package:ndere_ads/screens/home_page.dart';
-import 'package:ndere_ads/screens/my_post_page.dart';
-import 'package:ndere_ads/screens/profile_page.dart';
-import 'package:ndere_ads/screens/research_page.dart';
-import 'package:ndere_ads/screens/service_page.dart';
-import 'package:ndere_ads/utils/utils.dart';
-import 'package:ndere_ads/welcome_pages/auth/disconnection.dart';
-import 'package:ndere_ads/welcome_pages/auth/sign_in_page.dart';
+import 'package:shop_app/screens/about_page.dart';
+import 'package:shop_app/screens/home_page.dart';
+import 'package:shop_app/screens/my_post_page.dart';
+import 'package:shop_app/screens/profile_page.dart';
+import 'package:shop_app/screens/research_page.dart';
+import 'package:shop_app/utils/utils.dart';
+import 'package:shop_app/welcome_pages/auth/disconnection.dart';
+import 'package:shop_app/welcome_pages/auth/sign_in_page.dart';
 // import 'package:stack_appodeal_flutter/stack_appodeal_flutter.dart';
 
 class MyHomePage extends StatefulWidget {

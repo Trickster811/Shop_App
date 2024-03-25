@@ -2,9 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-import 'package:ndere_ads/screens/components/details_post_page.dart';
-import 'package:ndere_ads/screens/components/image_view_page.dart';
-import 'package:ndere_ads/utils/utils.dart';
+import 'package:shop_app/screens/components/details_post_page.dart';
+import 'package:shop_app/screens/components/image_view_page.dart';
+import 'package:shop_app/utils/utils.dart';
 // import 'package:stack_appodeal_flutter/stack_appodeal_flutter.dart';
 
 class HomeScreen extends StatefulWidget {

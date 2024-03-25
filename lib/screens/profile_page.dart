@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
-import 'package:ndere_ads/screens/components/image_view_page.dart';
-import 'package:ndere_ads/screens/home_page.dart';
-import 'package:ndere_ads/utils/utils.dart';
-import 'package:ndere_ads/welcome_pages/auth/disconnection.dart';
-import 'package:ndere_ads/welcome_pages/auth/sign_in_page.dart';
+import 'package:shop_app/screens/components/image_view_page.dart';
+import 'package:shop_app/screens/home_page.dart';
+import 'package:shop_app/utils/utils.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({

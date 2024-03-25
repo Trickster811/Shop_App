@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ndere_ads/screens/components/image_view_page.dart';
-import 'package:ndere_ads/screens/home_page.dart';
-import 'package:ndere_ads/utils/utils.dart';
+import 'package:shop_app/screens/components/image_view_page.dart';
+import 'package:shop_app/screens/home_page.dart';
+import 'package:shop_app/utils/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailsPostScreen extends StatefulWidget {

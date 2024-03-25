@@ -3,12 +3,11 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:ndere_ads/screens/components/image_view_page.dart';
-import 'package:ndere_ads/screens/components/new_post_page.dart';
-import 'package:ndere_ads/screens/home_page.dart';
-import 'package:ndere_ads/utils/utils.dart';
-import 'package:ndere_ads/welcome_pages/auth/sign_in_page.dart';
-import 'package:ndere_ads/welcome_pages/start_page.dart';
+import 'package:shop_app/screens/components/image_view_page.dart';
+import 'package:shop_app/screens/components/new_post_page.dart';
+import 'package:shop_app/screens/home_page.dart';
+import 'package:shop_app/utils/utils.dart';
+import 'package:shop_app/welcome_pages/start_page.dart';
 
 class MyPostScreen extends StatefulWidget {
   const MyPostScreen({
@@ -599,8 +598,8 @@ class _MyPostScreenState extends State<MyPostScreen>
                                         validator: (value) => value == null
                                             ? 'Veuillez choisir un type'
                                             : null,
-                                        items: const <
-                                            DropdownMenuItem<String?>>[
+                                        items: const <DropdownMenuItem<
+                                            String?>>[
                                           DropdownMenuItem(
                                             value: 'Orange Money',
                                             child: Text(

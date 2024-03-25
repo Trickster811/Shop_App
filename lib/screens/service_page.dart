@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ndere_ads/screens/components/my_documents_page.dart';
-import 'package:ndere_ads/screens/components/new_print_page.dart';
-import 'package:ndere_ads/utils/utils.dart';
+import 'package:shop_app/screens/components/my_documents_page.dart';
+import 'package:shop_app/screens/components/new_print_page.dart';
+import 'package:shop_app/utils/utils.dart';
 
 class ServiceScreen extends StatelessWidget {
   const ServiceScreen({

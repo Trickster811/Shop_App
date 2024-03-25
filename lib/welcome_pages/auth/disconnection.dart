@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ndere_ads/utils/utils.dart';
-import 'package:ndere_ads/welcome_pages/auth/sign_in_page.dart';
+import 'package:shop_app/utils/utils.dart';
+import 'package:shop_app/welcome_pages/auth/sign_in_page.dart';
 
 class DeconnexionScreen extends StatefulWidget {
   const DeconnexionScreen({Key? key}) : super(key: key);

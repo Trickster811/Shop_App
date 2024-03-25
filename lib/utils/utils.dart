@@ -29,8 +29,8 @@ class UtilFunctions {
     //     AppodealAdType.MREC
     //   ],
     //   onInitializationFinished: (errors) {
-    //     errors?.forEach((error) => print(error.desctiption));
-    //     print("onInitializationFinished: errors - ${errors?.length ?? 0}");
+    //     errors?.forEach((error) => debugPrint(error.desctiption));
+    //     debugPrint("onInitializationFinished: errors - ${errors?.length ?? 0}");
     //     // init();
     //   },
     // );
@@ -73,7 +73,7 @@ class UtilFunctions {
 
       return File(document).copy(fileSaved.path);
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 
@@ -100,7 +100,7 @@ class UtilFunctions {
     final status = await permission.request();
 
     if (status == PermissionStatus.granted) {
-      print('yyo');
+      debugPrint('yyo');
       if (!await Directory('/sdcard/Ndere Ads').exists()) {
         await Directory('/sdcard/Ndere Ads').create(recursive: true);
       }
@@ -111,7 +111,7 @@ class UtilFunctions {
         documentDirectory.create(recursive: true);
       }
     } else {
-      print('Denied');
+      debugPrint('Denied');
     }
   }
 
@@ -164,7 +164,10 @@ class UtilFunctions {
           children: [
             SvgPicture.asset(
               item[0],
-              color: Theme.of(context).iconTheme.color,
+              colorFilter: ColorFilter.mode(
+                Theme.of(context).iconTheme.color!,
+                BlendMode.srcIn,
+              ),
             ),
             const SizedBox(
               width: 5,

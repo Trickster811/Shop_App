@@ -1,14 +1,14 @@
 // ************************************************************
 // ************************************************************
-// ***     Copyright 2023 Ndere Ads. All rights reserved.   ***
+// ***     Copyright 2023 Shop App. All rights reserved.    ***
 // ***          by Jo@chim Ned@ouk@ (MacNight_nj).          ***
 // ************************************************************
 // ************************************************************
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ndere_ads/utils/utils.dart';
-import 'package:ndere_ads/welcome_pages/loading_page.dart';
+import 'package:shop_app/utils/utils.dart';
+import 'package:shop_app/welcome_pages/loading_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
