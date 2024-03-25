@@ -34,7 +34,10 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
           },
           icon: SvgPicture.asset(
             'assets/icons/arrow-left-2.2.svg',
-            color: Theme.of(context).iconTheme.color,
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).iconTheme.color!,
+              BlendMode.srcIn,
+            ),
           ),
         ),
       ),
@@ -58,7 +61,7 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
                   Text(
                     widget.adsObjets.productName,
                     textAlign: TextAlign.center,
-                    textScaleFactor: 1.5,
+                    textScaler: const TextScaler.linear(1.5),
                     style: const TextStyle(
                       color: primaryColor,
                     ),
@@ -77,7 +80,7 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
                     child: Text(
                       'XAF ${widget.adsObjets.productPrice}',
                       textAlign: TextAlign.center,
-                      textScaleFactor: 1.5,
+                      textScaler: const TextScaler.linear(1.5),
                       style: const TextStyle(
                         color: Colors.white,
                       ),
@@ -106,14 +109,17 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
                 itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
                 itemBuilder: (context, _) => SvgPicture.asset(
                   'assets/icons/heart.5.svg',
-                  color: Colors.red,
+                  colorFilter: const ColorFilter.mode(
+                    Colors.red,
+                    BlendMode.srcIn,
+                  ),
                 ),
                 onRatingUpdate: (rating) {
-                  print(rating);
+                  debugPrint('$rating');
                 },
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10.0,
             ),
             Padding(
@@ -129,7 +135,7 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10.0,
             ),
             Padding(
@@ -145,7 +151,7 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10.0,
             ),
             Padding(
@@ -161,7 +167,7 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10.0,
             ),
             Padding(
@@ -212,7 +218,10 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
                   SvgPicture.asset(
                     'assets/icons/whatsapp.svg',
                     height: 20,
-                    color: Colors.white,
+                    colorFilter: const ColorFilter.mode(
+                      Colors.white,
+                      BlendMode.srcIn,
+                    ),
                   ),
                   const SizedBox(
                     width: 05.0,
@@ -254,7 +263,10 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
                 children: [
                   SvgPicture.asset(
                     'assets/icons/call.svg',
-                    color: Colors.white,
+                    colorFilter: const ColorFilter.mode(
+                      Colors.white,
+                      BlendMode.srcIn,
+                    ),
                   ),
                   const SizedBox(
                     width: 05.0,

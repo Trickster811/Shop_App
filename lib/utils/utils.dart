@@ -186,31 +186,35 @@ class UtilFunctions {
     );
   }
 
-  static showFlashMessage(
-      BuildContext context, String message, Color color, Size deviceSize) {
+  static final messagerKey = GlobalKey<ScaffoldMessengerState>();
+  static showFlashMessage(String message, Color color) {
     final snackBar = SnackBar(
       behavior: SnackBarBehavior.floating,
       content: Container(
         height: 40,
-        width: deviceSize.width,
-        margin: const EdgeInsets.all(10),
+        // width: deviceSize.width,
+        margin: const EdgeInsets.all(10), padding: const EdgeInsets.all(10.0),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: color.withOpacity(.5),
+          color: color.withOpacity(.8),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Text(
           message,
+          textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 14,
             fontFamily: 'Comfortaa_bold',
+            // color: Theme.of(context).iconTheme.color,
           ),
         ),
       ),
       elevation: 0,
       backgroundColor: Colors.transparent,
     );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    messagerKey.currentState!
+      ..removeCurrentSnackBar()
+      ..showSnackBar(snackBar);
   }
 
   // static Future<void> appodealInitialization() async {

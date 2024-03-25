@@ -264,7 +264,10 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   SvgPicture.asset(
                     'assets/icons/arrow-right-2.2.svg',
-                    color: Colors.white,
+                    colorFilter: const ColorFilter.mode(
+                      Colors.white,
+                      BlendMode.srcIn,
+                    ),
                     height: 50,
                   )
                 ],
@@ -534,7 +537,10 @@ class AppDecriptionScreen extends StatelessWidget {
                   ),
                   SvgPicture.asset(
                     'assets/icons/arrow-right-2.2.svg',
-                    color: Colors.white,
+                    colorFilter: const ColorFilter.mode(
+                      Colors.white,
+                      BlendMode.srcIn,
+                    ),
                     height: 50,
                   )
                 ],
@@ -620,9 +626,9 @@ class StartScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: Row(
+      bottomNavigationBar: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
+        children: [
           Text(
             'by MacNight_nj',
             style: TextStyle(

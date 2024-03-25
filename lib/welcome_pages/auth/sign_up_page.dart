@@ -95,7 +95,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Text(
                           'Shop\nApp'.toUpperCase(),
                           textAlign: TextAlign.center,
-                          textScaleFactor: 1.6,
+                          textScaler: const TextScaler.linear(1.6),
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 25,
@@ -339,7 +339,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           color: Colors.transparent,
                         ),
                       ),
-                      errorBorder: OutlineInputBorder(
+                      errorBorder: const OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.transparent,
                         ),
@@ -520,10 +520,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             onTap: () async {
               if (!_formKey.currentState!.validate()) {
                 UtilFunctions.showFlashMessage(
-                  context,
                   'Veuillez remplir tous les champs !!!',
                   Colors.red,
-                  widget.deviceSize,
                 );
                 return;
               }
@@ -541,10 +539,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   await UtilFunctions.setFirstTime(true);
 
                   UtilFunctions.showFlashMessage(
-                    context,
                     "Vos Informations et votre demande d'inscription a été envoyée avec succès. Bienvenue sur ShopApp",
                     primaryColor,
-                    widget.deviceSize,
                   );
 
                   Navigator.pushReplacement(
@@ -557,10 +553,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   );
                 } catch (e) {
                   UtilFunctions.showFlashMessage(
-                    context,
                     'Oups! Une erreur est survenue\nVeuillez réessayer',
                     Colors.orange,
-                    widget.deviceSize,
                   );
                 }
               } else {
@@ -616,10 +610,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   10.0,
                                 ),
                               ),
-                              child: Row(
+                              child: const Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
-                                children: const [
+                                children: [
                                   Text(
                                     'XAF',
                                     style: TextStyle(
@@ -805,10 +799,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               onTap: () async {
                                 if (!paymentFormKey.currentState!.validate()) {
                                   UtilFunctions.showFlashMessage(
-                                    context,
                                     'Veuillez remplir tous les champs !!!',
                                     Colors.red,
-                                    widget.deviceSize,
                                   );
                                   return;
                                 }
@@ -830,10 +822,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   await UtilFunctions.setFirstTime(true);
 
                                   UtilFunctions.showFlashMessage(
-                                    context,
                                     "Vos Informations et votre demande d'abonnement a été envoyée avec succès. La vérification et la confirmation de votre compte se fera dans un délai d'un (01) jour ouvrable",
                                     primaryColor,
-                                    widget.deviceSize,
                                   );
 
                                   Navigator.pushReplacement(
@@ -846,10 +836,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   );
                                 } catch (e) {
                                   UtilFunctions.showFlashMessage(
-                                    context,
                                     'Oups! Une erreur est survenue\nVeuillez réessayer',
                                     Colors.orange,
-                                    widget.deviceSize,
                                   );
                                 }
                               },

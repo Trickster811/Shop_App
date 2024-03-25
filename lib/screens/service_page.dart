@@ -21,7 +21,7 @@ class ServiceScreen extends StatelessWidget {
           const Text(
             'Services impression de documents par le secrétariat LMD',
             textAlign: TextAlign.center,
-            textScaleFactor: 1.1,
+            textScaler: TextScaler.linear(1.1),
             style: TextStyle(
               fontSize: 16,
             ),

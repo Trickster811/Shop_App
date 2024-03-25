@@ -180,7 +180,10 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                                   children: [
                                     SvgPicture.asset(
                                       'assets/icons/document.2.svg',
-                                      color: Colors.white,
+                                      colorFilter: const ColorFilter.mode(
+                                        Colors.white,
+                                        BlendMode.srcIn,
+                                      ),
                                     ),
                                     const SizedBox(
                                       width: 10.0,
@@ -492,10 +495,8 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                             onChanged: (value) {
                               if (int.tryParse(value) == null) {
                                 UtilFunctions.showFlashMessage(
-                                  context,
                                   'Veuillez entre des chiffres !!!',
                                   Colors.red,
-                                  widget.deviceSize,
                                 );
                                 return;
                               }
@@ -504,7 +505,7 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                                     int.parse(documentPrice.text
                                         .toString()
                                         .substring(0, 2));
-                                print(documentCopies.text);
+                                debugPrint(documentCopies.text);
                               });
                             },
                             controller: documentCopies,
@@ -704,10 +705,8 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     onChanged: (value) {
                       if (int.tryParse(value) == null) {
                         UtilFunctions.showFlashMessage(
-                          context,
                           'Veuillez entre des chiffres !!!',
                           Colors.red,
-                          widget.deviceSize,
                         );
                       }
                     },
@@ -753,10 +752,8 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
                     onChanged: (value) {
                       if (int.tryParse(value) == null) {
                         UtilFunctions.showFlashMessage(
-                          context,
                           'Veuillez entre des chiffres !!!',
                           Colors.red,
-                          widget.deviceSize,
                         );
                       }
                     },
@@ -881,20 +878,16 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
         onTap: () async {
           if (!_formKey.currentState!.validate()) {
             UtilFunctions.showFlashMessage(
-              context,
               'Veuillez remplir tous les champs !!',
               Colors.red,
-              widget.deviceSize,
             );
           }
 
           await UtilFunctions.generateTicket();
 
           UtilFunctions.showFlashMessage(
-            context,
             'Merci pour votre confiance !!',
-            Colors.green,
-            widget.deviceSize,
+            const Color.fromARGB(255, 75, 82, 76),
           );
         },
         child: Container(
@@ -919,7 +912,10 @@ class _NewPrintSCreenState extends State<NewPrintSCreen> {
             children: [
               SvgPicture.asset(
                 'assets/icons/work.svg',
-                color: Colors.white,
+                colorFilter: const ColorFilter.mode(
+                  Colors.white,
+                  BlendMode.srcIn,
+                ),
               ),
               const SizedBox(
                 width: 10.0,

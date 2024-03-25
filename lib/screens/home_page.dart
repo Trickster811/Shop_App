@@ -395,7 +395,10 @@ class AdsItemBuilder extends StatelessWidget {
                           ),
                           SvgPicture.asset(
                             'assets/icons/heart.5.svg',
-                            color: Colors.red,
+                            colorFilter: const ColorFilter.mode(
+                              Colors.red,
+                              BlendMode.srcIn,
+                            ),
                           ),
                         ],
                       ),
@@ -419,7 +422,10 @@ class AdsItemBuilder extends StatelessWidget {
                           ),
                           SvgPicture.asset(
                             'assets/icons/3-user.1.svg',
-                            color: primaryColor,
+                            colorFilter: const ColorFilter.mode(
+                              primaryColor,
+                              BlendMode.srcIn,
+                            ),
                           ),
                         ],
                       ),

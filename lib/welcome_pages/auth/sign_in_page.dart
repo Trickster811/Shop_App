@@ -84,7 +84,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         Text(
                           'Shop\nApp'.toUpperCase(),
                           textAlign: TextAlign.center,
-                          textScaleFactor: 1.6,
+                          textScaler: const TextScaler.linear(1.6),
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 25,
@@ -324,10 +324,8 @@ class _SignInScreenState extends State<SignInScreen> {
             onTap: () async {
               if (!_formKey.currentState!.validate()) {
                 return UtilFunctions.showFlashMessage(
-                  context,
                   'Veuillez remplir tous les champs !!!',
                   Colors.red,
-                  deviceSize,
                 );
               }
 
@@ -341,19 +339,15 @@ class _SignInScreenState extends State<SignInScreen> {
                     await UtilFunctions.setUserInfo(userLoginInfo);
                 if (userInfo.isEmpty) {
                   return UtilFunctions.showFlashMessage(
-                    context,
                     'Aucun compte existant avec cet email !!',
                     Colors.orange,
-                    deviceSize,
                   );
                 }
                 for (var element in userInfo) {
                   if (element != userLoginInfo[userInfo.indexOf(element)]) {
                     return UtilFunctions.showFlashMessage(
-                      context,
                       'Email ou Mot de passe incorrect',
                       Colors.red,
-                      deviceSize,
                     );
                   }
                 }
@@ -369,10 +363,8 @@ class _SignInScreenState extends State<SignInScreen> {
                 );
               } catch (e) {
                 UtilFunctions.showFlashMessage(
-                  context,
                   'Aucun compte existant avec cet email !!',
                   Colors.orange,
-                  deviceSize,
                 );
               }
             },

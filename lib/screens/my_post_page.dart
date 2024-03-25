@@ -722,10 +722,8 @@ class _MyPostScreenState extends State<MyPostScreen>
                                     if (!paymentFormKey.currentState!
                                         .validate()) {
                                       UtilFunctions.showFlashMessage(
-                                        context,
                                         'Veuillez remplir tous les champs !!!',
                                         Colors.red,
-                                        widget.deviceSize,
                                       );
                                       return;
                                     }
@@ -742,10 +740,8 @@ class _MyPostScreenState extends State<MyPostScreen>
                                       await UtilFunctions.setFirstTime(true);
 
                                       UtilFunctions.showFlashMessage(
-                                        context,
                                         "Votre demande d'abonnement a été envoyée avec succès. La vérification et la confirmation de votre compte se fera dans un délai d'un (01) jour ouvrable",
                                         primaryColor,
-                                        widget.deviceSize,
                                       );
 
                                       Navigator.pushReplacement(
@@ -759,10 +755,8 @@ class _MyPostScreenState extends State<MyPostScreen>
                                       );
                                     } catch (e) {
                                       UtilFunctions.showFlashMessage(
-                                        context,
                                         'Oups! Une erreur est survenue\nVeuillez réessayer',
                                         Colors.orange,
-                                        widget.deviceSize,
                                       );
                                     }
                                   },

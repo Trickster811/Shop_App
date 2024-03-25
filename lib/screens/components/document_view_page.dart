@@ -38,7 +38,10 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
           },
           icon: SvgPicture.asset(
             'assets/icons/arrow-left.svg',
-            color: Colors.white,
+            colorFilter: const ColorFilter.mode(
+              Colors.white,
+              BlendMode.srcIn,
+            ),
           ),
         ),
         title: Text(UtilFunctions.baseNameProvider(widget.pdfFile.path)),
@@ -52,37 +55,20 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
                   name: imageName,
                   document: widget.pdfFile,
                 );
-                // print(image!.path);
-                final snackBar = SnackBar(
-                  behavior: SnackBarBehavior.floating,
-                  content: Container(
-                    height: 40,
-                    width: widget.deviceSize.width,
-                    margin: const EdgeInsets.all(10),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(.5),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Text(
-                      'Image Downloaded',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'Comfortaa_bold',
-                      ),
-                    ),
-                  ),
-                  elevation: 0,
-                  backgroundColor: Colors.transparent,
+                UtilFunctions.showFlashMessage(
+                  'Image Downloaded',
+                  Colors.white,
                 );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
               } catch (e) {
-                print(e);
+                debugPrint('$e');
               }
             },
             icon: SvgPicture.asset(
               'assets/icons/download.3.svg',
-              color: Colors.white,
+              colorFilter: const ColorFilter.mode(
+                Colors.white,
+                BlendMode.srcIn,
+              ),
             ),
           ),
           // IconButton(

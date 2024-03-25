@@ -130,7 +130,7 @@ class _MyPendingTasksScreenState extends State<MyPendingTasksScreen> {
                         ),
                         Text(
                           pendingTask.documentTitle,
-                          textScaleFactor: 1.25,
+                          textScaler: const TextScaler.linear(1.25),
                           textAlign: TextAlign.center,
                         ),
                       ],
@@ -233,7 +233,7 @@ class _MyPendingTasksScreenState extends State<MyPendingTasksScreen> {
                   }
                 });
               } catch (e) {
-                print(e);
+                debugPrint('$e');
               }
             },
             child: Container(
@@ -246,7 +246,10 @@ class _MyPendingTasksScreenState extends State<MyPendingTasksScreen> {
               ),
               child: SvgPicture.asset(
                 'assets/icons/calendar.svg',
-                color: Colors.white,
+                colorFilter: const ColorFilter.mode(
+                  Colors.white,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
           ),

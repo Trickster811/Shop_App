@@ -15,9 +15,9 @@ class SecretariatHistoryScreen extends StatefulWidget {
 class _SecretariatHistoryScreenState extends State<SecretariatHistoryScreen> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return const SingleChildScrollView(
       child: Column(
-        children: const [],
+        children: [],
       ),
     );
   }

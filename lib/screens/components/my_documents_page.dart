@@ -131,7 +131,10 @@ class MyDocumentsScreen extends StatelessWidget {
               },
               icon: SvgPicture.asset(
                 'assets/icons/show.5.svg',
-                color: Colors.white,
+                colorFilter: const ColorFilter.mode(
+                  Colors.white,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
           ),

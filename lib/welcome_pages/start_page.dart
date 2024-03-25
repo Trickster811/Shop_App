@@ -178,7 +178,10 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: currentState != 0
                   ? SvgPicture.asset(
                       'assets/icons/bag.1.svg',
-                      color: Colors.white,
+                      colorFilter: const ColorFilter.mode(
+                        Colors.white,
+                        BlendMode.srcIn,
+                      ),
                     )
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -193,7 +196,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         SvgPicture.asset(
                           'assets/icons/bag.4.svg',
-                          color: Colors.white,
+                          colorFilter: const ColorFilter.mode(
+                            Colors.white,
+                            BlendMode.srcIn,
+                          ),
                         ),
                       ],
                     ),
@@ -209,7 +215,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       // widget.userInfo.isNotEmpty && widget.userInfo[0] == 'Client'
                       //     ? 'assets/icons/activity.6.svg'
                       'assets/icons/plus.svg',
-                      color: Colors.white,
+                      colorFilter: const ColorFilter.mode(
+                        Colors.white,
+                        BlendMode.srcIn,
+                      ),
                     )
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -227,7 +236,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           //         widget.userInfo[0] == 'Client'
                           //     ? 'assets/icons/activity.2.svg'
                           'assets/icons/plus.3.svg',
-                          color: Colors.white,
+                          colorFilter: const ColorFilter.mode(
+                            Colors.white,
+                            BlendMode.srcIn,
+                          ),
                         ),
                       ],
                     ),
@@ -241,7 +253,10 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: currentState != 2
                   ? SvgPicture.asset(
                       'assets/icons/search.1.svg',
-                      color: Colors.white,
+                      colorFilter: const ColorFilter.mode(
+                        Colors.white,
+                        BlendMode.srcIn,
+                      ),
                     )
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -256,7 +271,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         SvgPicture.asset(
                           'assets/icons/search.6.svg',
-                          color: Colors.white,
+                          colorFilter: const ColorFilter.mode(
+                            Colors.white,
+                            BlendMode.srcIn,
+                          ),
                         ),
                       ],
                     ),
@@ -272,7 +290,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       // widget.userInfo.isNotEmpty && widget.userInfo[0] == 'Client'
                       //     ? 'assets/icons/time-circle.4.svg'
                       'assets/icons/profile.6.svg',
-                      color: Colors.white,
+                      colorFilter: const ColorFilter.mode(
+                        Colors.white,
+                        BlendMode.srcIn,
+                      ),
                     )
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -290,7 +311,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           //         widget.userInfo[0] == 'Client'
                           //     ? 'assets/icons/time-circle.5.svg'
                           'assets/icons/profile.3.svg',
-                          color: Colors.white,
+                          colorFilter: const ColorFilter.mode(
+                            Colors.white,
+                            BlendMode.srcIn,
+                          ),
                         ),
                       ],
                     ),

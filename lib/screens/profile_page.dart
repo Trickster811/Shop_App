@@ -251,7 +251,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     SvgPicture.asset(
                       'assets/icons/heart.5.svg',
-                      color: Colors.red,
+                      colorFilter: const ColorFilter.mode(
+                        Colors.red,
+                        BlendMode.srcIn,
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
@@ -265,7 +268,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     SvgPicture.asset(
                       'assets/icons/3-user.1.svg',
-                      color: primaryColor,
+                      colorFilter: const ColorFilter.mode(
+                        primaryColor,
+                        BlendMode.srcIn,
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
@@ -274,9 +280,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ],
                 ),
                 const Text('|'),
-                Column(
+                const Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
+                  children: [
                     Text('240'),
                     SizedBox(
                       height: 10,

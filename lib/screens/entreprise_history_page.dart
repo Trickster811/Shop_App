@@ -177,7 +177,7 @@ class _EntrepriseHistoryScreenState extends State<EntrepriseHistoryScreen> {
                     }
                   });
                 } catch (e) {
-                  print(e);
+                  debugPrint(e.toString());
                 }
               },
               child: Container(
@@ -190,7 +190,10 @@ class _EntrepriseHistoryScreenState extends State<EntrepriseHistoryScreen> {
                 ),
                 child: SvgPicture.asset(
                   'assets/icons/calendar.svg',
-                  color: Colors.white,
+                  colorFilter: const ColorFilter.mode(
+                    Colors.white,
+                    BlendMode.srcIn,
+                  ),
                 ),
               ),
             ),

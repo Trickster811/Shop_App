@@ -43,9 +43,9 @@ class SecretariatDetailsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text('Informations sur le Document'),
                 ],
               ),
@@ -69,7 +69,7 @@ class SecretariatDetailsScreen extends StatelessWidget {
                   children: [
                     Text(
                       documentBuilder.documentTitle,
-                      textScaleFactor: 1.2,
+                      textScaler: const TextScaler.linear(1.2),
                       textAlign: TextAlign.center,
                     ),
                     InkWell(
@@ -88,7 +88,10 @@ class SecretariatDetailsScreen extends StatelessWidget {
                           children: [
                             SvgPicture.asset(
                               'assets/icons/download.3.svg',
-                              color: Colors.white,
+                              colorFilter: const ColorFilter.mode(
+                                Colors.white,
+                                BlendMode.srcIn,
+                              ),
                             ),
                             const SizedBox(
                               width: 05.0,
@@ -248,9 +251,9 @@ class SecretariatDetailsScreen extends StatelessWidget {
               const SizedBox(
                 height: 50.0,
               ),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text('Informations sur le Client'),
                 ],
               ),
@@ -327,7 +330,10 @@ class SecretariatDetailsScreen extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 'assets/icons/tick-square.1.svg',
-                color: Colors.white,
+                colorFilter: const ColorFilter.mode(
+                  Colors.white,
+                  BlendMode.srcIn,
+                ),
               ),
               const SizedBox(
                 width: 05.0,

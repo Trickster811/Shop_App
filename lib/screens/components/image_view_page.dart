@@ -30,7 +30,10 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
           },
           icon: SvgPicture.asset(
             'assets/icons/arrow-left.svg',
-            color: Colors.white,
+            colorFilter: const ColorFilter.mode(
+              Colors.white,
+              BlendMode.srcIn,
+            ),
           ),
         ),
         actions: [
@@ -43,37 +46,21 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                   name: imageName,
                   document: widget.imageLink[index],
                 );
-                // print(image!.path);
-                final snackBar = SnackBar(
-                  behavior: SnackBarBehavior.floating,
-                  content: Container(
-                    height: 40,
-                    width: widget.deviceSize.width,
-                    margin: const EdgeInsets.all(10),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(.5),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Text(
-                      'Image Downloaded',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'Comfortaa_bold',
-                      ),
-                    ),
-                  ),
-                  elevation: 0,
-                  backgroundColor: Colors.transparent,
+
+                UtilFunctions.showFlashMessage(
+                  'Image Downloaded',
+                  Colors.white,
                 );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
               } catch (e) {
-                print(e);
+                debugPrint(e.toString());
               }
             },
             icon: SvgPicture.asset(
               'assets/icons/download.3.svg',
-              color: Colors.white,
+              colorFilter: const ColorFilter.mode(
+                Colors.white,
+                BlendMode.srcIn,
+              ),
             ),
           ),
         ],
@@ -93,8 +80,8 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
               ),
             ),
           ),
-          Row(
-            children: const [
+          const Row(
+            children: [
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(

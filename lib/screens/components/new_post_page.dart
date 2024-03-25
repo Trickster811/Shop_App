@@ -387,7 +387,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
                                   children: [
                                     SvgPicture.asset(
                                       'assets/icons/image-2.svg',
-                                      color: Colors.white,
+                                      colorFilter: const ColorFilter.mode(
+                                        Colors.white,
+                                        BlendMode.srcIn,
+                                      ),
                                     ),
                                     const SizedBox(
                                       width: 10.0,
@@ -624,7 +627,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
             children: [
               SvgPicture.asset(
                 'assets/icons/send.3.svg',
-                color: Colors.white,
+                colorFilter: const ColorFilter.mode(
+                  Colors.white,
+                  BlendMode.srcIn,
+                ),
               ),
               const SizedBox(
                 width: 10.0,
@@ -663,19 +669,20 @@ class _NewPostScreenState extends State<NewPostScreen> {
 
   /// Get from Camera
   Future getImageFromDevice() async {
+    final ImagePicker picker = ImagePicker();
     try {
-      List<PickedFile>? pickedFile =
-          await ImagePicker.platform.pickMultiImage();
-      if (pickedFile == null) return;
-      List<File?> imageList = [];
-      for (var element in pickedFile) {
-        imageList.add(File(element.path));
+      final pickedFile = await picker.pickMultiImage();
+
+      if (pickedFile.isEmpty) return;
+      List<File?> imagesFiles = [];
+      for (var pic in pickedFile) {
+        imagesFiles.add(File(pic.path));
       }
       setState(() {
-        imageFile = imageList;
+        imageFile = imagesFiles;
       });
     } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
+      debugPrint('Failed to pick image: $e');
     }
   }
 }

@@ -130,8 +130,10 @@ class AboutScreen extends StatelessWidget {
                           },
                           icon: SvgPicture.asset(
                             'assets/icons/github.svg',
-                            color: Colors.white,
-                            // width: 25,
+                            colorFilter: const ColorFilter.mode(
+                              Colors.white,
+                              BlendMode.srcIn,
+                            ), // width: 25,
                             // height: 25,
                           ),
                         ),
@@ -141,7 +143,10 @@ class AboutScreen extends StatelessWidget {
                           },
                           icon: SvgPicture.asset(
                             'assets/icons/mail.svg',
-                            color: Colors.white,
+                            colorFilter: const ColorFilter.mode(
+                              Colors.white,
+                              BlendMode.srcIn,
+                            ),
                             width: 25,
                             height: 25,
                           ),
@@ -152,7 +157,10 @@ class AboutScreen extends StatelessWidget {
                           },
                           icon: SvgPicture.asset(
                             'assets/icons/pinterest.svg',
-                            color: Colors.white,
+                            colorFilter: const ColorFilter.mode(
+                              Colors.white,
+                              BlendMode.srcIn,
+                            ),
                             width: 25,
                             height: 25,
                           ),
@@ -163,7 +171,10 @@ class AboutScreen extends StatelessWidget {
                           },
                           icon: SvgPicture.asset(
                             'assets/icons/linked_in.svg',
-                            color: Colors.white,
+                            colorFilter: const ColorFilter.mode(
+                              Colors.white,
+                              BlendMode.srcIn,
+                            ),
                             width: 25,
                             height: 25,
                           ),
@@ -174,7 +185,10 @@ class AboutScreen extends StatelessWidget {
                           },
                           icon: SvgPicture.asset(
                             'assets/icons/youtube.svg',
-                            color: Colors.white,
+                            colorFilter: const ColorFilter.mode(
+                              Colors.white,
+                              BlendMode.srcIn,
+                            ),
                             width: 25,
                             height: 25,
                           ),

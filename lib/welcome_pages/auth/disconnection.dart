@@ -15,7 +15,6 @@ class DeconnexionScreen extends StatefulWidget {
 class _DeconnexionScreenState extends State<DeconnexionScreen> {
   @override
   Widget build(BuildContext context) {
-    final Size deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       // extendBody: true,
       body: Padding(
@@ -34,12 +33,12 @@ class _DeconnexionScreenState extends State<DeconnexionScreen> {
                   color: primaryColor,
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                child: Column(
-                  children: const [
+                child: const Column(
+                  children: [
                     Text(
-                      'NDERE\nADS',
+                      'SHOP\nAPP',
                       textAlign: TextAlign.center,
-                      textScaleFactor: 1.6,
+                      textScaler: TextScaler.linear(1.6),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 25,
@@ -120,17 +119,15 @@ class _DeconnexionScreenState extends State<DeconnexionScreen> {
                         await UtilFunctions.setUserInfo(['', '', '']);
 
                         await UtilFunctions.setFirstTime(false);
-                        print('object');
+                        debugPrint('object');
                         //restarting the application
                         Platform.isAndroid ? SystemNavigator.pop() : exit(0);
                       } catch (e) {
                         UtilFunctions.showFlashMessage(
-                          context,
                           'Oups! Une erreur est survenue\nVeuillez réessayer !!',
                           Colors.orange,
-                          deviceSize,
                         );
-                        print(e);
+                        debugPrint(e.toString());
                       }
                     },
                     child: Container(
