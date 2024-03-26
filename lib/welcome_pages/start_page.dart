@@ -113,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
       extendBody: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.transparent,
+        // backgroundColor: Colors.white,
         elevation: 0,
         title: Text(
           listOfScreensTitle[currentState],
