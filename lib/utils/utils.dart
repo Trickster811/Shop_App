@@ -4,12 +4,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:pdf/pdf.dart' as pdf;
-import 'package:pdf/widgets.dart' as pdf_widget;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:stack_appodeal_flutter/stack_appodeal_flutter.dart';
 
 const primaryColor = Color.fromARGB(255, 35, 25, 37);
 
@@ -187,6 +184,7 @@ class UtilFunctions {
   }
 
   static final messagerKey = GlobalKey<ScaffoldMessengerState>();
+
   static showFlashMessage(String message, Color color) {
     final snackBar = SnackBar(
       behavior: SnackBarBehavior.floating,
@@ -215,91 +213,5 @@ class UtilFunctions {
     messagerKey.currentState!
       ..removeCurrentSnackBar()
       ..showSnackBar(snackBar);
-  }
-
-  // static Future<void> appodealInitialization() async {
-  //   Appodeal.setLogLevel(Appodeal.LogLevelVerbose);
-
-  //   Appodeal.setAutoCache(AppodealAdType.Interstitial, false);
-  //   Appodeal.setAutoCache(AppodealAdType.RewardedVideo, false);
-  //   Appodeal.setUseSafeArea(true);
-
-  //   // Set ad auto caching enabled or disabled
-  //   // By default autocache is enabled for all ad types
-  //   Appodeal.setAutoCache(AppodealAdType.Interstitial, false); //default - true
-
-  //   // Set testing mode
-  //   Appodeal.setTesting(false); //default - false
-
-  //   // Set Appodeal SDK logging level
-  //   Appodeal.setLogLevel(
-  //       Appodeal.LogLevelVerbose); //default - Appodeal.LogLevelNone
-
-  //   // Enable or disable child direct threatment
-  //   Appodeal.setChildDirectedTreatment(false); //default - false
-
-  //   // Disable network for specific ad type
-  //   Appodeal.disableNetwork("admob");
-  //   Appodeal.disableNetwork("admob", AppodealAdType.Interstitial);
-
-  //   Appodeal.setBannerCallbacks(
-  //     onBannerLoaded: (isPrecache) => {},
-  //     onBannerFailedToLoad: () => {},
-  //     onBannerShown: () => {},
-  //     onBannerShowFailed: () => {},
-  //     onBannerClicked: () => {},
-  //     onBannerExpired: () => {},
-  //   );
-
-  //   Appodeal.setInterstitialCallbacks(
-  //     onInterstitialLoaded: (isPrecache) => {},
-  //     onInterstitialFailedToLoad: () => {},
-  //     onInterstitialShown: () => {},
-  //     onInterstitialShowFailed: () => {},
-  //     onInterstitialClicked: () => {},
-  //     onInterstitialClosed: () => {},
-  //     onInterstitialExpired: () => {},
-  //   );
-  //   Appodeal.setRewardedVideoCallbacks(
-  //     onRewardedVideoLoaded: (isPrecache) => {},
-  //     onRewardedVideoFailedToLoad: () => {
-  //       showAppodealRewardedVideoAds(),
-  //     },
-  //     onRewardedVideoShown: () => {},
-  //     onRewardedVideoShowFailed: () => {
-  //       showAppodealRewardedVideoAds(),
-  //     },
-  //     onRewardedVideoClicked: () => {},
-  //     onRewardedVideoClosed: (isFinished) {},
-  //     onRewardedVideoExpired: () => {},
-  //   );
-  // }
-
-  // static showAppodealRewardedVideoAds() async {
-  //   var isready = await Appodeal.isInitialized(AppodealAdType.RewardedVideo);
-  //   var canShow = await Appodeal.canShow(AppodealAdType.RewardedVideo);
-
-  //   if (!isready) return 1;
-  //   if (!canShow) return 2;
-
-  //   return await Appodeal.show(AppodealAdType.RewardedVideo);
-  // }
-
-  static generateTicket() async {
-    final ticket = pdf_widget.Document();
-    ticket.addPage(
-      pdf_widget.Page(
-        pageFormat: const pdf.PdfPageFormat(
-          21.0 * pdf.PdfPageFormat.cm,
-          29.7 * pdf.PdfPageFormat.cm,
-          marginAll: 1.5 * pdf.PdfPageFormat.cm,
-        ),
-        build: (context) => pdf_widget.Column(),
-      ),
-    );
-    return await saveDocument(
-      name: '',
-      document: ticket,
-    );
   }
 }
