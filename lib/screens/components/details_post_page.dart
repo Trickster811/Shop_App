@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_app/screens/components/image_view_page.dart';
-import 'package:shop_app/screens/home_page.dart';
+import 'package:shop_app/screens/shop_page.dart';
 import 'package:shop_app/utils/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -26,14 +26,15 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.transparent,
+        // backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.of(context).pop(context);
           },
           icon: SvgPicture.asset(
-            'assets/icons/arrow-left-2.2.svg',
+            "assets/icons/arrow-left-2.2.svg",
+            height: 30,
             colorFilter: ColorFilter.mode(
               Theme.of(context).iconTheme.color!,
               BlendMode.srcIn,
@@ -122,6 +123,90 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
             const SizedBox(
               height: 10.0,
             ),
+            Container(
+              padding: const EdgeInsets.only(left: 10.0, bottom: 10.0),
+              width: double.maxFinite,
+              child: const Text(
+                "House Details",
+                style: TextStyle(
+                  // fontSize: 25,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Table(
+                // defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                // border: TableBorder.symmetric(
+                //   inside: BorderSide(),
+                //   outside: BorderSide(),
+                // ),
+                children: [
+                  TableRow(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).iconTheme.color!.withOpacity(.5),
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(6.0),
+                        topRight: Radius.circular(6.0),
+                      ),
+                    ),
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10.0,
+                          horizontal: 10.0,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color: Theme.of(context).iconTheme.color!,
+                            ),
+                          ),
+                        ),
+                        child: const Text(
+                          "Specification",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 10.0,
+                          horizontal: 10.0,
+                        ),
+                        child: Text(
+                          "Value",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  tableRowBuilder(
+                    context,
+                    "Town",
+                    'Douala',
+                    false,
+                  ),
+                  tableRowBuilder(
+                    context,
+                    "Water Source",
+                    'Yes',
+                    true,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 10.0,
+            ),
             Padding(
               padding: const EdgeInsets.only(
                 left: 10.0,
@@ -147,38 +232,6 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
                   const Text("Siège : "),
                   Text(
                     widget.adsObjets.location,
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 10.0,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 10.0,
-              ),
-              child: Row(
-                children: [
-                  const Text("Numèro : "),
-                  Text(
-                    widget.adsObjets.traderPhoneNumber.toString(),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 10.0,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 10.0,
-              ),
-              child: Row(
-                children: [
-                  const Text("Whatsapp : "),
-                  Text(
-                    widget.adsObjets.traderWhatsappNumber.toString(),
                   ),
                 ],
               ),
@@ -329,6 +382,54 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  TableRow tableRowBuilder(
+      BuildContext context, String title, value, bool lastItem) {
+    return TableRow(
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(
+            vertical: 10.0,
+            horizontal: 10.0,
+          ),
+          decoration: BoxDecoration(
+            color: Theme.of(context).iconTheme.color!.withOpacity(.5),
+            borderRadius: BorderRadius.only(
+              bottomLeft: lastItem
+                  ? const Radius.circular(6.0)
+                  : const Radius.circular(0.0),
+            ),
+            border: Border(
+              bottom: !lastItem
+                  ? BorderSide(
+                      color: Theme.of(context).iconTheme.color!,
+                    )
+                  : BorderSide.none,
+            ),
+          ),
+          child: Text(
+            title,
+            style: TextStyle(
+              fontSize: 16,
+              color: Theme.of(context).scaffoldBackgroundColor,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 10.0,
+            horizontal: 10.0,
+          ),
+          child: Text(
+            value.toString(),
+            style: const TextStyle(
+              fontSize: 16,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

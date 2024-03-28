@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shop_app/screens/home_page.dart';
+import 'package:shop_app/screens/shop_page.dart';
 import 'package:shop_app/utils/utils.dart';
 
 class NewPostScreen extends StatefulWidget {

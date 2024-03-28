@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:shop_app/screens/components/image_view_page.dart';
 import 'package:shop_app/screens/components/new_post_page.dart';
-import 'package:shop_app/screens/home_page.dart';
+import 'package:shop_app/screens/shop_page.dart';
 import 'package:shop_app/utils/utils.dart';
 import 'package:shop_app/welcome_pages/start_page.dart';
 

@@ -98,7 +98,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                   height: 10,
                 ),
                 const Text(
-                  'ShopApp',
+                  'B-Shop',
                   style: TextStyle(
                     fontSize: 15,
                     // fontFamily: 'Comfortaa_bold',

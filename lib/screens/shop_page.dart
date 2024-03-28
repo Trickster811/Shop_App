@@ -7,18 +7,18 @@ import 'package:shop_app/screens/components/image_view_page.dart';
 import 'package:shop_app/utils/utils.dart';
 // import 'package:stack_appodeal_flutter/stack_appodeal_flutter.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({
+class ShopScreen extends StatefulWidget {
+  const ShopScreen({
     Key? key,
     required this.deviceSize,
   }) : super(key: key);
   final Size deviceSize;
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<ShopScreen> createState() => _ShopScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _ShopScreenState extends State<ShopScreen> {
   String currentDisplayedCategory = 'All';
   Future<void> _handleScreenRefreshing() async {
     return await Future.delayed(
@@ -110,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
             showChildOpacityTransition: false,
             child: ListView.builder(
               itemCount: test.length,
-              itemBuilder: (context, index) => AdsItemBuilder(
+              itemBuilder: (context, index) => adsItemBuilder(
                 adsObjets: test[index],
                 deviceSize: widget.deviceSize,
               ),
@@ -151,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.all(8.0),
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: primaryColor,
+              color: Colors.black,
               borderRadius: BorderRadius.circular(1000),
             ),
             child: Text(
@@ -199,20 +199,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
     );
   }
-}
 
-class AdsItemBuilder extends StatelessWidget {
-  const AdsItemBuilder({
-    Key? key,
-    required this.adsObjets,
-    required this.deviceSize,
-  }) : super(key: key);
-  final AdsObjets adsObjets;
-  final Size deviceSize;
-  @override
-  Widget build(
-    BuildContext context,
-  ) {
+  Widget adsItemBuilder(
+      {required AdsObjets adsObjets, required Size deviceSize}) {
     return Container(
       height: 300,
       width: deviceSize.width,
@@ -423,7 +412,7 @@ class AdsItemBuilder extends StatelessWidget {
                           SvgPicture.asset(
                             'assets/icons/3-user.1.svg',
                             colorFilter: const ColorFilter.mode(
-                              primaryColor,
+                              secondColor,
                               BlendMode.srcIn,
                             ),
                           ),
@@ -445,7 +434,7 @@ class AdsItemBuilder extends StatelessWidget {
                       child: Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: primaryColor,
+                          color: secondColor,
                           borderRadius: BorderRadius.circular(
                             10,
                           ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_app/screens/about_page.dart';
-import 'package:shop_app/screens/home_page.dart';
+import 'package:shop_app/screens/restaurant_page.dart';
+import 'package:shop_app/screens/shop_page.dart';
 import 'package:shop_app/screens/my_post_page.dart';
 import 'package:shop_app/screens/profile_page.dart';
 import 'package:shop_app/screens/research_page.dart';
@@ -39,30 +40,12 @@ class _MyHomePageState extends State<MyHomePage> {
     final deviceSize = MediaQuery.of(context).size;
     final listOfScreensTitle = [
       'Acceuil',
-      // widget.userInfo.isNotEmpty && widget.userInfo[0] == 'Client'
-      //     ? 'Gérer'
+      'Restaurant',
       'Publications',
       'Recherche',
       'Profil',
-      // widget.userInfo.isNotEmpty && widget.userInfo[0] == 'Client'
-      //     ? 'Historique'
-      //     : 'Service',
     ];
     List<List> menuItemList = [
-      // if (widget.userInfo.isNotEmpty &&
-      //     widget.userInfo[0] == 'Entreprise' &&
-      //     currentState == 3) ...[
-      //   [
-      //     'assets/icons/call.5.svg',
-      //     'Service Client',
-      //     const AboutScreen(),
-      //   ],
-      //   [
-      //     'assets/icons/time-circle.4.svg',
-      //     'Historique',
-      //     EntrepriseHistoryScreen(deviceSize: deviceSize),
-      //   ]
-      // ],
       [
         widget.userInfo!.isNotEmpty
             ? 'assets/icons/logout.4.svg'
@@ -82,13 +65,12 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
 
     final listOfScreens = [
-      HomeScreen(
+      ShopScreen(
         deviceSize: deviceSize,
       ),
-      // widget.userInfo.isNotEmpty && widget.userInfo[0] == 'Client'
-      //     ? MyPendingTasksScreen(
-      //         deviceSize: deviceSize,
-      //       )
+      RestaurantScreen(
+        deviceSize: deviceSize,
+      ),
       MyPostScreen(
         deviceSize: deviceSize,
         userLoginInfo: widget.userInfo!,
@@ -96,13 +78,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ResearchScreen(
         deviceSize: deviceSize,
       ),
-      // widget.userInfo.isNotEmpty && widget.userInfo[0] == 'Client'
-      //     ? SecretariatHistoryScreen(
-      //         deviceSize: deviceSize,
-      //       )
-      // ServiceScreen(
-      //   deviceSize: deviceSize,
-      // ),
       ProfileScreen(
         appBarHeightSize: appBarHeightSize,
         deviceSize: deviceSize,
@@ -212,6 +187,43 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               icon: currentState != 1
                   ? SvgPicture.asset(
+                      'assets/icons/restaurant-1.svg',
+                      colorFilter: const ColorFilter.mode(
+                        Colors.white,
+                        BlendMode.srcIn,
+                      ),
+                      height: 20,
+                    )
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          height: 5,
+                          width: 15,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(1000),
+                          ),
+                        ),
+                        SvgPicture.asset(
+                          'assets/icons/restaurant.svg',
+                          colorFilter: const ColorFilter.mode(
+                            Colors.white,
+                            BlendMode.srcIn,
+                          ),
+                          height: 20,
+                        ),
+                      ],
+                    ),
+            ),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  currentState = 2;
+                });
+              },
+              icon: currentState != 2
+                  ? SvgPicture.asset(
                       // widget.userInfo.isNotEmpty && widget.userInfo[0] == 'Client'
                       //     ? 'assets/icons/activity.6.svg'
                       'assets/icons/plus.svg',
@@ -247,10 +259,10 @@ class _MyHomePageState extends State<MyHomePage> {
             IconButton(
               onPressed: () {
                 setState(() {
-                  currentState = 2;
+                  currentState = 3;
                 });
               },
-              icon: currentState != 2
+              icon: currentState != 3
                   ? SvgPicture.asset(
                       'assets/icons/search.1.svg',
                       colorFilter: const ColorFilter.mode(
@@ -282,10 +294,10 @@ class _MyHomePageState extends State<MyHomePage> {
             IconButton(
               onPressed: () {
                 setState(() {
-                  currentState = 3;
+                  currentState = 4;
                 });
               },
-              icon: currentState != 3
+              icon: currentState != 4
                   ? SvgPicture.asset(
                       // widget.userInfo.isNotEmpty && widget.userInfo[0] == 'Client'
                       //     ? 'assets/icons/time-circle.4.svg'

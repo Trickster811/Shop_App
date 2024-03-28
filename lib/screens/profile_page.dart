@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
 import 'package:shop_app/screens/components/image_view_page.dart';
-import 'package:shop_app/screens/home_page.dart';
+import 'package:shop_app/screens/shop_page.dart';
 import 'package:shop_app/utils/utils.dart';
 
 class ProfileScreen extends StatefulWidget {

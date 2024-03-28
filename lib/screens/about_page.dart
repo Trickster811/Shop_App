@@ -79,7 +79,7 @@ class AboutScreen extends StatelessWidget {
                     height: 10,
                   ),
                   const Text(
-                    'ShopApp',
+                    'B-Shop',
                     style: TextStyle(
                       fontSize: 15,
                     ),
