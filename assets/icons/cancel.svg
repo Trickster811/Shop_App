@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="480" height="480" viewBox="0 0 480 480" xml:space="preserve">
+<desc>Created with Fabric.js 3.6.6</desc>
+<defs>
+</defs>
+<g transform="matrix(5.24 0 0 5.24 240.16 240.16)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"  transform=" translate(-50, -50)" d="M 90 6 Q 88.344921875 6.0017578125 87.15 7.15 L 50 44.35 L 12.8 7.15 Q 11.655078125 6.0017578125 10 6 Q 8.344921875 6.0017578125 7.15 7.15 Q 6.0017578125 8.344921875 6 10 Q 6.0017578125 11.655078125 7.15 12.8 L 44.35 50 L 7.15 87.15 Q 6.0017578125 88.344921875 6 90 Q 6.0017578125 91.655078125 7.15 92.8 Q 8.344921875 93.9982421875 10 94 Q 11.655078125 93.9982421875 12.8 92.8 L 50 55.65 L 87.15 92.8 Q 88.344921875 93.9982421875 90 94 Q 91.655078125 93.9982421875 92.8 92.8 Q 93.9982421875 91.655078125 94 90 Q 93.9982421875 88.344921875 92.8 87.15 L 55.65 50 L 92.8 12.8 Q 93.9982421875 11.655078125 94 10 Q 93.9982421875 8.344921875 92.8 7.15 Q 91.655078125 6.0017578125 90 6 Z" stroke-linecap="round" />
+</g>
+</svg>

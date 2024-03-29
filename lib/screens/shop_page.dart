@@ -48,11 +48,14 @@ class _ShopScreenState extends State<ShopScreen> {
         ],
         productName: 'Baskets',
         productPrice: 0.25,
-        location: 'Bini - Dang',
-        traderName: 'Julie Queen',
-        traderPhoneNumber: 690786195,
-        traderWhatsappNumber: 690786195,
-        tradeCategory: 'Commerce',
+        tradeFamily: 'HP',
+        productDescription:
+            'Ordinateur neuf avec carton et facture. Prix non negociable.',
+        quantity: 17,
+        productSpecifications: {
+          'CPU': '2.5 GHz',
+          'RAM': '8Go',
+        },
       ),
       const AdsObjets(
         imageLink: [
@@ -62,11 +65,14 @@ class _ShopScreenState extends State<ShopScreen> {
         ],
         productName: 'Paires Cirées',
         productPrice: 0.25,
-        location: 'Bini - Dang',
-        traderName: 'Julie Queen',
-        traderPhoneNumber: 690786195,
-        traderWhatsappNumber: 690786195,
-        tradeCategory: 'Offre Service',
+        tradeFamily: 'HP',
+        productDescription:
+            'Ordinateur neuf avec carton et facture. Prix non negociable.',
+        quantity: 17,
+        productSpecifications: {
+          'CPU': '2.5 GHz',
+          'RAM': '8Go',
+        },
       ),
       const AdsObjets(
         imageLink: [
@@ -79,32 +85,35 @@ class _ShopScreenState extends State<ShopScreen> {
         ],
         productName: 'Féminin',
         productPrice: 0.25,
-        location: 'Bini - Dang',
-        traderName: 'Julie Queen',
-        traderPhoneNumber: 690786195,
-        traderWhatsappNumber: 690786195,
-        tradeCategory: 'Formation',
+        tradeFamily: 'HP',
+        productDescription:
+            'Ordinateur neuf avec carton et facture. Prix non negociable.',
+        quantity: 17,
+        productSpecifications: {
+          'CPU': '2.5 GHz',
+          'RAM': '8Go',
+        },
       ),
     ];
 
     return Column(
       children: [
-        SingleChildScrollView(
-          // controller: scrollController,
-          scrollDirection: Axis.horizontal,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Row(
-              children: [
-                for (var item in toolBarElement) toolBarElementBuilder(item),
-              ],
-            ),
-          ),
-        ),
+        // SingleChildScrollView(
+        //   // controller: scrollController,
+        //   scrollDirection: Axis.horizontal,
+        //   child: Padding(
+        //     padding: const EdgeInsets.symmetric(vertical: 8.0),
+        //     child: Row(
+        //       children: [
+        //         for (var item in toolBarElement) toolBarElementBuilder(item),
+        //       ],
+        //     ),
+        //   ),
+        // ),
         Expanded(
           child: LiquidPullToRefresh(
             onRefresh: _handleScreenRefreshing,
-            color: primaryColor,
+            // color: primaryColor,
             height: 300,
             animSpeedFactor: 2.0,
             showChildOpacityTransition: false,
@@ -328,19 +337,19 @@ class _ShopScreenState extends State<ShopScreen> {
                           ),
                         ],
                       ),
-                      Row(
+                      const Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            adsObjets.location,
-                            style: const TextStyle(
+                            'Ngaoundere',
+                            style: TextStyle(
                               fontSize: 18,
                             ),
                           ),
-                          const SizedBox(
+                          SizedBox(
                             width: 05,
                           ),
-                          const Text(
+                          Text(
                             "(Position)",
                             style: TextStyle(
                               fontSize: 10,
@@ -412,7 +421,7 @@ class _ShopScreenState extends State<ShopScreen> {
                           SvgPicture.asset(
                             'assets/icons/3-user.1.svg',
                             colorFilter: const ColorFilter.mode(
-                              secondColor,
+                              primaryColor,
                               BlendMode.srcIn,
                             ),
                           ),
@@ -434,7 +443,7 @@ class _ShopScreenState extends State<ShopScreen> {
                       child: Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: secondColor,
+                          color: thirdColor,
                           borderRadius: BorderRadius.circular(
                             10,
                           ),
@@ -460,23 +469,22 @@ class _ShopScreenState extends State<ShopScreen> {
 }
 
 class AdsObjets {
+  final String productDescription;
   final List<String> imageLink;
   final String productName;
   final double productPrice;
-  final String location;
-  final String traderName;
-  final int traderPhoneNumber;
-  final int traderWhatsappNumber;
-  final String tradeCategory;
+  final int quantity;
+  final Map<String, dynamic> productSpecifications;
+  final String tradeFamily;
+
   const AdsObjets({
     Key? key,
+    required this.productDescription,
     required this.imageLink,
     required this.productName,
     required this.productPrice,
-    required this.location,
-    required this.traderName,
-    required this.traderPhoneNumber,
-    required this.traderWhatsappNumber,
-    required this.tradeCategory,
+    required this.quantity,
+    required this.productSpecifications,
+    required this.tradeFamily,
   });
 }

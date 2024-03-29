@@ -37,11 +37,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ],
         productName: 'Baskets',
         productPrice: 0.25,
-        location: 'Bini - Dang',
-        traderName: 'Julie Queen',
-        traderPhoneNumber: 690786195,
-        traderWhatsappNumber: 690786195,
-        tradeCategory: 'Commerce',
+        tradeFamily: 'HP',
+        productDescription:
+            'Ordinateur neuf avec carton et facture. Prix non negociable.',
+        quantity: 17,
+        productSpecifications: {
+          'CPU': '2.5 GHz',
+          'RAM': '8Go',
+        },
       ),
       const AdsObjets(
         imageLink: [
@@ -51,11 +54,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ],
         productName: 'Paires Cirées',
         productPrice: 0.25,
-        location: 'Bini - Dang',
-        traderName: 'Julie Queen',
-        traderPhoneNumber: 690786195,
-        traderWhatsappNumber: 690786195,
-        tradeCategory: 'Offre Service',
+        tradeFamily: 'HP',
+        productDescription:
+            'Ordinateur neuf avec carton et facture. Prix non negociable.',
+        quantity: 17,
+        productSpecifications: {
+          'CPU': '2.5 GHz',
+          'RAM': '8Go',
+        },
       ),
       const AdsObjets(
         imageLink: [
@@ -68,11 +74,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ],
         productName: 'Baskets',
         productPrice: 0.25,
-        location: 'Bini - Dang',
-        traderName: 'Julie Queen',
-        traderPhoneNumber: 690786195,
-        traderWhatsappNumber: 690786195,
-        tradeCategory: 'Commerce',
+        tradeFamily: 'HP',
+        productDescription:
+            'Ordinateur neuf avec carton et facture. Prix non negociable.',
+        quantity: 17,
+        productSpecifications: {
+          'CPU': '2.5 GHz',
+          'RAM': '8Go',
+        },
       ),
       const AdsObjets(
         imageLink: [
@@ -85,11 +94,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ],
         productName: 'Féminin',
         productPrice: 0.25,
-        location: 'Bini - Dang',
-        traderName: 'Julie Queen',
-        traderPhoneNumber: 690786195,
-        traderWhatsappNumber: 690786195,
-        tradeCategory: 'Formation',
+        tradeFamily: 'HP',
+        productDescription:
+            'Ordinateur neuf avec carton et facture. Prix non negociable.',
+        quantity: 17,
+        productSpecifications: {
+          'CPU': '2.5 GHz',
+          'RAM': '8Go',
+        },
       ),
       const AdsObjets(
         imageLink: [
@@ -99,11 +111,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ],
         productName: 'Paires Cirées',
         productPrice: 0.25,
-        location: 'Bini - Dang',
-        traderName: 'Julie Queen',
-        traderPhoneNumber: 690786195,
-        traderWhatsappNumber: 690786195,
-        tradeCategory: 'Offre Service',
+        tradeFamily: 'HP',
+        productDescription:
+            'Ordinateur neuf avec carton et facture. Prix non negociable.',
+        quantity: 17,
+        productSpecifications: {
+          'CPU': '2.5 GHz',
+          'RAM': '8Go',
+        },
       ),
       const AdsObjets(
         imageLink: [
@@ -116,11 +131,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ],
         productName: 'Féminin',
         productPrice: 0.25,
-        location: 'Bini - Dang',
-        traderName: 'Julie Queen',
-        traderPhoneNumber: 690786195,
-        traderWhatsappNumber: 690786195,
-        tradeCategory: 'Formation',
+        tradeFamily: 'HP',
+        productDescription:
+            'Ordinateur neuf avec carton et facture. Prix non negociable.',
+        quantity: 17,
+        productSpecifications: {
+          'CPU': '2.5 GHz',
+          'RAM': '8Go',
+        },
       ),
       const AdsObjets(
         imageLink: [
@@ -133,11 +151,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ],
         productName: 'Baskets',
         productPrice: 0.25,
-        location: 'Bini - Dang',
-        traderName: 'Julie Queen',
-        traderPhoneNumber: 690786195,
-        traderWhatsappNumber: 690786195,
-        tradeCategory: 'Commerce',
+        tradeFamily: 'HP',
+        productDescription:
+            'Ordinateur neuf avec carton et facture. Prix non negociable.',
+        quantity: 17,
+        productSpecifications: {
+          'CPU': '2.5 GHz',
+          'RAM': '8Go',
+        },
       ),
       const AdsObjets(
         imageLink: [
@@ -150,11 +171,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ],
         productName: 'Féminin',
         productPrice: 0.25,
-        location: 'Bini - Dang',
-        traderName: 'Julie Queen',
-        traderPhoneNumber: 690786195,
-        traderWhatsappNumber: 690786195,
-        tradeCategory: 'Formation',
+        tradeFamily: 'HP',
+        productDescription:
+            'Ordinateur neuf avec carton et facture. Prix non negociable.',
+        quantity: 17,
+        productSpecifications: {
+          'CPU': '2.5 GHz',
+          'RAM': '8Go',
+        },
       ),
       const AdsObjets(
         imageLink: [
@@ -164,11 +188,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ],
         productName: 'Paires Cirées',
         productPrice: 0.25,
-        location: 'Bini - Dang',
-        traderName: 'Julie Queen',
-        traderPhoneNumber: 690786195,
-        traderWhatsappNumber: 690786195,
-        tradeCategory: 'Offre Service',
+        tradeFamily: 'HP',
+        productDescription:
+            'Ordinateur neuf avec carton et facture. Prix non negociable.',
+        quantity: 17,
+        productSpecifications: {
+          'CPU': '2.5 GHz',
+          'RAM': '8Go',
+        },
       ),
     ];
     return Padding(

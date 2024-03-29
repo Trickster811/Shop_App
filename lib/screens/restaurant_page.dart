@@ -60,7 +60,11 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            for (var item in foodSnapshots) foodCardBuilder(context, item)
+            for (var item in foodSnapshots)
+              foodCardBuilder(
+                context,
+                item,
+              ),
           ],
         ),
       ),
@@ -156,7 +160,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                           width: 100,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: secondColor.withOpacity(.2),
+                            color: secondColor,
                             borderRadius: BorderRadius.circular(5),
                           ),
                           child: Row(
@@ -166,6 +170,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                 item.foodPrice.toString(),
                                 style: const TextStyle(
                                   fontSize: 18,
+                                  color: Colors.white,
                                 ),
                               ),
                               const SizedBox(
@@ -175,6 +180,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                 'FCFA',
                                 style: TextStyle(
                                   fontSize: 12,
+                                  color: Colors.white,
                                 ),
                               ),
                             ],
@@ -191,7 +197,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                   padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,
                   ),
-                  width: (widget.deviceSize.width - 20) * .35,
+                  width: (widget.deviceSize.width - 20) * .40,
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(.03),
                     borderRadius: const BorderRadius.only(
@@ -216,7 +222,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                         ),
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          color: primaryColor,
+                          color: thirdColor,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Row(
@@ -229,11 +235,12 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                 BlendMode.srcIn,
                               ),
                             ),
-                            const SizedBox(
-                              width: 10,
-                            ),
+                            // const SizedBox(
+                            //   width: 5,
+                            // ),
                             const Text(
-                              'Order',
+                              'Commander',
+                              overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 color: Colors.white,
                               ),

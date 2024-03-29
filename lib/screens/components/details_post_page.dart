@@ -215,7 +215,7 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
                 children: [
                   const Text("Entreprise : "),
                   Text(
-                    widget.adsObjets.traderName.toUpperCase(),
+                    'ButterFly'.toUpperCase(),
                   ),
                 ],
               ),
@@ -223,15 +223,15 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
             const SizedBox(
               height: 10.0,
             ),
-            Padding(
-              padding: const EdgeInsets.only(
+            const Padding(
+              padding: EdgeInsets.only(
                 left: 10.0,
               ),
               child: Row(
                 children: [
-                  const Text("Siège : "),
+                  Text("Siège : "),
                   Text(
-                    widget.adsObjets.location,
+                    'Ngaoundere',
                   ),
                 ],
               ),
@@ -255,7 +255,7 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
               onTap: () async {
                 final whatsappContact = Uri.https(
                   'wa.me',
-                  widget.adsObjets.traderPhoneNumber.toString(),
+                  '690786195',
                   {'text': 'Bonjour'},
                 );
                 if (await canLaunchUrl(whatsappContact)) {
@@ -302,7 +302,7 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
             child: InkWell(
               onTap: () async {
                 final phoneContact = Uri.parse(
-                  'tel:${widget.adsObjets.traderPhoneNumber}',
+                  'tel:${690786195}',
                 );
                 if (await canLaunchUrl(phoneContact)) {
                   await launchUrl(

@@ -8,8 +8,9 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const secondColor = Color.fromARGB(255, 255, 153, 0);
-const primaryColor = Colors.blue;
+const primaryColor = Color.fromARGB(255, 0, 94, 172);
+const secondColor = Colors.orange;
+const thirdColor = Colors.green;
 
 class UtilFunctions {
   static late SharedPreferences _preferences;

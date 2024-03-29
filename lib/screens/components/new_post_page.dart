@@ -13,11 +13,11 @@ class NewPostScreen extends StatefulWidget {
   const NewPostScreen({
     Key? key,
     required this.deviceSize,
-    required this.adsObjets,
+    this.adsObjets,
     this.firstTimeIndex,
   }) : super(key: key);
   final Size deviceSize;
-  final AdsObjets adsObjets;
+  final AdsObjets? adsObjets;
   final bool? firstTimeIndex;
 
   @override
@@ -27,15 +27,21 @@ class NewPostScreen extends StatefulWidget {
 class _NewPostScreenState extends State<NewPostScreen> {
   List<File?> imageFile = [];
 
+// Variables to get user entries
+  final nameController = TextEditingController();
+  final priceController = TextEditingController();
+  final quantityController = TextEditingController();
+  final descriptionController = TextEditingController();
+  String? family;
   // Form key
   final _formKey = GlobalKey<FormState>();
 
-  List<DropdownMenuItem<String>> get categoryItems {
+  List<DropdownMenuItem<String>> get familyComputers {
     List<DropdownMenuItem<String>> items = [
       const DropdownMenuItem(
-        value: "Commerce",
+        value: "DELL",
         child: Text(
-          "Commerce",
+          "DELL",
           style: TextStyle(
             color: primaryColor,
             fontSize: 16,
@@ -44,9 +50,9 @@ class _NewPostScreenState extends State<NewPostScreen> {
         ),
       ),
       const DropdownMenuItem(
-        value: "Offre Service",
+        value: "HP",
         child: Text(
-          "Offre Service",
+          "HP",
           style: TextStyle(
             color: primaryColor,
             fontSize: 16,
@@ -55,9 +61,9 @@ class _NewPostScreenState extends State<NewPostScreen> {
         ),
       ),
       const DropdownMenuItem(
-        value: "Formation",
+        value: "TOSHIBA",
         child: Text(
-          "Formation",
+          "TOSHIBA",
           style: TextStyle(
             color: primaryColor,
             fontSize: 16,
@@ -72,31 +78,23 @@ class _NewPostScreenState extends State<NewPostScreen> {
   @override
   void initState() {
     super.initState();
-    if (widget.adsObjets.imageLink.isNotEmpty) {
-      for (var item in widget.adsObjets.imageLink) {
-        imageFile.add(File(item));
+    if (widget.adsObjets != null) {
+      if (widget.adsObjets!.imageLink.isNotEmpty) {
+        for (var item in widget.adsObjets!.imageLink) {
+          imageFile.add(File(item));
+        }
       }
+      priceController.text = widget.adsObjets!.productPrice.toString();
+      family = widget.adsObjets!.tradeFamily;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    String category = widget.adsObjets.tradeCategory;
-    // Variables to get user entries
-    final price =
-        TextEditingController(text: widget.adsObjets.productPrice.toString());
-    final location = TextEditingController(text: widget.adsObjets.location);
-    final name = TextEditingController(text: widget.adsObjets.traderName);
-
-    final phone = TextEditingController(
-        text: widget.adsObjets.traderPhoneNumber.toString());
-    final whatsapp = TextEditingController(
-        text: widget.adsObjets.traderWhatsappNumber.toString());
-
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        // backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
           onPressed: () {
@@ -114,17 +112,17 @@ class _NewPostScreenState extends State<NewPostScreen> {
             color: Colors.black,
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () async {
-              // await getImageFromDevice();
-              // print(imageFile!.path);
-            },
-            icon: SvgPicture.asset(
-              'assets/icons/category.2.svg',
-            ),
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () async {
+        //       // await getImageFromDevice();
+        //       // print(imageFile!.path);
+        //     },
+        //     icon: SvgPicture.asset(
+        //       'assets/icons/family.2.svg',
+        //     ),
+        //   ),
+        // ],
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -137,53 +135,70 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Catégorie'),
+                    const Text('Family'),
                     SvgPicture.asset(
                       'assets/icons/category.4.svg',
                     ),
                   ],
                 ),
-                Container(
-                  height: 50,
-                  width: widget.deviceSize.width,
-                  margin: const EdgeInsets.all(5.0),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10.0,
-                    vertical: 8.0,
+                DropdownButtonFormField(
+                  style: const TextStyle(
+                    fontSize: 10,
+                    height: 0.5,
                   ),
-                  decoration: BoxDecoration(
-                    color: primaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: DropdownButtonFormField(
-                    style: const TextStyle(
-                      fontSize: 10,
-                      height: 0.5,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: primaryColor.withOpacity(0.1),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 10.0,
+                      vertical: 8.0,
                     ),
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.only(bottom: 10.0),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                        color: Colors.transparent,
                       ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
-                      hintText: 'choose',
                     ),
-                    value: category,
-                    validator: (value) =>
-                        value == null ? 'Veuillez choisir un type' : null,
-                    items: categoryItems,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        category = newValue!;
-                      });
-                    },
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                        color: Colors.red,
+                      ),
+                    ),
+                    hintText: 'choose',
                   ),
+                  value: family,
+                  validator: (value) =>
+                      value == null ? 'Veuillez choisir un type' : null,
+                  items: familyComputers,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      family = newValue!;
+                    });
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Nom'),
+                    SvgPicture.asset(
+                      'assets/icons/edit.2.svg',
+                    ),
+                  ],
+                ),
+                postFieldBuilder(
+                  controller: nameController,
+                  fieldTitle: 'nom',
+                  numericField: false,
                 ),
                 const SizedBox(
                   height: 10,
@@ -197,41 +212,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
                     ),
                   ],
                 ),
-                Container(
-                  height: 50,
-                  width: widget.deviceSize.width,
-                  margin: const EdgeInsets.all(5.0),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10.0,
-                    vertical: 8.0,
-                  ),
-                  decoration: BoxDecoration(
-                    color: primaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: TextFormField(
-                    controller: price,
-                    cursorColor: primaryColor,
-                    keyboardType: const TextInputType.numberWithOptions(
-                      decimal: true,
-                    ),
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.only(bottom: 10.0),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
-                    ),
-                    validator: RequiredValidator(
-                      errorText: 'Veuillez renseigner cet élément',
-                    ),
-                  ),
+                postFieldBuilder(
+                  controller: priceController,
+                  fieldTitle: 'xxxx',
+                  numericField: true,
                 ),
                 const SizedBox(
                   height: 10,
@@ -239,45 +223,16 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Localisation'),
+                    const Text('Quantite'),
                     SvgPicture.asset(
-                      'assets/icons/arrow-down-square.svg',
+                      'assets/icons/quantity-1.svg',
                     ),
                   ],
                 ),
-                Container(
-                  height: 50,
-                  width: widget.deviceSize.width,
-                  margin: const EdgeInsets.all(5.0),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10.0,
-                    vertical: 8.0,
-                  ),
-                  decoration: BoxDecoration(
-                    color: primaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: TextFormField(
-                    controller: location,
-                    cursorColor: primaryColor,
-                    keyboardType: TextInputType.text,
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.only(bottom: 10.0),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
-                    ),
-                    validator: RequiredValidator(
-                      errorText: 'Veuillez renseigner cet élément',
-                    ),
-                  ),
+                postFieldBuilder(
+                  controller: quantityController,
+                  fieldTitle: 'xxxx',
+                  numericField: true,
                 ),
                 const SizedBox(
                   height: 10,
@@ -414,45 +369,16 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Nom'),
+                    const Text('Description'),
                     SvgPicture.asset(
-                      'assets/icons/profile.1.svg',
+                      'assets/icons/description.svg',
                     ),
                   ],
                 ),
-                Container(
-                  height: 50,
-                  width: widget.deviceSize.width,
-                  margin: const EdgeInsets.all(5.0),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10.0,
-                    vertical: 8.0,
-                  ),
-                  decoration: BoxDecoration(
-                    color: primaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: TextFormField(
-                    controller: name,
-                    cursorColor: primaryColor,
-                    keyboardType: TextInputType.name,
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.only(bottom: 10.0),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
-                    ),
-                    validator: RequiredValidator(
-                      errorText: 'Veuillez renseigner cet élément',
-                    ),
-                  ),
+                postFieldBuilder(
+                  controller: descriptionController,
+                  fieldTitle: 'details',
+                  numericField: false,
                 ),
                 const SizedBox(
                   height: 10,
@@ -460,92 +386,29 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Téléphone'),
+                    const Text('Specifications'),
                     SvgPicture.asset(
-                      'assets/icons/calling.4.svg',
+                      'assets/icons/specifications-1.svg',
                     ),
                   ],
-                ),
-                Container(
-                  height: 50,
-                  width: widget.deviceSize.width,
-                  margin: const EdgeInsets.all(5.0),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10.0,
-                    vertical: 8.0,
-                  ),
-                  decoration: BoxDecoration(
-                    color: primaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: TextFormField(
-                    controller: phone,
-                    cursorColor: primaryColor,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.only(bottom: 10.0),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
-                    ),
-                    validator: RequiredValidator(
-                      errorText: 'Veuillez renseigner cet élément',
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Whatsapp'),
-                    SvgPicture.asset(
-                      'assets/icons/whatsapp.svg',
-                      height: 20,
+                    Container(
+                      padding: EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: SvgPicture.asset(
+                        'assets/icons/cancel.svg',
+                        colorFilter: const ColorFilter.mode(
+                          Colors.white,
+                          BlendMode.srcIn,
+                        ),
+                      ),
                     ),
                   ],
-                ),
-                Container(
-                  height: 50,
-                  width: widget.deviceSize.width,
-                  margin: const EdgeInsets.all(5.0),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10.0,
-                    vertical: 8.0,
-                  ),
-                  decoration: BoxDecoration(
-                    color: primaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: TextFormField(
-                    controller: whatsapp,
-                    cursorColor: primaryColor,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.only(bottom: 10.0),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
-                    ),
-                    validator: RequiredValidator(
-                      errorText: 'Veuillez renseigner cet élément',
-                    ),
-                  ),
                 ),
                 const SizedBox(
                   height: 70,
@@ -607,12 +470,12 @@ class _NewPostScreenState extends State<NewPostScreen> {
         },
         child: Container(
           height: 40,
-          margin: const EdgeInsets.all(20),
+          margin: const EdgeInsets.all(10),
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: primaryColor,
             borderRadius: const BorderRadius.all(
-              Radius.circular(1000),
+              Radius.circular(10),
             ),
             boxShadow: [
               BoxShadow(
@@ -645,6 +508,53 @@ class _NewPostScreenState extends State<NewPostScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  TextFormField postFieldBuilder({
+    required TextEditingController controller,
+    required String fieldTitle,
+    required bool numericField,
+  }) {
+    return TextFormField(
+      controller: controller,
+      cursorColor: primaryColor,
+      keyboardType: numericField
+          ? const TextInputType.numberWithOptions(
+              decimal: true,
+            )
+          : TextInputType.text,
+      maxLines: fieldTitle == 'details' ? 5 : 1,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: primaryColor.withOpacity(0.1),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 10.0,
+          vertical: 8.0,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(
+            color: Colors.transparent,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(
+            color: Colors.transparent,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(
+            color: Colors.red,
+          ),
+        ),
+        hintText: fieldTitle,
+      ),
+      validator: RequiredValidator(
+        errorText: 'Veuillez renseigner cet élément',
       ),
     );
   }

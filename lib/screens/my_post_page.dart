@@ -78,11 +78,14 @@ class _MyPostScreenState extends State<MyPostScreen>
                       ],
                       productName: 'Chocolat',
                       productPrice: 0.25,
-                      location: 'Bini - Dang',
-                      traderName: 'Julie Queen',
-                      traderPhoneNumber: 690786195,
-                      traderWhatsappNumber: 690786195,
-                      tradeCategory: 'Formation',
+                      tradeFamily: 'HP',
+                      productDescription:
+                          'Ordinateur neuf avec carton et facture. Prix non negociable.',
+                      quantity: 17,
+                      productSpecifications: {
+                        'CPU': '2.5 GHz',
+                        'RAM': '8Go',
+                      },
                     ),
                   ),
                 ],
@@ -99,16 +102,6 @@ class _MyPostScreenState extends State<MyPostScreen>
                   MaterialPageRoute(
                     builder: (context) => NewPostScreen(
                       deviceSize: widget.deviceSize,
-                      adsObjets: const AdsObjets(
-                        imageLink: [],
-                        productName: '',
-                        productPrice: 0.00,
-                        location: '',
-                        traderName: '',
-                        traderPhoneNumber: 0,
-                        traderWhatsappNumber: 0000,
-                        tradeCategory: 'Commerce',
-                      ),
                     ),
                   ),
                 );
@@ -137,7 +130,7 @@ class _MyPostScreenState extends State<MyPostScreen>
         children: [
           const Text(
             "Abonnez-vous à",
-            textScaleFactor: 1.2,
+            textScaler: TextScaler.linear(1.2),
             textAlign: TextAlign.center,
           ),
           const SizedBox(
@@ -145,7 +138,7 @@ class _MyPostScreenState extends State<MyPostScreen>
           ),
           const Text(
             "Shop App",
-            textScaleFactor: 1.2,
+            textScaler: TextScaler.linear(1.2),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 20,
@@ -156,7 +149,7 @@ class _MyPostScreenState extends State<MyPostScreen>
           ),
           const Text(
             "Et poster vos annonces et publicités\nà seulement",
-            textScaleFactor: 1.2,
+            textScaler: TextScaler.linear(1.2),
             textAlign: TextAlign.center,
           ),
           const SizedBox(
@@ -177,9 +170,9 @@ class _MyPostScreenState extends State<MyPostScreen>
                     10.0,
                   ),
                 ),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
+                  children: [
                     Text(
                       'XAF',
                       style: TextStyle(
@@ -482,7 +475,7 @@ class _MyPostScreenState extends State<MyPostScreen>
                                         color: Colors.transparent,
                                       ),
                                     ),
-                                    errorBorder: OutlineInputBorder(
+                                    errorBorder: const OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.transparent,
                                       ),
@@ -525,10 +518,10 @@ class _MyPostScreenState extends State<MyPostScreen>
                                       10.0,
                                     ),
                                   ),
-                                  child: Row(
+                                  child: const Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
-                                    children: const [
+                                    children: [
                                       Text(
                                         'XAF',
                                         style: TextStyle(
@@ -808,7 +801,10 @@ class _MyPostScreenState extends State<MyPostScreen>
                 children: [
                   SvgPicture.asset(
                     'assets/icons/wallet.5.svg',
-                    color: Colors.white,
+                    colorFilter: const ColorFilter.mode(
+                      Colors.white,
+                      BlendMode.srcIn,
+                    ),
                   ),
                   const SizedBox(
                     width: 15.0,
@@ -934,19 +930,19 @@ class _MyPostScreenState extends State<MyPostScreen>
                           ),
                         ],
                       ),
-                      Row(
+                      const Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            adsObjets.location,
-                            style: const TextStyle(
+                            'Ngaoundere',
+                            style: TextStyle(
                               fontSize: 18,
                             ),
                           ),
-                          const SizedBox(
+                          SizedBox(
                             width: 05,
                           ),
-                          const Text(
+                          Text(
                             "(Position)",
                             style: TextStyle(
                               fontSize: 10,
@@ -1009,7 +1005,10 @@ class _MyPostScreenState extends State<MyPostScreen>
                         onPressed: () {},
                         icon: SvgPicture.asset(
                           'assets/icons/delete.3.svg',
-                          color: Colors.white,
+                          colorFilter: const ColorFilter.mode(
+                            Colors.white,
+                            BlendMode.srcIn,
+                          ),
                         ),
                       ),
                     ),
