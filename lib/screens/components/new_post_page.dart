@@ -33,6 +33,8 @@ class _NewPostScreenState extends State<NewPostScreen> {
   final quantityController = TextEditingController();
   final descriptionController = TextEditingController();
   String? family;
+  String? specs;
+  int numberSpecs = 1;
   // Form key
   final _formKey = GlobalKey<FormState>();
 
@@ -45,6 +47,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
           style: TextStyle(
             color: primaryColor,
             fontSize: 16,
+            overflow: TextOverflow.ellipsis,
             fontFamily: 'Comfortaa_bold',
           ),
         ),
@@ -56,6 +59,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
           style: TextStyle(
             color: primaryColor,
             fontSize: 16,
+            overflow: TextOverflow.ellipsis,
             fontFamily: 'Comfortaa_bold',
           ),
         ),
@@ -67,6 +71,61 @@ class _NewPostScreenState extends State<NewPostScreen> {
           style: TextStyle(
             color: primaryColor,
             fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+    ];
+    return items;
+  }
+
+  List<DropdownMenuItem<String>> get specificationsComputers {
+    List<DropdownMenuItem<String>> items = [
+      const DropdownMenuItem(
+        value: "BATTERIE",
+        child: Text(
+          "BATTERIE",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+      const DropdownMenuItem(
+        value: "CPU",
+        child: Text(
+          "CPU",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+      const DropdownMenuItem(
+        value: "RAM",
+        child: Text(
+          "RAM",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+      const DropdownMenuItem(
+        value: "RAM",
+        child: Text(
+          "RAM",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
             fontFamily: 'Comfortaa_bold',
           ),
         ),
@@ -214,7 +273,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 ),
                 postFieldBuilder(
                   controller: priceController,
-                  fieldTitle: 'xxxx',
+                  fieldTitle: '0.0',
                   numericField: true,
                 ),
                 const SizedBox(
@@ -231,7 +290,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 ),
                 postFieldBuilder(
                   controller: quantityController,
-                  fieldTitle: 'xxxx',
+                  fieldTitle: '00',
                   numericField: true,
                 ),
                 const SizedBox(
@@ -392,19 +451,114 @@ class _NewPostScreenState extends State<NewPostScreen> {
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Wrap(
+                  children: [
+                    for (var i = 0; i < numberSpecs; i++)
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: widget.deviceSize.width * .3,
+                            child: DropdownButtonFormField(
+                              isExpanded: true,
+                              menuMaxHeight: widget.deviceSize.height * .8,
+                              style: const TextStyle(
+                                fontSize: 10,
+                                overflow: TextOverflow.ellipsis,
+                                height: 0.5,
+                              ),
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: primaryColor.withOpacity(0.1),
+                                contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 10.0,
+                                  vertical: 8.0,
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: const BorderSide(
+                                    color: Colors.transparent,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: const BorderSide(
+                                    color: Colors.transparent,
+                                  ),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: const BorderSide(
+                                    color: Colors.red,
+                                  ),
+                                ),
+                                hintText: 'choose',
+                                hintStyle: TextStyle(
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              value: specs,
+                              validator: (value) => value == null
+                                  ? 'Veuillez choisir un type'
+                                  : null,
+                              items: specificationsComputers,
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  specs = newValue!;
+                                });
+                              },
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5.0,
+                          ),
+                          Expanded(
+                            child: postFieldBuilder(
+                              controller: quantityController,
+                              fieldTitle: '00',
+                              numericField: true,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5.0,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(12.0),
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: InkWell(
+                              onTap: () {},
+                              child: const Icon(
+                                Icons.close_rounded,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(12.0),
                       decoration: BoxDecoration(
-                        color: Colors.red,
+                        color: Colors.green,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: SvgPicture.asset(
-                        'assets/icons/cancel.svg',
-                        colorFilter: const ColorFilter.mode(
-                          Colors.white,
-                          BlendMode.srcIn,
+                      child: InkWell(
+                        onTap: _addSpecification,
+                        child: const Icon(
+                          Icons.add,
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -594,5 +748,11 @@ class _NewPostScreenState extends State<NewPostScreen> {
     } on PlatformException catch (e) {
       debugPrint('Failed to pick image: $e');
     }
+  }
+
+  _addSpecification() {
+    setState(() {
+      numberSpecs++;
+    });
   }
 }
