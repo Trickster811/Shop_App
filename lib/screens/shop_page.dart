@@ -30,12 +30,12 @@ class _ShopScreenState extends State<ShopScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> toolBarElement = [
-      'All',
-      'Commerce',
-      'Offre Service',
-      'Formation',
-    ];
+    // final List<String> toolBarElement = [
+    //   'All',
+    //   'Commerce',
+    //   'Offre Service',
+    //   'Formation',
+    // ];
     final List test = [
       const AdsObjets(
         imageLink: [

@@ -987,7 +987,10 @@ class _MyPostScreenState extends State<MyPostScreen>
                         },
                         icon: SvgPicture.asset(
                           'assets/icons/edit-square.6.svg',
-                          color: Colors.white,
+                          colorFilter: const ColorFilter.mode(
+                            Colors.white,
+                            BlendMode.srcIn,
+                          ),
                         ),
                       ),
                     ),

@@ -33,7 +33,9 @@ class _NewPostScreenState extends State<NewPostScreen> {
   final quantityController = TextEditingController();
   final descriptionController = TextEditingController();
   String? family;
-  String? specs;
+  // Specifications
+  List<String?> specs = [];
+  List<TextEditingController>? specValueController;
   int numberSpecs = 1;
   // Form key
   final _formKey = GlobalKey<FormState>();
@@ -145,6 +147,8 @@ class _NewPostScreenState extends State<NewPostScreen> {
       }
       priceController.text = widget.adsObjets!.productPrice.toString();
       family = widget.adsObjets!.tradeFamily;
+    } else {
+      specValueController!.add(TextEditingController());
     }
   }
 
@@ -457,88 +461,93 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 Wrap(
                   children: [
                     for (var i = 0; i < numberSpecs; i++)
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: widget.deviceSize.width * .3,
-                            child: DropdownButtonFormField(
-                              isExpanded: true,
-                              menuMaxHeight: widget.deviceSize.height * .8,
-                              style: const TextStyle(
-                                fontSize: 10,
-                                overflow: TextOverflow.ellipsis,
-                                height: 0.5,
-                              ),
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: primaryColor.withOpacity(0.1),
-                                contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 10.0,
-                                  vertical: 8.0,
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: const BorderSide(
-                                    color: Colors.transparent,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: const BorderSide(
-                                    color: Colors.transparent,
-                                  ),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: const BorderSide(
-                                    color: Colors.red,
-                                  ),
-                                ),
-                                hintText: 'choose',
-                                hintStyle: TextStyle(
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: 10.0,
+                        ),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: widget.deviceSize.width * .3,
+                              child: DropdownButtonFormField(
+                                isExpanded: true,
+                                menuMaxHeight: widget.deviceSize.height * .8,
+                                style: const TextStyle(
+                                  fontSize: 10,
                                   overflow: TextOverflow.ellipsis,
+                                  height: 0.5,
+                                ),
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: primaryColor.withOpacity(0.1),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0,
+                                    vertical: 8.0,
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                      color: Colors.transparent,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                      color: Colors.transparent,
+                                    ),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  hintText: 'choose',
+                                  hintStyle: const TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                value: specs[i],
+                                validator: (value) => value == null
+                                    ? 'Veuillez choisir un type'
+                                    : null,
+                                items: specificationsComputers,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    specs[i] = newValue!;
+                                  });
+                                },
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 5.0,
+                            ),
+                            Expanded(
+                              child: postFieldBuilder(
+                                controller: specValueController![i],
+                                fieldTitle: '00',
+                                numericField: true,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 5.0,
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(12.0),
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: InkWell(
+                                onTap: () {},
+                                child: const Icon(
+                                  Icons.close_rounded,
+                                  color: Colors.white,
                                 ),
                               ),
-                              value: specs,
-                              validator: (value) => value == null
-                                  ? 'Veuillez choisir un type'
-                                  : null,
-                              items: specificationsComputers,
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  specs = newValue!;
-                                });
-                              },
                             ),
-                          ),
-                          const SizedBox(
-                            width: 5.0,
-                          ),
-                          Expanded(
-                            child: postFieldBuilder(
-                              controller: quantityController,
-                              fieldTitle: '00',
-                              numericField: true,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 5.0,
-                          ),
-                          Container(
-                            padding: const EdgeInsets.all(12.0),
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: InkWell(
-                              onTap: () {},
-                              child: const Icon(
-                                Icons.close_rounded,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                   ],
                 ),
