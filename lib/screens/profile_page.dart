@@ -25,8 +25,8 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    final List<AdsObjets> postsList = [
-      const AdsObjets(
+    final List<AdsObjects> postsList = [
+      const AdsObjects(
         imageLink: [
           'https://rukminim1.flixcart.com/image/612/612/l51d30w0/shoe/z/w/c/10-mrj1914-10-aadi-white-black-red-original-imagft9k9hydnfjp.jpeg?q=70',
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH0YZh6ggzT4m0wdOK84OuihNDPGSHEuVUtwLhge3pmEPeA8k7GjZCsSSoAOgDXqzFcBI&usqp=CAU',
@@ -35,7 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGFEzJimi75YHQQ6ClrDVpKG2ldTukwK_PIST1lklXhTmHQQI_OwGenvurqqnj3U_00c4&usqp=CAU',
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9uELZlGwIYcmHNK8h4mpTLiwh-BTNv3I9f4hPNgKSLuH3v_KTJh3Ciu6K4qE3olXNvgM&usqp=CAU',
         ],
-        productName: 'Baskets',
+        productName: 'HP Elite Book',
         productPrice: 0.25,
         tradeFamily: 'HP',
         productDescription:
@@ -45,8 +45,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           'CPU': '2.5 GHz',
           'RAM': '8Go',
         },
+        tradeCategory: 'Ordinateurs',
       ),
-      const AdsObjets(
+      const AdsObjects(
         imageLink: [
           'https://cdn.shopify.com/s/files/1/0046/9139/4658/files/SS20_HOMEPAGE_MCCLEANPAIR_880x550_crop_center.jpg?v=1614334815',
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqRw1KJxR6to1NRwgUn3qZan9eWtSJXS37yC8JMJvgvqjKNpuzb7YD5ZZd3wXpFMouHHM&usqp=CAU',
@@ -56,34 +57,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
         productPrice: 0.25,
         tradeFamily: 'HP',
         productDescription:
-            'Ordinateur neuf avec carton et facture. Prix non negociable.',
+            'Telephone neuf avec carton et facture. Prix non negociable.',
         quantity: 17,
         productSpecifications: {
           'CPU': '2.5 GHz',
-          'RAM': '8Go',
+          'RAM': '8 Go',
+          'ROM': '128 Go',
         },
+        tradeCategory: 'Telephones',
       ),
-      const AdsObjets(
-        imageLink: [
-          'https://rukminim1.flixcart.com/image/612/612/l51d30w0/shoe/z/w/c/10-mrj1914-10-aadi-white-black-red-original-imagft9k9hydnfjp.jpeg?q=70',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH0YZh6ggzT4m0wdOK84OuihNDPGSHEuVUtwLhge3pmEPeA8k7GjZCsSSoAOgDXqzFcBI&usqp=CAU',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZtaCc3GrWTcxkOL1lvXXMEDo5rVEg5DGf2LyEmxd2cYWkPTPw6gzVVdKc_3Md5Mbfz0I&usqp=CAU',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzv-wsjN5e6td-LHSyqak5TG4pdW4CcqQuTPUUpGwvDwWRVhbeBpFkpwRgZ89z_mtfOE8&usqp=CAU',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGFEzJimi75YHQQ6ClrDVpKG2ldTukwK_PIST1lklXhTmHQQI_OwGenvurqqnj3U_00c4&usqp=CAU',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9uELZlGwIYcmHNK8h4mpTLiwh-BTNv3I9f4hPNgKSLuH3v_KTJh3Ciu6K4qE3olXNvgM&usqp=CAU',
-        ],
-        productName: 'Baskets',
-        productPrice: 0.25,
-        tradeFamily: 'HP',
-        productDescription:
-            'Ordinateur neuf avec carton et facture. Prix non negociable.',
-        quantity: 17,
-        productSpecifications: {
-          'CPU': '2.5 GHz',
-          'RAM': '8Go',
-        },
-      ),
-      const AdsObjets(
+      const AdsObjects(
         imageLink: [
           'https://www.shoe-tease.com/wp-content/uploads/2021/10/Shoes-that-go-with-everything-ShoeTease-Blog.jpg',
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZNdz-mIrSJtcSry4OKCjYGUo_zZcWqjDdMkAxHDdmbaRfjagUcB5JVNYRdByps4sABr8&usqp=CAU',
@@ -94,108 +77,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ],
         productName: 'Féminin',
         productPrice: 0.25,
-        tradeFamily: 'HP',
         productDescription:
-            'Ordinateur neuf avec carton et facture. Prix non negociable.',
+            'Chaussures pour Femmes. Pointure 31 a 41, Taille haute',
         quantity: 17,
-        productSpecifications: {
-          'CPU': '2.5 GHz',
-          'RAM': '8Go',
-        },
-      ),
-      const AdsObjets(
-        imageLink: [
-          'https://cdn.shopify.com/s/files/1/0046/9139/4658/files/SS20_HOMEPAGE_MCCLEANPAIR_880x550_crop_center.jpg?v=1614334815',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqRw1KJxR6to1NRwgUn3qZan9eWtSJXS37yC8JMJvgvqjKNpuzb7YD5ZZd3wXpFMouHHM&usqp=CAU',
-          'https://cdn.shopify.com/s/files/1/0285/9873/0883/articles/leather-full-brogue-shoes-26-05-17_1.jpg?v=1581688850',
-        ],
-        productName: 'Paires Cirées',
-        productPrice: 0.25,
-        tradeFamily: 'HP',
-        productDescription:
-            'Ordinateur neuf avec carton et facture. Prix non negociable.',
-        quantity: 17,
-        productSpecifications: {
-          'CPU': '2.5 GHz',
-          'RAM': '8Go',
-        },
-      ),
-      const AdsObjets(
-        imageLink: [
-          'https://www.shoe-tease.com/wp-content/uploads/2021/10/Shoes-that-go-with-everything-ShoeTease-Blog.jpg',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZNdz-mIrSJtcSry4OKCjYGUo_zZcWqjDdMkAxHDdmbaRfjagUcB5JVNYRdByps4sABr8&usqp=CAU',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScqH7-rT4dGQyiiotOLaY6NMyUKmow4sB0h4UScgVlw_PVeIPfbAFXHaaMy0FicQ1wKqY&usqp=CAU',
-          'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-1345098657.jpg',
-          'https://images.dsw.ca/is/image/dswca/113103072_120_ss_01?impolicy=colpg&imwidth=400&imdensity=1',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO3WoxUdbu67ymI1b8Jdv3JBWCo6kssA-9Zzr9Ua-Y87blL6vseVA2GTyQQfT4imz8xQQ&usqp=CAU',
-        ],
-        productName: 'Féminin',
-        productPrice: 0.25,
-        tradeFamily: 'HP',
-        productDescription:
-            'Ordinateur neuf avec carton et facture. Prix non negociable.',
-        quantity: 17,
-        productSpecifications: {
-          'CPU': '2.5 GHz',
-          'RAM': '8Go',
-        },
-      ),
-      const AdsObjets(
-        imageLink: [
-          'https://rukminim1.flixcart.com/image/612/612/l51d30w0/shoe/z/w/c/10-mrj1914-10-aadi-white-black-red-original-imagft9k9hydnfjp.jpeg?q=70',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH0YZh6ggzT4m0wdOK84OuihNDPGSHEuVUtwLhge3pmEPeA8k7GjZCsSSoAOgDXqzFcBI&usqp=CAU',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZtaCc3GrWTcxkOL1lvXXMEDo5rVEg5DGf2LyEmxd2cYWkPTPw6gzVVdKc_3Md5Mbfz0I&usqp=CAU',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzv-wsjN5e6td-LHSyqak5TG4pdW4CcqQuTPUUpGwvDwWRVhbeBpFkpwRgZ89z_mtfOE8&usqp=CAU',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGFEzJimi75YHQQ6ClrDVpKG2ldTukwK_PIST1lklXhTmHQQI_OwGenvurqqnj3U_00c4&usqp=CAU',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9uELZlGwIYcmHNK8h4mpTLiwh-BTNv3I9f4hPNgKSLuH3v_KTJh3Ciu6K4qE3olXNvgM&usqp=CAU',
-        ],
-        productName: 'Baskets',
-        productPrice: 0.25,
-        tradeFamily: 'HP',
-        productDescription:
-            'Ordinateur neuf avec carton et facture. Prix non negociable.',
-        quantity: 17,
-        productSpecifications: {
-          'CPU': '2.5 GHz',
-          'RAM': '8Go',
-        },
-      ),
-      const AdsObjets(
-        imageLink: [
-          'https://www.shoe-tease.com/wp-content/uploads/2021/10/Shoes-that-go-with-everything-ShoeTease-Blog.jpg',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZNdz-mIrSJtcSry4OKCjYGUo_zZcWqjDdMkAxHDdmbaRfjagUcB5JVNYRdByps4sABr8&usqp=CAU',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScqH7-rT4dGQyiiotOLaY6NMyUKmow4sB0h4UScgVlw_PVeIPfbAFXHaaMy0FicQ1wKqY&usqp=CAU',
-          'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-1345098657.jpg',
-          'https://images.dsw.ca/is/image/dswca/113103072_120_ss_01?impolicy=colpg&imwidth=400&imdensity=1',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO3WoxUdbu67ymI1b8Jdv3JBWCo6kssA-9Zzr9Ua-Y87blL6vseVA2GTyQQfT4imz8xQQ&usqp=CAU',
-        ],
-        productName: 'Féminin',
-        productPrice: 0.25,
-        tradeFamily: 'HP',
-        productDescription:
-            'Ordinateur neuf avec carton et facture. Prix non negociable.',
-        quantity: 17,
-        productSpecifications: {
-          'CPU': '2.5 GHz',
-          'RAM': '8Go',
-        },
-      ),
-      const AdsObjets(
-        imageLink: [
-          'https://cdn.shopify.com/s/files/1/0046/9139/4658/files/SS20_HOMEPAGE_MCCLEANPAIR_880x550_crop_center.jpg?v=1614334815',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqRw1KJxR6to1NRwgUn3qZan9eWtSJXS37yC8JMJvgvqjKNpuzb7YD5ZZd3wXpFMouHHM&usqp=CAU',
-          'https://cdn.shopify.com/s/files/1/0285/9873/0883/articles/leather-full-brogue-shoes-26-05-17_1.jpg?v=1581688850',
-        ],
-        productName: 'Paires Cirées',
-        productPrice: 0.25,
-        tradeFamily: 'HP',
-        productDescription:
-            'Ordinateur neuf avec carton et facture. Prix non negociable.',
-        quantity: 17,
-        productSpecifications: {
-          'CPU': '2.5 GHz',
-          'RAM': '8Go',
-        },
+        tradeCategory: 'Chaussures',
       ),
     ];
     return Padding(
@@ -381,6 +266,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         builder: (context) => ImageViewScreen(
                           imageLink: adsObjets.imageLink,
                           deviceSize: widget.deviceSize,
+                          fileImage: false,
                         ),
                       ),
                     ),

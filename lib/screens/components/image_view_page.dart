@@ -3,13 +3,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_app/utils/utils.dart';
 
 class ImageViewScreen extends StatefulWidget {
+  final List imageLink;
+  final Size deviceSize;
+  final bool fileImage;
+
   const ImageViewScreen({
     Key? key,
     required this.imageLink,
     required this.deviceSize,
+    required this.fileImage,
   }) : super(key: key);
-  final List<String> imageLink;
-  final Size deviceSize;
 
   @override
   State<ImageViewScreen> createState() => _ImageViewScreenState();
@@ -73,11 +76,16 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
               height: widget.deviceSize.width,
               width: widget.deviceSize.width,
               alignment: Alignment.center,
-              child: FadeInImage.assetNetwork(
-                placeholder: 'assets/images/2.png',
-                image: widget.imageLink[index],
-                fit: BoxFit.cover,
-              ),
+              child: widget.fileImage
+                  ? Image.file(
+                      widget.imageLink[index],
+                      fit: BoxFit.cover,
+                    )
+                  : FadeInImage.assetNetwork(
+                      placeholder: 'assets/images/2.png',
+                      image: widget.imageLink[index],
+                      fit: BoxFit.cover,
+                    ),
             ),
           ),
           const Row(
@@ -118,10 +126,15 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                         borderRadius: BorderRadius.circular(10.0),
                         child: InteractiveViewer(
                           maxScale: 5,
-                          child: Image.network(
-                            item,
-                            fit: BoxFit.cover,
-                          ),
+                          child: widget.fileImage
+                              ? Image.file(
+                                  item,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.network(
+                                  item,
+                                  fit: BoxFit.cover,
+                                ),
                         ),
                       ),
                     ),

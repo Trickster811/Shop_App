@@ -9,11 +9,11 @@ import 'package:url_launcher/url_launcher.dart';
 class DetailsPostScreen extends StatefulWidget {
   const DetailsPostScreen({
     Key? key,
-    required this.adsObjets,
+    required this.adsObjects,
     required this.deviceSize,
   }) : super(key: key);
 
-  final AdsObjets adsObjets;
+  final AdsObjects adsObjects;
   final Size deviceSize;
 
   @override
@@ -49,7 +49,7 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  for (var image in widget.adsObjets.imageLink)
+                  for (var image in widget.adsObjects.imageLink)
                     articleItemBuilder(context, image),
                 ],
               ),
@@ -60,7 +60,7 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.adsObjets.productName,
+                    widget.adsObjects.productName,
                     textAlign: TextAlign.center,
                     textScaler: const TextScaler.linear(1.5),
                     style: const TextStyle(
@@ -79,7 +79,7 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: Text(
-                      'XAF ${widget.adsObjets.productPrice}',
+                      'XAF ${widget.adsObjects.productPrice}',
                       textAlign: TextAlign.center,
                       textScaler: const TextScaler.linear(1.5),
                       style: const TextStyle(
@@ -365,8 +365,9 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
             context,
             MaterialPageRoute(
               builder: (context) => ImageViewScreen(
-                imageLink: widget.adsObjets.imageLink,
+                imageLink: widget.adsObjects.imageLink,
                 deviceSize: widget.deviceSize,
+                fileImage: false,
               ),
             ),
           );

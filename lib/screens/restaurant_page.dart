@@ -98,6 +98,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                   builder: (context) => ImageViewScreen(
                     imageLink: item.imageLink,
                     deviceSize: widget.deviceSize,
+                    fileImage: false,
                   ),
                 ),
               );

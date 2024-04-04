@@ -30,14 +30,19 @@ class _ShopScreenState extends State<ShopScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final List<String> toolBarElement = [
-    //   'All',
-    //   'Commerce',
-    //   'Offre Service',
-    //   'Formation',
-    // ];
+    final List<String> toolBarElement = [
+      'All',
+      'Ordinateurs',
+      'Telephones',
+      'Vetements',
+      'Electro-menager',
+      'Chaussures',
+      'Gadgets',
+      'Cuisine',
+      'Divers',
+    ];
     final List test = [
-      const AdsObjets(
+      const AdsObjects(
         imageLink: [
           'https://rukminim1.flixcart.com/image/612/612/l51d30w0/shoe/z/w/c/10-mrj1914-10-aadi-white-black-red-original-imagft9k9hydnfjp.jpeg?q=70',
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH0YZh6ggzT4m0wdOK84OuihNDPGSHEuVUtwLhge3pmEPeA8k7GjZCsSSoAOgDXqzFcBI&usqp=CAU',
@@ -46,7 +51,7 @@ class _ShopScreenState extends State<ShopScreen> {
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGFEzJimi75YHQQ6ClrDVpKG2ldTukwK_PIST1lklXhTmHQQI_OwGenvurqqnj3U_00c4&usqp=CAU',
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9uELZlGwIYcmHNK8h4mpTLiwh-BTNv3I9f4hPNgKSLuH3v_KTJh3Ciu6K4qE3olXNvgM&usqp=CAU',
         ],
-        productName: 'Baskets',
+        productName: 'HP Elite Book',
         productPrice: 0.25,
         tradeFamily: 'HP',
         productDescription:
@@ -56,8 +61,9 @@ class _ShopScreenState extends State<ShopScreen> {
           'CPU': '2.5 GHz',
           'RAM': '8Go',
         },
+        tradeCategory: 'Ordinateurs',
       ),
-      const AdsObjets(
+      const AdsObjects(
         imageLink: [
           'https://cdn.shopify.com/s/files/1/0046/9139/4658/files/SS20_HOMEPAGE_MCCLEANPAIR_880x550_crop_center.jpg?v=1614334815',
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqRw1KJxR6to1NRwgUn3qZan9eWtSJXS37yC8JMJvgvqjKNpuzb7YD5ZZd3wXpFMouHHM&usqp=CAU',
@@ -67,14 +73,16 @@ class _ShopScreenState extends State<ShopScreen> {
         productPrice: 0.25,
         tradeFamily: 'HP',
         productDescription:
-            'Ordinateur neuf avec carton et facture. Prix non negociable.',
+            'Telephone neuf avec carton et facture. Prix non negociable.',
         quantity: 17,
         productSpecifications: {
           'CPU': '2.5 GHz',
-          'RAM': '8Go',
+          'RAM': '8 Go',
+          'ROM': '128 Go',
         },
+        tradeCategory: 'Telephones',
       ),
-      const AdsObjets(
+      const AdsObjects(
         imageLink: [
           'https://www.shoe-tease.com/wp-content/uploads/2021/10/Shoes-that-go-with-everything-ShoeTease-Blog.jpg',
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZNdz-mIrSJtcSry4OKCjYGUo_zZcWqjDdMkAxHDdmbaRfjagUcB5JVNYRdByps4sABr8&usqp=CAU',
@@ -85,31 +93,27 @@ class _ShopScreenState extends State<ShopScreen> {
         ],
         productName: 'Féminin',
         productPrice: 0.25,
-        tradeFamily: 'HP',
         productDescription:
-            'Ordinateur neuf avec carton et facture. Prix non negociable.',
+            'Chaussures pour Femmes. Pointure 31 a 41, Taille haute',
         quantity: 17,
-        productSpecifications: {
-          'CPU': '2.5 GHz',
-          'RAM': '8Go',
-        },
+        tradeCategory: 'Chaussures',
       ),
     ];
 
     return Column(
       children: [
-        // SingleChildScrollView(
-        //   // controller: scrollController,
-        //   scrollDirection: Axis.horizontal,
-        //   child: Padding(
-        //     padding: const EdgeInsets.symmetric(vertical: 8.0),
-        //     child: Row(
-        //       children: [
-        //         for (var item in toolBarElement) toolBarElementBuilder(item),
-        //       ],
-        //     ),
-        //   ),
-        // ),
+        SingleChildScrollView(
+          // controller: scrollController,
+          scrollDirection: Axis.horizontal,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Row(
+              children: [
+                for (var item in toolBarElement) toolBarElementBuilder(item),
+              ],
+            ),
+          ),
+        ),
         Expanded(
           child: LiquidPullToRefresh(
             onRefresh: _handleScreenRefreshing,
@@ -120,7 +124,7 @@ class _ShopScreenState extends State<ShopScreen> {
             child: ListView.builder(
               itemCount: test.length,
               itemBuilder: (context, index) => adsItemBuilder(
-                adsObjets: test[index],
+                adsObjects: test[index],
                 deviceSize: widget.deviceSize,
               ),
             ),
@@ -157,11 +161,14 @@ class _ShopScreenState extends State<ShopScreen> {
           ),
           Container(
             height: 40,
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10.0,
+              vertical: 5.0,
+            ),
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: Colors.black,
-              borderRadius: BorderRadius.circular(1000),
+              borderRadius: BorderRadius.circular(5.0),
             ),
             child: Text(
               title,
@@ -210,7 +217,7 @@ class _ShopScreenState extends State<ShopScreen> {
   }
 
   Widget adsItemBuilder(
-      {required AdsObjets adsObjets, required Size deviceSize}) {
+      {required AdsObjects adsObjects, required Size deviceSize}) {
     return Container(
       height: 300,
       width: deviceSize.width,
@@ -229,7 +236,7 @@ class _ShopScreenState extends State<ShopScreen> {
       child: Column(
         children: [
           CarouselSlider.builder(
-            itemCount: adsObjets.imageLink.length,
+            itemCount: adsObjects.imageLink.length,
             options: CarouselOptions(
               autoPlayInterval: const Duration(
                 seconds: 4,
@@ -241,15 +248,16 @@ class _ShopScreenState extends State<ShopScreen> {
               autoPlay: true,
             ),
             itemBuilder: (context, index, realIndex) {
-              final image = adsObjets.imageLink[index];
+              final image = adsObjects.imageLink[index];
               return InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => ImageViewScreen(
-                        imageLink: adsObjets.imageLink,
+                        imageLink: adsObjects.imageLink,
                         deviceSize: deviceSize,
+                        fileImage: false,
                       ),
                     ),
                   );
@@ -301,7 +309,7 @@ class _ShopScreenState extends State<ShopScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            adsObjets.productName,
+                            adsObjects.productName,
                             style: const TextStyle(
                               fontSize: 18,
                             ),
@@ -321,7 +329,7 @@ class _ShopScreenState extends State<ShopScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'XAF ${adsObjets.productPrice}',
+                            'XAF ${adsObjects.productPrice}',
                             style: const TextStyle(
                               fontSize: 18,
                             ),
@@ -379,7 +387,7 @@ class _ShopScreenState extends State<ShopScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => DetailsPostScreen(
-                            adsObjets: adsObjets,
+                            adsObjects: adsObjects,
                             deviceSize: deviceSize,
                           ),
                         ),
@@ -406,7 +414,7 @@ class _ShopScreenState extends State<ShopScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => DetailsPostScreen(
-                            adsObjets: adsObjets,
+                            adsObjects: adsObjects,
                             deviceSize: deviceSize,
                           ),
                         ),
@@ -430,25 +438,25 @@ class _ShopScreenState extends State<ShopScreen> {
                     ),
                     InkWell(
                       onTap: () =>
-                          // showDetails(context, adsObjets);
+                          // showDetails(context, adsObjects);
                           Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => DetailsPostScreen(
-                            adsObjets: adsObjets,
+                            adsObjects: adsObjects,
                             deviceSize: deviceSize,
                           ),
                         ),
                       ),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
+                          horizontal: 10.0,
                           vertical: 5.0,
                         ),
                         decoration: BoxDecoration(
                           color: primaryColor,
                           borderRadius: BorderRadius.circular(
-                            5,
+                            5.0,
                           ),
                         ),
                         child: const Text(
@@ -471,23 +479,25 @@ class _ShopScreenState extends State<ShopScreen> {
   }
 }
 
-class AdsObjets {
+class AdsObjects {
   final String productDescription;
   final List<String> imageLink;
   final String productName;
   final double productPrice;
   final int quantity;
-  final Map<String, dynamic> productSpecifications;
-  final String tradeFamily;
+  final Map<String, dynamic>? productSpecifications;
+  final String? tradeFamily;
+  final String tradeCategory;
 
-  const AdsObjets({
+  const AdsObjects({
     Key? key,
     required this.productDescription,
     required this.imageLink,
     required this.productName,
     required this.productPrice,
     required this.quantity,
-    required this.productSpecifications,
-    required this.tradeFamily,
+    this.productSpecifications,
+    this.tradeFamily,
+    required this.tradeCategory,
   });
 }

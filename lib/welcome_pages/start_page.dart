@@ -86,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
     return Scaffold(
       extendBody: true,
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         // backgroundColor: Colors.transparent,

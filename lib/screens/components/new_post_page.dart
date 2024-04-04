@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shop_app/screens/components/image_view_page.dart';
 import 'package:shop_app/screens/shop_page.dart';
 import 'package:shop_app/utils/utils.dart';
 
@@ -17,7 +18,7 @@ class NewPostScreen extends StatefulWidget {
     this.firstTimeIndex,
   }) : super(key: key);
   final Size deviceSize;
-  final AdsObjets? adsObjets;
+  final AdsObjects? adsObjets;
   final bool? firstTimeIndex;
 
   @override
@@ -25,13 +26,14 @@ class NewPostScreen extends StatefulWidget {
 }
 
 class _NewPostScreenState extends State<NewPostScreen> {
-  List<File?> imageFile = [];
+  List imageFile = [];
 
-// Variables to get user entries
+  // Variables to get user entries
   final nameController = TextEditingController();
   final priceController = TextEditingController();
   final quantityController = TextEditingController();
   final descriptionController = TextEditingController();
+  String? category;
   String? family;
   // Specifications
   List<String?> specs = [];
@@ -40,8 +42,134 @@ class _NewPostScreenState extends State<NewPostScreen> {
   // Form key
   final _formKey = GlobalKey<FormState>();
 
+  List<DropdownMenuItem<String>> get tradeCategory {
+    List<DropdownMenuItem<String>> items = [
+      const DropdownMenuItem(
+        value: "Chaussures",
+        child: Text(
+          "Chaussures",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+      const DropdownMenuItem(
+        value: "Cuisine",
+        child: Text(
+          "Cuisine",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+      const DropdownMenuItem(
+        value: "Divers",
+        child: Text(
+          "Divers",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+      const DropdownMenuItem(
+        value: "Electro-menager",
+        child: Text(
+          "Electro-menager",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+      const DropdownMenuItem(
+        value: "Gadgets",
+        child: Text(
+          "Gadgets",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+      const DropdownMenuItem(
+        value: "Ordinateurs",
+        child: Text(
+          "Ordinateurs",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+      const DropdownMenuItem(
+        value: "Telephones",
+        child: Text(
+          "Telephones",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+      const DropdownMenuItem(
+        value: "Vetements",
+        child: Text(
+          "Vetements",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+    ];
+    return items;
+  }
+
   List<DropdownMenuItem<String>> get familyComputers {
     List<DropdownMenuItem<String>> items = [
+      const DropdownMenuItem(
+        value: "ACER",
+        child: Text(
+          "ACER",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+      const DropdownMenuItem(
+        value: "ASUS",
+        child: Text(
+          "ASUS",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
       const DropdownMenuItem(
         value: "DELL",
         child: Text(
@@ -58,6 +186,90 @@ class _NewPostScreenState extends State<NewPostScreen> {
         value: "HP",
         child: Text(
           "HP",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+      const DropdownMenuItem(
+        value: "HUAWEI",
+        child: Text(
+          "HUAWEI",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+      const DropdownMenuItem(
+        value: "LENOVO",
+        child: Text(
+          "LENOVO",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+      const DropdownMenuItem(
+        value: "LENOVO THINK",
+        child: Text(
+          "LENOVO THINK",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+      const DropdownMenuItem(
+        value: "APPLE",
+        child: Text(
+          "APPLE",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+      const DropdownMenuItem(
+        value: "SAMSUNG",
+        child: Text(
+          "SAMSUNG",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+      const DropdownMenuItem(
+        value: "SURFACE",
+        child: Text(
+          "SURFACE",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+      const DropdownMenuItem(
+        value: "TECNO",
+        child: Text(
+          "TECNO",
           style: TextStyle(
             color: primaryColor,
             fontSize: 16,
@@ -100,6 +312,18 @@ class _NewPostScreenState extends State<NewPostScreen> {
         value: "CPU",
         child: Text(
           "CPU",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+      const DropdownMenuItem(
+        value: "ECRAN",
+        child: Text(
+          "ECRAN",
           style: TextStyle(
             color: primaryColor,
             fontSize: 16,
@@ -152,13 +376,21 @@ class _NewPostScreenState extends State<NewPostScreen> {
   void initState() {
     super.initState();
     if (widget.adsObjets != null) {
-      if (widget.adsObjets!.imageLink.isNotEmpty) {
-        for (var item in widget.adsObjets!.imageLink) {
-          imageFile.add(File(item));
-        }
-      }
+      imageFile.addAll(widget.adsObjets!.imageLink);
+      nameController.text = widget.adsObjets!.productName.toString();
       priceController.text = widget.adsObjets!.productPrice.toString();
+      quantityController.text = widget.adsObjets!.quantity.toString();
+      descriptionController.text =
+          widget.adsObjets!.productDescription.toString();
       family = widget.adsObjets!.tradeFamily;
+      category = widget.adsObjets!.tradeCategory;
+      specs = widget.adsObjets!.productSpecifications!.keys.toList();
+      for (var entry in widget.adsObjets!.productSpecifications!.entries) {
+        specValueController.add(TextEditingController(
+          text: entry.value,
+        ));
+      }
+      numberSpecs = widget.adsObjets!.productSpecifications!.length;
     } else {
       specs.add(null);
       specValueController.add(TextEditingController());
@@ -211,57 +443,39 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Family'),
+                    const Text('Categorie'),
                     SvgPicture.asset(
                       'assets/icons/category.4.svg',
                     ),
                   ],
                 ),
-                DropdownButtonFormField(
-                  style: const TextStyle(
-                    fontSize: 10,
-                    height: 0.5,
-                  ),
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: primaryColor.withOpacity(0.1),
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 10.0,
-                      vertical: 8.0,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(
-                        color: Colors.transparent,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(
-                        color: Colors.transparent,
-                      ),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(
-                        color: Colors.red,
-                      ),
-                    ),
-                    hintText: 'choose',
-                  ),
-                  value: family,
-                  validator: (value) =>
-                      value == null ? 'Veuillez choisir un type' : null,
-                  items: familyComputers,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      family = newValue!;
-                    });
-                  },
+                dropDownBuilder(
+                  controller: category!,
+                  fieldTitle: 'Categorie',
+                  dropDownItemsList: tradeCategory,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
+                if (category == 'Ordinateurs' || category == 'Telephones') ...[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('Family'),
+                      SvgPicture.asset(
+                        'assets/icons/category.4.svg',
+                      ),
+                    ],
+                  ),
+                  dropDownBuilder(
+                    controller: family!,
+                    fieldTitle: 'Famille',
+                    dropDownItemsList: familyComputers,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                ],
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -360,16 +574,20 @@ class _NewPostScreenState extends State<NewPostScreen> {
                                   for (var image in imageFile)
                                     InkWell(
                                       onTap: () {
-                                        // Navigator.push(
-                                        //   context,
-                                        //   MaterialPageRoute(
-                                        //     builder: (context) =>
-                                        //         ImageViewScreen(
-                                        //       imageLink: imageFile,
-                                        //       deviceSize: widget.deviceSize,
-                                        //     ),
-                                        //   ),
-                                        // );
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ImageViewScreen(
+                                              imageLink: imageFile,
+                                              deviceSize: widget.deviceSize,
+                                              fileImage:
+                                                  widget.adsObjets != null
+                                                      ? false
+                                                      : true,
+                                            ),
+                                          ),
+                                        );
                                       },
                                       child: Container(
                                         height: 250,
@@ -385,10 +603,15 @@ class _NewPostScreenState extends State<NewPostScreen> {
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(10.0),
-                                          child: Image.file(
-                                            image!,
-                                            fit: BoxFit.fill,
-                                          ),
+                                          child: widget.adsObjets != null
+                                              ? Image.file(
+                                                  image!,
+                                                  fit: BoxFit.fill,
+                                                )
+                                              : Image.network(
+                                                  image!,
+                                                  fit: BoxFit.fill,
+                                                ),
                                         ),
                                       ),
                                     ),
@@ -456,23 +679,23 @@ class _NewPostScreenState extends State<NewPostScreen> {
                   fieldTitle: 'details',
                   numericField: false,
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text('Specifications'),
-                    SvgPicture.asset(
-                      'assets/icons/specifications-1.svg',
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Wrap(
-                  children: [
+                if (category == 'Ordinateurs' || category == 'Telephones') ...[
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('Specifications'),
+                      SvgPicture.asset(
+                        'assets/icons/specifications-1.svg',
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ...[
                     for (var i = 0; i < numberSpecs; i++)
                       Padding(
                         padding: const EdgeInsets.only(
@@ -565,29 +788,29 @@ class _NewPostScreenState extends State<NewPostScreen> {
                         ),
                       ),
                   ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(12.0),
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: InkWell(
-                        onTap: _addSpecification,
-                        child: const Icon(
-                          Icons.add,
-                          color: Colors.white,
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(12.0),
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: InkWell(
+                          onTap: _addSpecification,
+                          child: const Icon(
+                            Icons.add,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+                ],
                 const SizedBox(
                   height: 70,
                 ),
@@ -596,97 +819,241 @@ class _NewPostScreenState extends State<NewPostScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: InkWell(
-        onTap: () {
-          if (!_formKey.currentState!.validate()) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                behavior: SnackBarBehavior.floating,
-                content: Container(
-                  height: 40,
-                  width: widget.deviceSize.width,
-                  margin: const EdgeInsets.all(10),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Colors.red.withOpacity(.5),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Text(
-                    'Veuiller renseigner tous les champs!!',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontFamily: 'Comfortaa_bold',
+      bottomNavigationBar: Row(
+        children: [
+          InkWell(
+            onTap: () {
+              if (!_formKey.currentState!.validate()) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    behavior: SnackBarBehavior.floating,
+                    content: Container(
+                      height: 40,
+                      width: widget.deviceSize.width,
+                      margin: const EdgeInsets.all(10),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.red.withOpacity(.5),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Text(
+                        'Veuiller renseigner tous les champs!!',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: 'Comfortaa_bold',
+                        ),
+                      ),
                     ),
+                    elevation: 0,
+                    backgroundColor: Colors.transparent,
                   ),
-                ),
-                elevation: 0,
-                backgroundColor: Colors.transparent,
-              ),
-            );
-          } else {
-            showCupertinoModalPopup(
-              context: context,
-              builder: (context) => CupertinoActionSheet(
-                message: const Text(
-                  'Votre demande de publication a été envoyé avec succès',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontFamily: 'Comfortaa_bold',
+                );
+              } else {
+                showCupertinoModalPopup(
+                  context: context,
+                  builder: (context) => CupertinoActionSheet(
+                    message: const Text(
+                      'Votre demande de publication a été enregistree avec succès',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Comfortaa_bold',
+                      ),
+                    ),
+                    actions: [
+                      CupertinoActionSheetAction(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('OK'),
+                      ),
+                    ],
                   ),
+                );
+              }
+            },
+            child: Container(
+              height: 40,
+              margin: const EdgeInsets.all(10),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: thirdColor,
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(10),
                 ),
-                actions: [
-                  CupertinoActionSheetAction(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('OK'),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.15),
+                    blurRadius: 30,
+                    offset: const Offset(0, 10),
                   ),
                 ],
               ),
-            );
-          }
-        },
-        child: Container(
-          height: 40,
-          margin: const EdgeInsets.all(10),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: primaryColor,
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    'assets/icons/send.3.svg',
+                    colorFilter: const ColorFilter.mode(
+                      Colors.white,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10.0,
+                  ),
+                  const Text(
+                    'Enregistrer',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.15),
-                blurRadius: 30,
-                offset: const Offset(0, 10),
-              ),
-            ],
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                'assets/icons/send.3.svg',
-                colorFilter: const ColorFilter.mode(
-                  Colors.white,
-                  BlendMode.srcIn,
+          InkWell(
+            onTap: () {
+              if (!_formKey.currentState!.validate()) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    behavior: SnackBarBehavior.floating,
+                    content: Container(
+                      height: 40,
+                      width: widget.deviceSize.width,
+                      margin: const EdgeInsets.all(10),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.red.withOpacity(.5),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Text(
+                        'Veuiller renseigner tous les champs!!',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: 'Comfortaa_bold',
+                        ),
+                      ),
+                    ),
+                    elevation: 0,
+                    backgroundColor: Colors.transparent,
+                  ),
+                );
+              } else {
+                showCupertinoModalPopup(
+                  context: context,
+                  builder: (context) => CupertinoActionSheet(
+                    message: const Text(
+                      'Votre demande de publication a été envoyé avec succès',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Comfortaa_bold',
+                      ),
+                    ),
+                    actions: [
+                      CupertinoActionSheetAction(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            },
+            child: Container(
+              height: 40,
+              margin: const EdgeInsets.all(10),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: primaryColor,
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(10),
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.15),
+                    blurRadius: 30,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
               ),
-              const SizedBox(
-                width: 10.0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    'assets/icons/send.3.svg',
+                    colorFilter: const ColorFilter.mode(
+                      Colors.white,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10.0,
+                  ),
+                  const Text(
+                    'Publier',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
               ),
-              const Text(
-                'Publier',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                ),
-              ),
-            ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  DropdownButtonFormField<String> dropDownBuilder({
+    required String controller,
+    required String fieldTitle,
+    required List<DropdownMenuItem<String>>? dropDownItemsList,
+  }) {
+    return DropdownButtonFormField(
+      style: const TextStyle(
+        fontSize: 10,
+        height: 0.5,
+      ),
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: primaryColor.withOpacity(0.1),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 10.0,
+          vertical: 8.0,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(
+            color: Colors.transparent,
           ),
         ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(
+            color: Colors.transparent,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(
+            color: Colors.red,
+          ),
+        ),
+        hintText: 'choose',
       ),
+      value: controller,
+      validator: (value) =>
+          value == null ? 'Veuillez choisir une $fieldTitle' : null,
+      items: dropDownItemsList,
+      onChanged: (String? newValue) {
+        setState(() {
+          controller = newValue!;
+        });
+      },
     );
   }
 
