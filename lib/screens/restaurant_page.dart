@@ -222,7 +222,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                         ),
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          color: thirdColor,
+                          color: primaryColor,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Row(

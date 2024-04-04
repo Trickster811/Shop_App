@@ -30,9 +30,22 @@ class AboutScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        // backgroundColor: Colors.transparent,
         elevation: 0,
         automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop(context);
+          },
+          icon: SvgPicture.asset(
+            "assets/icons/arrow-left-2.2.svg",
+            height: 30,
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).iconTheme.color!,
+              BlendMode.srcIn,
+            ),
+          ),
+        ),
         title: Text(
           'A propos',
           style: TextStyle(

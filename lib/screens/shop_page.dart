@@ -441,11 +441,14 @@ class _ShopScreenState extends State<ShopScreen> {
                         ),
                       ),
                       child: Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 5.0,
+                        ),
                         decoration: BoxDecoration(
-                          color: thirdColor,
+                          color: primaryColor,
                           borderRadius: BorderRadius.circular(
-                            10,
+                            5,
                           ),
                         ),
                         child: const Text(

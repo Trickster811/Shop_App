@@ -35,7 +35,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
   String? family;
   // Specifications
   List<String?> specs = [];
-  List<TextEditingController>? specValueController;
+  List<TextEditingController> specValueController = [];
   int numberSpecs = 1;
   // Form key
   final _formKey = GlobalKey<FormState>();
@@ -109,9 +109,9 @@ class _NewPostScreenState extends State<NewPostScreen> {
         ),
       ),
       const DropdownMenuItem(
-        value: "RAM",
+        value: "GPU",
         child: Text(
-          "RAM",
+          "GPU",
           style: TextStyle(
             color: primaryColor,
             fontSize: 16,
@@ -124,6 +124,18 @@ class _NewPostScreenState extends State<NewPostScreen> {
         value: "RAM",
         child: Text(
           "RAM",
+          style: TextStyle(
+            color: primaryColor,
+            fontSize: 16,
+            overflow: TextOverflow.ellipsis,
+            fontFamily: 'Comfortaa_bold',
+          ),
+        ),
+      ),
+      const DropdownMenuItem(
+        value: "ROM",
+        child: Text(
+          "ROM",
           style: TextStyle(
             color: primaryColor,
             fontSize: 16,
@@ -148,7 +160,8 @@ class _NewPostScreenState extends State<NewPostScreen> {
       priceController.text = widget.adsObjets!.productPrice.toString();
       family = widget.adsObjets!.tradeFamily;
     } else {
-      specValueController!.add(TextEditingController());
+      specs.add(null);
+      specValueController.add(TextEditingController());
     }
   }
 
@@ -524,7 +537,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                             ),
                             Expanded(
                               child: postFieldBuilder(
-                                controller: specValueController![i],
+                                controller: specValueController[i],
                                 fieldTitle: '00',
                                 numericField: true,
                               ),
@@ -539,7 +552,9 @@ class _NewPostScreenState extends State<NewPostScreen> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  _removeSpecification(index: i);
+                                },
                                 child: const Icon(
                                   Icons.close_rounded,
                                   color: Colors.white,
@@ -762,6 +777,16 @@ class _NewPostScreenState extends State<NewPostScreen> {
   _addSpecification() {
     setState(() {
       numberSpecs++;
+      specs.add(null);
+      specValueController.add(TextEditingController());
+    });
+  }
+
+  _removeSpecification({required int index}) {
+    setState(() {
+      numberSpecs--;
+      specs.removeAt(index);
+      specValueController.removeAt(index);
     });
   }
 }

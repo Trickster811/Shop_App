@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     final listOfScreensTitle = [
-      'Acceuil',
+      'B-Shop',
       'Restaurant',
       'Publications',
       'Recherche',
@@ -86,9 +86,10 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
     return Scaffold(
       extendBody: true,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        // backgroundColor: Colors.white,
+        // backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
           listOfScreensTitle[currentState],
@@ -129,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
         width: deviceSize.width,
         margin: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: primaryColor,
+          color: thirdColor,
           borderRadius: const BorderRadius.all(
             Radius.circular(10.0),
           ),
