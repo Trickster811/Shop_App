@@ -62,6 +62,7 @@ class _ShopScreenState extends State<ShopScreen> {
           'RAM': '8Go',
         },
         tradeCategory: 'Ordinateurs',
+        isPublished: true,
       ),
       const AdsObjects(
         imageLink: [
@@ -81,6 +82,7 @@ class _ShopScreenState extends State<ShopScreen> {
           'ROM': '128 Go',
         },
         tradeCategory: 'Telephones',
+        isPublished: true,
       ),
       const AdsObjects(
         imageLink: [
@@ -97,6 +99,7 @@ class _ShopScreenState extends State<ShopScreen> {
             'Chaussures pour Femmes. Pointure 31 a 41, Taille haute',
         quantity: 17,
         tradeCategory: 'Chaussures',
+        isPublished: true,
       ),
     ];
 
@@ -482,6 +485,7 @@ class _ShopScreenState extends State<ShopScreen> {
 class AdsObjects {
   final String productDescription;
   final List<String> imageLink;
+  final bool isPublished;
   final String productName;
   final double productPrice;
   final int quantity;
@@ -493,6 +497,7 @@ class AdsObjects {
     Key? key,
     required this.productDescription,
     required this.imageLink,
+    required this.isPublished,
     required this.productName,
     required this.productPrice,
     required this.quantity,

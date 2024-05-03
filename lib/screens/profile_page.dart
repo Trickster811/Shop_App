@@ -46,6 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           'RAM': '8Go',
         },
         tradeCategory: 'Ordinateurs',
+        isPublished: true,
       ),
       const AdsObjects(
         imageLink: [
@@ -65,6 +66,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           'ROM': '128 Go',
         },
         tradeCategory: 'Telephones',
+        isPublished: false,
       ),
       const AdsObjects(
         imageLink: [
@@ -81,6 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             'Chaussures pour Femmes. Pointure 31 a 41, Taille haute',
         quantity: 17,
         tradeCategory: 'Chaussures',
+        isPublished: true,
       ),
     ];
     return Padding(

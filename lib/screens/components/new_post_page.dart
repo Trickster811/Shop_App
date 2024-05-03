@@ -35,6 +35,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
   final descriptionController = TextEditingController();
   String? category;
   String? family;
+  bool delivery = true;
   // Specifications
   List<String?> specs = [];
   List<TextEditingController> specValueController = [];
@@ -70,6 +71,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
       ),
       const DropdownMenuItem(
         value: "Divers",
+        // enabled: false,
         child: Text(
           "Divers",
           style: TextStyle(
@@ -384,7 +386,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
           widget.adsObjets!.productDescription.toString();
       family = widget.adsObjets!.tradeFamily;
       category = widget.adsObjets!.tradeCategory;
-      specs = widget.adsObjets!.productSpecifications!.keys.toList();
+      specs.addAll(widget.adsObjets!.productSpecifications!.keys.toList());
       for (var entry in widget.adsObjets!.productSpecifications!.entries) {
         specValueController.add(TextEditingController(
           text: entry.value,
@@ -449,10 +451,47 @@ class _NewPostScreenState extends State<NewPostScreen> {
                     ),
                   ],
                 ),
-                dropDownBuilder(
-                  controller: category!,
-                  fieldTitle: 'Categorie',
-                  dropDownItemsList: tradeCategory,
+                DropdownButtonFormField(
+                  style: const TextStyle(
+                    fontSize: 10,
+                    height: 0.5,
+                  ),
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: primaryColor.withOpacity(0.1),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 10.0,
+                      vertical: 8.0,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                        color: Colors.red,
+                      ),
+                    ),
+                    hintText: 'choose',
+                  ),
+                  value: category,
+                  validator: (value) =>
+                      value == null ? 'Veuillez choisir une categorie' : null,
+                  items: tradeCategory,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      category = newValue!;
+                    });
+                  },
                 ),
                 const SizedBox(
                   height: 10,
@@ -467,10 +506,47 @@ class _NewPostScreenState extends State<NewPostScreen> {
                       ),
                     ],
                   ),
-                  dropDownBuilder(
-                    controller: family!,
-                    fieldTitle: 'Famille',
-                    dropDownItemsList: familyComputers,
+                  DropdownButtonFormField(
+                    style: const TextStyle(
+                      fontSize: 10,
+                      height: 0.5,
+                    ),
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: primaryColor.withOpacity(0.1),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 10.0,
+                        vertical: 8.0,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                          color: Colors.transparent,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                          color: Colors.transparent,
+                        ),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                          color: Colors.red,
+                        ),
+                      ),
+                      hintText: 'choose',
+                    ),
+                    value: family,
+                    validator: (value) =>
+                        value == null ? 'Veuillez choisir une Famille' : null,
+                    items: familyComputers,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        family = newValue!;
+                      });
+                    },
                   ),
                   const SizedBox(
                     height: 10,
@@ -603,7 +679,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(10.0),
-                                          child: widget.adsObjets != null
+                                          child: widget.adsObjets == null
                                               ? Image.file(
                                                   image!,
                                                   fit: BoxFit.fill,
@@ -678,6 +754,100 @@ class _NewPostScreenState extends State<NewPostScreen> {
                   controller: descriptionController,
                   fieldTitle: 'details',
                   numericField: false,
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Livraison Gratuite'),
+                    SvgPicture.asset(
+                      'assets/icons/delivery.svg',
+                      height: 20,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      children: [
+                        const Text('Oui'),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              delivery = delivery ? false : true;
+                            });
+                          },
+                          child: Container(
+                            height: 30,
+                            width: 55,
+                            padding: const EdgeInsets.all(2.0),
+                            margin: const EdgeInsets.symmetric(vertical: 5.0),
+                            alignment: delivery
+                                ? Alignment.centerRight
+                                : Alignment.centerLeft,
+                            decoration: BoxDecoration(
+                              color: delivery
+                                  ? Colors.green
+                                  : Colors.green.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(10000),
+                              border: Border.all(
+                                color: Colors.green.withOpacity(0.2),
+                              ),
+                            ),
+                            child: Container(
+                              height: 30,
+                              width: 25,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(1000),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        const Text('Non'),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              delivery = delivery ? false : true;
+                            });
+                          },
+                          child: Container(
+                            height: 30,
+                            width: 55,
+                            padding: const EdgeInsets.all(2.0),
+                            margin: const EdgeInsets.symmetric(vertical: 5.0),
+                            alignment: !delivery
+                                ? Alignment.centerRight
+                                : Alignment.centerLeft,
+                            decoration: BoxDecoration(
+                              color: !delivery
+                                  ? Colors.orange
+                                  : Colors.orange.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(10000),
+                              border: Border.all(
+                                color: Colors.orange.withOpacity(0.2),
+                              ),
+                            ),
+                            child: Container(
+                              height: 30,
+                              width: 25,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(1000),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
                 if (category == 'Ordinateurs' || category == 'Telephones') ...[
                   const SizedBox(
@@ -820,6 +990,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
         ),
       ),
       bottomNavigationBar: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           InkWell(
             onTap: () {
@@ -873,6 +1044,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
             },
             child: Container(
               height: 40,
+              width: widget.deviceSize.width / 2.5,
               margin: const EdgeInsets.all(10),
               alignment: Alignment.center,
               decoration: BoxDecoration(
@@ -964,6 +1136,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
             },
             child: Container(
               height: 40,
+              width: widget.deviceSize.width / 2.5,
               margin: const EdgeInsets.all(10),
               alignment: Alignment.center,
               decoration: BoxDecoration(
@@ -1009,7 +1182,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
   }
 
   DropdownButtonFormField<String> dropDownBuilder({
-    required String controller,
+    required String? controller,
     required String fieldTitle,
     required List<DropdownMenuItem<String>>? dropDownItemsList,
   }) {

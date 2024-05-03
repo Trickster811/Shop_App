@@ -87,6 +87,7 @@ class _MyPostScreenState extends State<MyPostScreen>
                         'RAM': '8Go',
                       },
                       tradeCategory: 'Ordinateurs',
+                      isPublished: true,
                     ),
                   ),
                   adsItemBuilder(
@@ -109,6 +110,7 @@ class _MyPostScreenState extends State<MyPostScreen>
                         'ROM': '128 Go',
                       },
                       tradeCategory: 'Telephones',
+                      isPublished: false,
                     ),
                   ),
                 ],
@@ -848,157 +850,140 @@ class _MyPostScreenState extends State<MyPostScreen>
   }
 
   Widget adsItemBuilder(BuildContext context, AdsObjects adsObjets) {
-    return Container(
-      height: 300,
-      width: widget.deviceSize.width,
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.15),
-            blurRadius: 10,
-            offset: const Offset(0, 10),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ImageViewScreen(
-                    imageLink: adsObjets.imageLink,
-                    deviceSize: widget.deviceSize,
-                    fileImage: false,
+    return StatefulBuilder(builder: (context, StateSetter setStates) {
+      bool isPublished = adsObjets.isPublished;
+      return Container(
+        height: 300,
+        width: widget.deviceSize.width,
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.15),
+              blurRadius: 10,
+              offset: const Offset(0, 10),
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ImageViewScreen(
+                      imageLink: adsObjets.imageLink,
+                      deviceSize: widget.deviceSize,
+                      fileImage: false,
+                    ),
+                  ),
+                );
+              },
+              child: Container(
+                height: 175,
+                width: double.maxFinite,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(10),
                   ),
                 ),
-              );
-            },
-            child: Container(
-              height: 175,
-              width: double.maxFinite,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(10),
-                ),
-              ),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(10),
-                ),
-                child: FadeInImage.assetNetwork(
-                  placeholder: 'assets/images/2.png',
-                  image: adsObjets.imageLink[0],
-                  fit: BoxFit.cover,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(10),
+                  ),
+                  child: FadeInImage.assetNetwork(
+                    placeholder: 'assets/images/2.png',
+                    image: adsObjets.imageLink[0],
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  height: 125,
-                  // width: (widget.deviceSize.width - 20) * .65,
-                  padding: const EdgeInsets.all(10),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(10),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                ),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            adsObjets.productName,
-                            style: const TextStyle(
-                              fontSize: 18,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 05,
-                          ),
-                          const Text(
-                            "(Produit)",
-                            style: TextStyle(
-                              fontSize: 10,
-                            ),
-                          ),
-                        ],
+                      Text(
+                        adsObjets.productName,
+                        style: const TextStyle(
+                          fontSize: 18,
+                        ),
                       ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'XAF ${adsObjets.productPrice}',
-                            style: const TextStyle(
-                              fontSize: 18,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 05,
-                          ),
-                          const Text(
-                            "(Prix U)",
-                            style: TextStyle(
-                              fontSize: 10,
-                            ),
-                          ),
-                        ],
+                      const SizedBox(
+                        width: 05,
                       ),
-                      const Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Ngaoundere',
-                            style: TextStyle(
-                              fontSize: 18,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 05,
-                          ),
-                          Text(
-                            "(Position)",
-                            style: TextStyle(
-                              fontSize: 10,
-                            ),
-                          ),
-                        ],
+                      const Text(
+                        "(Produit)",
+                        style: TextStyle(
+                          fontSize: 10,
+                        ),
                       ),
                     ],
                   ),
-                ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'XAF ${adsObjets.productPrice}',
+                        style: const TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 05,
+                      ),
+                      const Text(
+                        "(Prix U)",
+                        style: TextStyle(
+                          fontSize: 10,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              Container(
-                height: 125,
-                width: (widget.deviceSize.width - 20) * .35,
+            ),
+            Expanded(
+              child: Container(
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(.05),
                   borderRadius: const BorderRadius.only(
                     bottomRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
                   ),
                 ),
-                child: Column(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0,
+                        vertical: 10.0,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.green,
                         borderRadius: BorderRadius.circular(
                           10,
                         ),
                       ),
-                      child: IconButton(
-                        onPressed: () {
+                      child: InkWell(
+                        onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -1009,43 +994,93 @@ class _MyPostScreenState extends State<MyPostScreen>
                             ),
                           );
                         },
-                        icon: SvgPicture.asset(
-                          'assets/icons/edit-square.6.svg',
-                          colorFilter: const ColorFilter.mode(
-                            Colors.white,
-                            BlendMode.srcIn,
-                          ),
+                        child: Row(
+                          children: [
+                            const Text(
+                              'Modifier',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 5.0,
+                            ),
+                            SvgPicture.asset(
+                              'assets/icons/edit-square.6.svg',
+                              colorFilter: const ColorFilter.mode(
+                                Colors.white,
+                                BlendMode.srcIn,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 10.0,
-                    ),
                     Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0,
+                        vertical: 2.0,
+                      ),
                       decoration: BoxDecoration(
-                        color: Colors.red,
+                        color: isPublished ? primaryColor : thirdColor,
                         borderRadius: BorderRadius.circular(
                           10,
                         ),
                       ),
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: SvgPicture.asset(
-                          'assets/icons/delete.3.svg',
-                          colorFilter: const ColorFilter.mode(
-                            Colors.white,
-                            BlendMode.srcIn,
+                      child: Row(
+                        children: [
+                          const Text(
+                            'Publie',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
+                          const SizedBox(
+                            width: 5.0,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                // adsObjets.isPublished = !adsObjets.isPublished;
+                              });
+                            },
+                            child: Container(
+                              height: 30,
+                              width: 55,
+                              padding: const EdgeInsets.all(2.0),
+                              margin: const EdgeInsets.symmetric(vertical: 5.0),
+                              alignment: adsObjets.isPublished
+                                  ? Alignment.centerRight
+                                  : Alignment.centerLeft,
+                              decoration: BoxDecoration(
+                                color: adsObjets.isPublished
+                                    ? Colors.white
+                                    : Colors.white.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(10000),
+                                border: Border.all(
+                                  color: Colors.white.withOpacity(0.2),
+                                ),
+                              ),
+                              child: Container(
+                                height: 30,
+                                width: 25,
+                                decoration: BoxDecoration(
+                                  color: Colors.purple,
+                                  borderRadius: BorderRadius.circular(1000),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
               ),
-            ],
-          ),
-        ],
-      ),
-    );
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
