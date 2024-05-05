@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
@@ -213,40 +214,121 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                         style: TextStyle(),
                         textAlign: TextAlign.center,
                       ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                          // horizontal: 10.0,
-                          vertical: 5.0,
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 10.0,
-                        ),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: primaryColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset(
-                              'assets/icons/buy.3.svg',
-                              colorFilter: const ColorFilter.mode(
-                                Colors.white,
-                                BlendMode.srcIn,
+                      InkWell(
+                        onTap: () => {
+                          showCupertinoModalPopup(
+                            context: context,
+                            builder: (context) => CupertinoActionSheet(
+                              title: const Text(
+                                'Passer une commande\nVeuillew renseigner les details de votre achat',
+                              ),
+                              message: SizedBox(
+                                height: MediaQuery.of(context).size.height * .5,
+                                child: Column(
+                                  children: [
+                                    const Text('Nom et Prenom'),
+                                    TextFormField(
+                                      controller: TextEditingController(),
+                                      cursorColor: primaryColor,
+                                      keyboardType: TextInputType.emailAddress,
+                                      decoration: InputDecoration(
+                                        hintText: 'votre email',
+                                        contentPadding: const EdgeInsets.only(
+                                          left: 10.0,
+                                          bottom: 10.0,
+                                        ),
+                                        filled: true,
+                                        fillColor:
+                                            primaryColor.withOpacity(0.1),
+                                        enabledBorder: const OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                          ),
+                                        ),
+                                        errorBorder: const OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                          ),
+                                        ),
+                                        focusedErrorBorder:
+                                            const OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                          ),
+                                        ),
+                                        focusedBorder: const OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                          ),
+                                        ),
+                                      ),
+                                      // validator: RequiredValidator(
+                                      //   errorText:
+                                      //       'Veuillez renseigner cet élément',
+                                      // ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              actions: [
+                                CupertinoActionSheetAction(
+                                  onPressed: () => (),
+                                  child: const Text(
+                                    "Payer",
+                                    style: TextStyle(
+                                      // fontSize: 12,
+                                      color: primaryColor,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                              cancelButton: CupertinoActionSheetAction(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text(
+                                  "Annuler",
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                  ),
+                                ),
                               ),
                             ),
-                            // const SizedBox(
-                            //   width: 5,
-                            // ),
-                            const Text(
-                              'Commander',
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: Colors.white,
+                          )
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(
+                            // horizontal: 10.0,
+                            vertical: 5.0,
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 10.0,
+                          ),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: primaryColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/icons/buy.3.svg',
+                                colorFilter: const ColorFilter.mode(
+                                  Colors.white,
+                                  BlendMode.srcIn,
+                                ),
                               ),
-                            ),
-                          ],
+                              // const SizedBox(
+                              //   width: 5,
+                              // ),
+                              const Text(
+                                'Commander',
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       )
                     ],

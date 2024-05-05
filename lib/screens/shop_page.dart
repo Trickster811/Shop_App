@@ -242,7 +242,7 @@ class _ShopScreenState extends State<ShopScreen> {
             itemCount: adsObjects.imageLink.length,
             options: CarouselOptions(
               autoPlayInterval: const Duration(
-                seconds: 4,
+                seconds: 5,
               ),
               viewportFraction: 1,
               enlargeCenterPage: true,

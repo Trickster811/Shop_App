@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop_app/screens/about_page.dart';
+import 'package:shop_app/screens/components/account/about_page.dart';
 import 'package:shop_app/screens/restaurant_page.dart';
 import 'package:shop_app/screens/shop_page.dart';
 import 'package:shop_app/screens/my_post_page.dart';
-import 'package:shop_app/screens/profile_page.dart';
+import 'package:shop_app/screens/account_page.dart';
 import 'package:shop_app/screens/research_page.dart';
 import 'package:shop_app/utils/utils.dart';
 import 'package:shop_app/welcome_pages/auth/disconnection.dart';
@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
       'Restaurant',
       'Publications',
       'Recherche',
-      'Profil',
+      'Account',
     ];
     List<List> menuItemList = [
       [
@@ -99,21 +99,12 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         actions: [
-          // IconButton(
-          //   onPressed: () => Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //       builder: (context) => ProfileScreen(
-          //         appBarHeightSize: appBarHeightSize,
-          //         deviceSize: deviceSize,
-          //         widget.userInfo: widget.userInfo,
-          //       ),
-          //     ),
-          //   ),
-          //   icon: SvgPicture.asset(
-          //     'assets/icons/profile.6.svg',
-          //   ),
-          // ),
+          IconButton(
+            onPressed: () => {},
+            icon: SvgPicture.asset(
+              'assets/icons/search.1.svg',
+            ),
+          ),
           IconButton(
             onPressed: () {
               UtilFunctions.openDialog(context, menuItemList, appBarHeightSize);

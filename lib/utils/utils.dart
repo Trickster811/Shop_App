@@ -140,6 +140,8 @@ class UtilFunctions {
           Radius.circular(10.0),
         ),
       ),
+      color: Colors.white,
+      surfaceTintColor: Colors.white,
       items: [
         for (final element in menuItemList) _buildPopMenuItem(context, element),
       ],
