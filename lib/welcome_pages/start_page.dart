@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_app/screens/components/account/about_page.dart';
+import 'package:shop_app/screens/components/restaurant/order_list_page.dart';
 import 'package:shop_app/screens/restaurant_page.dart';
 import 'package:shop_app/screens/shop_page.dart';
 import 'package:shop_app/screens/my_post_page.dart';
@@ -99,6 +100,21 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         actions: [
+          if (currentState == 1)
+            IconButton(
+              onPressed: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => OrderListScreen(),
+                  ),
+                )
+              },
+              icon: SvgPicture.asset(
+                'assets/icons/delivery.svg',
+                height: 20,
+              ),
+            ),
           IconButton(
             onPressed: () => {},
             icon: SvgPicture.asset(

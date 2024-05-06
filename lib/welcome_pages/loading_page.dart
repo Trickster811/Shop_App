@@ -76,7 +76,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
           right: -MediaQuery.of(context).size.width * 0.8,
           bottom: 0,
           child: Image.asset(
-            'assets/images/hidden_icon_logo.png',
+            'assets/images/butterfly-logo-minim.png',
             color: Colors.white.withOpacity(0.4),
             // colorBlendMode: BlendMode.modulate,
             // width: MediaQuery.of(context).size.width * 3,
@@ -90,7 +90,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
               children: [
                 const Spacer(),
                 Image.asset(
-                  'assets/images/hidden_icon_logo.png',
+                  'assets/images/butterfly-logo-minim.png',
                   height: 100,
                   width: 100,
                 ),
@@ -116,7 +116,18 @@ class _LoadingScreenState extends State<LoadingScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 100,
+                  height: 20,
+                ),
+                const Text(
+                  'by Butterfly Company',
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black45,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10.0,
                 ),
               ],
             ),

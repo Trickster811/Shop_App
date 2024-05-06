@@ -1,15 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:focused_menu/focused_menu.dart';
-import 'package:focused_menu/modals.dart';
 import 'package:shop_app/screens/components/account/about_page.dart';
 import 'package:shop_app/screens/components/account/help_page.dart';
 import 'package:shop_app/screens/components/account/policy_page.dart';
 import 'package:shop_app/screens/components/account/settings_screen.dart';
 import 'package:shop_app/screens/components/account/updates_pages.dart';
-import 'package:shop_app/screens/components/image_view_page.dart';
-import 'package:shop_app/screens/shop_page.dart';
 import 'package:shop_app/utils/utils.dart';
 import 'package:shop_app/welcome_pages/auth/disconnection.dart';
 
@@ -32,6 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> screens = [
+      const SettingsScreen(),
       const PolicyScreen(),
       const HelpScreen(),
       const UpdateScreen(),

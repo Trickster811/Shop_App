@@ -150,39 +150,37 @@ class UtilFunctions {
 
   static PopupMenuItem _buildPopMenuItem(BuildContext context, List item) {
     return PopupMenuItem(
-      child: InkWell(
-        onTap: () {
-          Navigator.pop(context);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => item[2],
+      onTap: () {
+        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => item[2],
+          ),
+        );
+      },
+      child: Row(
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            item[0],
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).iconTheme.color!,
+              BlendMode.srcIn,
             ),
-          );
-        },
-        child: Row(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset(
-              item[0],
-              colorFilter: ColorFilter.mode(
-                Theme.of(context).iconTheme.color!,
-                BlendMode.srcIn,
-              ),
+          ),
+          const SizedBox(
+            width: 5,
+          ),
+          Text(
+            item[1],
+            style: const TextStyle(
+              fontSize: 15,
+              fontFamily: 'Comfortaa_bold',
+              // color: Colors.white,
             ),
-            const SizedBox(
-              width: 5,
-            ),
-            Text(
-              item[1],
-              style: const TextStyle(
-                fontSize: 15,
-                fontFamily: 'Comfortaa_bold',
-                // color: Colors.white,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

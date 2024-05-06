@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SettingsScreen extends StatefulWidget {
-  final Map<String, dynamic> userInfo;
-
   const SettingsScreen({
     Key? key,
-    required this.userInfo,
   }) : super(key: key);
 
   @override

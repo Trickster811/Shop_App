@@ -58,6 +58,12 @@ class AboutScreen extends StatelessWidget {
           IconButton(
             onPressed: () {},
             icon: SvgPicture.asset(
+              'assets/icons/graph.6.svg',
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: SvgPicture.asset(
               'assets/icons/call.5.svg',
             ),
           ),
@@ -66,11 +72,11 @@ class AboutScreen extends StatelessWidget {
       body: Stack(
         children: [
           Positioned(
-            right: -MediaQuery.of(context).size.width * 0.8,
+            right: -MediaQuery.of(context).size.width * 0.6,
             bottom: 0,
             child: Image.asset(
-              'assets/images/hidden_icon_logo.png',
-              // color: Colors.white.withOpacity(0.2),
+              'assets/images/butterfly_company_logo.png',
+              color: Color.fromARGB(255, 153, 51, 51).withOpacity(0.2),
               // colorBlendMode: BlendMode.modulate,
               // width: MediaQuery.of(context).size.width * 3,
               height: MediaQuery.of(context).size.height * 0.65,
@@ -84,7 +90,7 @@ class AboutScreen extends StatelessWidget {
                   const SizedBox(),
                   const Spacer(),
                   Image.asset(
-                    'assets/images/hidden_icon_logo.png',
+                    'assets/images/butterfly-logo-minim.png',
                     height: 65,
                     width: 65,
                   ),
