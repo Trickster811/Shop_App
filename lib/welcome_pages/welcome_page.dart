@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop_app/utils/utils.dart';
-import 'package:shop_app/welcome_pages/auth/sign_in_page.dart';
+import 'package:b_shop/utils/utils.dart';
+import 'package:b_shop/welcome_pages/auth/sign_in_page.dart';
 
 class WelcomeScreen extends StatelessWidget {
   final Map<String, dynamic> userInfo;

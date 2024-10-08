@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop_app/screens/components/account/about_page.dart';
-import 'package:shop_app/screens/components/restaurant/order_list_page.dart';
-import 'package:shop_app/screens/restaurant_page.dart';
-import 'package:shop_app/screens/shop_page.dart';
-import 'package:shop_app/screens/my_post_page.dart';
-import 'package:shop_app/screens/account_page.dart';
-import 'package:shop_app/screens/research_page.dart';
-import 'package:shop_app/utils/utils.dart';
-import 'package:shop_app/welcome_pages/auth/sign_out_page.dart';
-import 'package:shop_app/welcome_pages/auth/sign_in_page.dart';
+import 'package:b_shop/screens/components/account/about_page.dart';
+import 'package:b_shop/screens/components/restaurant/order_list_page.dart';
+import 'package:b_shop/screens/restaurant_page.dart';
+import 'package:b_shop/screens/shop_page.dart';
+import 'package:b_shop/screens/my_post_page.dart';
+import 'package:b_shop/screens/account_page.dart';
+import 'package:b_shop/screens/research_page.dart';
+import 'package:b_shop/utils/utils.dart';
+import 'package:b_shop/welcome_pages/auth/sign_out_page.dart';
+import 'package:b_shop/welcome_pages/auth/sign_in_page.dart';
 // import 'package:stack_appodeal_flutter/stack_appodeal_flutter.dart';
 
 class MyHomePage extends StatefulWidget {

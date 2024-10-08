@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop_app/utils/utils.dart';
+import 'package:b_shop/utils/utils.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

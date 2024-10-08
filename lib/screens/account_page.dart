@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop_app/screens/components/account/about_page.dart';
-import 'package:shop_app/screens/components/account/help_page.dart';
-import 'package:shop_app/screens/components/account/policy_page.dart';
-import 'package:shop_app/screens/components/account/settings_screen.dart';
-import 'package:shop_app/screens/components/account/updates_pages.dart';
-import 'package:shop_app/utils/utils.dart';
-import 'package:shop_app/welcome_pages/auth/sign_out_page.dart';
+import 'package:b_shop/screens/components/account/about_page.dart';
+import 'package:b_shop/screens/components/account/help_page.dart';
+import 'package:b_shop/screens/components/account/policy_page.dart';
+import 'package:b_shop/screens/components/account/settings_screen.dart';
+import 'package:b_shop/screens/components/account/updates_pages.dart';
+import 'package:b_shop/utils/utils.dart';
+import 'package:b_shop/welcome_pages/auth/sign_out_page.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({

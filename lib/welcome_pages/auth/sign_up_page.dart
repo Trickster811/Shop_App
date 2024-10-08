@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:shop_app/utils/controllers.utils.dart';
-import 'package:shop_app/utils/utils.dart';
-import 'package:shop_app/welcome_pages/auth/sign_in_page.dart';
-import 'package:shop_app/welcome_pages/loading_page.dart';
+import 'package:b_shop/utils/controllers.utils.dart';
+import 'package:b_shop/utils/utils.dart';
+import 'package:b_shop/welcome_pages/auth/sign_in_page.dart';
+import 'package:b_shop/welcome_pages/loading_page.dart';
 
 class SignUpScreen extends StatefulWidget {
   final List<String>? userInfo;
@@ -654,385 +654,385 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ],
                 ),
                 const SizedBox(
-                  height: 70,
+                  height: 100,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        height: 40,
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10.0,
+                          horizontal: 50.0,
+                        ),
+                        margin: const EdgeInsets.symmetric(vertical: 10.0),
+                        decoration: BoxDecoration(
+                          color: primaryColor.withOpacity(.5),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: const Text(
+                          'Annuler',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () async {
+                        if (!isLoading) {
+                          if (!_signUpFormKey.currentState!.validate()) {
+                            return;
+                          }
+
+                          await createUserWithEmailAndPassword();
+                        }
+                      },
+                      //   showModalBottomSheet(
+                      //     context: context,
+                      //     shape: const RoundedRectangleBorder(
+                      //       borderRadius: BorderRadius.only(
+                      //         topLeft: Radius.circular(
+                      //           20,
+                      //         ),
+                      //         topRight: Radius.circular(
+                      //           20,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     builder: (context) => Padding(
+                      //       padding: const EdgeInsets.symmetric(
+                      //         horizontal: 10.0,
+                      //       ),
+                      //       child: Form(
+                      //         key: paymentFormKey,
+                      //         child: SingleChildScrollView(
+                      //           child: Column(
+                      //             children: [
+                      //               Container(
+                      //                 height: 5,
+                      //                 width: 50,
+                      //                 margin: const EdgeInsets.symmetric(
+                      //                   vertical: 5.0,
+                      //                 ),
+                      //                 decoration: BoxDecoration(
+                      //                   color: primaryColor,
+                      //                   borderRadius: BorderRadius.circular(
+                      //                     1000,
+                      //                   ),
+                      //                 ),
+                      //               ),
+                      //               const SizedBox(
+                      //                 height: 10,
+                      //               ),
+                      //               const Text('Merci de choisir Shop App'),
+                      //               const SizedBox(
+                      //                 height: 20,
+                      //               ),
+                      //               Container(
+                      //                 height: 100,
+                      //                 width: 250,
+                      //                 alignment: Alignment.center,
+                      //                 padding: const EdgeInsets.all(10.0),
+                      //                 decoration: BoxDecoration(
+                      //                   color: primaryColor,
+                      //                   borderRadius: BorderRadius.circular(
+                      //                     10.0,
+                      //                   ),
+                      //                 ),
+                      //                 child: const Row(
+                      //                   mainAxisAlignment:
+                      //                       MainAxisAlignment.spaceEvenly,
+                      //                   children: [
+                      //                     Text(
+                      //                       'XAF',
+                      //                       style: TextStyle(
+                      //                         fontSize: 18,
+                      //                         color: Colors.white,
+                      //                       ),
+                      //                     ),
+                      //                     Text(
+                      //                       '3000',
+                      //                       style: TextStyle(
+                      //                         fontSize: 40,
+                      //                         color: Colors.white,
+                      //                       ),
+                      //                     ),
+                      //                     Text(
+                      //                       '/mois',
+                      //                       style: TextStyle(
+                      //                         fontSize: 18,
+                      //                         color: Colors.white,
+                      //                       ),
+                      //                     ),
+                      //                   ],
+                      //                 ),
+                      //               ),
+                      //               const SizedBox(
+                      //                 height: 20,
+                      //               ),
+                      //               Row(
+                      //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //                 children: [
+                      //                   Expanded(
+                      //                     child: DropdownButtonFormField(
+                      //                       style: const TextStyle(
+                      //                         fontSize: 10,
+                      //                         height: 0.5,
+                      //                       ),
+                      //                       decoration: const InputDecoration(
+                      //                         contentPadding: EdgeInsets.only(
+                      //                           left: 10.0,
+                      //                           bottom: 10.0,
+                      //                         ),
+                      //                         enabledBorder: OutlineInputBorder(
+                      //                           borderSide: BorderSide(
+                      //                             color: primaryColor,
+                      //                           ),
+                      //                         ),
+                      //                         errorBorder: OutlineInputBorder(
+                      //                           borderSide: BorderSide(
+                      //                             color: primaryColor,
+                      //                           ),
+                      //                         ),
+                      //                         focusedErrorBorder: OutlineInputBorder(
+                      //                           borderSide: BorderSide(
+                      //                             color: primaryColor,
+                      //                           ),
+                      //                         ),
+                      //                         focusedBorder: OutlineInputBorder(
+                      //                           borderSide: BorderSide(
+                      //                             color: primaryColor,
+                      //                           ),
+                      //                         ),
+                      //                         hintText: 'choose',
+                      //                       ),
+                      //                       value: paymentMethod,
+                      //                       validator: (value) => value == null
+                      //                           ? 'Veuillez choisir un type'
+                      //                           : null,
+                      //                       items: const <DropdownMenuItem<String?>>[
+                      //                         DropdownMenuItem(
+                      //                           value: 'Orange Money',
+                      //                           child: Text(
+                      //                             'Orange Money',
+                      //                             style: TextStyle(
+                      //                               color: primaryColor,
+                      //                               fontSize: 16,
+                      //                               fontFamily: 'Monstserrat',
+                      //                             ),
+                      //                           ),
+                      //                         ),
+                      //                         DropdownMenuItem(
+                      //                           value: 'MTN MoMo',
+                      //                           child: Text(
+                      //                             'MTN MoMo',
+                      //                             style: TextStyle(
+                      //                               color: primaryColor,
+                      //                               fontSize: 16,
+                      //                               fontFamily: 'Monstserrat',
+                      //                             ),
+                      //                           ),
+                      //                         ),
+                      //                       ],
+                      //                       onChanged: (newValue) {
+                      //                         setState(() {
+                      //                           paymentMethod = newValue!;
+                      //                         });
+                      //                       },
+                      //                     ),
+                      //                   ),
+                      //                   const SizedBox(
+                      //                     width: 10,
+                      //                   ),
+                      //                   SizedBox(
+                      //                     width: widget.deviceSize.width / 2.5,
+                      //                     child: TextFormField(
+                      //                       controller: paymentphone,
+                      //                       cursorColor: primaryColor,
+                      //                       keyboardType: TextInputType.number,
+                      //                       decoration: InputDecoration(
+                      //                         label: Text('Numéro $paymentMethod'),
+                      //                         contentPadding: const EdgeInsets.only(
+                      //                           left: 10.0,
+                      //                           bottom: 10.0,
+                      //                         ),
+                      //                         enabledBorder: const OutlineInputBorder(
+                      //                           borderSide: BorderSide(
+                      //                             color: primaryColor,
+                      //                           ),
+                      //                         ),
+                      //                         errorBorder: const OutlineInputBorder(
+                      //                           borderSide: BorderSide(
+                      //                             color: primaryColor,
+                      //                           ),
+                      //                         ),
+                      //                         focusedErrorBorder:
+                      //                             const OutlineInputBorder(
+                      //                           borderSide: BorderSide(
+                      //                             color: primaryColor,
+                      //                           ),
+                      //                         ),
+                      //                         focusedBorder: const OutlineInputBorder(
+                      //                           borderSide: BorderSide(
+                      //                             color: primaryColor,
+                      //                           ),
+                      //                         ),
+                      //                       ),
+                      //                       validator: RequiredValidator(
+                      //                         errorText:
+                      //                             'Veuillez renseigner cet élément',
+                      //                       ),
+                      //                     ),
+                      //                   ),
+                      //                 ],
+                      //               ),
+                      //               const SizedBox(
+                      //                 height: 20,
+                      //               ),
+                      //               TextFormField(
+                      //                 controller: paymentName,
+                      //                 cursorColor: primaryColor,
+                      //                 keyboardType: TextInputType.text,
+                      //                 decoration: InputDecoration(
+                      //                   label: Text('Nom $paymentMethod'),
+                      //                   contentPadding: const EdgeInsets.only(
+                      //                     left: 10.0,
+                      //                     bottom: 10.0,
+                      //                   ),
+                      //                   enabledBorder: const OutlineInputBorder(
+                      //                     borderSide: BorderSide(
+                      //                       color: primaryColor,
+                      //                     ),
+                      //                   ),
+                      //                   errorBorder: const OutlineInputBorder(
+                      //                     borderSide: BorderSide(
+                      //                       color: primaryColor,
+                      //                     ),
+                      //                   ),
+                      //                   focusedErrorBorder: const OutlineInputBorder(
+                      //                     borderSide: BorderSide(
+                      //                       color: primaryColor,
+                      //                     ),
+                      //                   ),
+                      //                   focusedBorder: const OutlineInputBorder(
+                      //                     borderSide: BorderSide(
+                      //                       color: primaryColor,
+                      //                     ),
+                      //                   ),
+                      //                 ),
+                      //                 validator: RequiredValidator(
+                      //                   errorText: 'Veuillez renseigner cet élément',
+                      //                 ),
+                      //               ),
+                      //               InkWell(
+                      //                 onTap: () async {
+                      //                   if (!paymentFormKey.currentState!.validate()) {
+                      //                     UtilFunctions.showFlashMessage(
+                      //                       'Veuillez remplir tous les champs !!!',
+                      //                       Colors.red,
+                      //                     );
+                      //                     return;
+                      //                   }
+                      //                   final Map<String, dynamic> userLoginInfo = [
+                      //                     userType!,
+                      //                     name.text,
+                      //                     phone.text,
+                      //                     whatsapp.text,
+                      //                     email.text,
+                      //                     password.text,
+                      //                     // Payment info
+                      //                     paymentMethod!,
+                      //                     paymentphone.text,
+                      //                     paymentName.text,
+                      //                   ];
+                      //                   try {
+                      //                     await UtilFunctions.setUserInfo(
+                      //                         userLoginInfo);
+                      //                     await UtilFunctions.setFirstTime(true);
+
+                      //                     UtilFunctions.showFlashMessage(
+                      //                       "Vos Informations et votre demande d'abonnement a été envoyée avec succès. La vérification et la confirmation de votre compte se fera dans un délai d'un (01) jour ouvrable",
+                      //                       primaryColor,
+                      //                     );
+
+                      //                     Navigator.pushReplacement(
+                      //                       context,
+                      //                       MaterialPageRoute(
+                      //                         builder: (context) => MyHomePage(
+                      //                           userInfo: UtilFunctions.getUserInfo(),
+                      //                         ),
+                      //                       ),
+                      //                     );
+                      //                   } catch (e) {
+                      //                     UtilFunctions.showFlashMessage(
+                      //                       'Oups! Une erreur est survenue\nVeuillez réessayer',
+                      //                       Colors.orange,
+                      //                     );
+                      //                   }
+                      //                 },
+                      //                 child: Container(
+                      //                   height: 40,
+                      //                   width: 200,
+                      //                   alignment: Alignment.center,
+                      //                   padding: const EdgeInsets.symmetric(
+                      //                     vertical: 10.0,
+                      //                     horizontal: 50.0,
+                      //                   ),
+                      //                   margin: const EdgeInsets.symmetric(
+                      //                     vertical: 10.0,
+                      //                   ),
+                      //                   decoration: BoxDecoration(
+                      //                     color: primaryColor,
+                      //                     borderRadius: BorderRadius.circular(10.0),
+                      //                   ),
+                      //                   child: const Text(
+                      //                     "S'abonner",
+                      //                     style: TextStyle(
+                      //                       color: Colors.white,
+                      //                     ),
+                      //                   ),
+                      //                 ),
+                      //               )
+                      //             ],
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   );
+                      // }
+
+                      child: Container(
+                        height: 40,
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10.0,
+                          horizontal: 50.0,
+                        ),
+                        margin: const EdgeInsets.symmetric(vertical: 10.0),
+                        decoration: BoxDecoration(
+                          color: primaryColor,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: const Text(
+                          "S'inscrire",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Container(
-              height: 40,
-              alignment: Alignment.center,
-              padding: const EdgeInsets.symmetric(
-                vertical: 10.0,
-                horizontal: 50.0,
-              ),
-              margin: const EdgeInsets.symmetric(vertical: 10.0),
-              decoration: BoxDecoration(
-                color: primaryColor.withOpacity(.5),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: const Text(
-                'Annuler',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: () async {
-              if (!isLoading) {
-                if (!_signUpFormKey.currentState!.validate()) {
-                  return;
-                }
-
-                await createUserWithEmailAndPassword();
-              }
-            },
-            //   showModalBottomSheet(
-            //     context: context,
-            //     shape: const RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.only(
-            //         topLeft: Radius.circular(
-            //           20,
-            //         ),
-            //         topRight: Radius.circular(
-            //           20,
-            //         ),
-            //       ),
-            //     ),
-            //     builder: (context) => Padding(
-            //       padding: const EdgeInsets.symmetric(
-            //         horizontal: 10.0,
-            //       ),
-            //       child: Form(
-            //         key: paymentFormKey,
-            //         child: SingleChildScrollView(
-            //           child: Column(
-            //             children: [
-            //               Container(
-            //                 height: 5,
-            //                 width: 50,
-            //                 margin: const EdgeInsets.symmetric(
-            //                   vertical: 5.0,
-            //                 ),
-            //                 decoration: BoxDecoration(
-            //                   color: primaryColor,
-            //                   borderRadius: BorderRadius.circular(
-            //                     1000,
-            //                   ),
-            //                 ),
-            //               ),
-            //               const SizedBox(
-            //                 height: 10,
-            //               ),
-            //               const Text('Merci de choisir Shop App'),
-            //               const SizedBox(
-            //                 height: 20,
-            //               ),
-            //               Container(
-            //                 height: 100,
-            //                 width: 250,
-            //                 alignment: Alignment.center,
-            //                 padding: const EdgeInsets.all(10.0),
-            //                 decoration: BoxDecoration(
-            //                   color: primaryColor,
-            //                   borderRadius: BorderRadius.circular(
-            //                     10.0,
-            //                   ),
-            //                 ),
-            //                 child: const Row(
-            //                   mainAxisAlignment:
-            //                       MainAxisAlignment.spaceEvenly,
-            //                   children: [
-            //                     Text(
-            //                       'XAF',
-            //                       style: TextStyle(
-            //                         fontSize: 18,
-            //                         color: Colors.white,
-            //                       ),
-            //                     ),
-            //                     Text(
-            //                       '3000',
-            //                       style: TextStyle(
-            //                         fontSize: 40,
-            //                         color: Colors.white,
-            //                       ),
-            //                     ),
-            //                     Text(
-            //                       '/mois',
-            //                       style: TextStyle(
-            //                         fontSize: 18,
-            //                         color: Colors.white,
-            //                       ),
-            //                     ),
-            //                   ],
-            //                 ),
-            //               ),
-            //               const SizedBox(
-            //                 height: 20,
-            //               ),
-            //               Row(
-            //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //                 children: [
-            //                   Expanded(
-            //                     child: DropdownButtonFormField(
-            //                       style: const TextStyle(
-            //                         fontSize: 10,
-            //                         height: 0.5,
-            //                       ),
-            //                       decoration: const InputDecoration(
-            //                         contentPadding: EdgeInsets.only(
-            //                           left: 10.0,
-            //                           bottom: 10.0,
-            //                         ),
-            //                         enabledBorder: OutlineInputBorder(
-            //                           borderSide: BorderSide(
-            //                             color: primaryColor,
-            //                           ),
-            //                         ),
-            //                         errorBorder: OutlineInputBorder(
-            //                           borderSide: BorderSide(
-            //                             color: primaryColor,
-            //                           ),
-            //                         ),
-            //                         focusedErrorBorder: OutlineInputBorder(
-            //                           borderSide: BorderSide(
-            //                             color: primaryColor,
-            //                           ),
-            //                         ),
-            //                         focusedBorder: OutlineInputBorder(
-            //                           borderSide: BorderSide(
-            //                             color: primaryColor,
-            //                           ),
-            //                         ),
-            //                         hintText: 'choose',
-            //                       ),
-            //                       value: paymentMethod,
-            //                       validator: (value) => value == null
-            //                           ? 'Veuillez choisir un type'
-            //                           : null,
-            //                       items: const <DropdownMenuItem<String?>>[
-            //                         DropdownMenuItem(
-            //                           value: 'Orange Money',
-            //                           child: Text(
-            //                             'Orange Money',
-            //                             style: TextStyle(
-            //                               color: primaryColor,
-            //                               fontSize: 16,
-            //                               fontFamily: 'Monstserrat',
-            //                             ),
-            //                           ),
-            //                         ),
-            //                         DropdownMenuItem(
-            //                           value: 'MTN MoMo',
-            //                           child: Text(
-            //                             'MTN MoMo',
-            //                             style: TextStyle(
-            //                               color: primaryColor,
-            //                               fontSize: 16,
-            //                               fontFamily: 'Monstserrat',
-            //                             ),
-            //                           ),
-            //                         ),
-            //                       ],
-            //                       onChanged: (newValue) {
-            //                         setState(() {
-            //                           paymentMethod = newValue!;
-            //                         });
-            //                       },
-            //                     ),
-            //                   ),
-            //                   const SizedBox(
-            //                     width: 10,
-            //                   ),
-            //                   SizedBox(
-            //                     width: widget.deviceSize.width / 2.5,
-            //                     child: TextFormField(
-            //                       controller: paymentphone,
-            //                       cursorColor: primaryColor,
-            //                       keyboardType: TextInputType.number,
-            //                       decoration: InputDecoration(
-            //                         label: Text('Numéro $paymentMethod'),
-            //                         contentPadding: const EdgeInsets.only(
-            //                           left: 10.0,
-            //                           bottom: 10.0,
-            //                         ),
-            //                         enabledBorder: const OutlineInputBorder(
-            //                           borderSide: BorderSide(
-            //                             color: primaryColor,
-            //                           ),
-            //                         ),
-            //                         errorBorder: const OutlineInputBorder(
-            //                           borderSide: BorderSide(
-            //                             color: primaryColor,
-            //                           ),
-            //                         ),
-            //                         focusedErrorBorder:
-            //                             const OutlineInputBorder(
-            //                           borderSide: BorderSide(
-            //                             color: primaryColor,
-            //                           ),
-            //                         ),
-            //                         focusedBorder: const OutlineInputBorder(
-            //                           borderSide: BorderSide(
-            //                             color: primaryColor,
-            //                           ),
-            //                         ),
-            //                       ),
-            //                       validator: RequiredValidator(
-            //                         errorText:
-            //                             'Veuillez renseigner cet élément',
-            //                       ),
-            //                     ),
-            //                   ),
-            //                 ],
-            //               ),
-            //               const SizedBox(
-            //                 height: 20,
-            //               ),
-            //               TextFormField(
-            //                 controller: paymentName,
-            //                 cursorColor: primaryColor,
-            //                 keyboardType: TextInputType.text,
-            //                 decoration: InputDecoration(
-            //                   label: Text('Nom $paymentMethod'),
-            //                   contentPadding: const EdgeInsets.only(
-            //                     left: 10.0,
-            //                     bottom: 10.0,
-            //                   ),
-            //                   enabledBorder: const OutlineInputBorder(
-            //                     borderSide: BorderSide(
-            //                       color: primaryColor,
-            //                     ),
-            //                   ),
-            //                   errorBorder: const OutlineInputBorder(
-            //                     borderSide: BorderSide(
-            //                       color: primaryColor,
-            //                     ),
-            //                   ),
-            //                   focusedErrorBorder: const OutlineInputBorder(
-            //                     borderSide: BorderSide(
-            //                       color: primaryColor,
-            //                     ),
-            //                   ),
-            //                   focusedBorder: const OutlineInputBorder(
-            //                     borderSide: BorderSide(
-            //                       color: primaryColor,
-            //                     ),
-            //                   ),
-            //                 ),
-            //                 validator: RequiredValidator(
-            //                   errorText: 'Veuillez renseigner cet élément',
-            //                 ),
-            //               ),
-            //               InkWell(
-            //                 onTap: () async {
-            //                   if (!paymentFormKey.currentState!.validate()) {
-            //                     UtilFunctions.showFlashMessage(
-            //                       'Veuillez remplir tous les champs !!!',
-            //                       Colors.red,
-            //                     );
-            //                     return;
-            //                   }
-            //                   final Map<String, dynamic> userLoginInfo = [
-            //                     userType!,
-            //                     name.text,
-            //                     phone.text,
-            //                     whatsapp.text,
-            //                     email.text,
-            //                     password.text,
-            //                     // Payment info
-            //                     paymentMethod!,
-            //                     paymentphone.text,
-            //                     paymentName.text,
-            //                   ];
-            //                   try {
-            //                     await UtilFunctions.setUserInfo(
-            //                         userLoginInfo);
-            //                     await UtilFunctions.setFirstTime(true);
-
-            //                     UtilFunctions.showFlashMessage(
-            //                       "Vos Informations et votre demande d'abonnement a été envoyée avec succès. La vérification et la confirmation de votre compte se fera dans un délai d'un (01) jour ouvrable",
-            //                       primaryColor,
-            //                     );
-
-            //                     Navigator.pushReplacement(
-            //                       context,
-            //                       MaterialPageRoute(
-            //                         builder: (context) => MyHomePage(
-            //                           userInfo: UtilFunctions.getUserInfo(),
-            //                         ),
-            //                       ),
-            //                     );
-            //                   } catch (e) {
-            //                     UtilFunctions.showFlashMessage(
-            //                       'Oups! Une erreur est survenue\nVeuillez réessayer',
-            //                       Colors.orange,
-            //                     );
-            //                   }
-            //                 },
-            //                 child: Container(
-            //                   height: 40,
-            //                   width: 200,
-            //                   alignment: Alignment.center,
-            //                   padding: const EdgeInsets.symmetric(
-            //                     vertical: 10.0,
-            //                     horizontal: 50.0,
-            //                   ),
-            //                   margin: const EdgeInsets.symmetric(
-            //                     vertical: 10.0,
-            //                   ),
-            //                   decoration: BoxDecoration(
-            //                     color: primaryColor,
-            //                     borderRadius: BorderRadius.circular(10.0),
-            //                   ),
-            //                   child: const Text(
-            //                     "S'abonner",
-            //                     style: TextStyle(
-            //                       color: Colors.white,
-            //                     ),
-            //                   ),
-            //                 ),
-            //               )
-            //             ],
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   );
-            // }
-
-            child: Container(
-              height: 40,
-              alignment: Alignment.center,
-              padding: const EdgeInsets.symmetric(
-                vertical: 10.0,
-                horizontal: 50.0,
-              ),
-              margin: const EdgeInsets.symmetric(vertical: 10.0),
-              decoration: BoxDecoration(
-                color: primaryColor,
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: const Text(
-                "S'inscrire",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

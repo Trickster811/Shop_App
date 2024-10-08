@@ -9,9 +9,9 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shop_app/utils/firebase_options.dart';
-import 'package:shop_app/utils/utils.dart';
-import 'package:shop_app/welcome_pages/loading_page.dart';
+import 'package:b_shop/utils/firebase_options.dart';
+import 'package:b_shop/utils/utils.dart';
+import 'package:b_shop/welcome_pages/loading_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

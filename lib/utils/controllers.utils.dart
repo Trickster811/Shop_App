@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shop_app/utils/utils.dart';
+import 'package:b_shop/utils/utils.dart';
 
 class Article {
   // Global variable to store articles

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop_app/utils/utils.dart';
+import 'package:b_shop/utils/utils.dart';
 
 class ImageViewScreen extends StatefulWidget {
   final List imageLink;

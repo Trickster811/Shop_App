@@ -1,6 +1,6 @@
 {
-    "name": "shop_app",
-    "short_name": "shop_app",
+    "name": "b_shop",
+    "short_name": "b_shop",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#hexcode",

@@ -3,10 +3,10 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:shop_app/screens/components/image_view_page.dart';
-import 'package:shop_app/screens/components/new_post_page.dart';
-import 'package:shop_app/screens/shop_page.dart';
-import 'package:shop_app/utils/utils.dart';
+import 'package:b_shop/screens/components/image_view_page.dart';
+import 'package:b_shop/screens/components/new_post_page.dart';
+import 'package:b_shop/screens/shop_page.dart';
+import 'package:b_shop/utils/utils.dart';
 
 class MyPostScreen extends StatefulWidget {
   const MyPostScreen({

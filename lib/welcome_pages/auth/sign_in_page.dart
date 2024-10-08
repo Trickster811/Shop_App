@@ -2,10 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:shop_app/utils/controllers.utils.dart';
-import 'package:shop_app/utils/utils.dart';
-import 'package:shop_app/welcome_pages/auth/sign_up_page.dart';
-import 'package:shop_app/welcome_pages/start_page.dart';
+import 'package:b_shop/utils/controllers.utils.dart';
+import 'package:b_shop/utils/utils.dart';
+import 'package:b_shop/welcome_pages/auth/sign_up_page.dart';
+import 'package:b_shop/welcome_pages/start_page.dart';
 
 class SignInScreen extends StatefulWidget {
   final Map<String, dynamic> userInfo;
@@ -289,83 +289,85 @@ class _SignInScreenState extends State<SignInScreen> {
                   ],
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 100,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        height: 40,
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10.0,
+                          horizontal: 50.0,
+                        ),
+                        margin: const EdgeInsets.symmetric(vertical: 10.0),
+                        decoration: BoxDecoration(
+                          color: primaryColor.withOpacity(.5),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: const Text(
+                          'Annuler',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () async {
+                        // if (!_signInFormKey.currentState!.validate()) {
+                        //   return UtilFunctions.showFlashMessage(
+                        //     'Veuillez remplir tous les champs !!!',
+                        //     Colors.red,
+                        //   );
+                        // }
+
+                        if (_signInFormKey.currentState!.validate() &&
+                            !isLoading) {
+                          await signInWithEmailAndPassword();
+                        }
+                      },
+                      child: Container(
+                        height: 40,
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10.0,
+                          horizontal: 30.0,
+                        ),
+                        margin: const EdgeInsets.symmetric(vertical: 10.0),
+                        decoration: BoxDecoration(
+                          color: primaryColor,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: isLoading
+                            ? SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2.0,
+                                  color:
+                                      Theme.of(context).scaffoldBackgroundColor,
+                                ),
+                              )
+                            : const Text(
+                                'Se Connecter',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Container(
-              height: 40,
-              alignment: Alignment.center,
-              padding: const EdgeInsets.symmetric(
-                vertical: 10.0,
-                horizontal: 50.0,
-              ),
-              margin: const EdgeInsets.symmetric(vertical: 10.0),
-              decoration: BoxDecoration(
-                color: primaryColor.withOpacity(.5),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: const Text(
-                'Annuler',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: () async {
-              // if (!_signInFormKey.currentState!.validate()) {
-              //   return UtilFunctions.showFlashMessage(
-              //     'Veuillez remplir tous les champs !!!',
-              //     Colors.red,
-              //   );
-              // }
-
-              if (_signInFormKey.currentState!.validate() && !isLoading) {
-                await signInWithEmailAndPassword();
-              }
-            },
-            child: Container(
-              height: 40,
-              alignment: Alignment.center,
-              padding: const EdgeInsets.symmetric(
-                vertical: 10.0,
-                horizontal: 30.0,
-              ),
-              margin: const EdgeInsets.symmetric(vertical: 10.0),
-              decoration: BoxDecoration(
-                color: primaryColor,
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: isLoading
-                  ? SizedBox(
-                      height: 20,
-                      width: 20,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2.0,
-                        color: Theme.of(context).scaffoldBackgroundColor,
-                      ),
-                    )
-                  : const Text(
-                      'Se Connecter',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-            ),
-          ),
-        ],
       ),
     );
   }

@@ -3,8 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-import 'package:shop_app/screens/components/image_view_page.dart';
-import 'package:shop_app/utils/utils.dart';
+import 'package:b_shop/screens/components/image_view_page.dart';
+import 'package:b_shop/utils/utils.dart';
 
 class RestaurantScreen extends StatefulWidget {
   final Size deviceSize;
