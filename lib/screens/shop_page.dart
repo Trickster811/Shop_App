@@ -85,18 +85,6 @@ class _ShopScreenState extends State<ShopScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> toolBarElement = [
-      'All',
-      'Ordinateurs',
-      'Telephones',
-      'Vetements',
-      'Electro-menager',
-      'Chaussures',
-      'Gadgets',
-      'Cuisine',
-      'Divers',
-    ];
-
     final List test = [
       const AdsObjects(
         imageLink: [
@@ -190,7 +178,8 @@ class _ShopScreenState extends State<ShopScreen> {
                           'Pas d\'accès internet',
                           style: TextStyle(
                             fontSize: 15,
-                            fontFamily: 'Monstserrat',fontWeight:FontWeight.w700,
+                            fontFamily: 'Monstserrat',
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                         const SizedBox(
@@ -252,7 +241,8 @@ class _ShopScreenState extends State<ShopScreen> {
                                 'Aucune Category à afficher',
                                 style: TextStyle(
                                   fontSize: 15,
-                                  fontFamily: 'Monstserrat',fontWeight:FontWeight.w700,
+                                  fontFamily: 'Monstserrat',
+                                  fontWeight: FontWeight.w700,
                                 ),
                               ),
                               const SizedBox(

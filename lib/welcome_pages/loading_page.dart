@@ -76,7 +76,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
           right: -MediaQuery.of(context).size.width * 0.8,
           bottom: 0,
           child: Image.asset(
-            'assets/images/butterfly-logo-minim.png',
+            'assets/images/butterfly_company_logo.png',
             color: Colors.white.withOpacity(0.4),
             // colorBlendMode: BlendMode.modulate,
             // width: MediaQuery.of(context).size.width * 3,

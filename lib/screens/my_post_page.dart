@@ -7,7 +7,6 @@ import 'package:shop_app/screens/components/image_view_page.dart';
 import 'package:shop_app/screens/components/new_post_page.dart';
 import 'package:shop_app/screens/shop_page.dart';
 import 'package:shop_app/utils/utils.dart';
-import 'package:shop_app/welcome_pages/start_page.dart';
 
 class MyPostScreen extends StatefulWidget {
   const MyPostScreen({
@@ -745,38 +744,38 @@ class _MyPostScreenState extends State<MyPostScreen>
                                       );
                                       return;
                                     }
-                                    widget.userLoginInfo[0] = 'Entreprise';
-                                    widget.userLoginInfo = [
-                                      // Payment info
-                                      paymentMethod!,
-                                      paymentphone.text,
-                                      paymentName.text,
-                                    ];
-                                    try {
-                                      await UtilFunctions.setUserInfo(
-                                          widget.userLoginInfo);
-                                      await UtilFunctions.setFirstTime(true);
+                                    // widget.userLoginInfo[0] = 'Entreprise';
+                                    // widget.userLoginInfo = [
+                                    //   // Payment info
+                                    //   paymentMethod!,
+                                    //   paymentphone.text,
+                                    //   paymentName.text,
+                                    // ];
+                                    // try {
+                                    //   await UtilFunctions.setUserInfo(
+                                    //       widget.userLoginInfo);
+                                    //   await UtilFunctions.setFirstTime(true);
 
-                                      UtilFunctions.showFlashMessage(
-                                        "Votre demande d'abonnement a été envoyée avec succès. La vérification et la confirmation de votre compte se fera dans un délai d'un (01) jour ouvrable",
-                                        primaryColor,
-                                      );
+                                    //   UtilFunctions.showFlashMessage(
+                                    //     "Votre demande d'abonnement a été envoyée avec succès. La vérification et la confirmation de votre compte se fera dans un délai d'un (01) jour ouvrable",
+                                    //     primaryColor,
+                                    //   );
 
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => MyHomePage(
-                                            userInfo:
-                                                UtilFunctions.getUserInfo(),
-                                          ),
-                                        ),
-                                      );
-                                    } catch (e) {
-                                      UtilFunctions.showFlashMessage(
-                                        'Oups! Une erreur est survenue\nVeuillez réessayer',
-                                        Colors.orange,
-                                      );
-                                    }
+                                    //   Navigator.pushReplacement(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //       builder: (context) => MyHomePage(
+                                    //         userInfo:
+                                    //             UtilFunctions.getUserInfo(),
+                                    //       ),
+                                    //     ),
+                                    //   );
+                                    // } catch (e) {
+                                    //   UtilFunctions.showFlashMessage(
+                                    //     'Oups! Une erreur est survenue\nVeuillez réessayer',
+                                    //     Colors.orange,
+                                    //   );
+                                    // }
                                   },
                                   child: Container(
                                     height: 40,

@@ -3,13 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:shop_app/utils/controllers.utils.dart';
 import 'package:shop_app/utils/utils.dart';
 import 'package:shop_app/welcome_pages/auth/sign_in_page.dart';
 import 'package:shop_app/welcome_pages/loading_page.dart';
-import 'package:shop_app/welcome_pages/start_page.dart';
 
 class SignUpScreen extends StatefulWidget {
   final List<String>? userInfo;
