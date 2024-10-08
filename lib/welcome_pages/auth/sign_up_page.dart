@@ -13,10 +13,10 @@ class SignUpScreen extends StatefulWidget {
   final List<String>? userInfo;
   final Size deviceSize;
   const SignUpScreen({
-    Key? key,
+    super.key,
     required this.userInfo,
     required this.deviceSize,
-  }) : super(key: key);
+  });
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();

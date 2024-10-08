@@ -6,8 +6,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   Future<void> _launchUrl(Uri url) async {
     await launchUrl(
@@ -91,7 +91,7 @@ class AboutScreen extends StatelessWidget {
                   const SizedBox(),
                   const Spacer(),
                   Image.asset(
-                    'assets/images/butterfly-logo-minim.png',
+                    'assets/images/butterfly_logo_minim.png',
                     height: 65,
                     width: 65,
                   ),

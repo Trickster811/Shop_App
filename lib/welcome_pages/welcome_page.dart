@@ -6,9 +6,9 @@ import 'package:b_shop/welcome_pages/auth/sign_in_page.dart';
 class WelcomeScreen extends StatelessWidget {
   final Map<String, dynamic> userInfo;
   const WelcomeScreen({
-    Key? key,
+    super.key,
     required this.userInfo,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -282,9 +282,9 @@ class WelcomeScreen extends StatelessWidget {
 
 class AppDecriptionScreen extends StatelessWidget {
   const AppDecriptionScreen({
-    Key? key,
+    super.key,
     required this.userInfo,
-  }) : super(key: key);
+  });
 
   final Map<String, dynamic> userInfo;
 
@@ -555,9 +555,9 @@ class AppDecriptionScreen extends StatelessWidget {
 
 class StartScreen extends StatelessWidget {
   const StartScreen({
-    Key? key,
+    super.key,
     required this.userInfo,
-  }) : super(key: key);
+  });
 
   final Map<String, dynamic> userInfo;
 

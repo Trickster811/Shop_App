@@ -8,11 +8,11 @@ class ImageViewScreen extends StatefulWidget {
   final bool fileImage;
 
   const ImageViewScreen({
-    Key? key,
+    super.key,
     required this.imageLink,
     required this.deviceSize,
     required this.fileImage,
-  }) : super(key: key);
+  });
 
   @override
   State<ImageViewScreen> createState() => _ImageViewScreenState();

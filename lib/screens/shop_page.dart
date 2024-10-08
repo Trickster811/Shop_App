@@ -11,9 +11,9 @@ import 'package:b_shop/utils/utils.dart';
 
 class ShopScreen extends StatefulWidget {
   const ShopScreen({
-    Key? key,
+    super.key,
     required this.deviceSize,
-  }) : super(key: key);
+  });
   final Size deviceSize;
 
   @override
@@ -33,7 +33,7 @@ class _ShopScreenState extends State<ShopScreen> {
   bool _hasNextCategory = true;
 
   // To check if have remaining article data in our cloud firestore
-  bool _hasNextArticle = true;
+  final bool _hasNextArticle = true;
 
   final scrollController = ScrollController();
   bool internetAccess = true;

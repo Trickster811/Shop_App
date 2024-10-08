@@ -10,10 +10,10 @@ import 'package:b_shop/utils/utils.dart';
 
 class MyPostScreen extends StatefulWidget {
   const MyPostScreen({
-    Key? key,
+    super.key,
     required this.deviceSize,
     required this.userLoginInfo,
-  }) : super(key: key);
+  });
   final Size deviceSize;
   final Map<String, dynamic> userLoginInfo;
 
@@ -381,7 +381,7 @@ class _MyPostScreenState extends State<MyPostScreen>
                                   validator: RequiredValidator(
                                     errorText:
                                         'Veuillez renseigner cet élément',
-                                  ),
+                                  ).call,
                                 ),
                                 const SizedBox(
                                   height: 10,
@@ -427,7 +427,7 @@ class _MyPostScreenState extends State<MyPostScreen>
                                   validator: RequiredValidator(
                                     errorText:
                                         'Veuillez renseigner cet élément',
-                                  ),
+                                  ).call,
                                 ),
                                 const SizedBox(
                                   height: 10,
@@ -473,7 +473,7 @@ class _MyPostScreenState extends State<MyPostScreen>
                                   validator: RequiredValidator(
                                     errorText:
                                         'Veuillez renseigner cet élément',
-                                  ),
+                                  ).call,
                                 ),
                                 const SizedBox(
                                   height: 10,
@@ -519,7 +519,7 @@ class _MyPostScreenState extends State<MyPostScreen>
                                   validator: RequiredValidator(
                                     errorText:
                                         'Veuillez renseigner cet élément',
-                                  ),
+                                  ).call,
                                 ),
                                 const SizedBox(
                                   height: 10,
@@ -689,7 +689,7 @@ class _MyPostScreenState extends State<MyPostScreen>
                                         validator: RequiredValidator(
                                           errorText:
                                               'Veuillez renseigner cet élément',
-                                        ),
+                                        ).call,
                                       ),
                                     ),
                                   ],
@@ -732,7 +732,7 @@ class _MyPostScreenState extends State<MyPostScreen>
                                   validator: RequiredValidator(
                                     errorText:
                                         'Veuillez renseigner cet élément',
-                                  ),
+                                  ).call,
                                 ),
                                 InkWell(
                                   onTap: () async {

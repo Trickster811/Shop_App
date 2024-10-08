@@ -4,9 +4,9 @@ import 'package:b_shop/utils/utils.dart';
 
 class ResearchScreen extends StatelessWidget {
   const ResearchScreen({
-    Key? key,
+    super.key,
     required this.deviceSize,
-  }) : super(key: key);
+  });
   final Size deviceSize;
   @override
   Widget build(BuildContext context) {

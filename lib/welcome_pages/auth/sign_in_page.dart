@@ -10,9 +10,9 @@ import 'package:b_shop/welcome_pages/start_page.dart';
 class SignInScreen extends StatefulWidget {
   final Map<String, dynamic> userInfo;
   const SignInScreen({
-    Key? key,
+    super.key,
     required this.userInfo,
-  }) : super(key: key);
+  });
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -213,7 +213,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   validator: RequiredValidator(
                     errorText: 'Veuillez renseigner cet élément',
-                  ),
+                  ).call,
                 ),
                 const SizedBox(
                   height: 10,
@@ -255,7 +255,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   validator: RequiredValidator(
                     errorText: 'Veuillez renseigner cet élément',
-                  ),
+                  ).call,
                 ),
                 const SizedBox(
                   height: 30,

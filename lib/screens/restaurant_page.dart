@@ -10,9 +10,9 @@ class RestaurantScreen extends StatefulWidget {
   final Size deviceSize;
 
   const RestaurantScreen({
-    Key? key,
+    super.key,
     required this.deviceSize,
-  }) : super(key: key);
+  });
 
   @override
   State<RestaurantScreen> createState() => _RestaurantScreenState();
@@ -423,7 +423,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                                   validator: RequiredValidator(
                                                     errorText:
                                                         'Veuillez renseigner votre nom',
-                                                  ),
+                                                  ).call,
                                                 ),
                                                 const SizedBox(
                                                   height: 20.0,
@@ -491,7 +491,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                                   validator: RequiredValidator(
                                                     errorText:
                                                         'Veuillez renseigner votre position',
-                                                  ),
+                                                  ).call,
                                                 ),
                                                 const SizedBox(
                                                   height: 20.0,
@@ -558,7 +558,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                                   validator: RequiredValidator(
                                                     errorText:
                                                         'Veuillez renseigner votre Nom OM | MoMo',
-                                                  ),
+                                                  ).call,
                                                 ),
                                                 const SizedBox(
                                                   height: 20.0,

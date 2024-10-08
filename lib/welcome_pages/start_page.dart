@@ -16,9 +16,9 @@ class MyHomePage extends StatefulWidget {
   final Map<String, dynamic> userInfo;
 
   const MyHomePage({
-    Key? key,
+    super.key,
     required this.userInfo,
-  }) : super(key: key);
+  });
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }

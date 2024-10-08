@@ -42,7 +42,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyBps_642Bzp4KbGVOtSPAoB2G4REs-OUKo',
-    appId: '1:107950135645:web:ff0272e6e578da0c4070b4',
+    appId: '1:107950135645:web:100c8e2e5f1eeb3c4070b4',
     messagingSenderId: '107950135645',
     projectId: 'b-shop24',
     authDomain: 'b-shop24.firebaseapp.com',
@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyArDE_mUuLoIwhIvcmVZUWblgl2DuyXL1w',
-    appId: '1:107950135645:android:3b2e353eabc4ed984070b4',
+    appId: '1:107950135645:android:19c6b4df733d85c24070b4',
     messagingSenderId: '107950135645',
     projectId: 'b-shop24',
     storageBucket: 'b-shop24.appspot.com',
@@ -59,28 +59,29 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyC8f2Vzp3dJDLncff-wIiZuZKU0Fc5i3lg',
-    appId: '1:107950135645:ios:d88318acbe70f2954070b4',
+    appId: '1:107950135645:ios:ec66fdb15923df844070b4',
     messagingSenderId: '107950135645',
     projectId: 'b-shop24',
     storageBucket: 'b-shop24.appspot.com',
-    iosBundleId: 'com.example.shopApp',
+    iosBundleId: 'com.example.bShop',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyC8f2Vzp3dJDLncff-wIiZuZKU0Fc5i3lg',
-    appId: '1:107950135645:ios:d88318acbe70f2954070b4',
+    appId: '1:107950135645:ios:ec66fdb15923df844070b4',
     messagingSenderId: '107950135645',
     projectId: 'b-shop24',
     storageBucket: 'b-shop24.appspot.com',
-    iosBundleId: 'com.example.shopApp',
+    iosBundleId: 'com.example.bShop',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
     apiKey: 'AIzaSyBps_642Bzp4KbGVOtSPAoB2G4REs-OUKo',
-    appId: '1:107950135645:web:b42ba3810c06a0af4070b4',
+    appId: '1:107950135645:web:6bd71e321d0b8f0f4070b4',
     messagingSenderId: '107950135645',
     projectId: 'b-shop24',
     authDomain: 'b-shop24.firebaseapp.com',
     storageBucket: 'b-shop24.appspot.com',
   );
+
 }

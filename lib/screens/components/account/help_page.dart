@@ -3,8 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class HelpScreen extends StatefulWidget {
   const HelpScreen({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<HelpScreen> createState() => _HelpScreenState();

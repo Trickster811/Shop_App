@@ -11,11 +11,11 @@ import 'package:b_shop/welcome_pages/auth/sign_out_page.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({
-    Key? key,
+    super.key,
     required this.appBarHeightSize,
     required this.deviceSize,
     required this.userLoginInfo,
-  }) : super(key: key);
+  });
   final double appBarHeightSize;
   final Size deviceSize;
   final Map<String, dynamic> userLoginInfo;

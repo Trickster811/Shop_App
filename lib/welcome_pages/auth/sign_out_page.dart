@@ -7,7 +7,7 @@ import 'package:b_shop/utils/utils.dart';
 import 'package:b_shop/welcome_pages/auth/sign_in_page.dart';
 
 class DeconnexionScreen extends StatefulWidget {
-  const DeconnexionScreen({Key? key}) : super(key: key);
+  const DeconnexionScreen({super.key});
 
   @override
   State<DeconnexionScreen> createState() => _DeconnexionScreenState();

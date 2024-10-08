@@ -12,11 +12,11 @@ import 'package:b_shop/utils/utils.dart';
 
 class NewPostScreen extends StatefulWidget {
   const NewPostScreen({
-    Key? key,
+    super.key,
     required this.deviceSize,
     this.adsObjets,
     this.firstTimeIndex,
-  }) : super(key: key);
+  });
   final Size deviceSize;
   final AdsObjects? adsObjets;
   final bool? firstTimeIndex;
@@ -1303,7 +1303,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
       ),
       validator: RequiredValidator(
         errorText: 'Veuillez renseigner cet élément',
-      ),
+      ).call,
     );
   }
 

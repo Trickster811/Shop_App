@@ -8,10 +8,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 class DetailsPostScreen extends StatefulWidget {
   const DetailsPostScreen({
-    Key? key,
+    super.key,
     required this.adsObjects,
     required this.deviceSize,
-  }) : super(key: key);
+  });
 
   final AdsObjects adsObjects;
   final Size deviceSize;

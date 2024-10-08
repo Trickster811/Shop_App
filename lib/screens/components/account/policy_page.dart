@@ -3,8 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class PolicyScreen extends StatelessWidget {
   const PolicyScreen({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

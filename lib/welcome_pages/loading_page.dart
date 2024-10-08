@@ -8,9 +8,9 @@ import 'package:b_shop/welcome_pages/welcome_page.dart';
 class LoadingScreen extends StatefulWidget {
   final Map<String, dynamic> userInfo;
   const LoadingScreen({
-    Key? key,
+    super.key,
     required this.userInfo,
-  }) : super(key: key);
+  });
 
   @override
   State<LoadingScreen> createState() => _LoadingScreenState();
@@ -90,7 +90,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
               children: [
                 const Spacer(),
                 Image.asset(
-                  'assets/images/butterfly-logo-minim.png',
+                  'assets/images/butterfly_logo_minim.png',
                   height: 100,
                   width: 100,
                 ),
