@@ -1,11 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:shop_app/utils/controllers.utils.dart';
 import 'package:shop_app/utils/utils.dart';
 import 'package:shop_app/welcome_pages/auth/sign_up_page.dart';
 import 'package:shop_app/welcome_pages/start_page.dart';
 
 class SignInScreen extends StatefulWidget {
-  final List<String>? userInfo;
+  final Map<String, dynamic> userInfo;
   const SignInScreen({
     Key? key,
     required this.userInfo,
@@ -16,42 +19,90 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  bool isLoading = false;
   // Variables to get user entries
-  final email = TextEditingController();
-
-  final password = TextEditingController();
+  final _controllerEmail = TextEditingController();
+  final _controllerPassword = TextEditingController();
 
   // Form key
-  final _formKey = GlobalKey<FormState>();
+  final _signInFormKey = GlobalKey<FormState>();
 
   String? userType;
 
-  List<DropdownMenuItem<String>> get userTypeList {
-    List<DropdownMenuItem<String>> items = [
-      const DropdownMenuItem(
-        value: "Client",
-        child: Text(
-          "Client",
-          style: TextStyle(
-            color: primaryColor,
-            fontSize: 16,
-            fontFamily: 'Comfortaa',
+  Future<void> signInWithEmailAndPassword() async {
+    try {
+      if (!await Internet.checkInternetAccess()) {
+        UtilFunctions.showFlashMessage(
+          'Pas d\'internet',
+          Colors.blue,
+        );
+        return;
+      }
+      setState(() {
+        isLoading = true;
+      });
+      User? userSignedIn = await Auth.signInWithEmailAndPassword(
+        email: _controllerEmail.text.trim(),
+        password: _controllerPassword.text.trim(),
+      );
+      if (userSignedIn != null) {
+        // print(userSignedIn);
+        UserAccount.localSaving().then(
+          (value) => showCupertinoModalPopup(
+            context: context,
+            builder: (context) => CupertinoActionSheet(
+              title: Text(
+                'Bon retour M/Mme ${userSignedIn.displayName!.substring(0, userSignedIn.displayName!.indexOf('|'))}!!',
+                style: const TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+              message: const Text(
+                'Vos informations ont été validées avec succès',
+                style: TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+              actions: [
+                CupertinoActionSheetAction(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MyHomePage(
+                          userInfo: {
+                            'userType': userSignedIn.displayName!.substring(
+                                userSignedIn.displayName!.indexOf('|') + 1),
+                            'username': userSignedIn.displayName!.substring(
+                                0, userSignedIn.displayName!.indexOf('|')),
+                            'phone': userSignedIn.phoneNumber,
+                            'email': userSignedIn.email,
+                            'photoURL': userSignedIn.photoURL,
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    'Continuer d\'utiliser B-Shop',
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ),
-      const DropdownMenuItem(
-        value: "Entreprise",
-        child: Text(
-          "Entreprise",
-          style: TextStyle(
-            color: primaryColor,
-            fontSize: 16,
-            fontFamily: 'Comfortaa',
-          ),
-        ),
-      ),
-    ];
-    return items;
+        );
+      }
+      setState(() {
+        isLoading = false;
+      });
+    } on FirebaseAuthException catch (e) {
+      debugPrint(
+        e.message,
+      );
+    }
   }
 
   @override
@@ -63,7 +114,7 @@ class _SignInScreenState extends State<SignInScreen> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Form(
-            key: _formKey,
+            key: _signInFormKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -125,58 +176,10 @@ class _SignInScreenState extends State<SignInScreen> {
                   padding: EdgeInsets.symmetric(
                     vertical: 5.0,
                   ),
-                  child: Text('Utilisateur'),
+                  child: Text('Email'),
                 ),
-                DropdownButtonFormField(
-                  style: const TextStyle(
-                    fontSize: 10,
-                    height: 0.5,
-                  ),
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.only(
-                      left: 10.0,
-                      bottom: 10.0,
-                    ),
-                    filled: true,
-                    fillColor: primaryColor.withOpacity(0.1),
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                      ),
-                    ),
-                    errorBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                      ),
-                    ),
-                    focusedErrorBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                      ),
-                    ),
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                      ),
-                    ),
-                    hintText: 'choose',
-                  ),
-                  value: userType,
-                  validator: (value) =>
-                      value == null ? 'Veuillez choisir un type' : null,
-                  items: userTypeList,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      userType = newValue!;
-                    });
-                  },
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text('Email'),
                 TextFormField(
-                  controller: email,
+                  controller: _controllerEmail,
                   cursorColor: primaryColor,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
@@ -217,7 +220,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 const Text('Mot de passe'),
                 TextFormField(
-                  controller: password,
+                  controller: _controllerPassword,
                   cursorColor: primaryColor,
                   obscureText: true,
                   keyboardType: TextInputType.visiblePassword,
@@ -322,50 +325,15 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
           InkWell(
             onTap: () async {
-              if (!_formKey.currentState!.validate()) {
-                return UtilFunctions.showFlashMessage(
-                  'Veuillez remplir tous les champs !!!',
-                  Colors.red,
-                );
-              }
+              // if (!_signInFormKey.currentState!.validate()) {
+              //   return UtilFunctions.showFlashMessage(
+              //     'Veuillez remplir tous les champs !!!',
+              //     Colors.red,
+              //   );
+              // }
 
-              final List<String> userLoginInfo = [
-                userType!,
-                email.text,
-                password.text,
-              ];
-              try {
-                final List<String> userInfo =
-                    await UtilFunctions.setUserInfo(userLoginInfo);
-                if (userInfo.isEmpty) {
-                  return UtilFunctions.showFlashMessage(
-                    'Aucun compte existant avec cet email !!',
-                    Colors.orange,
-                  );
-                }
-                for (var element in userInfo) {
-                  if (element != userLoginInfo[userInfo.indexOf(element)]) {
-                    return UtilFunctions.showFlashMessage(
-                      'Email ou Mot de passe incorrect',
-                      Colors.red,
-                    );
-                  }
-                }
-                await UtilFunctions.setFirstTime(true);
-                //redirecting
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MyHomePage(
-                      userInfo: userLoginInfo,
-                    ),
-                  ),
-                );
-              } catch (e) {
-                UtilFunctions.showFlashMessage(
-                  'Aucun compte existant avec cet email !!',
-                  Colors.orange,
-                );
+              if (_signInFormKey.currentState!.validate() && !isLoading) {
+                await signInWithEmailAndPassword();
               }
             },
             child: Container(
@@ -380,12 +348,21 @@ class _SignInScreenState extends State<SignInScreen> {
                 color: primaryColor,
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child: const Text(
-                'Se Connecter',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
+              child: isLoading
+                  ? SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2.0,
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                      ),
+                    )
+                  : const Text(
+                      'Se Connecter',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
             ),
           ),
         ],

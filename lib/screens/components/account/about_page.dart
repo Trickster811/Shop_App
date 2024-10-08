@@ -51,7 +51,8 @@ class AboutScreen extends StatelessWidget {
           style: TextStyle(
             color: Theme.of(context).iconTheme.color,
             fontSize: 25,
-            fontFamily: 'Comfortaa_bold',
+            fontFamily: 'Monstserrat',
+            fontWeight: FontWeight.w700,
           ),
         ),
         actions: [
@@ -76,7 +77,7 @@ class AboutScreen extends StatelessWidget {
             bottom: 0,
             child: Image.asset(
               'assets/images/butterfly_company_logo.png',
-              color: Color.fromARGB(255, 153, 51, 51).withOpacity(0.2),
+              color: const Color.fromARGB(255, 153, 51, 51).withOpacity(0.2),
               // colorBlendMode: BlendMode.modulate,
               // width: MediaQuery.of(context).size.width * 3,
               height: MediaQuery.of(context).size.height * 0.65,
@@ -125,7 +126,7 @@ class AboutScreen extends StatelessWidget {
                   const Text(
                     'Liens',
                     style: TextStyle(
-                      fontFamily: 'Comfortaa_bold',
+                      fontFamily: 'Monstserrat', fontWeight: FontWeight.w700,
                       // color: Colors.black45,
                     ),
                   ),

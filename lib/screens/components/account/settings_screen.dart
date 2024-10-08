@@ -60,7 +60,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           style: TextStyle(
             color: Theme.of(context).iconTheme.color,
             fontSize: 25,
-            fontFamily: 'Comfortaa_bold',
+            fontFamily: 'Monstserrat',
+            fontWeight: FontWeight.w700,
           ),
         ),
       ),
@@ -78,7 +79,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 style: TextStyle(
                   // color: kPrimaryColor,
                   fontSize: 15,
-                  fontFamily: 'Comfortaa_bold',
+                  fontFamily: 'Monstserrat', fontWeight: FontWeight.w700,
                 ),
               ),
               const SizedBox(
@@ -118,7 +119,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 style: TextStyle(
                   // color: kPrimaryColor,
                   fontSize: 15,
-                  fontFamily: 'Comfortaa_bold',
+                  fontFamily: 'Monstserrat', fontWeight: FontWeight.w700,
                 ),
               ),
               const SizedBox(
@@ -206,7 +207,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     style: const TextStyle(
                       // color: kPrimaryColor,
                       fontSize: 15,
-                      fontFamily: 'Comfortaa_regular',
+                      fontFamily: 'Montserrat',
                     ),
                   ),
                   SvgPicture.asset(

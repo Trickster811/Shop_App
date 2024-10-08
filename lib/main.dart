@@ -5,8 +5,11 @@
 // ************************************************************
 // ************************************************************
 
+import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shop_app/utils/firebase_options.dart';
 import 'package:shop_app/utils/utils.dart';
 import 'package:shop_app/welcome_pages/loading_page.dart';
 
@@ -16,6 +19,15 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
+  // Initialize app with Firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  /// Add this line ! This is activates the AppCheck and should remove /// the reCaptcha and also automate the OTP verification.
+  await FirebaseAppCheck.instance.activate();
+
   await UtilFunctions.init();
 
   runApp(const MyApp());
@@ -29,7 +41,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<String>? userInfo;
+  late Map<String, dynamic> userInfo;
 
   @override
   void initState() {
@@ -46,7 +58,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: primaryColor,
-        fontFamily: 'Comfortaa',
+        fontFamily: 'Montserrat',
       ),
       home: LoadingScreen(
         userInfo: userInfo,

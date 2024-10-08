@@ -8,12 +8,12 @@ import 'package:shop_app/screens/my_post_page.dart';
 import 'package:shop_app/screens/account_page.dart';
 import 'package:shop_app/screens/research_page.dart';
 import 'package:shop_app/utils/utils.dart';
-import 'package:shop_app/welcome_pages/auth/disconnection.dart';
+import 'package:shop_app/welcome_pages/auth/sign_out_page.dart';
 import 'package:shop_app/welcome_pages/auth/sign_in_page.dart';
 // import 'package:stack_appodeal_flutter/stack_appodeal_flutter.dart';
 
 class MyHomePage extends StatefulWidget {
-  final List<String>? userInfo;
+  final Map<String, dynamic> userInfo;
 
   const MyHomePage({
     Key? key,
@@ -48,14 +48,14 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
     List<List> menuItemList = [
       [
-        widget.userInfo!.isNotEmpty
+        widget.userInfo.isNotEmpty
             ? 'assets/icons/logout.4.svg'
             : 'assets/icons/login.1.svg',
-        widget.userInfo!.isNotEmpty ? 'Deconnexion' : 'Se Connecter',
-        widget.userInfo!.isNotEmpty
+        widget.userInfo.isNotEmpty ? 'Deconnexion' : 'Se Connecter',
+        widget.userInfo.isNotEmpty
             ? const DeconnexionScreen()
             : const SignInScreen(
-                userInfo: [],
+                userInfo: {},
               ),
       ],
       [
@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       MyPostScreen(
         deviceSize: deviceSize,
-        userLoginInfo: widget.userInfo!,
+        userLoginInfo: widget.userInfo,
       ),
       ResearchScreen(
         deviceSize: deviceSize,
@@ -82,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ProfileScreen(
         appBarHeightSize: appBarHeightSize,
         deviceSize: deviceSize,
-        userLoginInfo: widget.userInfo!,
+        userLoginInfo: widget.userInfo,
       )
     ];
     return Scaffold(
@@ -106,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => OrderListScreen(),
+                    builder: (context) => const OrderListScreen(),
                   ),
                 )
               },

@@ -7,7 +7,7 @@ import 'package:shop_app/screens/components/account/policy_page.dart';
 import 'package:shop_app/screens/components/account/settings_screen.dart';
 import 'package:shop_app/screens/components/account/updates_pages.dart';
 import 'package:shop_app/utils/utils.dart';
-import 'package:shop_app/welcome_pages/auth/disconnection.dart';
+import 'package:shop_app/welcome_pages/auth/sign_out_page.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({
@@ -18,7 +18,7 @@ class ProfileScreen extends StatefulWidget {
   }) : super(key: key);
   final double appBarHeightSize;
   final Size deviceSize;
-  final List<String> userLoginInfo;
+  final Map<String, dynamic> userLoginInfo;
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -270,7 +270,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: const TextStyle(
                         // color: kPrimaryColor,
                         fontSize: 15,
-                        fontFamily: 'Comfortaa_regular',
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                     SvgPicture.asset(

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shop_app/utils/controllers.utils.dart';
 import 'package:shop_app/utils/utils.dart';
 import 'package:shop_app/welcome_pages/auth/sign_in_page.dart';
 
@@ -91,7 +92,7 @@ class _DeconnexionScreenState extends State<DeconnexionScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => const SignInScreen(
-                            userInfo: [],
+                            userInfo: {},
                           ),
                         ),
                       );
@@ -116,12 +117,17 @@ class _DeconnexionScreenState extends State<DeconnexionScreen> {
                   InkWell(
                     onTap: () async {
                       try {
-                        await UtilFunctions.setUserInfo(['', '', '']);
+                        Auth.signOut().then(
+                          (signOut) async {
+                            await UtilFunctions.setUserInfo({});
 
-                        await UtilFunctions.setFirstTime(false);
-                        debugPrint('object');
-                        //restarting the application
-                        Platform.isAndroid ? SystemNavigator.pop() : exit(0);
+                            await UtilFunctions.setFirstTime(false);
+                            //restarting the application
+                            Platform.isAndroid
+                                ? SystemNavigator.pop()
+                                : exit(0);
+                          },
+                        );
                       } catch (e) {
                         UtilFunctions.showFlashMessage(
                           'Oups! Une erreur est survenue\nVeuillez réessayer !!',

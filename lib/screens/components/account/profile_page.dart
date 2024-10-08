@@ -31,7 +31,8 @@ class ProfileScreen extends StatelessWidget {
           style: TextStyle(
             color: Theme.of(context).iconTheme.color,
             fontSize: 25,
-            fontFamily: 'Comfortaa_bold',
+            fontFamily: 'Monstserrat',
+            fontWeight: FontWeight.w700,
           ),
         ),
         actions: const [],

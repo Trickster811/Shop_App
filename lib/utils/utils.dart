@@ -1,8 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart';
@@ -41,12 +44,24 @@ class UtilFunctions {
 
   static bool? getFirstTime() => _preferences.getBool('firstTime');
 
-  static Future setUserInfo(List<String> userInfo) async {
-    await _preferences.setStringList('userInfo', userInfo);
+  static Future setUserInfo(Map<String, dynamic> userInfo) async {
+    await _preferences.setString('userInfo', jsonEncode(userInfo));
+    return getUserInfo();
   }
 
-  static List<String>? getUserInfo() => _preferences.getStringList('userInfo');
+  static Map<String, dynamic> getUserInfo() =>
+      jsonDecode(_preferences.getString('userInfo') ?? "{}");
 
+  static Future setAppLanguage(String appLanguage) async {
+    await _preferences.setString('appLanguage', appLanguage);
+  }
+
+  static String getAppLanguage() =>
+      _preferences.getString('appLanguage') ?? 'en';
+
+  ///////////////////////////
+  /// Manage Document
+  ///////////////////////////
   static saveDocument({required String name, required document}) async {
     Directory? directory;
 
@@ -176,7 +191,7 @@ class UtilFunctions {
             item[1],
             style: const TextStyle(
               fontSize: 15,
-              fontFamily: 'Comfortaa_bold',
+              fontFamily: 'Monstserrat', fontWeight: FontWeight.w700,
               // color: Colors.white,
             ),
           ),
@@ -204,7 +219,7 @@ class UtilFunctions {
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 14,
-            fontFamily: 'Comfortaa_bold',
+            fontFamily: 'Monstserrat', fontWeight: FontWeight.w700,
             // color: Theme.of(context).iconTheme.color,
           ),
         ),
@@ -215,5 +230,33 @@ class UtilFunctions {
     messagerKey.currentState!
       ..removeCurrentSnackBar()
       ..showSnackBar(snackBar);
+  }
+
+  //
+  static String formatLikeCount(int count) {
+    if (count < 1000) {
+      return count.toString(); // No abbreviation needed
+    } else if (count < 1000000) {
+      final kCount = (count / 1000).toStringAsFixed(1);
+      return '${kCount}k'; // Abbreviate thousands
+    } else {
+      final mCount = (count / 1000000).toStringAsFixed(1);
+      return '${mCount}M'; // Abbreviate millions
+    }
+  }
+}
+
+class Internet {
+  static Future<bool> checkInternetAccess() async {
+    final connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      return false;
+    }
+    final isInternetPresent = await InternetConnectionChecker().hasConnection;
+    if (!isInternetPresent) {
+      return false;
+    }
+
+    return true;
   }
 }

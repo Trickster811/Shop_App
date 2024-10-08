@@ -16,7 +16,7 @@ class MyPostScreen extends StatefulWidget {
     required this.userLoginInfo,
   }) : super(key: key);
   final Size deviceSize;
-  final List<String> userLoginInfo;
+  final Map<String, dynamic> userLoginInfo;
 
   @override
   State<MyPostScreen> createState() => _MyPostScreenState();
@@ -327,7 +327,7 @@ class _MyPostScreenState extends State<MyPostScreen>
                                         style: TextStyle(
                                           color: primaryColor,
                                           fontSize: 16,
-                                          fontFamily: 'Comfortaa',
+                                          fontFamily: 'Monstserrat',
                                         ),
                                       ),
                                     ),
@@ -625,7 +625,7 @@ class _MyPostScreenState extends State<MyPostScreen>
                                               style: TextStyle(
                                                 color: primaryColor,
                                                 fontSize: 16,
-                                                fontFamily: 'Comfortaa',
+                                                fontFamily: 'Monstserrat',
                                               ),
                                             ),
                                           ),
@@ -636,7 +636,7 @@ class _MyPostScreenState extends State<MyPostScreen>
                                               style: TextStyle(
                                                 color: primaryColor,
                                                 fontSize: 16,
-                                                fontFamily: 'Comfortaa',
+                                                fontFamily: 'Monstserrat',
                                               ),
                                             ),
                                           ),
@@ -746,12 +746,12 @@ class _MyPostScreenState extends State<MyPostScreen>
                                       return;
                                     }
                                     widget.userLoginInfo[0] = 'Entreprise';
-                                    widget.userLoginInfo.addAll([
+                                    widget.userLoginInfo = [
                                       // Payment info
                                       paymentMethod!,
                                       paymentphone.text,
                                       paymentName.text,
-                                    ]);
+                                    ];
                                     try {
                                       await UtilFunctions.setUserInfo(
                                           widget.userLoginInfo);

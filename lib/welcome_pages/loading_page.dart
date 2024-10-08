@@ -6,7 +6,7 @@ import 'package:shop_app/welcome_pages/start_page.dart';
 import 'package:shop_app/welcome_pages/welcome_page.dart';
 
 class LoadingScreen extends StatefulWidget {
-  final List<String>? userInfo;
+  final Map<String, dynamic> userInfo;
   const LoadingScreen({
     Key? key,
     required this.userInfo,
@@ -101,7 +101,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                   'B-Shop',
                   style: TextStyle(
                     fontSize: 15,
-                    // fontFamily: 'Comfortaa_bold',
+                    // fontFamily: 'Monstserrat',fontWeight:FontWeight.w700,
                   ),
                 ),
                 const SizedBox(
@@ -111,7 +111,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                   'Application Publicitaire',
                   style: TextStyle(
                     fontSize: 10,
-                    // fontFamily: 'Comfortaa_bold',
+                    // fontFamily: 'Monstserrat',fontWeight:FontWeight.w700,
                     // color: Colors.black45,
                   ),
                 ),

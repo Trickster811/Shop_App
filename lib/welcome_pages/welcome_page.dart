@@ -4,7 +4,7 @@ import 'package:shop_app/utils/utils.dart';
 import 'package:shop_app/welcome_pages/auth/sign_in_page.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  final List<String>? userInfo;
+  final Map<String, dynamic> userInfo;
   const WelcomeScreen({
     Key? key,
     required this.userInfo,
@@ -286,7 +286,7 @@ class AppDecriptionScreen extends StatelessWidget {
     required this.userInfo,
   }) : super(key: key);
 
-  final List<String>? userInfo;
+  final Map<String, dynamic> userInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -559,7 +559,7 @@ class StartScreen extends StatelessWidget {
     required this.userInfo,
   }) : super(key: key);
 
-  final List<String>? userInfo;
+  final Map<String, dynamic> userInfo;
 
   @override
   Widget build(BuildContext context) {

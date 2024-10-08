@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="480" height="480" viewBox="0 0 480 480" xml:space="preserve">
+<desc>Created with Fabric.js 3.6.6</desc>
+<defs>
+</defs>
+<g transform="matrix(2.26 0 0 2.26 240.3 240.01)"  >
+<g style=""   >
+		<g transform="matrix(3.43 0 0 3.43 10.34 44.81)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"  transform=" translate(-35.02, -45.06)" d="M 55.15 30.13 c -1.02 0 -1.85 0.84 -1.85 1.87 c 0 5.74 -2.22 11.14 -6.24 15.19 c -4.02 4.05 -9.37 6.28 -15.06 6.28 c -4.63 0 -9.01 -1.49 -12.65 -4.22 l 6.87 -0.56 c 0.49 -0.04 0.94 -0.27 1.26 -0.65 c 0.32 -0.38 0.47 -0.86 0.43 -1.36 c -0.04 -0.5 -0.28 -0.97 -0.66 -1.29 c -0.38 -0.32 -0.85 -0.47 -1.33 -0.42 l -10.98 0.9 c -0.3 -0.01 -0.6 0.06 -0.88 0.2 c 0 0 0 0 -0.01 0 c -0.08 0.04 -0.17 0.09 -0.24 0.15 c -0.03 0.02 -0.05 0.04 -0.07 0.06 c -0.03 0.02 -0.06 0.04 -0.09 0.07 c -0.03 0.02 -0.05 0.05 -0.07 0.08 c -0.04 0.04 -0.08 0.09 -0.12 0.14 c -0.03 0.04 -0.06 0.07 -0.08 0.11 c -0.22 0.31 -0.35 0.67 -0.35 1.07 v 10.38 c 0 1.03 0.83 1.87 1.85 1.87 s 1.85 -0.84 1.85 -1.87 v -6.17 c 4.36 3.41 9.67 5.26 15.27 5.26 c 6.68 0 12.96 -2.62 17.68 -7.39 C 54.4 45.07 57 38.74 57 32 C 57 30.97 56.17 30.13 55.15 30.13 z" stroke-linecap="round" />
+</g>
+		<g transform="matrix(3.43 0 0 3.43 -10.34 -44.81)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"  transform=" translate(-28.99, -18.93)" d="M 32 10.52 c 4.63 0 9.01 1.49 12.65 4.22 l -6.87 0.56 c -0.49 0.04 -0.94 0.27 -1.26 0.65 c -0.32 0.38 -0.47 0.86 -0.43 1.36 c 0.08 0.96 0.89 1.72 1.84 1.72 l 11.09 -0.9 c 0 0 0 0 0 0 c 0.43 0.03 0.84 -0.11 1.18 -0.37 c 0.02 -0.01 0.04 -0.03 0.05 -0.04 c 0.03 -0.03 0.07 -0.05 0.1 -0.07 c 0.03 -0.02 0.05 -0.05 0.07 -0.08 c 0.04 -0.04 0.08 -0.09 0.12 -0.14 c 0.03 -0.04 0.06 -0.07 0.08 -0.11 c 0.22 -0.31 0.35 -0.67 0.35 -1.07 V 5.87 c 0 -1.03 -0.83 -1.87 -1.85 -1.87 s -1.85 0.84 -1.85 1.87 v 6.17 C 42.92 8.63 37.6 6.78 32 6.78 c -6.68 0 -12.96 2.62 -17.68 7.39 C 9.6 18.93 7 25.26 7 32 c 0 1.03 0.83 1.87 1.85 1.87 S 10.7 33.03 10.7 32 c 0 -5.74 2.22 -11.14 6.24 -15.19 C 20.96 12.75 26.3 10.52 32 10.52 z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+</svg>

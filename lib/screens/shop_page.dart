@@ -1,9 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:shop_app/screens/components/details_post_page.dart';
 import 'package:shop_app/screens/components/image_view_page.dart';
+import 'package:shop_app/utils/controllers.utils.dart';
 import 'package:shop_app/utils/utils.dart';
 // import 'package:stack_appodeal_flutter/stack_appodeal_flutter.dart';
 
@@ -19,13 +21,66 @@ class ShopScreen extends StatefulWidget {
 }
 
 class _ShopScreenState extends State<ShopScreen> {
+  int documentLimit = 15;
+
+  // Check the app is currently fetching articles data
+  bool isFetchingArticles = false;
+
+  // Check the app is currently fetching Catrgories data
+  bool isFetchingCategories = false;
+
+  // To check if have remaining category data in our cloud firestore
+  bool _hasNextCategory = true;
+
+  // To check if have remaining article data in our cloud firestore
+  bool _hasNextArticle = true;
+
+  final scrollController = ScrollController();
+  bool internetAccess = true;
+
+  // List of categories
+  List<DocumentSnapshot<Object?>> categoryToDisplay = Category.categorySnapshot;
+
+  // List of articles to display depending on the filter configuration
+  List<DocumentSnapshot<Object?>> articlesToDisplay = [];
+
+  // The current displayed category
   String currentDisplayedCategory = 'All';
   Future<void> _handleScreenRefreshing() async {
-    return await Future.delayed(
+    articlesToDisplay = [];
+    Article.articlesSnapshot = [];
+    // retreiveHomes();
+    await Future.delayed(
       const Duration(
         seconds: 2,
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(scrollListener);
+    if (Category.categorySnapshot.isNotEmpty) {
+      filterArticlesForDisplay();
+    } else {
+      retreiveCategories();
+    }
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  void scrollListener() {
+    if (scrollController.offset >=
+            scrollController.position.maxScrollExtent / 2 &&
+        !scrollController.position.outOfRange &&
+        _hasNextCategory) {
+      retreiveCategories();
+    }
   }
 
   @override
@@ -41,6 +96,7 @@ class _ShopScreenState extends State<ShopScreen> {
       'Cuisine',
       'Divers',
     ];
+
     final List test = [
       const AdsObjects(
         imageLink: [
@@ -110,11 +166,127 @@ class _ShopScreenState extends State<ShopScreen> {
           scrollDirection: Axis.horizontal,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Row(
-              children: [
-                for (var item in toolBarElement) toolBarElementBuilder(item),
-              ],
-            ),
+            child: !internetAccess
+                ? Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.of(context).size.height / 1.5,
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/icons/no-internet.svg',
+                          colorFilter: ColorFilter.mode(
+                            Theme.of(context).iconTheme.color!,
+                            BlendMode.srcIn,
+                          ),
+                          height: 75,
+                          width: 75,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text(
+                          'Pas d\'accès internet',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: 'Monstserrat',fontWeight:FontWeight.w700,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          // alignment: Alignment.center,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 40.0,
+                            vertical: 10.0,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).iconTheme.color,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                internetAccess = true;
+                              });
+                              retreiveCategories();
+                            },
+                            child: Text(
+                              'Réessayer',
+                              style: TextStyle(
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : categoryToDisplay.isEmpty && !_hasNextCategory
+                    ? Container(
+                        alignment: Alignment.center,
+                        height: MediaQuery.of(context).size.height / 1.5,
+                        width: MediaQuery.of(context).size.width,
+                        child: GestureDetector(
+                          onTap: retreiveCategories,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/icons/no-data.svg',
+                                colorFilter: ColorFilter.mode(
+                                  Theme.of(context).iconTheme.color!,
+                                  BlendMode.srcIn,
+                                ),
+                                height: 75,
+                                width: 75,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              const Text(
+                                'Aucune Category à afficher',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontFamily: 'Monstserrat',fontWeight:FontWeight.w700,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                // alignment: Alignment.center,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 40.0,
+                                  vertical: 10.0,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).iconTheme.color,
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Text(
+                                  'Actualiser',
+                                  style: TextStyle(
+                                    color: Theme.of(context)
+                                        .scaffoldBackgroundColor,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    : Row(
+                        children: [
+                          for (var item in categoryToDisplay)
+                            toolBarElementBuilder(item['name']),
+                        ],
+                      ),
           ),
         ),
         Expanded(
@@ -124,13 +296,130 @@ class _ShopScreenState extends State<ShopScreen> {
             height: 300,
             animSpeedFactor: 2.0,
             showChildOpacityTransition: false,
-            child: ListView.builder(
-              itemCount: test.length,
-              itemBuilder: (context, index) => adsItemBuilder(
-                adsObjects: test[index],
-                deviceSize: widget.deviceSize,
-              ),
-            ),
+            child: !internetAccess
+                ? Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.of(context).size.height / 1.5,
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/icons/no-internet.svg',
+                          colorFilter: const ColorFilter.mode(
+                            Colors.black,
+                            BlendMode.srcIn,
+                          ),
+                          height: 75,
+                          width: 75,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text(
+                          'Pas d\'accès internet',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          // alignment: Alignment.center,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 40.0,
+                            vertical: 10.0,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).iconTheme.color,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                internetAccess = true;
+                              });
+                              // retreiveHomes();
+                            },
+                            child: Text(
+                              'Réessayer',
+                              style: TextStyle(
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : articlesToDisplay.isEmpty && !_hasNextArticle
+                    ? Container(
+                        alignment: Alignment.center,
+                        height: MediaQuery.of(context).size.height / 1.5,
+                        width: MediaQuery.of(context).size.width,
+                        child: GestureDetector(
+                          // onTap: retreiveHomes,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/icons/no-data.svg',
+                                colorFilter: ColorFilter.mode(
+                                  Theme.of(context).iconTheme.color!,
+                                  BlendMode.srcIn,
+                                ),
+                                height: 75,
+                                width: 75,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              const Text(
+                                'Aucune Article à afficher',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                // alignment: Alignment.center,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 40.0,
+                                  vertical: 10.0,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).iconTheme.color,
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Text(
+                                  'Actualiser',
+                                  style: TextStyle(
+                                    color: Theme.of(context)
+                                        .scaffoldBackgroundColor,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    : ListView.builder(
+                        itemCount: test.length,
+                        itemBuilder: (context, index) => adsItemBuilder(
+                          adsObjects: test[index],
+                          deviceSize: widget.deviceSize,
+                        ),
+                      ),
           ),
         ),
       ],
@@ -398,7 +687,7 @@ class _ShopScreenState extends State<ShopScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('125.5k'),
+                          Text(UtilFunctions.formatLikeCount(135098)),
                           const SizedBox(
                             width: 10.0,
                           ),
@@ -479,6 +768,76 @@ class _ShopScreenState extends State<ShopScreen> {
         ],
       ),
     );
+  }
+
+  Future retreiveCategories() async {
+    if (!await Internet.checkInternetAccess()) {
+      setState(() {
+        internetAccess = false;
+      });
+      return;
+    }
+
+    if (isFetchingCategories) return;
+    setState(() {
+      isFetchingCategories = true;
+    });
+
+    if (!_hasNextCategory) {
+      setState(() {
+        _hasNextCategory = true;
+      });
+    }
+
+    try {
+      // if (refresh) {
+      // await HomeFinder.getHomes(
+      //   documentLimit,
+      // );
+      // } else {
+      await Category.getCategories(
+        documentLimit,
+        startAfter: Category.categorySnapshot.isNotEmpty
+            ? Category.categorySnapshot.last
+            : null,
+      );
+      // }
+      if (Category.categorySnapshot.isNotEmpty) {
+        filterArticlesForDisplay();
+      }
+      if (Category.categorySnapshot.length < documentLimit) {
+        setState(() {
+          _hasNextCategory = false;
+        });
+      }
+    } on FirebaseException catch (errno) {
+      debugPrint(errno.code.toString());
+      UtilFunctions.showFlashMessage(
+        errno.message.toString(),
+        Colors.red,
+      );
+      setState(() {
+        _hasNextCategory = false;
+      });
+    }
+    setState(() {
+      isFetchingCategories = false;
+    });
+  }
+
+  Future filterArticlesForDisplay() async {
+    articlesToDisplay = [];
+    articlesToDisplay.addAll(
+      Article.articlesSnapshot.where(
+        (house) {
+          return true;
+          // return house['tradeCategory'] ==
+          //     widget.houseFilteredDisplay['MaxMonthlyRent'];
+        },
+      ),
+    );
+
+    // setState(() {});
   }
 }
 
