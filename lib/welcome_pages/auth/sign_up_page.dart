@@ -27,9 +27,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool showPassword = false;
 
   // Variables to get user entries
-  String _controllerUserType = "";
+  String? _controllerUserType;
   final _controllerUsername = TextEditingController();
-  String _controllerTown = '';
+  String? _controllerTown;
   final _controllerPhone = TextEditingController();
   final _controllerWhatsapp = TextEditingController();
   final _controllerEmail = TextEditingController();
@@ -174,23 +174,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       color: primaryColor,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    child: Column(
+                    child: const Column(
                       children: [
                         Text(
-                          'Shop\nApp'.toUpperCase(),
+                          'B-Shop',
                           textAlign: TextAlign.center,
-                          textScaler: const TextScaler.linear(1.6),
-                          style: const TextStyle(
+                          textScaler: TextScaler.linear(1.6),
+                          style: TextStyle(
                             color: Colors.white,
                             fontSize: 25,
                             letterSpacing: 10,
                           ),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           height: 5.0,
                         ),
-                        const Text(
-                          'by MacNight_nj',
+                        Text(
+                          'by Butterfly',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 9,
@@ -209,164 +209,104 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 18,
-                      letterSpacing: 10,
+                      // letterSpacing: 10,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
                 const SizedBox(
                   height: 40,
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 5.0,
-                  ),
-                  child: Text('Compte'),
-                ),
                 DropdownButtonFormField(
-                  style: const TextStyle(
-                    fontSize: 10,
-                    height: 0.5,
-                  ),
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.only(
-                      left: 10.0,
-                      bottom: 10.0,
-                    ),
-                    filled: true,
-                    fillColor: primaryColor.withOpacity(0.1),
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                      ),
-                    ),
-                    errorBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                      ),
-                    ),
-                    focusedErrorBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                      ),
-                    ),
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                      ),
-                    ),
-                    hintText: 'choose',
-                  ),
-                  value: _controllerUserType,
-                  validator: (value) {
-                    if (value == "") {
-                      return 'Veuillez sélectionner le type de comtpe';
-                    }
-                    return null;
+                  onChanged: (value) {
+                    setState(() {
+                      _controllerUserType = value!;
+                    });
                   },
-                  items: const [
+                  items: [
                     DropdownMenuItem(
                       value: "Client",
                       child: Text(
-                        "Client",
+                        'Client',
                         style: TextStyle(
-                          color: primaryColor,
-                          fontSize: 16,
-                          fontFamily: 'Montserrat',
+                          color: Theme.of(context).iconTheme.color,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                     ),
                     DropdownMenuItem(
                       value: "Entreprise",
                       child: Text(
-                        "Entreprise",
+                        'Entreprise',
                         style: TextStyle(
-                          color: primaryColor,
-                          fontSize: 16,
-                          fontFamily: 'Montserrat',
+                          color: Theme.of(context).iconTheme.color,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                     ),
                     DropdownMenuItem(
                       value: "Restaurant",
                       child: Text(
-                        "Restaurant",
+                        'Restaurant',
                         style: TextStyle(
-                          color: primaryColor,
-                          fontSize: 16,
-                          fontFamily: 'Montserrat',
+                          color: Theme.of(context).iconTheme.color,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                     ),
                   ],
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      _controllerUserType = newValue!;
-                    });
+                  decoration: InputDecoration(
+                    icon: SvgPicture.asset(
+                      "assets/icons/work.4.svg",
+                      colorFilter: ColorFilter.mode(
+                        Theme.of(context).iconTheme.color!,
+                        BlendMode.srcIn,
+                      ),
+                      height: 26,
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context).iconTheme.color!,
+                      ),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context).iconTheme.color!,
+                      ),
+                    ),
+                    hintStyle: TextStyle(
+                      color: Theme.of(context).iconTheme.color,
+                      fontWeight: FontWeight.normal,
+                    ),
+                    hintText: 'ville',
+                  ),
+                  validator: (value) {
+                    if (value == "") {
+                      return 'Veuillez sélectionner le type de compte';
+                    }
+                    return null;
                   },
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                if (_controllerUserType == 'Entreprise' ||
-                    _controllerUserType == 'Restaurant') ...[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5.0),
-                    child: Text(_controllerUserType),
-                  ),
+                if (_controllerUserType != null &&
+                    _controllerUserType != 'Client') ...[
                   _entryField(
                     context,
                     'assets/icons/profile.4.svg',
-                    'nom d\'utilisateur',
+                    'Denomination',
                     _controllerUsername,
                     false,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5.0),
-                    child: Text('Siège'),
-                  ),
                   DropdownButtonFormField(
-                    style: const TextStyle(
-                      fontSize: 10,
-                      height: 0.5,
-                    ),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.only(
-                        left: 10.0,
-                        bottom: 10.0,
-                      ),
-                      filled: true,
-                      fillColor: primaryColor.withOpacity(0.1),
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
-                      errorBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
-                      focusedErrorBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
-                      hintText: 'choose',
-                    ),
-                    value: _controllerTown,
-                    validator: (value) {
-                      if (value == "") {
-                        return 'Veuillez sélectionner votre ville';
-                      }
-                      return null;
+                    onChanged: (value) {
+                      setState(() {
+                        _controllerTown = value!;
+                      });
                     },
                     items: [
                       DropdownMenuItem(
@@ -470,18 +410,40 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                     ],
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _controllerTown = newValue!;
-                      });
+                    decoration: InputDecoration(
+                      icon: SvgPicture.asset(
+                        "assets/icons/town.svg",
+                        colorFilter: ColorFilter.mode(
+                          Theme.of(context).iconTheme.color!,
+                          BlendMode.srcIn,
+                        ),
+                        height: 26,
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).iconTheme.color!,
+                        ),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).iconTheme.color!,
+                        ),
+                      ),
+                      hintStyle: TextStyle(
+                        color: Theme.of(context).iconTheme.color,
+                        fontWeight: FontWeight.normal,
+                      ),
+                      hintText: 'Ville',
+                    ),
+                    validator: (value) {
+                      if (value == "") {
+                        return 'Veuillez sélectionner votre ville';
+                      }
+                      return null;
                     },
                   ),
                   const SizedBox(
                     height: 10,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5.0),
-                    child: Text('Téléphone'),
                   ),
                   InternationalPhoneNumberInput(
                     selectorConfig: const SelectorConfig(
@@ -536,10 +498,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   const SizedBox(
                     height: 10,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5.0),
-                    child: Text('Whatsapp'),
                   ),
                   InternationalPhoneNumberInput(
                     selectorConfig: const SelectorConfig(
@@ -596,10 +554,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 10,
                   ),
                 ],
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 5.0),
-                  child: Text('Email'),
-                ),
                 _entryField(
                   context,
                   'assets/icons/message.svg',
@@ -609,10 +563,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(
                   height: 10,
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 5.0),
-                  child: Text('Mot de passe'),
                 ),
                 _entryField(
                   context,

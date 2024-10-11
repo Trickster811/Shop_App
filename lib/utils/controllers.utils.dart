@@ -10,7 +10,7 @@ class Article {
   // Global variable to store articles
   static List<DocumentSnapshot> articlesOwnerSnapshot = <DocumentSnapshot>[];
 
-  // Global variable to store house visit statistics
+  // Global variable to store Article visit statistics
   static List<Map<String, dynamic>> articlesVisitStats =
       <Map<String, dynamic>>[];
 
@@ -22,53 +22,53 @@ class Article {
       FirebaseFirestore.instance;
 
   // Retreives all articles stored in the database
-  static Future<void> getHomes(
+  static Future<void> getArticles(
     int limit, {
     DocumentSnapshot? startAfter,
     Object? ownerRef,
   }) async {
-    Query<Map<String, dynamic>>? refHomes;
+    Query<Map<String, dynamic>>? refArticles;
     QuerySnapshot? snaparticles;
 
     if (ownerRef != null) {
       print(ownerRef);
-      refHomes = _firebaseFirestore
-          .collection('Home')
+      refArticles = _firebaseFirestore
+          .collection('Article')
           .where(
             'ownerReference',
             isEqualTo: ownerRef,
           )
-          .orderBy('surfaceHome')
+          // .orderBy('surfaceArticle')
           .limit(limit);
       if (startAfter == null) {
-        snaparticles = await refHomes.get();
+        snaparticles = await refArticles.get();
       } else {
-        snaparticles = await refHomes.startAfterDocument(startAfter).get();
+        snaparticles = await refArticles.startAfterDocument(startAfter).get();
       }
 
       // Adding articles to global instances
       articlesOwnerSnapshot.addAll(snaparticles.docs);
     }
     if (ownerRef == null) {
-      refHomes = _firebaseFirestore
-          .collection('Home')
-          .orderBy('surfaceHome')
+      refArticles = _firebaseFirestore
+          .collection('Article')
+          // .orderBy('surfaceArticle')
           .limit(limit);
       if (startAfter == null) {
-        snaparticles = await refHomes.get();
+        snaparticles = await refArticles.get();
       } else {
-        snaparticles = await refHomes.startAfterDocument(startAfter).get();
+        snaparticles = await refArticles.startAfterDocument(startAfter).get();
       }
       // Adding articles to global instances
       articlesSnapshot.addAll(snaparticles.docs);
 
       articlesVisitStats.clear();
-      // Retreiving house visit statistics
+      // Retreiving article visit statistics
       for (dynamic item in articlesSnapshot.isNotEmpty
           ? articlesSnapshot
           : snaparticles.docs) {
-        final visitStat = await homeVisitsStatistics(
-          houseRef: item.id,
+        final visitStat = await articleVisitsStatistics(
+          articleRef: item.id,
         );
         articlesVisitStats.add({
           item.id: visitStat.data()?['visits'],
@@ -77,40 +77,46 @@ class Article {
     }
   }
 
-  // Retreive house owner informations
-  static Future<DocumentSnapshot> getHouseOwnerInformations({
+  // Retreive Article owner informations
+  static Future<DocumentSnapshot> getArticleOwnerInformations({
     required DocumentReference ownerRef,
   }) async {
     return await ownerRef.get();
   }
 
-  // Update house informations
-  static Future createNewHome({
+  // Update Article informations
+  static Future createNewArticle({
     required Map<String, dynamic> data,
   }) async {
-    return await _firebaseFirestore.collection('Home').doc().set(data);
+    return await _firebaseFirestore.collection('Article').doc().set(data);
   }
 
-  // Update house informations
-  static Future updateHome({
-    required String idHome,
+  // Update Article informations
+  static Future updateArticle({
+    required String idArticle,
     required Map<Object, Object?> data,
   }) async {
-    return await _firebaseFirestore.collection('Home').doc(idHome).update(data);
+    return await _firebaseFirestore
+        .collection('Article')
+        .doc(idArticle)
+        .update(data);
   }
 
-  // Delete house from database
-  static Future deleteHome({
-    required String houseRef,
+  // Delete Article from database
+  static Future deleteArticle({
+    required String articleRef,
   }) async {
-    return await _firebaseFirestore.collection('Home').doc(houseRef).delete();
+    return await _firebaseFirestore
+        .collection('Article')
+        .doc(articleRef)
+        .delete();
   }
 
-  // Get house visit statistics
-  static Future homeVisitsStatistics({
-    required String houseRef,
+  // Get Article visit statistics
+  static Future articleVisitsStatistics({
+    required String articleRef,
   }) async {
-    return await _firebaseFirestore.collection('Visit').doc(houseRef).get();
+    return await _firebaseFirestore.collection('Visit').doc(articleRef).get();
   }
 
   // Get user chats
@@ -165,14 +171,14 @@ class Category {
     categorySnapshot.addAll(snapcategory.docs);
   }
 
-  // Update house informations
+  // Update Article informations
   static Future createNewCategory({
     required Map<String, dynamic> data,
   }) async {
     return await _firebaseFirestore.collection('Category').doc().set(data);
   }
 
-  // Update house informations
+  // Update Article informations
   static Future updateCategory({
     required String idCategory,
     required Map<Object, Object?> data,
@@ -183,7 +189,7 @@ class Category {
         .update(data);
   }
 
-  // Delete house from database
+  // Delete Article from database
   static Future deleteCategory({
     required String categoryRef,
   }) async {

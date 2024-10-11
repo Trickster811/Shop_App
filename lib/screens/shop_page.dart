@@ -1,3 +1,4 @@
+import 'package:card_loading/card_loading.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class _ShopScreenState extends State<ShopScreen> {
   bool _hasNextCategory = true;
 
   // To check if have remaining article data in our cloud firestore
-  final bool _hasNextArticle = true;
+  bool _hasNextArticle = true;
 
   final scrollController = ScrollController();
   bool internetAccess = true;
@@ -41,15 +42,16 @@ class _ShopScreenState extends State<ShopScreen> {
   // List of categories
   List<DocumentSnapshot<Object?>> categoryToDisplay = Category.categorySnapshot;
 
+  // The current displayed category
+  String currentDisplayedCategory = '*';
+
   // List of articles to display depending on the filter configuration
   List<DocumentSnapshot<Object?>> articlesToDisplay = [];
 
-  // The current displayed category
-  String currentDisplayedCategory = 'All';
   Future<void> _handleScreenRefreshing() async {
     articlesToDisplay = [];
     Article.articlesSnapshot = [];
-    // retreiveHomes();
+    retreiveArticles();
     await Future.delayed(
       const Duration(
         seconds: 2,
@@ -281,136 +283,150 @@ class _ShopScreenState extends State<ShopScreen> {
         ),
         Expanded(
           child: LiquidPullToRefresh(
-            onRefresh: _handleScreenRefreshing,
-            // color: primaryColor,
-            height: 300,
-            animSpeedFactor: 2.0,
-            showChildOpacityTransition: false,
-            child: !internetAccess
-                ? Container(
-                    alignment: Alignment.center,
-                    height: MediaQuery.of(context).size.height / 1.5,
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/icons/no-internet.svg',
-                          colorFilter: const ColorFilter.mode(
-                            Colors.black,
-                            BlendMode.srcIn,
+              onRefresh: _handleScreenRefreshing,
+              // color: primaryColor,
+              height: 300,
+              animSpeedFactor: 2.0,
+              showChildOpacityTransition: false,
+              child: !internetAccess
+                  ? Container(
+                      alignment: Alignment.center,
+                      height: MediaQuery.of(context).size.height / 1.5,
+                      width: MediaQuery.of(context).size.width,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/icons/no-internet.svg',
+                            colorFilter: const ColorFilter.mode(
+                              Colors.black,
+                              BlendMode.srcIn,
+                            ),
+                            height: 75,
+                            width: 75,
                           ),
-                          height: 75,
-                          width: 75,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Text(
-                          'Pas d\'accès internet',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w700,
+                          const SizedBox(
+                            height: 10,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          // alignment: Alignment.center,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 40.0,
-                            vertical: 10.0,
+                          const Text(
+                            'Pas d\'accès internet',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).iconTheme.color,
-                            borderRadius: BorderRadius.circular(10.0),
+                          const SizedBox(
+                            height: 10,
                           ),
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                internetAccess = true;
-                              });
-                              // retreiveHomes();
-                            },
-                            child: Text(
-                              'Réessayer',
-                              style: TextStyle(
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor,
-                                fontSize: 16,
+                          Container(
+                            // alignment: Alignment.center,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 40.0,
+                              vertical: 10.0,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).iconTheme.color,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  internetAccess = true;
+                                });
+                                // retreiveHomes();
+                              },
+                              child: Text(
+                                'Réessayer',
+                                style: TextStyle(
+                                  color:
+                                      Theme.of(context).scaffoldBackgroundColor,
+                                  fontSize: 16,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                : articlesToDisplay.isEmpty && !_hasNextArticle
-                    ? Container(
-                        alignment: Alignment.center,
-                        height: MediaQuery.of(context).size.height / 1.5,
-                        width: MediaQuery.of(context).size.width,
-                        child: GestureDetector(
-                          // onTap: retreiveHomes,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                'assets/icons/no-data.svg',
-                                colorFilter: ColorFilter.mode(
-                                  Theme.of(context).iconTheme.color!,
-                                  BlendMode.srcIn,
+                        ],
+                      ),
+                    )
+                  : articlesToDisplay.isEmpty && !_hasNextArticle
+                      ? Container(
+                          alignment: Alignment.center,
+                          height: MediaQuery.of(context).size.height / 1.5,
+                          width: MediaQuery.of(context).size.width,
+                          child: GestureDetector(
+                            onTap: retreiveArticles,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/icons/no-data.svg',
+                                  colorFilter: ColorFilter.mode(
+                                    Theme.of(context).iconTheme.color!,
+                                    BlendMode.srcIn,
+                                  ),
+                                  height: 75,
+                                  width: 75,
                                 ),
-                                height: 75,
-                                width: 75,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              const Text(
-                                'Aucune Article à afficher',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontFamily: 'Montserrat',
-                                  fontWeight: FontWeight.w700,
+                                const SizedBox(
+                                  height: 10,
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Container(
-                                // alignment: Alignment.center,
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 40.0,
-                                  vertical: 10.0,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).iconTheme.color,
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Text(
-                                  'Actualiser',
+                                const Text(
+                                  'Aucune Article à afficher',
                                   style: TextStyle(
-                                    color: Theme.of(context)
-                                        .scaffoldBackgroundColor,
-                                    fontSize: 16,
+                                    fontSize: 15,
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.w700,
                                   ),
                                 ),
-                              ),
-                            ],
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Container(
+                                  // alignment: Alignment.center,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 40.0,
+                                    vertical: 10.0,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).iconTheme.color,
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Text(
+                                    'Actualiser',
+                                    style: TextStyle(
+                                      color: Theme.of(context)
+                                          .scaffoldBackgroundColor,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      )
-                    : ListView.builder(
-                        itemCount: test.length,
-                        itemBuilder: (context, index) => adsItemBuilder(
-                          adsObjects: test[index],
-                          deviceSize: widget.deviceSize,
-                        ),
-                      ),
-          ),
+                        )
+                      : Column(
+                          children: [
+                            for (DocumentSnapshot item in articlesToDisplay)
+                              if (item['isPublished'])
+                                adsItemBuilder(
+                                  adsObjects: AdsObjects(
+                                    imageLink: item['imageLink'],
+                                    productDescription:
+                                        item['productDescription'],
+                                    isPublished: item['isPublished'],
+                                    productName: item['productName'],
+                                    productPrice: item['productPrice'],
+                                    quantity: item['quantity:'],
+                                    tradeCategory: item['tradeCategory'],
+                                  ),
+                                  deviceSize: widget.deviceSize,
+                                ),
+                            if (_hasNextArticle) ...[
+                              for (var i = 0; i < 10; i++) cardLoadingBuilder(),
+                            ]
+                          ],
+                        )),
         ),
       ],
     );
@@ -419,22 +435,9 @@ class _ShopScreenState extends State<ShopScreen> {
   Widget toolBarElementBuilder(String title) {
     return InkWell(
       onTap: () async {
-        setState(() {});
-        // var ads = await UtilFunctions.showAppodealRewardedVideoAds();
-        // if (ads == 1)
-        //   UtilFunctions.showFlashMessage(
-        //     context,
-        //     'Appodeal not ready to Show Ads',
-        //     Colors.white60,
-        //     widget.deviceSize,
-        //   );
-        // if (ads == 2)
-        //   UtilFunctions.showFlashMessage(
-        //     context,
-        //     'Failed to Show Ads',
-        //     Colors.white60,
-        //     widget.deviceSize,
-        //   );
+        setState(() {
+          currentDisplayedCategory = title;
+        });
       },
       child: Row(
         children: [
@@ -780,21 +783,12 @@ class _ShopScreenState extends State<ShopScreen> {
     }
 
     try {
-      // if (refresh) {
-      // await HomeFinder.getHomes(
-      //   documentLimit,
-      // );
-      // } else {
       await Category.getCategories(
         documentLimit,
         startAfter: Category.categorySnapshot.isNotEmpty
             ? Category.categorySnapshot.last
             : null,
       );
-      // }
-      if (Category.categorySnapshot.isNotEmpty) {
-        filterArticlesForDisplay();
-      }
       if (Category.categorySnapshot.length < documentLimit) {
         setState(() {
           _hasNextCategory = false;
@@ -815,19 +809,163 @@ class _ShopScreenState extends State<ShopScreen> {
     });
   }
 
+  Future retreiveArticles() async {
+    if (!await Internet.checkInternetAccess()) {
+      setState(() {
+        internetAccess = false;
+      });
+      return;
+    }
+
+    if (isFetchingArticles) return;
+    setState(() {
+      isFetchingArticles = true;
+    });
+
+    if (!_hasNextArticle) {
+      setState(() {
+        _hasNextArticle = true;
+      });
+    }
+
+    try {
+      // if (refresh) {
+      // await HomeFinder.getHomes(
+      //   documentLimit,
+      // );
+      // } else {
+      await Article.getArticles(
+        documentLimit,
+        startAfter: Article.articlesSnapshot.isNotEmpty
+            ? Article.articlesSnapshot.last
+            : null,
+      );
+      // }
+      if (Article.articlesSnapshot.isNotEmpty) {
+        filterArticlesForDisplay();
+      }
+      if (Article.articlesSnapshot.length < documentLimit) {
+        setState(() {
+          _hasNextArticle = false;
+        });
+      }
+    } on FirebaseException catch (errno) {
+      debugPrint(errno.code.toString());
+      UtilFunctions.showFlashMessage(
+        errno.message.toString(),
+        Colors.red,
+      );
+      setState(() {
+        _hasNextArticle = false;
+      });
+    }
+    setState(() {
+      isFetchingArticles = false;
+    });
+  }
+
   Future filterArticlesForDisplay() async {
     articlesToDisplay = [];
     articlesToDisplay.addAll(
       Article.articlesSnapshot.where(
         (house) {
-          return true;
-          // return house['tradeCategory'] ==
-          //     widget.houseFilteredDisplay['MaxMonthlyRent'];
+          if (currentDisplayedCategory == '*') return true;
+          return house['tradeCategory'].toString().toLowerCase() ==
+              currentDisplayedCategory.toString().toLowerCase();
         },
       ),
     );
 
     // setState(() {});
+  }
+
+  Container cardLoadingBuilder() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 20.0),
+      height: 290,
+      child: const Column(
+        children: [
+          CardLoading(
+            height: 220,
+            borderRadius: BorderRadius.all(
+              Radius.circular(5.0),
+            ),
+            cardLoadingTheme: CardLoadingTheme(
+              colorOne: Color(0xFFE5E5E5),
+              colorTwo: Color(0xFFF0F0F0),
+            ),
+          ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CardLoading(
+                      height: 10,
+                      width: 100,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5.0),
+                      ),
+                      cardLoadingTheme: CardLoadingTheme(
+                        colorOne: Color(0xFFE5E5E5),
+                        colorTwo: Color(0xFFF0F0F0),
+                      ),
+                    ),
+                    CardLoading(
+                      height: 10,
+                      width: 60,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5.0),
+                      ),
+                      cardLoadingTheme: CardLoadingTheme(
+                        colorOne: Color(0xFFE5E5E5),
+                        colorTwo: Color(0xFFF0F0F0),
+                      ),
+                    ),
+                    CardLoading(
+                      height: 10,
+                      width: 90,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5.0),
+                      ),
+                      cardLoadingTheme: CardLoadingTheme(
+                        colorOne: Color(0xFFE5E5E5),
+                        colorTwo: Color(0xFFF0F0F0),
+                      ),
+                    ),
+                  ],
+                ),
+                CardLoading(
+                  height: 30,
+                  width: 150,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(5.0),
+                  ),
+                  cardLoadingTheme: CardLoadingTheme(
+                    colorOne: Color(0xFFE5E5E5),
+                    colorTwo: Color(0xFFF0F0F0),
+                  ),
+                ),
+                CardLoading(
+                  height: 60,
+                  width: 70,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(5.0),
+                  ),
+                  cardLoadingTheme: CardLoadingTheme(
+                    colorOne: Color(0xFFE5E5E5),
+                    colorTwo: Color(0xFFF0F0F0),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
 

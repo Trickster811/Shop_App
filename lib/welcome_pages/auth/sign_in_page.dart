@@ -130,23 +130,23 @@ class _SignInScreenState extends State<SignInScreen> {
                       color: primaryColor,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    child: Column(
+                    child: const Column(
                       children: [
                         Text(
-                          'Shop\nApp'.toUpperCase(),
+                          'B-Shop',
                           textAlign: TextAlign.center,
-                          textScaler: const TextScaler.linear(1.6),
-                          style: const TextStyle(
+                          textScaler: TextScaler.linear(1.6),
+                          style: TextStyle(
                             color: Colors.white,
                             fontSize: 25,
                             letterSpacing: 10,
                           ),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           height: 5.0,
                         ),
-                        const Text(
-                          'by MacNight_nj',
+                        Text(
+                          'by Butterfly',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 9,
@@ -165,7 +165,8 @@ class _SignInScreenState extends State<SignInScreen> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 18,
-                      letterSpacing: 10,
+                      // letterSpacing: 10
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
