@@ -51,7 +51,7 @@ class AboutScreen extends StatelessWidget {
           style: TextStyle(
             color: Theme.of(context).iconTheme.color,
             fontSize: 25,
-            fontFamily: 'Monstserrat',
+            fontFamily: 'Montserrat',
             fontWeight: FontWeight.w700,
           ),
         ),
@@ -126,7 +126,7 @@ class AboutScreen extends StatelessWidget {
                   const Text(
                     'Liens',
                     style: TextStyle(
-                      fontFamily: 'Monstserrat', fontWeight: FontWeight.w700,
+                      fontFamily: 'Montserrat', fontWeight: FontWeight.w700,
                       // color: Colors.black45,
                     ),
                   ),

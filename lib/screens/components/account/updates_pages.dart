@@ -31,7 +31,7 @@ class UpdateScreen extends StatelessWidget {
           style: TextStyle(
             color: Theme.of(context).iconTheme.color,
             fontSize: 25,
-            fontFamily: 'Monstserrat',
+            fontFamily: 'Montserrat',
             fontWeight: FontWeight.w700,
           ),
         ),
@@ -52,7 +52,7 @@ class UpdateScreen extends StatelessWidget {
             const Text(
               'Pas de mises à jour',
               style: TextStyle(
-                fontFamily: 'Monstserrat',
+                fontFamily: 'Montserrat',
                 fontWeight: FontWeight.w700,
                 fontSize: 20,
               ),

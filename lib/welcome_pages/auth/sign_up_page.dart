@@ -56,24 +56,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
         email: _controllerEmail.text.trim(),
         password: _controllerPassword.text.trim(),
       );
+
       if (userSignedUp != null) {
         await UserAccount.cloudSaving(
           data: {
             'userType': _controllerUserType,
             'username': userSignedUp.displayName,
+            'age': 18,
             'town': _controllerTown,
             'phone': _controllerPhone.text.trim(),
             'whatsapp': _controllerWhatsapp.text.trim(),
-            'email': _controllerEmail.text.trim(),
+            'email': userSignedUp.email,
             'photoURL': userSignedUp.photoURL,
           },
         );
-        final newUserInfos = UtilFunctions.getUserInfo();
-        showCupertinoModalPopup(
+
+        setState(() {
+          isLoading = false;
+        });
+
+        return showCupertinoModalPopup(
           context: context,
           builder: (context) => CupertinoActionSheet(
             title: Text(
-              'Bon retour M/Mme ${userSignedUp.displayName!.substring(0, userSignedUp.displayName!.indexOf('|'))}!!',
+              'Bon retour M/Mme ${userSignedUp.displayName!}!!',
               style: const TextStyle(
                 fontSize: 14,
               ),
@@ -90,29 +96,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          LoadingScreen(userInfo: newUserInfos),
+                      builder: (context) => LoadingScreen(userInfo: {
+                        'userType': _controllerUserType,
+                        'username': userSignedUp.displayName,
+                        'town': _controllerTown,
+                        'phone': _controllerPhone.text.trim(),
+                        'whatsapp': _controllerWhatsapp.text.trim(),
+                        'email': userSignedUp.email,
+                        'photoURL': userSignedUp.photoURL,
+                      }),
                     ),
                     (Route<dynamic> route) => false,
                   );
-                  // Navigator.pushReplacement(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => MyHomePage(
-                  //       userInfo: {
-                  //         'userType': userSignedUp.displayName!.substring(
-                  //             userSignedUp.displayName!.indexOf('|') + 1),
-                  //         'username': userSignedUp.displayName!.substring(
-                  //             0, userSignedUp.displayName!.indexOf('|')),
-                  //         'town': _controllerTown,
-                  //         'phone': _controllerPhone.text.trim(),
-                  //         'whatsapp': _controllerWhatsapp.text.trim(),
-                  //         'email': userSignedUp.email,
-                  //         'photoURL': userSignedUp.photoURL,
-                  //       },
-                  //     ),
-                  //   ),
-                  // );
                 },
                 child: const Text(
                   'Commencer à travailler avec B-Shop',
@@ -124,31 +119,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ],
           ),
         );
+
+        // final newUserInfos = UtilFunctions.getUserInfo();
       }
-      setState(() {
-        isLoading = false;
-      });
     } catch (e) {
       debugPrint(
         e.toString(),
       );
     }
-  } // Function for redirecting
-
-  // void redirection() {
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(
-  //       builder: (context) => OtpVerificationScreen(
-  //         phone: _controllerPhone.text.trim(),
-  //         updatePhone: false,
-  //         userType: _controllerUserType,
-  //         age: int.parse(_controllerAge.text.trim()),
-  //         town: _controllerTown,
-  //       ),
-  //     ),
-  //   );
-  // }
+  }
+  // Function for redirecting
 
   @override
   Widget build(BuildContext context) {
@@ -278,8 +258,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       color: Theme.of(context).iconTheme.color,
                       fontWeight: FontWeight.normal,
                     ),
-                    hintText: 'ville',
+                    hintText: 'compte',
                   ),
+                  value: _controllerUserType,
                   validator: (value) {
                     if (value == "") {
                       return 'Veuillez sélectionner le type de compte';
@@ -435,6 +416,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       hintText: 'Ville',
                     ),
+                    value: _controllerTown,
                     validator: (value) {
                       if (value == "") {
                         return 'Veuillez sélectionner votre ville';
@@ -774,7 +756,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       //                             style: TextStyle(
                       //                               color: primaryColor,
                       //                               fontSize: 16,
-                      //                               fontFamily: 'Monstserrat',
+                      //                               fontFamily: 'Montserrat',
                       //                             ),
                       //                           ),
                       //                         ),
@@ -785,7 +767,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       //                             style: TextStyle(
                       //                               color: primaryColor,
                       //                               fontSize: 16,
-                      //                               fontFamily: 'Monstserrat',
+                      //                               fontFamily: 'Montserrat',
                       //                             ),
                       //                           ),
                       //                         ),
@@ -969,12 +951,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           color: primaryColor,
                           borderRadius: BorderRadius.circular(10.0),
                         ),
-                        child: const Text(
-                          "S'inscrire",
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
+                        child: isLoading
+                            ? SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2.0,
+                                  color:
+                                      Theme.of(context).scaffoldBackgroundColor,
+                                ),
+                              )
+                            : const Text(
+                                "S'inscrire",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
                       ),
                     ),
                   ],

@@ -101,7 +101,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                   'B-Shop',
                   style: TextStyle(
                     fontSize: 15,
-                    // fontFamily: 'Monstserrat',fontWeight:FontWeight.w700,
+                    // fontFamily: 'Montserrat',fontWeight:FontWeight.w700,
                   ),
                 ),
                 const SizedBox(
@@ -111,7 +111,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                   'Application Publicitaire',
                   style: TextStyle(
                     fontSize: 10,
-                    // fontFamily: 'Monstserrat',fontWeight:FontWeight.w700,
+                    // fontFamily: 'Montserrat',fontWeight:FontWeight.w700,
                     // color: Colors.black45,
                   ),
                 ),

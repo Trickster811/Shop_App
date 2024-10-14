@@ -191,7 +191,7 @@ class UtilFunctions {
             item[1],
             style: const TextStyle(
               fontSize: 15,
-              fontFamily: 'Monstserrat', fontWeight: FontWeight.w700,
+              fontFamily: 'Montserrat', fontWeight: FontWeight.w700,
               // color: Colors.white,
             ),
           ),
@@ -219,7 +219,7 @@ class UtilFunctions {
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 14,
-            fontFamily: 'Monstserrat', fontWeight: FontWeight.w700,
+            fontFamily: 'Montserrat', fontWeight: FontWeight.w700,
             // color: Theme.of(context).iconTheme.color,
           ),
         ),

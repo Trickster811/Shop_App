@@ -47,57 +47,49 @@ class _SignInScreenState extends State<SignInScreen> {
       );
       if (userSignedIn != null) {
         // print(userSignedIn);
-        UserAccount.localSaving().then(
-          (value) => showCupertinoModalPopup(
-            context: context,
-            builder: (context) => CupertinoActionSheet(
-              title: Text(
-                'Bon retour M/Mme ${userSignedIn.displayName!.substring(0, userSignedIn.displayName!.indexOf('|'))}!!',
-                style: const TextStyle(
-                  fontSize: 14,
-                ),
+        await UserAccount.localSaving();
+        final userInfos = UtilFunctions.getUserInfo();
+        setState(() {
+          isLoading = false;
+        });
+        return showCupertinoModalPopup(
+          context: context,
+          builder: (context) => CupertinoActionSheet(
+            title: Text(
+              'Bon retour M/Mme ${userSignedIn.displayName}!!',
+              style: const TextStyle(
+                fontSize: 14,
               ),
-              message: const Text(
-                'Vos informations ont été validées avec succès',
-                style: TextStyle(
-                  fontSize: 14,
-                ),
+            ),
+            message: const Text(
+              'Vos informations ont été validées avec succès',
+              style: TextStyle(
+                fontSize: 14,
               ),
-              actions: [
-                CupertinoActionSheetAction(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => MyHomePage(
-                          userInfo: {
-                            'userType': userSignedIn.displayName!.substring(
-                                userSignedIn.displayName!.indexOf('|') + 1),
-                            'username': userSignedIn.displayName!.substring(
-                                0, userSignedIn.displayName!.indexOf('|')),
-                            'phone': userSignedIn.phoneNumber,
-                            'email': userSignedIn.email,
-                            'photoURL': userSignedIn.photoURL,
-                          },
-                        ),
+            ),
+            actions: [
+              CupertinoActionSheetAction(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyHomePage(
+                        userInfo: userInfos,
                       ),
-                    );
-                  },
-                  child: const Text(
-                    'Continuer d\'utiliser B-Shop',
-                    style: TextStyle(
-                      fontSize: 14,
                     ),
+                  );
+                },
+                child: const Text(
+                  'Continuer d\'utiliser B-Shop',
+                  style: TextStyle(
+                    fontSize: 14,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       }
-      setState(() {
-        isLoading = false;
-      });
     } on FirebaseAuthException catch (e) {
       debugPrint(
         e.message,

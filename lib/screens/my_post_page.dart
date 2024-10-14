@@ -326,7 +326,7 @@ class _MyPostScreenState extends State<MyPostScreen>
                                         style: TextStyle(
                                           color: primaryColor,
                                           fontSize: 16,
-                                          fontFamily: 'Monstserrat',
+                                          fontFamily: 'Montserrat',
                                         ),
                                       ),
                                     ),
@@ -624,7 +624,7 @@ class _MyPostScreenState extends State<MyPostScreen>
                                               style: TextStyle(
                                                 color: primaryColor,
                                                 fontSize: 16,
-                                                fontFamily: 'Monstserrat',
+                                                fontFamily: 'Montserrat',
                                               ),
                                             ),
                                           ),
@@ -635,7 +635,7 @@ class _MyPostScreenState extends State<MyPostScreen>
                                               style: TextStyle(
                                                 color: primaryColor,
                                                 fontSize: 16,
-                                                fontFamily: 'Monstserrat',
+                                                fontFamily: 'Montserrat',
                                               ),
                                             ),
                                           ),

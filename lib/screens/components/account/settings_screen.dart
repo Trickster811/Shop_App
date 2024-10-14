@@ -60,7 +60,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           style: TextStyle(
             color: Theme.of(context).iconTheme.color,
             fontSize: 25,
-            fontFamily: 'Monstserrat',
+            fontFamily: 'Montserrat',
             fontWeight: FontWeight.w700,
           ),
         ),
@@ -79,7 +79,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 style: TextStyle(
                   // color: kPrimaryColor,
                   fontSize: 15,
-                  fontFamily: 'Monstserrat', fontWeight: FontWeight.w700,
+                  fontFamily: 'Montserrat', fontWeight: FontWeight.w700,
                 ),
               ),
               const SizedBox(
@@ -119,7 +119,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 style: TextStyle(
                   // color: kPrimaryColor,
                   fontSize: 15,
-                  fontFamily: 'Monstserrat', fontWeight: FontWeight.w700,
+                  fontFamily: 'Montserrat', fontWeight: FontWeight.w700,
                 ),
               ),
               const SizedBox(

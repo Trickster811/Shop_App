@@ -135,9 +135,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: primaryColor,
                 ),
               ),
-              child: const Text(
-                'BUTTERFLY',
-                style: TextStyle(
+              child: Text(
+                '${widget.userLoginInfo['username']}',
+                style: const TextStyle(
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -271,7 +272,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         // color: kPrimaryColor,
                         fontSize: 15,
                         fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w700,
+                        // fontWeight: FontWeight.w700,
                       ),
                     ),
                     SvgPicture.asset(

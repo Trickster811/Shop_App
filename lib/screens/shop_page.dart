@@ -66,6 +66,7 @@ class _ShopScreenState extends State<ShopScreen> {
     if (Category.categorySnapshot.isNotEmpty) {
       filterArticlesForDisplay();
     } else {
+      retreiveArticles();
       retreiveCategories();
     }
   }
@@ -81,7 +82,7 @@ class _ShopScreenState extends State<ShopScreen> {
             scrollController.position.maxScrollExtent / 2 &&
         !scrollController.position.outOfRange &&
         _hasNextCategory) {
-      retreiveCategories();
+      retreiveArticles();
     }
   }
 
@@ -180,7 +181,7 @@ class _ShopScreenState extends State<ShopScreen> {
                           'Pas d\'accès internet',
                           style: TextStyle(
                             fontSize: 15,
-                            fontFamily: 'Monstserrat',
+                            fontFamily: 'Montserrat',
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -243,7 +244,7 @@ class _ShopScreenState extends State<ShopScreen> {
                                 'Aucune Category à afficher',
                                 style: TextStyle(
                                   fontSize: 15,
-                                  fontFamily: 'Monstserrat',
+                                  fontFamily: 'Montserrat',
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
@@ -277,123 +278,86 @@ class _ShopScreenState extends State<ShopScreen> {
                         children: [
                           for (var item in categoryToDisplay)
                             toolBarElementBuilder(item['name']),
+                          if (_hasNextArticle)
+                            Container(
+                              alignment: Alignment.center,
+                              decoration: const BoxDecoration(),
+                              child: const SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2.0,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
                         ],
                       ),
           ),
         ),
         Expanded(
-          child: LiquidPullToRefresh(
-              onRefresh: _handleScreenRefreshing,
-              // color: primaryColor,
-              height: 300,
-              animSpeedFactor: 2.0,
-              showChildOpacityTransition: false,
-              child: !internetAccess
-                  ? Container(
-                      alignment: Alignment.center,
-                      height: MediaQuery.of(context).size.height / 1.5,
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            'assets/icons/no-internet.svg',
-                            colorFilter: const ColorFilter.mode(
-                              Colors.black,
-                              BlendMode.srcIn,
-                            ),
-                            height: 75,
-                            width: 75,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Text(
-                            'Pas d\'accès internet',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            // alignment: Alignment.center,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 40.0,
-                              vertical: 10.0,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).iconTheme.color,
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  internetAccess = true;
-                                });
-                                // retreiveHomes();
-                              },
-                              child: Text(
-                                'Réessayer',
-                                style: TextStyle(
-                                  color:
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : articlesToDisplay.isEmpty && !_hasNextArticle
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8.0,
+            ),
+            child: SingleChildScrollView(
+              controller: scrollController,
+              child: LiquidPullToRefresh(
+                  onRefresh: _handleScreenRefreshing,
+                  // color: primaryColor,
+                  height: 300,
+                  animSpeedFactor: 2.0,
+                  showChildOpacityTransition: false,
+                  child: !internetAccess
                       ? Container(
                           alignment: Alignment.center,
                           height: MediaQuery.of(context).size.height / 1.5,
                           width: MediaQuery.of(context).size.width,
-                          child: GestureDetector(
-                            onTap: retreiveArticles,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/icons/no-data.svg',
-                                  colorFilter: ColorFilter.mode(
-                                    Theme.of(context).iconTheme.color!,
-                                    BlendMode.srcIn,
-                                  ),
-                                  height: 75,
-                                  width: 75,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/icons/no-internet.svg',
+                                colorFilter: const ColorFilter.mode(
+                                  Colors.black,
+                                  BlendMode.srcIn,
                                 ),
-                                const SizedBox(
-                                  height: 10,
+                                height: 75,
+                                width: 75,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              const Text(
+                                'Pas d\'accès internet',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.w700,
                                 ),
-                                const Text(
-                                  'Aucune Article à afficher',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.w700,
-                                  ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                // alignment: Alignment.center,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 40.0,
+                                  vertical: 10.0,
                                 ),
-                                const SizedBox(
-                                  height: 10,
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).iconTheme.color,
+                                  borderRadius: BorderRadius.circular(10.0),
                                 ),
-                                Container(
-                                  // alignment: Alignment.center,
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 40.0,
-                                    vertical: 10.0,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).iconTheme.color,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
+                                child: InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      internetAccess = true;
+                                    });
+                                    // retreiveHomes();
+                                  },
                                   child: Text(
-                                    'Actualiser',
+                                    'Réessayer',
                                     style: TextStyle(
                                       color: Theme.of(context)
                                           .scaffoldBackgroundColor,
@@ -401,32 +365,93 @@ class _ShopScreenState extends State<ShopScreen> {
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         )
-                      : Column(
-                          children: [
-                            for (DocumentSnapshot item in articlesToDisplay)
-                              if (item['isPublished'])
-                                adsItemBuilder(
-                                  adsObjects: AdsObjects(
-                                    imageLink: item['imageLink'],
-                                    productDescription:
-                                        item['productDescription'],
-                                    isPublished: item['isPublished'],
-                                    productName: item['productName'],
-                                    productPrice: item['productPrice'],
-                                    quantity: item['quantity:'],
-                                    tradeCategory: item['tradeCategory'],
-                                  ),
-                                  deviceSize: widget.deviceSize,
+                      : articlesToDisplay.isEmpty && !_hasNextArticle
+                          ? Container(
+                              alignment: Alignment.center,
+                              height: MediaQuery.of(context).size.height / 1.5,
+                              width: MediaQuery.of(context).size.width,
+                              child: GestureDetector(
+                                onTap: retreiveArticles,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      'assets/icons/no-data.svg',
+                                      colorFilter: ColorFilter.mode(
+                                        Theme.of(context).iconTheme.color!,
+                                        BlendMode.srcIn,
+                                      ),
+                                      height: 75,
+                                      width: 75,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    const Text(
+                                      'Aucune Article à afficher',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontFamily: 'Montserrat',
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                      // alignment: Alignment.center,
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 40.0,
+                                        vertical: 10.0,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color:
+                                            Theme.of(context).iconTheme.color,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      child: Text(
+                                        'Actualiser',
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .scaffoldBackgroundColor,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                            if (_hasNextArticle) ...[
-                              for (var i = 0; i < 10; i++) cardLoadingBuilder(),
-                            ]
-                          ],
-                        )),
+                              ),
+                            )
+                          : Column(
+                              children: [
+                                for (DocumentSnapshot item in articlesToDisplay)
+                                  if (item['isPublished'])
+                                    adsItemBuilder(
+                                      adsObjects: AdsObjects(
+                                        imageLink: item['imageLink'],
+                                        productDescription:
+                                            item['productDescription'],
+                                        isPublished: item['isPublished'],
+                                        productName: item['productName'],
+                                        productPrice: item['productPrice'],
+                                        quantity: item['quantity:'],
+                                        tradeCategory: item['tradeCategory'],
+                                      ),
+                                      deviceSize: widget.deviceSize,
+                                    ),
+                                if (_hasNextArticle) ...[
+                                  for (var i = 0; i < 10; i++)
+                                    cardLoadingBuilder(),
+                                ]
+                              ],
+                            )),
+            ),
+          ),
         ),
       ],
     );

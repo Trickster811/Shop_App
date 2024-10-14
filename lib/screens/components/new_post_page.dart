@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:b_shop/utils/controllers.utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,114 +45,25 @@ class _NewPostScreenState extends State<NewPostScreen> {
   final _formKey = GlobalKey<FormState>();
 
   List<DropdownMenuItem<String>> get tradeCategory {
-    List<DropdownMenuItem<String>> items = [
-      const DropdownMenuItem(
-        value: "Chaussures",
-        child: Text(
-          "Chaussures",
-          style: TextStyle(
-            color: primaryColor,
-            fontSize: 16,
-            overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
+    List<DropdownMenuItem<String>> categories = [];
+    for (var item in Category.categorySnapshot) {
+      categories.add(
+        DropdownMenuItem(
+          value: item['name'],
+          child: Text(
+            item['name'],
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 14,
+              overflow: TextOverflow.ellipsis,
+              fontFamily: 'Montserrat',
+            ),
           ),
         ),
-      ),
-      const DropdownMenuItem(
-        value: "Cuisine",
-        child: Text(
-          "Cuisine",
-          style: TextStyle(
-            color: primaryColor,
-            fontSize: 16,
-            overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ),
-      const DropdownMenuItem(
-        value: "Divers",
-        // enabled: false,
-        child: Text(
-          "Divers",
-          style: TextStyle(
-            color: primaryColor,
-            fontSize: 16,
-            overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ),
-      const DropdownMenuItem(
-        value: "Electro-menager",
-        child: Text(
-          "Electro-menager",
-          style: TextStyle(
-            color: primaryColor,
-            fontSize: 16,
-            overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ),
-      const DropdownMenuItem(
-        value: "Gadgets",
-        child: Text(
-          "Gadgets",
-          style: TextStyle(
-            color: primaryColor,
-            fontSize: 16,
-            overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ),
-      const DropdownMenuItem(
-        value: "Ordinateurs",
-        child: Text(
-          "Ordinateurs",
-          style: TextStyle(
-            color: primaryColor,
-            fontSize: 16,
-            overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ),
-      const DropdownMenuItem(
-        value: "Telephones",
-        child: Text(
-          "Telephones",
-          style: TextStyle(
-            color: primaryColor,
-            fontSize: 16,
-            overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ),
-      const DropdownMenuItem(
-        value: "Vetements",
-        child: Text(
-          "Vetements",
-          style: TextStyle(
-            color: primaryColor,
-            fontSize: 16,
-            overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ),
-    ];
-    return items;
+      );
+    }
+
+    return categories;
   }
 
   List<DropdownMenuItem<String>> get familyComputers {
@@ -161,11 +73,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
         child: Text(
           "ACER",
           style: TextStyle(
-            color: primaryColor,
+            color: Colors.black,
             fontSize: 16,
             overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),
@@ -174,11 +85,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
         child: Text(
           "ASUS",
           style: TextStyle(
-            color: primaryColor,
+            color: Colors.black,
             fontSize: 16,
             overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),
@@ -187,11 +97,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
         child: Text(
           "DELL",
           style: TextStyle(
-            color: primaryColor,
+            color: Colors.black,
             fontSize: 16,
             overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),
@@ -200,11 +109,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
         child: Text(
           "HP",
           style: TextStyle(
-            color: primaryColor,
+            color: Colors.black,
             fontSize: 16,
             overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),
@@ -213,11 +121,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
         child: Text(
           "HUAWEI",
           style: TextStyle(
-            color: primaryColor,
+            color: Colors.black,
             fontSize: 16,
             overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),
@@ -226,11 +133,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
         child: Text(
           "LENOVO",
           style: TextStyle(
-            color: primaryColor,
+            color: Colors.black,
             fontSize: 16,
             overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),
@@ -239,11 +145,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
         child: Text(
           "LENOVO THINK",
           style: TextStyle(
-            color: primaryColor,
+            color: Colors.black,
             fontSize: 16,
             overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),
@@ -252,11 +157,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
         child: Text(
           "APPLE",
           style: TextStyle(
-            color: primaryColor,
+            color: Colors.black,
             fontSize: 16,
             overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),
@@ -265,11 +169,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
         child: Text(
           "SAMSUNG",
           style: TextStyle(
-            color: primaryColor,
+            color: Colors.black,
             fontSize: 16,
             overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),
@@ -278,11 +181,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
         child: Text(
           "SURFACE",
           style: TextStyle(
-            color: primaryColor,
+            color: Colors.black,
             fontSize: 16,
             overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),
@@ -291,11 +193,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
         child: Text(
           "TECNO",
           style: TextStyle(
-            color: primaryColor,
+            color: Colors.black,
             fontSize: 16,
             overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),
@@ -304,11 +205,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
         child: Text(
           "TOSHIBA",
           style: TextStyle(
-            color: primaryColor,
+            color: Colors.black,
             fontSize: 16,
             overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),
@@ -323,11 +223,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
         child: Text(
           "BATTERIE",
           style: TextStyle(
-            color: primaryColor,
-            fontSize: 16,
+            color: Colors.black,
+            fontSize: 14,
             overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),
@@ -336,11 +235,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
         child: Text(
           "CPU",
           style: TextStyle(
-            color: primaryColor,
-            fontSize: 16,
+            color: Colors.black,
+            fontSize: 14,
             overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),
@@ -349,11 +247,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
         child: Text(
           "ECRAN",
           style: TextStyle(
-            color: primaryColor,
-            fontSize: 16,
+            color: Colors.black,
+            fontSize: 14,
             overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),
@@ -362,11 +259,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
         child: Text(
           "GPU",
           style: TextStyle(
-            color: primaryColor,
-            fontSize: 16,
+            color: Colors.black,
+            fontSize: 14,
             overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),
@@ -375,11 +271,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
         child: Text(
           "RAM",
           style: TextStyle(
-            color: primaryColor,
-            fontSize: 16,
+            color: Colors.black,
+            fontSize: 14,
             overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),
@@ -388,11 +283,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
         child: Text(
           "ROM",
           style: TextStyle(
-            color: primaryColor,
-            fontSize: 16,
+            color: Colors.black,
+            fontSize: 14,
             overflow: TextOverflow.ellipsis,
-            fontFamily: 'Monstserrat',
-            fontWeight: FontWeight.w700,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),
@@ -1037,8 +931,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                         'Veuiller renseigner tous les champs!!',
                         style: TextStyle(
                           fontSize: 14,
-                          fontFamily: 'Monstserrat',
-                          fontWeight: FontWeight.w700,
+                          fontFamily: 'Montserrat',
                         ),
                       ),
                     ),
@@ -1054,8 +947,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                       'Votre demande de publication a été enregistree avec succès',
                       style: TextStyle(
                         fontSize: 14,
-                        fontFamily: 'Monstserrat',
-                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Montserrat',
                       ),
                     ),
                     actions: [
@@ -1131,8 +1023,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                         'Veuiller renseigner tous les champs!!',
                         style: TextStyle(
                           fontSize: 14,
-                          fontFamily: 'Monstserrat',
-                          fontWeight: FontWeight.w700,
+                          fontFamily: 'Montserrat',
                         ),
                       ),
                     ),
@@ -1148,8 +1039,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                       'Votre demande de publication a été envoyé avec succès',
                       style: TextStyle(
                         fontSize: 14,
-                        fontFamily: 'Monstserrat',
-                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Montserrat',
                       ),
                     ),
                     actions: [

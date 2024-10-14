@@ -47,7 +47,6 @@ dependencies:
   firebase_database:
   firebase_storage:
   file_picker:
-  flutter_launcher_icons:
   flutter_rating_bar:
   flutter_svg:
   focused_menu:
@@ -67,6 +66,7 @@ dependencies:
   syncfusion_flutter_pdfviewer:
 
 dev_dependencies:
+  flutter_launcher_icons:
   flutter_test:
     sdk: flutter
 

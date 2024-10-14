@@ -38,7 +38,7 @@ class _HelpScreenState extends State<HelpScreen> {
           style: TextStyle(
             color: Theme.of(context).iconTheme.color,
             fontSize: 25,
-            fontFamily: 'Monstserrat',
+            fontFamily: 'Montserrat',
             fontWeight: FontWeight.w700,
           ),
         ),

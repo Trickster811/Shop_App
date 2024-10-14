@@ -364,7 +364,7 @@ class UserAccount {
     required Map<String, Object?> data,
   }) async {
     await _firebaseFirestore
-        .collection('users')
+        .collection('User')
         .doc(Auth.currentUser!.uid)
         .set(data);
 
@@ -374,7 +374,7 @@ class UserAccount {
   // Local saving user's informations
   static Future<void> localSaving() async {
     final userData = await _firebaseFirestore
-        .collection('users')
+        .collection('User')
         .doc(Auth.currentUser!.uid)
         .get();
     await UtilFunctions.setUserInfo(
