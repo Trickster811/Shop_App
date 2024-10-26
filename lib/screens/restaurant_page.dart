@@ -1,3 +1,7 @@
+import 'package:b_shop/screens/shop_page.dart';
+import 'package:b_shop/utils/controllers.utils.dart';
+import 'package:card_loading/card_loading.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -25,61 +29,270 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
   final positionController = TextEditingController();
   final phoneController = TextEditingController();
 
-  final List foodSnapshots = [
-    const Food(
-      imageLink: [
-        'https://www.shoe-tease.com/wp-content/uploads/2021/10/Shoes-that-go-with-everything-ShoeTease-Blog.jpg',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZNdz-mIrSJtcSry4OKCjYGUo_zZcWqjDdMkAxHDdmbaRfjagUcB5JVNYRdByps4sABr8&usqp=CAU',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScqH7-rT4dGQyiiotOLaY6NMyUKmow4sB0h4UScgVlw_PVeIPfbAFXHaaMy0FicQ1wKqY&usqp=CAU',
-        'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-1345098657.jpg',
-        'https://images.dsw.ca/is/image/dswca/113103072_120_ss_01?impolicy=colpg&imwidth=400&imdensity=1',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO3WoxUdbu67ymI1b8Jdv3JBWCo6kssA-9Zzr9Ua-Y87blL6vseVA2GTyQQfT4imz8xQQ&usqp=CAU',
-      ],
-      foodName: 'Taro Sauce Jaune',
-      foodDescription: 'Pimente et accompagne d\'une boisson gazuese',
-      foodPrice: 1725,
-      foodCategory: 'Local',
-    ),
-    const Food(
-      imageLink: [
-        'https://www.shoe-tease.com/wp-content/uploads/2021/10/Shoes-that-go-with-everything-ShoeTease-Blog.jpg',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZNdz-mIrSJtcSry4OKCjYGUo_zZcWqjDdMkAxHDdmbaRfjagUcB5JVNYRdByps4sABr8&usqp=CAU',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScqH7-rT4dGQyiiotOLaY6NMyUKmow4sB0h4UScgVlw_PVeIPfbAFXHaaMy0FicQ1wKqY&usqp=CAU',
-        'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-1345098657.jpg',
-        'https://images.dsw.ca/is/image/dswca/113103072_120_ss_01?impolicy=colpg&imwidth=400&imdensity=1',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO3WoxUdbu67ymI1b8Jdv3JBWCo6kssA-9Zzr9Ua-Y87blL6vseVA2GTyQQfT4imz8xQQ&usqp=CAU',
-      ],
-      foodName: 'Taro Sauce Jaune',
-      foodDescription:
-          'Pimente et non pimente et accompagne d\'une boisson gazeuse ou eau plate (au choix)',
-      foodPrice: 1725,
-      foodCategory: 'Local',
-    ),
-  ];
+  // final List foodSnapshots = [
+  //   const Food(
+  //     imageLink: [
+  //       'https://www.shoe-tease.com/wp-content/uploads/2021/10/Shoes-that-go-with-everything-ShoeTease-Blog.jpg',
+  //       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZNdz-mIrSJtcSry4OKCjYGUo_zZcWqjDdMkAxHDdmbaRfjagUcB5JVNYRdByps4sABr8&usqp=CAU',
+  //       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScqH7-rT4dGQyiiotOLaY6NMyUKmow4sB0h4UScgVlw_PVeIPfbAFXHaaMy0FicQ1wKqY&usqp=CAU',
+  //       'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-1345098657.jpg',
+  //       'https://images.dsw.ca/is/image/dswca/113103072_120_ss_01?impolicy=colpg&imwidth=400&imdensity=1',
+  //       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO3WoxUdbu67ymI1b8Jdv3JBWCo6kssA-9Zzr9Ua-Y87blL6vseVA2GTyQQfT4imz8xQQ&usqp=CAU',
+  //     ],
+  //     foodName: 'Taro Sauce Jaune',
+  //     foodDescription: 'Pimente et accompagne d\'une boisson gazuese',
+  //     foodPrice: 1725,
+  //     foodCategory: 'Local',
+  //   ),
+  //   const Food(
+  //     imageLink: [
+  //       'https://www.shoe-tease.com/wp-content/uploads/2021/10/Shoes-that-go-with-everything-ShoeTease-Blog.jpg',
+  //       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZNdz-mIrSJtcSry4OKCjYGUo_zZcWqjDdMkAxHDdmbaRfjagUcB5JVNYRdByps4sABr8&usqp=CAU',
+  //       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScqH7-rT4dGQyiiotOLaY6NMyUKmow4sB0h4UScgVlw_PVeIPfbAFXHaaMy0FicQ1wKqY&usqp=CAU',
+  //       'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-1345098657.jpg',
+  //       'https://images.dsw.ca/is/image/dswca/113103072_120_ss_01?impolicy=colpg&imwidth=400&imdensity=1',
+  //       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO3WoxUdbu67ymI1b8Jdv3JBWCo6kssA-9Zzr9Ua-Y87blL6vseVA2GTyQQfT4imz8xQQ&usqp=CAU',
+  //     ],
+  //     foodName: 'Taro Sauce Jaune',
+  //     foodDescription:
+  //         'Pimente et non pimente et accompagne d\'une boisson gazeuse ou eau plate (au choix)',
+  //     foodPrice: 1725,
+  //     foodCategory: 'Local',
+  //   ),
+  // ];
 
-  @override
-  Widget build(BuildContext context) {
-    return LiquidPullToRefresh(
-      onRefresh: _handleScreenRefreshing,
-      color: primaryColor,
-      height: 300,
-      animSpeedFactor: 2.0,
-      showChildOpacityTransition: false,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            for (var item in foodSnapshots)
-              foodCardBuilder(
-                context,
-                item,
-              ),
-          ],
-        ),
+  int documentLimit = 15;
+
+  // Check the app is currently fetching articles data
+  bool isFetchingArticles = false;
+
+  // To check if have remaining article data in our cloud firestore
+  bool _hasNextFood = true;
+
+  final scrollController = ScrollController();
+  bool internetAccess = true;
+
+  // List of categories
+
+  // List of articles to display depending on the filter configuration
+  List<DocumentSnapshot<Object?>> foodSnapshots = [];
+
+  Future<void> _handleScreenRefreshing() async {
+    foodSnapshots = [];
+    Article.articlesSnapshot = [];
+    retreiveFood();
+    await Future.delayed(
+      const Duration(
+        seconds: 2,
       ),
     );
   }
 
-  Container foodCardBuilder(BuildContext context, item) {
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(scrollListener);
+    if (Article.articlesSnapshot.isEmpty) {
+      retreiveFood();
+    } else {
+      foodSnapshots.addAll(
+        Article.articlesSnapshot.where(
+          (house) {
+            return house['tradeCategory'].toString().toLowerCase() ==
+                'Cuisine'.toLowerCase();
+          },
+        ),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  void scrollListener() {
+    if (scrollController.offset >=
+            scrollController.position.maxScrollExtent / 2 &&
+        !scrollController.position.outOfRange &&
+        _hasNextFood) {
+      retreiveFood();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      controller: scrollController,
+      child: LiquidPullToRefresh(
+        onRefresh: _handleScreenRefreshing,
+        color: primaryColor,
+        height: 300,
+        animSpeedFactor: 2.0,
+        showChildOpacityTransition: false,
+        child: !internetAccess
+            ? Container(
+                alignment: Alignment.center,
+                height: MediaQuery.of(context).size.height / 1.5,
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/icons/no-internet.svg',
+                      colorFilter: const ColorFilter.mode(
+                        Colors.black,
+                        BlendMode.srcIn,
+                      ),
+                      height: 75,
+                      width: 75,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text(
+                      'Pas d\'accès internet',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      // alignment: Alignment.center,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 40.0,
+                        vertical: 10.0,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).iconTheme.color,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            internetAccess = true;
+                          });
+                          // retreiveHomes();
+                        },
+                        child: Text(
+                          'Réessayer',
+                          style: TextStyle(
+                            color: Theme.of(context).scaffoldBackgroundColor,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            : foodSnapshots.isEmpty && !_hasNextFood
+                ? Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.of(context).size.height / 1.5,
+                    width: MediaQuery.of(context).size.width,
+                    child: GestureDetector(
+                      onTap: retreiveFood,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/icons/no-data.svg',
+                            colorFilter: ColorFilter.mode(
+                              Theme.of(context).iconTheme.color!,
+                              BlendMode.srcIn,
+                            ),
+                            height: 75,
+                            width: 75,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const Text(
+                            'Aucune Article à afficher',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 40.0,
+                              vertical: 10.0,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).iconTheme.color,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Text(
+                              'Actualiser',
+                              style: TextStyle(
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                : Column(
+                    children: [
+                      for (DocumentSnapshot item in foodSnapshots)
+                        if (item['isPublished'])
+                          foodCardBuilder(
+                            context: context,
+                            food: AdsObjects(
+                              idArticle: item.id,
+                              imageLink: item['imageLink'],
+                              productDescription: item['productDescription'],
+                              isPublished: item['isPublished'],
+                              productName: item['productName'],
+                              productPrice: double.parse(item['productPrice']),
+                              quantity: int.parse(item['quantity']),
+                              tradeCategory: item['tradeCategory'],
+                              productSpecifications:
+                                  item['productSpecifications'],
+                              tradeFamily: item['tradeFamily'],
+                              ownerRef: item['ownerReference'],
+                            ),
+                          ),
+                      if (_hasNextFood) ...[
+                        for (var i = 0; i < 10; i++) ...[
+                          const CardLoading(
+                            height: 300,
+                            width: double.maxFinite,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(5.0),
+                            ),
+                            cardLoadingTheme: CardLoadingTheme(
+                              colorOne: Color(0xFFE5E5E5),
+                              colorTwo: Color(0xFFF0F0F0),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          )
+                        ]
+                      ]
+                    ],
+                  ),
+      ),
+    );
+  }
+
+  Container foodCardBuilder(
+      {required BuildContext context, required AdsObjects food}) {
     return Container(
       height: 300,
       // width: deviceSize.width,
@@ -104,7 +317,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => ImageViewScreen(
-                    imageLink: item.imageLink,
+                    imageLink: food.imageLink,
                     deviceSize: widget.deviceSize,
                     fileImage: false,
                   ),
@@ -125,7 +338,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                 ),
                 child: FadeInImage.assetNetwork(
                   placeholder: 'assets/images/2.png',
-                  image: item.imageLink[0],
+                  image: food.imageLink[0],
                   fit: BoxFit.cover,
                   placeholderFit: BoxFit.cover,
                   imageErrorBuilder: (context, error, stackTrace) =>
@@ -149,7 +362,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          item.foodName.toUpperCase(),
+                          food.productName.toUpperCase(),
                           softWrap: true,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
@@ -157,7 +370,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                           ),
                         ),
                         Text(
-                          item.foodDescription,
+                          food.productDescription,
                           style: const TextStyle(
                             fontSize: 12,
                           ),
@@ -176,7 +389,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                item.foodPrice.toString(),
+                                food.productPrice.toString(),
                                 style: const TextStyle(
                                   fontSize: 18,
                                   color: Colors.white,
@@ -802,12 +1015,66 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
     );
   }
 
-  Future<void> _handleScreenRefreshing() async {
-    return await Future.delayed(
-      const Duration(
-        seconds: 2,
-      ),
-    );
+  Future retreiveFood() async {
+    if (!await Internet.checkInternetAccess()) {
+      setState(() {
+        internetAccess = false;
+      });
+      return;
+    }
+
+    if (isFetchingArticles) return;
+    setState(() {
+      isFetchingArticles = true;
+    });
+
+    if (!_hasNextFood) {
+      setState(() {
+        _hasNextFood = true;
+      });
+    }
+
+    try {
+      // if (refresh) {
+      // await HomeFinder.getHomes(
+      //   documentLimit,
+      // );
+      // } else {
+      await Article.getArticles(
+        documentLimit,
+        startAfter: Article.articlesSnapshot.isNotEmpty
+            ? Article.articlesSnapshot.last
+            : null,
+      );
+      // }
+      if (Article.articlesSnapshot.isNotEmpty) {
+        foodSnapshots.addAll(
+          Article.articlesSnapshot.where(
+            (house) {
+              return house['tradeCategory'].toString().toLowerCase() ==
+                  'Cuisine'.toLowerCase();
+            },
+          ),
+        );
+      }
+      if (Article.articlesSnapshot.length < documentLimit) {
+        setState(() {
+          _hasNextFood = false;
+        });
+      }
+    } on FirebaseException catch (errno) {
+      debugPrint(errno.code.toString());
+      UtilFunctions.showFlashMessage(
+        errno.message.toString(),
+        Colors.red,
+      );
+      setState(() {
+        _hasNextFood = false;
+      });
+    }
+    setState(() {
+      isFetchingArticles = false;
+    });
   }
 }
 

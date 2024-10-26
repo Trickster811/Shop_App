@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-import 'package:b_shop/screens/components/details_post_page.dart';
+import 'package:b_shop/screens/components/post/details_post_page.dart';
 import 'package:b_shop/screens/components/image_view_page.dart';
 import 'package:b_shop/utils/controllers.utils.dart';
 import 'package:b_shop/utils/utils.dart';
@@ -63,11 +63,11 @@ class _ShopScreenState extends State<ShopScreen> {
   void initState() {
     super.initState();
     scrollController.addListener(scrollListener);
-    if (Category.categorySnapshot.isNotEmpty) {
+    if (Category.categorySnapshot.isEmpty) retreiveCategories();
+    if (Article.articlesSnapshot.isNotEmpty) {
       filterArticlesForDisplay();
     } else {
       retreiveArticles();
-      retreiveCategories();
     }
   }
 
@@ -81,75 +81,13 @@ class _ShopScreenState extends State<ShopScreen> {
     if (scrollController.offset >=
             scrollController.position.maxScrollExtent / 2 &&
         !scrollController.position.outOfRange &&
-        _hasNextCategory) {
+        _hasNextArticle) {
       retreiveArticles();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final List test = [
-      const AdsObjects(
-        imageLink: [
-          'https://rukminim1.flixcart.com/image/612/612/l51d30w0/shoe/z/w/c/10-mrj1914-10-aadi-white-black-red-original-imagft9k9hydnfjp.jpeg?q=70',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH0YZh6ggzT4m0wdOK84OuihNDPGSHEuVUtwLhge3pmEPeA8k7GjZCsSSoAOgDXqzFcBI&usqp=CAU',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZtaCc3GrWTcxkOL1lvXXMEDo5rVEg5DGf2LyEmxd2cYWkPTPw6gzVVdKc_3Md5Mbfz0I&usqp=CAU',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzv-wsjN5e6td-LHSyqak5TG4pdW4CcqQuTPUUpGwvDwWRVhbeBpFkpwRgZ89z_mtfOE8&usqp=CAU',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGFEzJimi75YHQQ6ClrDVpKG2ldTukwK_PIST1lklXhTmHQQI_OwGenvurqqnj3U_00c4&usqp=CAU',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9uELZlGwIYcmHNK8h4mpTLiwh-BTNv3I9f4hPNgKSLuH3v_KTJh3Ciu6K4qE3olXNvgM&usqp=CAU',
-        ],
-        productName: 'HP Elite Book',
-        productPrice: 0.25,
-        tradeFamily: 'HP',
-        productDescription:
-            'Ordinateur neuf avec carton et facture. Prix non negociable.',
-        quantity: 17,
-        productSpecifications: {
-          'CPU': '2.5 GHz',
-          'RAM': '8Go',
-        },
-        tradeCategory: 'Ordinateurs',
-        isPublished: true,
-      ),
-      const AdsObjects(
-        imageLink: [
-          'https://cdn.shopify.com/s/files/1/0046/9139/4658/files/SS20_HOMEPAGE_MCCLEANPAIR_880x550_crop_center.jpg?v=1614334815',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqRw1KJxR6to1NRwgUn3qZan9eWtSJXS37yC8JMJvgvqjKNpuzb7YD5ZZd3wXpFMouHHM&usqp=CAU',
-          'https://cdn.shopify.com/s/files/1/0285/9873/0883/articles/leather-full-brogue-shoes-26-05-17_1.jpg?v=1581688850',
-        ],
-        productName: 'Paires Cirées',
-        productPrice: 0.25,
-        tradeFamily: 'HP',
-        productDescription:
-            'Telephone neuf avec carton et facture. Prix non negociable.',
-        quantity: 17,
-        productSpecifications: {
-          'CPU': '2.5 GHz',
-          'RAM': '8 Go',
-          'ROM': '128 Go',
-        },
-        tradeCategory: 'Telephones',
-        isPublished: true,
-      ),
-      const AdsObjects(
-        imageLink: [
-          'https://www.shoe-tease.com/wp-content/uploads/2021/10/Shoes-that-go-with-everything-ShoeTease-Blog.jpg',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZNdz-mIrSJtcSry4OKCjYGUo_zZcWqjDdMkAxHDdmbaRfjagUcB5JVNYRdByps4sABr8&usqp=CAU',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScqH7-rT4dGQyiiotOLaY6NMyUKmow4sB0h4UScgVlw_PVeIPfbAFXHaaMy0FicQ1wKqY&usqp=CAU',
-          'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-1345098657.jpg',
-          'https://images.dsw.ca/is/image/dswca/113103072_120_ss_01?impolicy=colpg&imwidth=400&imdensity=1',
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO3WoxUdbu67ymI1b8Jdv3JBWCo6kssA-9Zzr9Ua-Y87blL6vseVA2GTyQQfT4imz8xQQ&usqp=CAU',
-        ],
-        productName: 'Féminin',
-        productPrice: 0.25,
-        productDescription:
-            'Chaussures pour Femmes. Pointure 31 a 41, Taille haute',
-        quantity: 17,
-        tradeCategory: 'Chaussures',
-        isPublished: true,
-      ),
-    ];
-
     return Column(
       children: [
         SingleChildScrollView(
@@ -296,161 +234,159 @@ class _ShopScreenState extends State<ShopScreen> {
           ),
         ),
         Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 8.0,
-            ),
-            child: SingleChildScrollView(
-              controller: scrollController,
-              child: LiquidPullToRefresh(
-                  onRefresh: _handleScreenRefreshing,
-                  // color: primaryColor,
-                  height: 300,
-                  animSpeedFactor: 2.0,
-                  showChildOpacityTransition: false,
-                  child: !internetAccess
-                      ? Container(
-                          alignment: Alignment.center,
-                          height: MediaQuery.of(context).size.height / 1.5,
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                'assets/icons/no-internet.svg',
-                                colorFilter: const ColorFilter.mode(
-                                  Colors.black,
-                                  BlendMode.srcIn,
-                                ),
-                                height: 75,
-                                width: 75,
+          child: SingleChildScrollView(
+            controller: scrollController,
+            child: LiquidPullToRefresh(
+                onRefresh: _handleScreenRefreshing,
+                // color: primaryColor,
+                height: 300,
+                animSpeedFactor: 2.0,
+                showChildOpacityTransition: false,
+                child: !internetAccess
+                    ? Container(
+                        alignment: Alignment.center,
+                        height: MediaQuery.of(context).size.height / 1.5,
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/icons/no-internet.svg',
+                              colorFilter: const ColorFilter.mode(
+                                Colors.black,
+                                BlendMode.srcIn,
                               ),
-                              const SizedBox(
-                                height: 10,
+                              height: 75,
+                              width: 75,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const Text(
+                              'Pas d\'accès internet',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w700,
                               ),
-                              const Text(
-                                'Pas d\'accès internet',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontFamily: 'Montserrat',
-                                  fontWeight: FontWeight.w700,
-                                ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              // alignment: Alignment.center,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 40.0,
+                                vertical: 10.0,
                               ),
-                              const SizedBox(
-                                height: 10,
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).iconTheme.color,
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
-                              Container(
-                                // alignment: Alignment.center,
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 40.0,
-                                  vertical: 10.0,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).iconTheme.color,
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      internetAccess = true;
-                                    });
-                                    // retreiveHomes();
-                                  },
-                                  child: Text(
-                                    'Réessayer',
-                                    style: TextStyle(
-                                      color: Theme.of(context)
-                                          .scaffoldBackgroundColor,
-                                      fontSize: 16,
-                                    ),
+                              child: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    internetAccess = true;
+                                  });
+                                  // retreiveHomes();
+                                },
+                                child: Text(
+                                  'Réessayer',
+                                  style: TextStyle(
+                                    color: Theme.of(context)
+                                        .scaffoldBackgroundColor,
+                                    fontSize: 16,
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
-                        )
-                      : articlesToDisplay.isEmpty && !_hasNextArticle
-                          ? Container(
-                              alignment: Alignment.center,
-                              height: MediaQuery.of(context).size.height / 1.5,
-                              width: MediaQuery.of(context).size.width,
-                              child: GestureDetector(
-                                onTap: retreiveArticles,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SvgPicture.asset(
-                                      'assets/icons/no-data.svg',
-                                      colorFilter: ColorFilter.mode(
-                                        Theme.of(context).iconTheme.color!,
-                                        BlendMode.srcIn,
-                                      ),
-                                      height: 75,
-                                      width: 75,
+                            ),
+                          ],
+                        ),
+                      )
+                    : articlesToDisplay.isEmpty && !_hasNextArticle
+                        ? Container(
+                            alignment: Alignment.center,
+                            height: MediaQuery.of(context).size.height / 1.5,
+                            width: MediaQuery.of(context).size.width,
+                            child: GestureDetector(
+                              onTap: retreiveArticles,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                    'assets/icons/no-data.svg',
+                                    colorFilter: ColorFilter.mode(
+                                      Theme.of(context).iconTheme.color!,
+                                      BlendMode.srcIn,
                                     ),
-                                    const SizedBox(
-                                      height: 10,
+                                    height: 75,
+                                    width: 75,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  const Text(
+                                    'Aucune Article à afficher',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: 'Montserrat',
+                                      fontWeight: FontWeight.w700,
                                     ),
-                                    const Text(
-                                      'Aucune Article à afficher',
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 40.0,
+                                      vertical: 10.0,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).iconTheme.color,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    child: Text(
+                                      'Actualiser',
                                       style: TextStyle(
-                                        fontSize: 15,
-                                        fontFamily: 'Montserrat',
-                                        fontWeight: FontWeight.w700,
+                                        color: Theme.of(context)
+                                            .scaffoldBackgroundColor,
+                                        fontSize: 16,
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Container(
-                                      // alignment: Alignment.center,
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 40.0,
-                                        vertical: 10.0,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color:
-                                            Theme.of(context).iconTheme.color,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
-                                      child: Text(
-                                        'Actualiser',
-                                        style: TextStyle(
-                                          color: Theme.of(context)
-                                              .scaffoldBackgroundColor,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                            )
-                          : Column(
-                              children: [
-                                for (DocumentSnapshot item in articlesToDisplay)
-                                  if (item['isPublished'])
-                                    adsItemBuilder(
-                                      adsObjects: AdsObjects(
-                                        imageLink: item['imageLink'],
-                                        productDescription:
-                                            item['productDescription'],
-                                        isPublished: item['isPublished'],
-                                        productName: item['productName'],
-                                        productPrice: item['productPrice'],
-                                        quantity: item['quantity:'],
-                                        tradeCategory: item['tradeCategory'],
-                                      ),
-                                      deviceSize: widget.deviceSize,
+                            ),
+                          )
+                        : Column(
+                            children: [
+                              for (DocumentSnapshot item in articlesToDisplay)
+                                if (item['isPublished'])
+                                  adsItemBuilder(
+                                    adsObjects: AdsObjects(
+                                      idArticle: item.id,
+                                      imageLink: item['imageLink'],
+                                      productDescription:
+                                          item['productDescription'],
+                                      isPublished: item['isPublished'],
+                                      productName: item['productName'],
+                                      productPrice:
+                                          double.parse(item['productPrice']),
+                                      quantity: int.parse(item['quantity']),
+                                      tradeCategory: item['tradeCategory'],
+                                      productSpecifications:
+                                          item['productSpecifications'],
+                                      tradeFamily: item['tradeFamily'],
+                                      ownerRef: item['ownerReference'],
                                     ),
-                                if (_hasNextArticle) ...[
-                                  for (var i = 0; i < 10; i++)
-                                    cardLoadingBuilder(),
-                                ]
-                              ],
-                            )),
-            ),
+                                    deviceSize: widget.deviceSize,
+                                  ),
+                              if (_hasNextArticle) ...[
+                                for (var i = 0; i < 10; i++)
+                                  cardLoadingBuilder(),
+                              ]
+                            ],
+                          )),
           ),
         ),
       ],
@@ -463,6 +399,7 @@ class _ShopScreenState extends State<ShopScreen> {
         setState(() {
           currentDisplayedCategory = title;
         });
+        filterArticlesForDisplay();
       },
       child: Row(
         children: [
@@ -906,6 +843,7 @@ class _ShopScreenState extends State<ShopScreen> {
 
   Container cardLoadingBuilder() {
     return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
       margin: const EdgeInsets.only(bottom: 20.0),
       height: 290,
       child: const Column(
@@ -995,8 +933,9 @@ class _ShopScreenState extends State<ShopScreen> {
 }
 
 class AdsObjects {
+  final String idArticle;
   final String productDescription;
-  final List<String> imageLink;
+  final List<dynamic> imageLink;
   final bool isPublished;
   final String productName;
   final double productPrice;
@@ -1004,17 +943,20 @@ class AdsObjects {
   final Map<String, dynamic>? productSpecifications;
   final String? tradeFamily;
   final String tradeCategory;
+  final DocumentReference ownerRef;
 
   const AdsObjects({
     Key? key,
+    required this.idArticle,
     required this.productDescription,
     required this.imageLink,
     required this.isPublished,
     required this.productName,
     required this.productPrice,
     required this.quantity,
-    this.productSpecifications,
-    this.tradeFamily,
+    required this.productSpecifications,
+    required this.tradeFamily,
     required this.tradeCategory,
+    required this.ownerRef,
   });
 }

@@ -525,11 +525,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: Theme.of(context).iconTheme.color,
                         fontWeight: FontWeight.normal,
                       ),
-                      hintText: 'téléphone',
+                      hintText: 'whatsapp',
                     ),
                     validator: (phone) => phone != null &&
                             _controllerWhatsapp.text.trim().length < 13
-                        ? 'Veuillez saisir une numéro de téléphone valide'
+                        ? 'Veuillez saisir une numéro whatsapp valide'
                         : null,
                   ),
                   const SizedBox(

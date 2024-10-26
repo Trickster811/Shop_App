@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -230,6 +231,34 @@ class UtilFunctions {
     messagerKey.currentState!
       ..removeCurrentSnackBar()
       ..showSnackBar(snackBar);
+  }
+
+  // Upload image to Firebase Storage
+  static Future uploadFile({
+    required File? fileToUpload,
+    required String fileName,
+    required int? number,
+    required String uploadToPath,
+  }) async {
+    try {
+      // Create an instance of Firebase Storage
+      final firebaseStorage = FirebaseStorage.instance;
+
+      final storageRef = firebaseStorage.ref().child(
+          '$uploadToPath/${fileName}_$number.${fileToUpload!.path.split('.').last}');
+      //
+      final uploadTask = storageRef.putFile(fileToUpload);
+      final snapshot = await uploadTask.whenComplete(() => null);
+
+      // Get the download URL
+      final imageUrl = await snapshot.ref.getDownloadURL();
+      return imageUrl;
+    } on FirebaseException catch (errno) {
+      showFlashMessage(
+        errno.message.toString(),
+        Colors.red,
+      );
+    }
   }
 
   //

@@ -1,10 +1,13 @@
 import 'dart:math' as math;
 
+import 'package:b_shop/utils/controllers.utils.dart';
+import 'package:card_loading/card_loading.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:b_shop/screens/components/image_view_page.dart';
-import 'package:b_shop/screens/components/new_post_page.dart';
+import 'package:b_shop/screens/components/post/new_post_page.dart';
 import 'package:b_shop/screens/shop_page.dart';
 import 'package:b_shop/utils/utils.dart';
 
@@ -46,75 +49,212 @@ class _MyPostScreenState extends State<MyPostScreen>
     vsync: this,
   )..repeat();
 
+  // To set a limit on the quantity of data we want to retreive at once
+  int documentLimit = 15;
+
+  // Check the app is currently fetching data
+  bool isFetchingArticles = false;
+
+  // To check if have data remaining in our cloud firestore
+  bool _hasNext = true;
+
+  // final HomeFinder.housesOwnerSnapshot = <DocumentSnapshot>[];
+
+  final scrollController = ScrollController();
+  bool internetAccess = true;
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(scrollListener);
+    retreiveOwnerArticles();
+  }
+
   @override
   void dispose() {
+    scrollController.dispose();
     _animationController.dispose();
     super.dispose();
+  }
+
+  void scrollListener() {
+    if (scrollController.offset >=
+            scrollController.position.maxScrollExtent / 2 &&
+        !scrollController.position.outOfRange &&
+        _hasNext) {
+      retreiveOwnerArticles();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     if (widget.userLoginInfo.isNotEmpty &&
-        widget.userLoginInfo[0] != 'Client') {
+        widget.userLoginInfo['userType'] != 'Client') {
       return Stack(
         children: [
           Container(
             height: widget.deviceSize.height,
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  adsItemBuilder(
-                    context,
-                    const AdsObjects(
-                      imageLink: [
-                        'https://rukminim1.flixcart.com/image/612/612/l51d30w0/shoe/z/w/c/10-mrj1914-10-aadi-white-black-red-original-imagft9k9hydnfjp.jpeg?q=70',
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH0YZh6ggzT4m0wdOK84OuihNDPGSHEuVUtwLhge3pmEPeA8k7GjZCsSSoAOgDXqzFcBI&usqp=CAU',
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZtaCc3GrWTcxkOL1lvXXMEDo5rVEg5DGf2LyEmxd2cYWkPTPw6gzVVdKc_3Md5Mbfz0I&usqp=CAU',
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzv-wsjN5e6td-LHSyqak5TG4pdW4CcqQuTPUUpGwvDwWRVhbeBpFkpwRgZ89z_mtfOE8&usqp=CAU',
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGFEzJimi75YHQQ6ClrDVpKG2ldTukwK_PIST1lklXhTmHQQI_OwGenvurqqnj3U_00c4&usqp=CAU',
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9uELZlGwIYcmHNK8h4mpTLiwh-BTNv3I9f4hPNgKSLuH3v_KTJh3Ciu6K4qE3olXNvgM&usqp=CAU',
+            child: !internetAccess
+                ? Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.of(context).size.height / 1.5,
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/icons/no-internet.svg',
+                          colorFilter: ColorFilter.mode(
+                            Theme.of(context).iconTheme.color!,
+                            BlendMode.srcIn,
+                          ),
+                          height: 75,
+                          width: 75,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text(
+                          'Pas d\'accès internet',
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontFamily: 'Comfortaa_bold',
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          // alignment: Alignment.center,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 40.0,
+                            vertical: 10.0,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).iconTheme.color,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                internetAccess = true;
+                              });
+                              retreiveOwnerArticles;
+                            },
+                            child: Text(
+                              'Réessayer',
+                              style: TextStyle(
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
-                      productName: 'HP Elite Book',
-                      productPrice: 0.25,
-                      tradeFamily: 'HP',
-                      productDescription:
-                          'Ordinateur neuf avec carton et facture. Prix non negociable.',
-                      quantity: 17,
-                      productSpecifications: {
-                        'CPU': '2.5 GHz',
-                        'RAM': '8Go',
-                      },
-                      tradeCategory: 'Ordinateurs',
-                      isPublished: true,
                     ),
-                  ),
-                  adsItemBuilder(
-                    context,
-                    const AdsObjects(
-                      imageLink: [
-                        'https://cdn.shopify.com/s/files/1/0046/9139/4658/files/SS20_HOMEPAGE_MCCLEANPAIR_880x550_crop_center.jpg?v=1614334815',
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqRw1KJxR6to1NRwgUn3qZan9eWtSJXS37yC8JMJvgvqjKNpuzb7YD5ZZd3wXpFMouHHM&usqp=CAU',
-                        'https://cdn.shopify.com/s/files/1/0285/9873/0883/articles/leather-full-brogue-shoes-26-05-17_1.jpg?v=1581688850',
-                      ],
-                      productName: 'Paires Cirées',
-                      productPrice: 0.25,
-                      tradeFamily: 'HP',
-                      productDescription:
-                          'Telephone neuf avec carton et facture. Prix non negociable.',
-                      quantity: 17,
-                      productSpecifications: {
-                        'CPU': '2.5 GHz',
-                        'RAM': '8 Go',
-                        'ROM': '128 Go',
-                      },
-                      tradeCategory: 'Telephones',
-                      isPublished: false,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                  )
+                : Article.articlesOwnerSnapshot.isEmpty && !_hasNext
+                    ? Container(
+                        alignment: Alignment.center,
+                        height: MediaQuery.of(context).size.height / 1.5,
+                        width: MediaQuery.of(context).size.width,
+                        child: GestureDetector(
+                          onTap: retreiveOwnerArticles,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/icons/no-data.svg',
+                                colorFilter: ColorFilter.mode(
+                                  Theme.of(context).iconTheme.color!,
+                                  BlendMode.srcIn,
+                                ),
+                                height: 75,
+                                width: 75,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              const Text(
+                                'Aucune publication à afficher',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontFamily: 'Comfortaa_bold',
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                // alignment: Alignment.center,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 40.0,
+                                  vertical: 10.0,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).iconTheme.color,
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Text(
+                                  'Actualiser',
+                                  style: TextStyle(
+                                    color: Theme.of(context)
+                                        .scaffoldBackgroundColor,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    : SingleChildScrollView(
+                        controller: scrollController,
+                        child: Column(
+                          children: [
+                            for (DocumentSnapshot item
+                                in Article.articlesOwnerSnapshot)
+                              adsItemBuilder(
+                                context,
+                                AdsObjects(
+                                  idArticle: item.id,
+                                  imageLink: item['imageLink'],
+                                  productDescription:
+                                      item['productDescription'],
+                                  isPublished: item['isPublished'],
+                                  productName: item['productName'],
+                                  productPrice:
+                                      double.parse(item['productPrice']),
+                                  quantity: int.parse(item['quantity']),
+                                  tradeCategory: item['tradeCategory'],
+                                  productSpecifications:
+                                      item['productSpecifications'],
+                                  tradeFamily: item['tradeFamily'],
+                                  ownerRef: item['ownerReference'],
+                                ),
+                              ),
+                            if (_hasNext)
+                              for (var i = 0; i < 10; i++) ...[
+                                const CardLoading(
+                                  height: 300,
+                                  width: double.maxFinite,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5.0),
+                                  ),
+                                  cardLoadingTheme: CardLoadingTheme(
+                                    colorOne: Color(0xFFE5E5E5),
+                                    colorTwo: Color(0xFFF0F0F0),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                )
+                              ]
+                          ],
+                        ),
+                      ),
           ),
           Positioned(
             bottom: 90,
@@ -1080,6 +1220,55 @@ class _MyPostScreenState extends State<MyPostScreen>
           ],
         ),
       );
+    });
+  }
+
+  Future retreiveOwnerArticles() async {
+    if (!await Internet.checkInternetAccess()) {
+      setState(() {
+        internetAccess = false;
+      });
+      return;
+    }
+    if (isFetchingArticles) return;
+    setState(() {
+      isFetchingArticles = true;
+    });
+    if (!_hasNext) {
+      setState(() {
+        _hasNext = true;
+      });
+    }
+    try {
+      // Get the current user id
+      DocumentReference currentUserRef = FirebaseFirestore.instance
+          .collection("users")
+          .doc(Auth.currentUser?.uid);
+
+      await Article.getArticles(
+        documentLimit,
+        startAfter: Article.articlesOwnerSnapshot.isNotEmpty
+            ? Article.articlesOwnerSnapshot.last
+            : null,
+        ownerRef: currentUserRef,
+      );
+      if (Article.articlesOwnerSnapshot.length < documentLimit) {
+        setState(() {
+          _hasNext = false;
+        });
+      }
+    } on FirebaseException catch (errno) {
+      debugPrint(errno.code.toString());
+      UtilFunctions.showFlashMessage(
+        errno.message.toString(),
+        Colors.red,
+      );
+      setState(() {
+        _hasNext = false;
+      });
+    }
+    setState(() {
+      isFetchingArticles = false;
     });
   }
 }
