@@ -1161,7 +1161,8 @@ class _MyPostScreenState extends State<MyPostScreen>
                         vertical: 2.0,
                       ),
                       decoration: BoxDecoration(
-                        color: isPublished ? primaryColor : thirdColor,
+                        color:
+                            adsObjets.isPublished ? primaryColor : thirdColor,
                         borderRadius: BorderRadius.circular(
                           10,
                         ),

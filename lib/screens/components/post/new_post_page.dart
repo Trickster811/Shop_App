@@ -602,12 +602,14 @@ class _NewPostScreenState extends State<NewPostScreen> {
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(10.0),
-                                            child: widget.adsObjets == null
-                                                ? Image.file(
+                                            child: const ListEquality().equals(
+                                                    widget.adsObjets!.imageLink,
+                                                    articleImages)
+                                                ? Image.network(
                                                     image!,
                                                     fit: BoxFit.fill,
                                                   )
-                                                : Image.network(
+                                                : Image.file(
                                                     image!,
                                                     fit: BoxFit.fill,
                                                   ),
@@ -930,11 +932,12 @@ class _NewPostScreenState extends State<NewPostScreen> {
                       setState(() {
                         isPublishing = true;
                       });
-                      if (articleImages.isNotEmpty) {
-                        uploadArticleImages(directPosting: false);
+                      if (const ListEquality()
+                          .equals(widget.adsObjets!.imageLink, articleImages)) {
+                        updateOrCreatePost(directPosting: false);
                         return;
                       }
-                      updateOrCreatePost(directPosting: false);
+                      uploadArticleImages(directPosting: false);
                     },
                     child: Container(
                       height: 40,
@@ -992,11 +995,12 @@ class _NewPostScreenState extends State<NewPostScreen> {
                       setState(() {
                         isPublishing = true;
                       });
-                      if (articleImages.isNotEmpty) {
-                        uploadArticleImages(directPosting: true);
+                      if (const ListEquality()
+                          .equals(widget.adsObjets!.imageLink, articleImages)) {
+                        updateOrCreatePost(directPosting: true);
                         return;
                       }
-                      updateOrCreatePost(directPosting: true);
+                      uploadArticleImages(directPosting: true);
                     },
                     child: Container(
                       height: 40,
@@ -1211,7 +1215,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
     final DocumentReference ownerRef = FirebaseFirestore.instance
         .collection('users')
         .doc(Auth.currentUser!.uid);
-// Get article spectifications for `Ordinateurs` category
+    // Get article spectifications for `Ordinateurs` category
     Map<String, String> articleSpecs = {};
     if (category == 'Ordinateurs' || category == 'Smartphone') {
       for (var i = 0; i < numberSpecs; i++) {
@@ -1233,7 +1237,8 @@ class _NewPostScreenState extends State<NewPostScreen> {
       'ownerReference': ownerRef,
     };
     try {
-      if (widget.adsObjets != null) {
+      if (const ListEquality()
+          .equals(widget.adsObjets!.imageLink, articleImages)) {
         await Article.updateArticle(
           data: data,
           idArticle: widget.adsObjets!.idArticle,
